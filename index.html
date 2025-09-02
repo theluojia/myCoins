@@ -61,20 +61,30 @@
     <script>
         let allCoinsData = [
             // 从 PDF 中提取的所有纪念币数据
-            { id: 'JB01', name: '中华人民共和国成立三十五周年', year: 1984, theme: '建国', denomination: '1元', imageUrl: 'https://placehold.co/300x300/F5A623/FFFFFF?text=建国35年' },
+            { id: 'JB01-1', name: '中华人民共和国成立三十五周年－祖国万岁', year: 1984, theme: '建国', denomination: '1元', imageUrl: 'https://placehold.co/300x300/F5A623/FFFFFF?text=建国35年' },
+            { id: 'JB01-2', name: '中华人民共和国成立三十五周年－民族大团结', year: 1984, theme: '建国', denomination: '1元', imageUrl: 'https://placehold.co/300x300/F5A623/FFFFFF?text=建国35年' },
+            { id: 'JB01-3', name: '中华人民共和国成立三十五周年－开国大典', year: 1984, theme: '建国', denomination: '1元', imageUrl: 'https://placehold.co/300x300/F5A623/FFFFFF?text=建国35年' },
             { id: 'JB02', name: '庆祝西藏自治区成立20周年', year: 1985, theme: '地区', denomination: '1元', imageUrl: 'https://placehold.co/300x300/4CAF50/FFFFFF?text=西藏20年' },
-            { id: 'JB03', name: '新疆维吾尔自治区成立 30 周年', year: 1985, theme: '地区', denomination: '1元', imageUrl: 'https://placehold.co/300x300/007BFF/FFFFFF?text=新疆30年' },
+            { id: 'JB03', name: '新疆维吾尔自治区成立30周年', year: 1985, theme: '地区', denomination: '1元', imageUrl: 'https://placehold.co/300x300/007BFF/FFFFFF?text=新疆30年' },
             { id: 'JB04', name: '国际和平年', year: 1986, theme: '和平', denomination: '1元', imageUrl: 'https://placehold.co/300x300/9C27B0/FFFFFF?text=和平年' },
             { id: 'JB05', name: '内蒙古自治区成立四十周年', year: 1987, theme: '地区', denomination: '1元', imageUrl: 'https://placehold.co/300x300/E91E63/FFFFFF?text=内蒙古40年' },
-            { id: 'JB06', name: '中华人民共和国第六届运动会', year: 1987, theme: '运动会', denomination: '1角', imageUrl: 'https://placehold.co/300x300/F44336/FFFFFF?text=六运会' },
+            { id: 'JB06-1', name: '中华人民共和国第六届运动会－足球', year: 1987, theme: '运动会', denomination: '1角', imageUrl: 'https://placehold.co/300x300/F44336/FFFFFF?text=六运会' },
+            { id: 'JB06-2', name: '中华人民共和国第六届运动会－体操', year: 1987, theme: '运动会', denomination: '1角', imageUrl: 'https://placehold.co/300x300/F44336/FFFFFF?text=六运会' },
+            { id: 'JB06-3', name: '中华人民共和国第六届运动会－排球', year: 1987, theme: '运动会', denomination: '1角', imageUrl: 'https://placehold.co/300x300/F44336/FFFFFF?text=六运会' },
             { id: 'JB07', name: '宁夏回族自治区成立三十周年', year: 1988, theme: '银行', denomination: '1元', imageUrl: 'https://placehold.co/300x300/FFC107/FFFFFF?text=央行40年' },
             { id: 'JB08', name: '中国人民银行成立四十周年', year: 1988, theme: '地区', denomination: '1元', imageUrl: 'https://placehold.co/300x300/8BC34A/FFFFFF?text=宁夏30年' },
             { id: 'JB09', name: '广西壮族自治区成立三十周年', year: 1988, theme: '战争', denomination: '1元', imageUrl: 'https://placehold.co/300x300/9E9E9E/FFFFFF?text=抗战50年' },
             { id: 'JB10', name: '中华人民共和国成立四十周年', year: 1989, theme: '世界银行', denomination: '1元', imageUrl: 'https://placehold.co/300x300/607D8B/FFFFFF?text=世行年会' },
-            { id: 'JB11', name: '第十一届亚洲运动会', year: 1990, theme: '回归', denomination: '1元', imageUrl: 'https://placehold.co/300x300/795548/FFFFFF?text=香港回归' },
-            { id: 'JB12', name: '全民义务植树运动十周年', year: 1991, theme: '建国', denomination: '1元', imageUrl: 'https://placehold.co/300x300/FF5722/FFFFFF?text=建国50年' },
-            { id: 'JB13', name: '中国共产党成立七十周年', year: 1991, theme: '世纪', denomination: '1元', imageUrl: 'https://placehold.co/300x300/00BCD4/FFFFFF?text=新世纪' },
-            { id: 'JB14', name: '第一届世界女子足球锦标赛', year: 1991, theme: '世纪', denomination: '1元', imageUrl: 'https://placehold.co/300x300/673AB7/FFFFFF?text=新世纪(异)' },
+            { id: 'JB11-1', name: '第十一届亚洲运动会－射箭', year: 1990, theme: '回归', denomination: '1元', imageUrl: 'https://placehold.co/300x300/795548/FFFFFF?text=香港回归' },
+            { id: 'JB11-2', name: '第十一届亚洲运动会－武术', year: 1990, theme: '回归', denomination: '1元', imageUrl: 'https://placehold.co/300x300/795548/FFFFFF?text=香港回归' },
+            { id: 'JB12-1', name: '全民义务植树运动十周年－绶带/铁锹/小数', year: 1991, theme: '建国', denomination: '1元', imageUrl: 'https://placehold.co/300x300/FF5722/FFFFFF?text=建国50年' },
+            { id: 'JB12-2', name: '全民义务植树运动十周年－女青年头像', year: 1991, theme: '建国', denomination: '1元', imageUrl: 'https://placehold.co/300x300/FF5722/FFFFFF?text=建国50年' },
+            { id: 'JB12-3', name: '全民义务植树运动十周年－华表/地球/小鸟', year: 1991, theme: '建国', denomination: '1元', imageUrl: 'https://placehold.co/300x300/FF5722/FFFFFF?text=建国50年' },
+            { id: 'JB13-1', name: '中国共产党成立七十周年－第一次全国代表大会', year: 1991, theme: '世纪', denomination: '1元', imageUrl: 'https://placehold.co/300x300/00BCD4/FFFFFF?text=新世纪' },
+            { id: 'JB13-2', name: '中国共产党成立七十周年－遵义会议', year: 1991, theme: '世纪', denomination: '1元', imageUrl: 'https://placehold.co/300x300/00BCD4/FFFFFF?text=新世纪' },
+            { id: 'JB13-3', name: '中国共产党成立七十周年－地十一届三中全会', year: 1991, theme: '世纪', denomination: '1元', imageUrl: 'https://placehold.co/300x300/00BCD4/FFFFFF?text=新世纪' },
+            { id: 'JB14-1', name: '第一届世界女子足球锦标赛－踢球', year: 1991, theme: '世纪', denomination: '1元', imageUrl: 'https://placehold.co/300x300/673AB7/FFFFFF?text=新世纪(异)' },
+            { id: 'JB14-2', name: '第一届世界女子足球锦标赛－扑球', year: 1991, theme: '世纪', denomination: '1元', imageUrl: 'https://placehold.co/300x300/673AB7/FFFFFF?text=新世纪(异)' },
             { id: 'JB15', name: '宪法颁布十周年', year: 1992, theme: '地区', denomination: '1元', imageUrl: 'https://placehold.co/300x300/4CAF50/FFFFFF?text=西藏解放' },
             { id: 'JB16', name: '宋庆龄诞辰 100 周年', year: 1993, theme: '地区', denomination: '1元', imageUrl: 'https://placehold.co/300x300/2196F3/FFFFFF?text=内蒙古50年' },
             { id: 'JB17', name: '中国珍稀野生动物－大熊猫', year: 1993, theme: '地区', denomination: '5元', imageUrl: 'https://placehold.co/300x300/FF9800/FFFFFF?text=宁夏40年' },
@@ -88,7 +98,8 @@
             { id: 'JB25', name: '朱德诞辰 110 周年', year: 1996, theme: '奥运会', denomination: '1元', imageUrl: 'https://placehold.co/300x300/00BCD4/FFFFFF?text=北京奥运' },
             { id: 'JB26', name: '中国珍稀野生动物－白鳍豚', year: 1996, theme: '奥运会', denomination: '5元', imageUrl: 'https://placehold.co/300x300/673AB7/FFFFFF?text=北京奥运' },
             { id: 'JB27', name: '中国珍稀野生动物－华南虎', year: 1996, theme: '奥运会', denomination: '5元', imageUrl: 'https://placehold.co/300x300/FF9800/FFFFFF?text=北京奥运' },
-            { id: 'JB28', name: '庆祝中华人民共和国香港特别行政区成立', year: 1997, theme: '战争', denomination: '10元', imageUrl: 'https://placehold.co/300x300/3F51B5/FFFFFF?text=抗战60年' },
+            { id: 'JB28-1', name: '庆祝中华人民共和国香港特别行政区成立－基本法', year: 1997, theme: '战争', denomination: '10元', imageUrl: 'https://placehold.co/300x300/3F51B5/FFFFFF?text=抗战60年' },
+            { id: 'JB28-2', name: '庆祝中华人民共和国香港特别行政区成立－维多利亚港', year: 1997, theme: '战争', denomination: '10元', imageUrl: 'https://placehold.co/300x300/3F51B5/FFFFFF?text=抗战60年' },
             { id: 'JB29', name: '周恩来诞辰 100 周年', year: 1998, theme: '航天', denomination: '1元', imageUrl: 'https://placehold.co/300x300/9C27B0/FFFFFF?text=探月工程' },
             { id: 'JB30', name: '中国珍稀野生动物－朱鹮', year: 1998, theme: '建军', denomination: '5元', imageUrl: 'https://placehold.co/300x300/009688/FFFFFF?text=建军80年' },
             { id: 'JB31', name: '中国珍稀野生动物－丹顶鹤', year: 1998, theme: '世博会', denomination: '5元', imageUrl: 'https://placehold.co/300x300/E91E63/FFFFFF?text=上海世博' },
@@ -99,7 +110,8 @@
             { id: 'JB36', name: '中国珍稀野生动物－金斑喙凤蝶', year: 1999, theme: '亚运会', denomination: '5元', imageUrl: 'https://placehold.co/300x300/607D8B/FFFFFF?text=广州亚运' },
             { id: 'JB37', name: '中国人民政治协商会议成立五十周年', year: 1999, theme: '辛亥革命', denomination: '1元', imageUrl: 'https://placehold.co/300x300/795548/FFFFFF?text=辛亥革命' },
             { id: 'JB38', name: '中华人民共和国成立五十周年', year: 1999, theme: '战争', denomination: '10元', imageUrl: 'https://placehold.co/300x300/FF5722/FFFFFF?text=抗战70年' },
-            { id: 'JB39', name: '庆祝中华人民共和国澳门特别行政区成立', year: 1999, theme: '建军', denomination: '10元', imageUrl: 'https://placehold.co/300x300/00BCD4/FFFFFF?text=建军90年' },
+            { id: 'JB39-1', name: '庆祝中华人民共和国澳门特别行政区成立－基本法', year: 1999, theme: '建军', denomination: '10元', imageUrl: 'https://placehold.co/300x300/00BCD4/FFFFFF?text=建军90年' },
+            { id: 'JB39-2', name: '庆祝中华人民共和国澳门特别行政区成立－妈祖阁和帆船', year: 1999, theme: '建军', denomination: '10元', imageUrl: 'https://placehold.co/300x300/00BCD4/FFFFFF?text=建军90年' },
             { id: 'JB40', name: '敦煌藏经洞发现 100 周年', year: 2000, theme: '人民币', denomination: '1元', imageUrl: 'https://placehold.co/300x300/673AB7/FFFFFF?text=人民币70年' },
             { id: 'JB41', name: '迎接新世纪', year: 2000, theme: '改革开放', denomination: '10元', imageUrl: 'https://placehold.co/300x300/FF9800/FFFFFF?text=改革开放40年' },
             { id: 'JB42', name: '西藏和平解放五十周年', year: 2001, theme: '建国', denomination: '5元', imageUrl: 'https://placehold.co/300x300/3F51B5/FFFFFF?text=建国70年' },
@@ -168,7 +180,8 @@
             { id: 'JB105', name: '世界文化和自然遗产－武夷山', year: 2020, theme: '贺岁', denomination: '5元', imageUrl: 'https://placehold.co/300x300/9E9E9E/FFFFFF?text=2046牛' },
             { id: 'JB106', name: '2021 年贺岁（辛丑）', year: 2021, theme: '贺岁', denomination: '10元', imageUrl: 'https://placehold.co/300x300/607D8B/FFFFFF?text=2046牛' },
             { id: 'JB107', name: '中国共产党成立 100 周年', year: 2021, theme: '贺岁', denomination: '10元', imageUrl: 'https://placehold.co/300x300/795548/FFFFFF?text=2047虎' },
-            { id: 'JB108', name: '第 24 界冬季奥林匹克运动会', year: 2021, theme: '贺岁', denomination: '5元', imageUrl: 'https://placehold.co/300x300/FF5722/FFFFFF?text=2047虎' },
+            { id: 'JB108-1', name: '第 24 界冬季奥林匹克运动会－冰上运动项目', year: 2021, theme: '贺岁', denomination: '5元', imageUrl: 'https://placehold.co/300x300/FF5722/FFFFFF?text=2047虎' },
+            { id: 'JB108-2', name: '第 24 界冬季奥林匹克运动会－雪上运动项目', year: 2021, theme: '贺岁', denomination: '5元', imageUrl: 'https://placehold.co/300x300/FF5722/FFFFFF?text=2047虎' },
             { id: 'JB109', name: '2022 年贺岁（壬寅）', year: 2022, theme: '贺岁', denomination: '10元', imageUrl: 'https://placehold.co/300x300/00BCD4/FFFFFF?text=2048兔' },
             { id: 'JB110', name: '2023 年贺岁（癸卯）', year: 2023, theme: '贺岁', denomination: '10元', imageUrl: 'https://placehold.co/300x300/673AB7/FFFFFF?text=2048兔' },
             { id: 'JB111', name: '世界文化和自然遗产－黄山', year: 2023, theme: '贺岁', denomination: '5元', imageUrl: 'https://placehold.co/300x300/FF9800/FFFFFF?text=2049龙' },
@@ -332,6 +345,7 @@
     </script>
 </body>
 </html>
+
 
 
 
