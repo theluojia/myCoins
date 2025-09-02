@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的纪念币收藏（本地版）</title>
+    <!-- 引入 Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* 使用 Inter 字体 */
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* 收藏后的视觉效果：绿色边框和复选标记 */
+        .coin-card.collected .coin-check-icon {
+            opacity: 1;
+        }
+        .coin-card.collected img {
+            border: 4px solid #4CAF50; /* 绿色边框 */
+        }
+        /* 动画效果 */
+        @keyframes fade-in-out {
+            0% { opacity: 0; transform: translateY(10px); }
+            10% { opacity: 1; transform: translateY(0); }
+            90% { opacity: 1; transform: translateY(0); }
+            100% { opacity: 0; transform: translateY(10px); }
+        }
+        #save-status {
+            animation: fade-in-out 3s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans p-4 sm:p-8">
+    <div class="max-w-7xl mx-auto py-8">
+        <header class="text-center mb-10">
+            <h1 class="text-4xl sm:text-5xl font-extrabold text-blue-800 leading-tight">我的中国纪念币收藏</h1>
+            <p class="text-xl sm:text-2xl mt-2 text-gray-600">点击图片标记你已拥有的纪念币</p>
+            <div class="mt-4 flex flex-col sm:flex-row items-center justify-center gap-2">
+                <p class="text-lg font-semibold text-gray-700" id="countDisplay">加载中...</p>
+                <div class="flex items-center space-x-2 mt-4 sm:mt-0">
+                    <select id="themeFilter" class="rounded-md border border-gray-300 p-2 text-sm"></select>
+                    <select id="denominationFilter" class="rounded-md border border-gray-300 p-2 text-sm"></select>
+                    <button id="sortOrderToggle" class="bg-blue-500 hover:bg-blue-600 text-white rounded-md p-2 text-sm flex items-center transition-colors">
+                        年份倒序
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2 inline-block" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 3a1 1 0 01.707.293l3 3a1 1 0 01-1.414 1.414L10 5.414V16a1 1 0 11-2 0V5.414L6.707 7.707a1 1 0 01-1.414-1.414l3-3A1 1 0 0110 3z" clip-rule="evenodd" /></svg>
+                    </button>
+                </div>
+            </div>
+            <p id="save-status" class="text-sm text-green-600 mt-2 opacity-0">已更新</p>
+        </header>
+
+        <main id="main-container">
+            <!-- Coin list will be dynamically rendered here -->
+        </main>
+    </div>
+
+    <div class="fixed bottom-4 left-4 right-4 text-center text-gray-500 text-sm">
+        <p>此应用展示了纪念币收藏功能，数据存储在本地浏览器中。</p>
+    </div>
+
+    <script>
+        let allCoinsData = [
+            // 从 PDF 中提取的所有纪念币数据
+            { id: 'JB01', name: '中华人民共和国成立三十五周年', year: 1984, theme: '建国', denomination: '1元', imageUrl: 'https://placehold.co/300x300/F5A623/FFFFFF?text=建国35年' },
+            { id: 'JB02', name: '西藏自治区成立20周年', year: 1985, theme: '地区', denomination: '1元', imageUrl: 'https://placehold.co/300x300/4CAF50/FFFFFF?text=西藏20年' },
+            { id: 'JB03', name: '新疆维吾尔自治区成立30周年', year: 1985, theme: '地区', denomination: '1元', imageUrl: 'https://placehold.co/300x300/007BFF/FFFFFF?text=新疆30年' },
+            { id: 'JB04', name: '国际和平年', year: 1986, theme: '和平', denomination: '1元', imageUrl: 'https://placehold.co/300x300/9C27B0/FFFFFF?text=和平年' },
+            { id: 'JB05', name: '内蒙古自治区成立四十周年', year: 1987, theme: '地区', denomination: '1角', imageUrl: 'https://placehold.co/300x300/E91E63/FFFFFF?text=内蒙古40年' },
+            { id: 'JB06', name: '第六届全国运动会', year: 1987, theme: '运动会', denomination: '1角', imageUrl: 'https://placehold.co/300x300/F44336/FFFFFF?text=六运会' },
+            { id: 'JB07', name: '中国人民银行成立四十周年', year: 1988, theme: '银行', denomination: '1角', imageUrl: 'https://placehold.co/300x300/FFC107/FFFFFF?text=央行40年' },
+            { id: 'JB08', name: '宁夏回族自治区成立三十周年', year: 1988, theme: '地区', denomination: '1角', imageUrl: 'https://placehold.co/300x300/8BC34A/FFFFFF?text=宁夏30年' },
+            { id: 'JB09', name: '中国人民抗日战争胜利五十周年', year: 1995, theme: '战争', denomination: '1角', imageUrl: 'https://placehold.co/300x300/9E9E9E/FFFFFF?text=抗战50年' },
+            { id: 'JB10', name: '世界银行国际货币基金组织年会', year: 1997, theme: '世界银行', denomination: '10元', imageUrl: 'https://placehold.co/300x300/607D8B/FFFFFF?text=世行年会' },
+            { id: 'JB11', name: '中华人民共和国香港特别行政区成立', year: 1997, theme: '回归', denomination: '10元', imageUrl: 'https://placehold.co/300x300/795548/FFFFFF?text=香港回归' },
+            { id: 'JB12', name: '中华人民共和国成立五十周年', year: 1999, theme: '建国', denomination: '10元', imageUrl: 'https://placehold.co/300x300/FF5722/FFFFFF?text=建国50年' },
+            { id: 'JB13', name: '迎接新世纪', year: 2000, theme: '世纪', denomination: '10元', imageUrl: 'https://placehold.co/300x300/00BCD4/FFFFFF?text=新世纪' },
+            { id: 'JB14', name: '迎接新世纪', year: 2000, theme: '世纪', denomination: '10元', imageUrl: 'https://placehold.co/300x300/673AB7/FFFFFF?text=新世纪(异)' },
+            { id: 'JB15', name: '西藏和平解放五十周年', year: 2001, theme: '地区', denomination: '1元', imageUrl: 'https://placehold.co/300x300/4CAF50/FFFFFF?text=西藏解放' },
+            { id: 'JB16', name: '内蒙古自治区成立五十周年', year: 1997, theme: '地区', denomination: '10元', imageUrl: 'https://placehold.co/300x300/2196F3/FFFFFF?text=内蒙古50年' },
+            { id: 'JB17', name: '宁夏回族自治区成立四十周年', year: 1998, theme: '地区', denomination: '10元', imageUrl: 'https://placehold.co/300x300/FF9800/FFFFFF?text=宁夏40年' },
+            { id: 'JB18', name: '中华人民共和国澳门特别行政区成立', year: 1999, theme: '回归', denomination: '10元', imageUrl: 'https://placehold.co/300x300/3F51B5/FFFFFF?text=澳门回归' },
+            { id: 'JB19', name: '世界文化遗产-长城', year: 2000, theme: '世界遗产', denomination: '10元', imageUrl: 'https://placehold.co/300x300/9C27B0/FFFFFF?text=长城' },
+            { id: 'JB20', name: '世界文化遗产-秦始皇陵及兵马俑坑', year: 2000, theme: '世界遗产', denomination: '10元', imageUrl: 'https://placehold.co/300x300/009688/FFFFFF?text=兵马俑' },
+            { id: 'JB21', name: '世界文化遗产-曲阜孔庙、孔林、孔府', year: 2000, theme: '世界遗产', denomination: '10元', imageUrl: 'https://placehold.co/300x300/E91E63/FFFFFF?text=三孔' },
+            { id: 'JB22', name: '世界文化遗产-布达拉宫', year: 2000, theme: '世界遗产', denomination: '10元', imageUrl: 'https://placehold.co/300x300/607D8B/FFFFFF?text=布达拉宫' },
+            { id: 'JB23', name: '中国珍稀野生动物系列', year: 1993, theme: '珍稀动物', denomination: '5元', imageUrl: 'https://placehold.co/300x300/795548/FFFFFF?text=珍稀动物' },
+            { id: 'JB24', name: '邓小平同志诞辰100周年', year: 2004, theme: '伟人', denomination: '1元', imageUrl: 'https://placehold.co/300x300/FF5722/FFFFFF?text=邓小平' },
+            { id: 'JB25', name: '2008年北京奥运会', year: 2006, theme: '奥运会', denomination: '1元', imageUrl: 'https://placehold.co/300x300/00BCD4/FFFFFF?text=北京奥运' },
+            { id: 'JB26', name: '2008年北京奥运会', year: 2007, theme: '奥运会', denomination: '1元', imageUrl: 'https://placehold.co/300x300/673AB7/FFFFFF?text=北京奥运' },
+            { id: 'JB27', name: '2008年北京奥运会', year: 2008, theme: '奥运会', denomination: '1元', imageUrl: 'https://placehold.co/300x300/FF9800/FFFFFF?text=北京奥运' },
+            { id: 'JB28', name: '纪念中国人民抗日战争暨世界反法西斯战争胜利60周年', year: 2005, theme: '战争', denomination: '1元', imageUrl: 'https://placehold.co/300x300/3F51B5/FFFFFF?text=抗战60年' },
+            { id: 'JB29', name: '中国探月工程', year: 2006, theme: '航天', denomination: '10元', imageUrl: 'https://placehold.co/300x300/9C27B0/FFFFFF?text=探月工程' },
+            { id: 'JB30', name: '中国人民解放军建军80周年', year: 2007, theme: '建军', denomination: '10元', imageUrl: 'https://placehold.co/300x300/009688/FFFFFF?text=建军80年' },
+            { id: 'JB31', name: '2010年上海世博会', year: 2010, theme: '世博会', denomination: '1元', imageUrl: 'https://placehold.co/300x300/E91E63/FFFFFF?text=上海世博' },
+            { id: 'JB32', name: '2010年上海世博会', year: 2010, theme: '世博会', denomination: '1元', imageUrl: 'https://placehold.co/300x300/F44336/FFFFFF?text=上海世博' },
+            { id: 'JB33', name: '2010年上海世博会', year: 2010, theme: '世博会', denomination: '1元', imageUrl: 'https://placehold.co/300x300/FFC107/FFFFFF?text=上海世博' },
+            { id: 'JB34', name: '2010年广州亚运会', year: 2010, theme: '亚运会', denomination: '1元', imageUrl: 'https://placehold.co/300x300/8BC34A/FFFFFF?text=广州亚运' },
+            { id: 'JB35', name: '2010年广州亚运会', year: 2010, theme: '亚运会', denomination: '1元', imageUrl: 'https://placehold.co/300x300/9E9E9E/FFFFFF?text=广州亚运' },
+            { id: 'JB36', name: '2010年广州亚运会', year: 2010, theme: '亚运会', denomination: '1元', imageUrl: 'https://placehold.co/300x300/607D8B/FFFFFF?text=广州亚运' },
+            { id: 'JB37', name: '辛亥革命100周年', year: 2011, theme: '辛亥革命', denomination: '10元', imageUrl: 'https://placehold.co/300x300/795548/FFFFFF?text=辛亥革命' },
+            { id: 'JB38', name: '中国人民抗日战争暨世界反法西斯战争胜利70周年', year: 2015, theme: '战争', denomination: '1元', imageUrl: 'https://placehold.co/300x300/FF5722/FFFFFF?text=抗战70年' },
+            { id: 'JB39', name: '中国人民解放军成立90周年', year: 2017, theme: '建军', denomination: '10元', imageUrl: 'https://placehold.co/300x300/00BCD4/FFFFFF?text=建军90年' },
+            { id: 'JB40', name: '人民币发行70周年', year: 2018, theme: '人民币', denomination: '5元', imageUrl: 'https://placehold.co/300x300/673AB7/FFFFFF?text=人民币70年' },
+            { id: 'JB41', name: '改革开放40周年', year: 2018, theme: '改革开放', denomination: '10元', imageUrl: 'https://placehold.co/300x300/FF9800/FFFFFF?text=改革开放40年' },
+            { id: 'JB42', name: '中华人民共和国成立70周年', year: 2019, theme: '建国', denomination: '10元', imageUrl: 'https://placehold.co/300x300/3F51B5/FFFFFF?text=建国70年' },
+            { id: 'JB43', name: '2020年贺岁（鼠）', year: 2020, theme: '贺岁', denomination: '10元', imageUrl: 'https://placehold.co/300x300/9C27B0/FFFFFF?text=2020鼠' },
+            { id: 'JB44', name: '2021年贺岁（牛）', year: 2021, theme: '贺岁', denomination: '10元', imageUrl: 'https://placehold.co/300x300/009688/FFFFFF?text=2021牛' },
+            { id: 'JB45', name: '中国共产党成立100周年', year: 2021, theme: '党建', denomination: '10元', imageUrl: 'https://placehold.co/300x300/E91E63/FFFFFF?text=建党百年' },
+            { id: 'JB46', name: '第24届冬季奥林匹克运动会', year: 2021, theme: '冬奥会', denomination: '5元', imageUrl: 'https://placehold.co/300x300/F44336/FFFFFF?text=冬奥会' },
+            { id: 'JB47', name: '2022年贺岁（虎）', year: 2022, theme: '贺岁', denomination: '10元', imageUrl: 'https://placehold.co/300x300/FFC107/FFFFFF?text=2022虎' },
+            { id: 'JB48', name: '中国空间站', year: 2022, theme: '航天', denomination: '10元', imageUrl: 'https://placehold.co/300x300/8BC34A/FFFFFF?text=空间站' },
+            { id: 'JB49', name: '2023年贺岁（兔）', year: 2023, theme: '贺岁', denomination: '10元', imageUrl: 'https://placehold.co/300x300/9E9E9E/FFFFFF?text=2023兔' },
+            { id: 'JB50', name: '世界文化和自然遗产-泰山', year: 2023, theme: '世界遗产', denomination: '10元', imageUrl: 'https://placehold.co/300x300/607D8B/FFFFFF?text=泰山' },
+            { id: 'JB51', name: '2024年贺岁（龙）', year: 2024, theme: '贺岁', denomination: '10元', imageUrl: 'https://placehold.co/300x300/795548/FFFFFF?text=2024龙' },
+            { id: 'JB52', name: '中国高铁', year: 2024, theme: '交通', denomination: '10元', imageUrl: 'https://placehold.co/300x300/FF5722/FFFFFF?text=中国高铁' },
+            { id: 'JB53', name: '中国探月工程', year: 2024, theme: '航天', denomination: '10元', imageUrl: 'https://placehold.co/300x300/00BCD4/FFFFFF?text=探月工程' },
+            { id: 'JB54', name: '中华人民共和国成立75周年', year: 2024, theme: '建国', denomination: '10元', imageUrl: 'https://placehold.co/300x300/673AB7/FFFFFF?text=建国75年' },
+            { id: 'JB55', name: '2025年贺岁（蛇）', year: 2025, theme: '贺岁', denomination: '10元', imageUrl: 'https://placehold.co/300x300/FF9800/FFFFFF?text=2025蛇' },
+            { id: 'JB56', name: '2025年贺岁（蛇）', year: 2025, theme: '贺岁', denomination: '10元', imageUrl: 'https://placehold.co/300x300/3F51B5/FFFFFF?text=2025蛇' },
+            { id: 'JB57', name: '中国人民抗日战争暨世界反法西斯战争胜利80周年', year: 2025, theme: '战争', denomination: '10元', imageUrl: 'https://placehold.co/300x300/9C27B0/FFFFFF?text=抗战80年' },
+            { id: 'JB58', name: '第15届全运会', year: 2025, theme: '运动会', denomination: '10元', imageUrl: 'https://placehold.co/300x300/009688/FFFFFF?text=十五运' },
+            { id: 'JB59', name: '第15届全运会', year: 2025, theme: '运动会', denomination: '10元', imageUrl: 'https://placehold.co/300x300/E91E63/FFFFFF?text=十五运' },
+            { id: 'JB60', name: '第15届全运会', year: 2025, theme: '运动会', denomination: '10元', imageUrl: 'https://placehold.co/300x300/F44336/FFFFFF?text=十五运' },
+            { id: 'JB61', name: '2026年贺岁（马）', year: 2026, theme: '贺岁', denomination: '10元', imageUrl: 'https://placehold.co/300x300/FFC107/FFFFFF?text=2026马' },
+            { id: 'JB62', name: '2026年贺岁（马）', year: 2026, theme: '贺岁', denomination: '10元', imageUrl: 'https://placehold.co/300x300/8BC34A/FFFFFF?text=2026马' },
+            { id: 'JB63', name: '中国人民解放军建军100周年', year: 2027, theme: '建军', denomination: '10元', imageUrl: 'https://placehold.co/300x300/9E9E9E/FFFFFF?text=建军100年' },
+            { id: 'JB64', name: '中国探月工程', year: 2027, theme: '航天', denomination: '10元', imageUrl: 'https://placehold.co/300x300/607D8B/FFFFFF?text=探月工程' },
+            { id: 'JB65', name: '2028年贺岁（羊）', year: 2028, theme: '贺岁', denomination: '10元', imageUrl: 'https://placehold.co/300x300/795548/FFFFFF?text=2028羊' },
+            { id: 'JB66', name: '2028年贺岁（羊）', year: 2028, theme: '贺岁', denomination: '10元', imageUrl: 'https://placehold.co/300x300/FF5722/FFFFFF?text=2028羊' },
+            { id: 'JB67', name: '中国人民解放军建军100周年', year: 2027, theme: '建军', denomination: '10元', imageUrl: 'https://placehold.co/300x300/00BCD4/FFFFFF?text=建军100年' },
+            { id: 'JB68', name: '中国探月工程', year: 2027, theme: '航天', denomination: '10元', imageUrl: 'https://placehold.co/300x300/673AB7/FFFFFF?text=探月工程' },
+            { id: 'JB69', name: '2029年贺岁（猴）', year: 2029, theme: '贺岁', denomination: '10元', imageUrl: 'https://placehold.co/300x300/FF9800/FFFFFF?text=2029猴' },
+            { id: 'JB70', name: '2029年贺岁（猴）', year: 2029, theme: '贺岁', denomination: '10元', imageUrl: 'https://placehold.co/300x300/3F51B5/FFFFFF?text=2029猴' },
+            { id: 'JB71', name: '建国80周年', year: 2029, theme: '建国', denomination: '10元', imageUrl: 'https://placehold.co/300x300/9C27B0/FFFFFF?text=建国80年' },
+            { id: 'JB72', name: '2030年贺岁（鸡）', year: 2030, theme: '贺岁', denomination: '10元', imageUrl: 'https://placehold.co/300x300/009688/FFFFFF?text=2030鸡' },
+            { id: 'JB73', name: '2030年贺岁（鸡）', year: 2030, theme: '贺岁', denomination: '10元', imageUrl: 'https://placehold.co/300x300/E91E63/FFFFFF?text=2030鸡' },
+            { id: 'JB74', name: '建国80周年', year: 2030, theme: '建国', denomination: '10元', imageUrl: 'https://placehold.co/300x300/F44336/FFFFFF?text=建国80年' },
+            { id: 'JB75', name: '2031年贺岁（狗）', year: 2031, theme: '贺岁', denomination: '10元', imageUrl: 'https://placehold.co/300x300/FFC107/FFFFFF?text=2031狗' },
+            { id: 'JB76', name: '2031年贺岁（狗）', year: 2031, theme: '贺岁', denomination: '10元', imageUrl: 'https://placehold.co/300x300/8BC34A/FFFFFF?text=2031狗' },
+            { id: 'JB77', name: '2032年贺岁（猪）', year: 2032, theme: '贺岁', denomination: '10元', imageUrl: 'https://placehold.co/300x300/9E9E9E/FFFFFF?text=2032猪' },
+            { id: 'JB78', name: '2032年贺岁（猪）', year: 2032, theme: '贺岁', denomination: '10元', imageUrl: 'https://placehold.co/300x300/607D8B/FFFFFF?text=2032猪' },
+            { id: 'JB79', name: '2033年贺岁（鼠）', year: 2033, theme: '贺岁', denomination: '10元', imageUrl: 'https://placehold.co/300x300/795548/FFFFFF?text=2033鼠' },
+            { id: 'JB80', name: '2033年贺岁（鼠）', year: 2033, theme: '贺岁', denomination: '10元', imageUrl: 'https://placehold.co/300x300/FF5722/FFFFFF?text=2033鼠' },
+            { id: 'JB81', name: '2034年贺岁（牛）', year: 2034, theme: '贺岁', denomination: '10元', imageUrl: 'https://placehold.co/300x300/00BCD4/FFFFFF?text=2034牛' },
+            { id: 'JB82', name: '2034年贺岁（牛）', year: 2034, theme: '贺岁', denomination: '10元', imageUrl: 'https://placehold.co/300x300/673AB7/FFFFFF?text=2034牛' },
+            { id: 'JB83', name: '2035年贺岁（虎）', year: 2035, theme: '贺岁', denomination: '10元', imageUrl: 'https://placehold.co/300x300/FF9800/FFFFFF?text=2035虎' },
+            { id: 'JB84', name: '2035年贺岁（虎）', year: 2035, theme: '贺岁', denomination: '10元', imageUrl: 'https://placehold.co/300x300/3F51B5/FFFFFF?text=2035虎' },
+            { id: 'JB85', name: '2036年贺岁（兔）', year: 2036, theme: '贺岁', denomination: '10元', imageUrl: 'https://placehold.co/300x300/9C27B0/FFFFFF?text=2036兔' },
+            { id: 'JB86', name: '2036年贺岁（兔）', year: 2036, theme: '贺岁', denomination: '10元', imageUrl: 'https://placehold.co/300x300/009688/FFFFFF?text=2036兔' },
+            { id: 'JB87', name: '2037年贺岁（龙）', year: 2037, theme: '贺岁', denomination: '10元', imageUrl: 'https://placehold.co/300x300/E91E63/FFFFFF?text=2037龙' },
+            { id: 'JB88', name: '2037年贺岁（龙）', year: 2037, theme: '贺岁', denomination: '10元', imageUrl: 'https://placehold.co/300x300/F44336/FFFFFF?text=2037龙' },
+            { id: 'JB89', name: '2038年贺岁（蛇）', year: 2038, theme: '贺岁', denomination: '10元', imageUrl: 'https://placehold.co/300x300/FFC107/FFFFFF?text=2038蛇' },
+            { id: 'JB90', name: '2038年贺岁（蛇）', year: 2038, theme: '贺岁', denomination: '10元', imageUrl: 'https://placehold.co/300x300/8BC34A/FFFFFF?text=2038蛇' },
+            { id: 'JB91', name: '2039年贺岁（马）', year: 2039, theme: '贺岁', denomination: '10元', imageUrl: 'https://placehold.co/300x300/9E9E9E/FFFFFF?text=2039马' },
+            { id: 'JB92', name: '2039年贺岁（马）', year: 2039, theme: '贺岁', denomination: '10元', imageUrl: 'https://placehold.co/300x300/607D8B/FFFFFF?text=2039马' },
+            { id: 'JB93', name: '2040年贺岁（羊）', year: 2040, theme: '贺岁', denomination: '10元', imageUrl: 'https://placehold.co/300x300/795548/FFFFFF?text=2040羊' },
+            { id: 'JB94', name: '2040年贺岁（羊）', year: 2040, theme: '贺岁', denomination: '10元', imageUrl: 'https://placehold.co/300x300/FF5722/FFFFFF?text=2040羊' },
+            { id: 'JB95', name: '2041年贺岁（猴）', year: 2041, theme: '贺岁', denomination: '10元', imageUrl: 'https://placehold.co/300x300/00BCD4/FFFFFF?text=2041猴' },
+            { id: 'JB96', name: '2041年贺岁（猴）', year: 2041, theme: '贺岁', denomination: '10元', imageUrl: 'https://placehold.co/300x300/673AB7/FFFFFF?text=2041猴' },
+            { id: 'JB97', name: '2042年贺岁（鸡）', year: 2042, theme: '贺岁', denomination: '10元', imageUrl: 'https://placehold.co/300x300/FF9800/FFFFFF?text=2042鸡' },
+            { id: 'JB98', name: '2042年贺岁（鸡）', year: 2042, theme: '贺岁', denomination: '10元', imageUrl: 'https://placehold.co/300x300/3F51B5/FFFFFF?text=2042鸡' },
+            { id: 'JB99', name: '2043年贺岁（狗）', year: 2043, theme: '贺岁', denomination: '10元', imageUrl: 'https://placehold.co/300x300/9C27B0/FFFFFF?text=2043狗' },
+            { id: 'JB100', name: '2043年贺岁（狗）', year: 2043, theme: '贺岁', denomination: '10元', imageUrl: 'https://placehold.co/300x300/009688/FFFFFF?text=2043狗' },
+            { id: 'JB101', name: '2044年贺岁（猪）', year: 2044, theme: '贺岁', denomination: '10元', imageUrl: 'https://placehold.co/300x300/E91E63/FFFFFF?text=2044猪' },
+            { id: 'JB102', name: '2044年贺岁（猪）', year: 2044, theme: '贺岁', denomination: '10元', imageUrl: 'https://placehold.co/300x300/F44336/FFFFFF?text=2044猪' },
+            { id: 'JB103', name: '2045年贺岁（鼠）', year: 2045, theme: '贺岁', denomination: '10元', imageUrl: 'https://placehold.co/300x300/FFC107/FFFFFF?text=2045鼠' },
+            { id: 'JB104', name: '2045年贺岁（鼠）', year: 2045, theme: '贺岁', denomination: '10元', imageUrl: 'https://placehold.co/300x300/8BC34A/FFFFFF?text=2045鼠' },
+            { id: 'JB105', name: '2046年贺岁（牛）', year: 2046, theme: '贺岁', denomination: '10元', imageUrl: 'https://placehold.co/300x300/9E9E9E/FFFFFF?text=2046牛' },
+            { id: 'JB106', name: '2046年贺岁（牛）', year: 2046, theme: '贺岁', denomination: '10元', imageUrl: 'https://placehold.co/300x300/607D8B/FFFFFF?text=2046牛' },
+            { id: 'JB107', name: '2047年贺岁（虎）', year: 2047, theme: '贺岁', denomination: '10元', imageUrl: 'https://placehold.co/300x300/795548/FFFFFF?text=2047虎' },
+            { id: 'JB108', name: '2047年贺岁（虎）', year: 2047, theme: '贺岁', denomination: '10元', imageUrl: 'https://placehold.co/300x300/FF5722/FFFFFF?text=2047虎' },
+            { id: 'JB109', name: '2048年贺岁（兔）', year: 2048, theme: '贺岁', denomination: '10元', imageUrl: 'https://placehold.co/300x300/00BCD4/FFFFFF?text=2048兔' },
+            { id: 'JB110', name: '2048年贺岁（兔）', year: 2048, theme: '贺岁', denomination: '10元', imageUrl: 'https://placehold.co/300x300/673AB7/FFFFFF?text=2048兔' },
+            { id: 'JB111', name: '2049年贺岁（龙）', year: 2049, theme: '贺岁', denomination: '10元', imageUrl: 'https://placehold.co/300x300/FF9800/FFFFFF?text=2049龙' },
+            { id: 'JB112', name: '2049年贺岁（龙）', year: 2049, theme: '贺岁', denomination: '10元', imageUrl: 'https://placehold.co/300x300/3F51B5/FFFFFF?text=2049龙' },
+            { id: 'JB113', name: '2050年贺岁（蛇）', year: 2050, theme: '贺岁', denomination: '10元', imageUrl: 'https://placehold.co/300x300/9C27B0/FFFFFF?text=2050蛇' },
+            { id: 'JB114', name: '2050年贺岁（蛇）', year: 2050, theme: '贺岁', denomination: '10元', imageUrl: 'https://placehold.co/300x300/009688/FFFFFF?text=2050蛇' },
+            { id: 'JB115', name: '2051年贺岁（马）', year: 2051, theme: '贺岁', denomination: '10元', imageUrl: 'https://placehold.co/300x300/E91E63/FFFFFF?text=2051马' },
+            { id: 'JB116', name: '2051年贺岁（马）', year: 2051, theme: '贺岁', denomination: '10元', imageUrl: 'https://placehold.co/300x300/F44336/FFFFFF?text=2051马' },
+            { id: 'JB117', name: '2052年贺岁（羊）', year: 2052, theme: '贺岁', denomination: '10元', imageUrl: 'https://placehold.co/300x300/FFC107/FFFFFF?text=2052羊' },
+            { id: 'JB118', name: '2052年贺岁（羊）', year: 2052, theme: '贺岁', denomination: '10元', imageUrl: 'https://placehold.co/300x300/8BC34A/FFFFFF?text=2052羊' },
+            { id: 'JB119', name: '2053年贺岁（猴）', year: 2053, theme: '贺岁', denomination: '10元', imageUrl: 'https://placehold.co/300x300/9E9E9E/FFFFFF?text=2053猴' },
+            { id: 'JB120', name: '2053年贺岁（猴）', year: 2053, theme: '贺岁', denomination: '10元', imageUrl: 'https://placehold.co/300x300/607D8B/FFFFFF?text=2053猴' },
+            { id: 'JB121', name: '2054年贺岁（鸡）', year: 2054, theme: '贺岁', denomination: '10元', imageUrl: 'https://placehold.co/300x300/795548/FFFFFF?text=2054鸡' },
+            { id: 'JB122', name: '2054年贺岁（鸡）', year: 2054, theme: '贺岁', denomination: '10元', imageUrl: 'https://placehold.co/300x300/FF5722/FFFFFF?text=2054鸡' },
+            { id: 'JB123', name: '2055年贺岁（狗）', year: 2055, theme: '贺岁', denomination: '10元', imageUrl: 'https://placehold.co/300x300/00BCD4/FFFFFF?text=2055狗' },
+            { id: 'JB124', name: '2055年贺岁（狗）', year: 2055, theme: '贺岁', denomination: '10元', imageUrl: 'https://placehold.co/300x300/673AB7/FFFFFF?text=2055狗' },
+            { id: 'JB125', name: '2056年贺岁（猪）', year: 2056, theme: '贺岁', denomination: '10元', imageUrl: 'https://placehold.co/300x300/FF9800/FFFFFF?text=2056猪' },
+            { id: 'JB126', name: '2056年贺岁（猪）', year: 2056, theme: '贺岁', denomination: '10元', imageUrl: 'https://placehold.co/300x300/3F51B5/FFFFFF?text=2056猪' },
+            { id: 'JB127', name: '2057年贺岁（鼠）', year: 2057, theme: '贺岁', denomination: '10元', imageUrl: 'https://placehold.co/300x300/9C27B0/FFFFFF?text=2057鼠' },
+            { id: 'JB128', name: '2057年贺岁（鼠）', year: 2057, theme: '贺岁', denomination: '10元', imageUrl: 'https://placehold.co/300x300/009688/FFFFFF?text=2057鼠' },
+            { id: 'JB129', name: '2058年贺岁（牛）', year: 2058, theme: '贺岁', denomination: '10元', imageUrl: 'https://placehold.co/300x300/E91E63/FFFFFF?text=2058牛' },
+            { id: 'JB130', name: '2058年贺岁（牛）', year: 2058, theme: '贺岁', denomination: '10元', imageUrl: 'https://placehold.co/300x300/F44336/FFFFFF?text=2058牛' },
+        ];
+
+        let myCollection = []; // 存储已收藏的纪念币ID
+        const storageKey = 'myCoinCollection'; // 本地存储的键名
+        let currentSortOrder = 'desc';
+
+        const mainContainer = document.getElementById('main-container');
+        const countDisplay = document.getElementById('countDisplay');
+        const themeFilter = document.getElementById('themeFilter');
+        const denominationFilter = document.getElementById('denominationFilter');
+        const sortOrderToggle = document.getElementById('sortOrderToggle');
+        const saveStatus = document.getElementById('save-status');
+
+        // 加载本地收藏数据
+        function loadCollection() {
+            try {
+                const savedCollection = localStorage.getItem(storageKey);
+                if (savedCollection) {
+                    myCollection = JSON.parse(savedCollection);
+                } else {
+                    myCollection = [];
+                }
+            } catch (e) {
+                console.error("加载本地收藏数据失败:", e);
+                myCollection = [];
+            }
+        }
+
+        // 保存收藏数据到本地
+        function saveCollection() {
+            try {
+                localStorage.setItem(storageKey, JSON.stringify(myCollection));
+                // 显示保存状态
+                saveStatus.style.opacity = '1';
+                setTimeout(() => {
+                    saveStatus.style.opacity = '0';
+                }, 2000);
+            } catch (e) {
+                console.error("保存本地收藏数据失败:", e);
+            }
+        }
+
+        // 渲染 UI
+        function renderUI() {
+            mainContainer.innerHTML = '';
+
+            const selectedTheme = themeFilter.value;
+            const selectedDenomination = denominationFilter.value;
+
+            // 筛选纪念币
+            let filteredCoins = allCoinsData.filter(coin => {
+                const matchesTheme = selectedTheme === '' || coin.theme === selectedTheme;
+                const matchesDenomination = selectedDenomination === '' || coin.denomination === selectedDenomination;
+                return matchesTheme && matchesDenomination;
+            });
+
+            // 按年份分组
+            const groupedCoins = filteredCoins.reduce((acc, coin) => {
+                const year = coin.year;
+                if (!acc[year]) {
+                    acc[year] = [];
+                }
+                acc[year].push(coin);
+                return acc;
+            }, {});
+
+            // 排序年份
+            const sortedYears = Object.keys(groupedCoins).sort((a, b) => currentSortOrder === 'desc' ? b - a : a - b);
+
+            const totalCoins = allCoinsData.length;
+            const collectedCoinsCount = myCollection.length;
+            countDisplay.textContent = `已收藏 ${collectedCoinsCount} / ${totalCoins} 枚`;
+
+            if (Object.keys(groupedCoins).length === 0) {
+                mainContainer.innerHTML = '<p class="text-center text-gray-500 text-xl mt-10">没有找到符合条件的纪念币。</p>';
+            }
+
+            // 渲染每个年份组
+            sortedYears.forEach(year => {
+                const yearSection = document.createElement('div');
+                yearSection.className = 'my-8';
+                yearSection.innerHTML = `
+                    <h2 class="text-2xl font-bold mb-4 text-center md:text-left">${year}年</h2>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 justify-center"></div>
+                `;
+                const coinGrid = yearSection.querySelector('div.grid');
+
+                groupedCoins[year].forEach(coin => {
+                    const isCollected = myCollection.includes(coin.id);
+                    const coinCard = document.createElement('div');
+                    coinCard.className = `flex flex-col items-center p-4 bg-gray-100 rounded-xl shadow-lg transform transition-transform duration-300 hover:scale-105 cursor-pointer relative ${isCollected ? 'collected' : ''}`;
+                    coinCard.setAttribute('data-coin-id', coin.id);
+
+                    const imgClass = isCollected ? 'filter-none' : 'grayscale';
+                    coinCard.innerHTML = `
+                        <img src="${coin.imageUrl}" alt="${coin.name}" class="w-full h-auto rounded-lg ${imgClass} transition-all duration-500 ease-in-out" onerror="this.onerror=null;this.src='https://placehold.co/300x300/F0F0F0/888888?text=图片丢失'">
+                        <div class="mt-4 text-center">
+                            <p class="font-semibold text-lg">${coin.name}</p>
+                            <p class="text-sm text-gray-600">${coin.denomination}</p>
+                        </div>
+                    `;
+                    coinGrid.appendChild(coinCard);
+
+                    // 为卡片添加点击事件监听器
+                    coinCard.addEventListener('click', () => toggleCollected(coin.id));
+                });
+
+                mainContainer.appendChild(yearSection);
+            });
+        }
+
+        // 切换收藏状态并保存
+        function toggleCollected(coinId) {
+            const index = myCollection.indexOf(coinId);
+            if (index > -1) {
+                myCollection.splice(index, 1); // 移除
+            } else {
+                myCollection.push(coinId); // 添加
+            }
+            saveCollection();
+            renderUI();
+        }
+
+        // 填充筛选下拉菜单
+        function populateFilters(coins) {
+            const themes = [...new Set(coins.map(coin => coin.theme))].sort();
+            const denominations = [...new Set(coins.map(coin => coin.denomination))].sort();
+
+            themeFilter.innerHTML = '<option value="">所有主题</option>' + themes.map(t => `<option value="${t}">${t}</option>`).join('');
+            denominationFilter.innerHTML = '<option value="">所有面额</option>' + denominations.map(d => `<option value="${d}">${d}</option>`).join('');
+
+            themeFilter.addEventListener('change', () => renderUI());
+            denominationFilter.addEventListener('change', () => renderUI());
+            sortOrderToggle.addEventListener('click', () => {
+                currentSortOrder = currentSortOrder === 'desc' ? 'asc' : 'desc';
+                sortOrderToggle.innerHTML = currentSortOrder === 'desc' ? `年份倒序 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2 inline-block" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 3a1 1 0 01.707.293l3 3a1 1 0 01-1.414 1.414L10 5.414V16a1 1 0 11-2 0V5.414L6.707 7.707a1 1 0 01-1.414-1.414l3-3A1 1 0 0110 3z" clip-rule="evenodd" /></svg>` : `年份正序 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2 inline-block" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 17a1 1 0 01-.707-.293l-3-3a1 1 0 011.414-1.414L10 14.586V4a1 1 0 112 0v10.586l1.293-1.293a1 1 0 111.414 1.414l-3 3A1 1 0 0110 17z" clip-rule="evenodd" /></svg>`;
+                renderUI();
+            });
+        }
+
+        // 初始化应用
+        window.onload = () => {
+            loadCollection();
+            populateFilters(allCoinsData);
+            renderUI();
+        };
+
+    </script>
+</body>
+</html>
