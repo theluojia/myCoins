@@ -20,6 +20,6 @@
     * 不提供任何担保。本许可证可能不会给你全部权限来满足你的预期用途。例如，其他权利（例如形象权、隐私权、以及人格权）可能限制你如何使用本作品。
 
 ---
-**完整许可证文本 (可选)**：
+**完整许可证文本**：
 
-如果你想在文件中包含完整的许可证文本，可以在这里插入 [CC BY-NC-SA 4.0 的完整法律文本](https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.zh)。
+[CC BY-NC-SA 4.0 的完整法律文本](https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.zh)。
