@@ -300,7 +300,13 @@
 
                     const imgClass = isCollected ? 'filter-none' : 'grayscale';
                     coinCard.innerHTML = `
-                        <img src="${coin.imageUrl}" alt="${coin.name}" class="w-full h-auto rounded-lg ${imgClass} transition-all duration-500 ease-in-out" onerror="this.onerror=null;this.src='https://placehold.co/300x300/F0F0F0/888888?text=图片丢失'">
+                        <div class="relative w-full aspect-square">
+                            <img 
+                                src="${coin.imageUrl}" 
+                                alt="${coin.name}" 
+                                class="absolute top-0 left-0 w-full h-full object-contain rounded-lg ${imgClass} transition-all duration-500 ease-in-out" 
+                                onerror="this.onerror=null;this.src='https://placehold.co/300x300/F0F0F0/888888?text=Photo not found'">
+                        </div>
                         <div class="mt-4 text-center">
                             <p class="font-semibold text-lg">${coin.name}</p>
                             <p class="text-sm text-gray-600">${coin.denomination}</p>
@@ -355,6 +361,7 @@
     </script>
 </body>
 </html>
+
 
 
 
