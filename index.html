@@ -28,6 +28,14 @@
         #save-status {
             animation: fade-in-out 3s ease-in-out;
         }
+        /* 骨架屏动画 */
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        .skeleton {
+            animation: pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans p-4 sm:p-8">
@@ -35,11 +43,27 @@
         <header class="text-center mb-10">
             <h1 class="text-4xl sm:text-5xl font-extrabold text-blue-800 leading-tight">我的纪念币收藏</h1>
             <p class="text-xl sm:text-2xl mt-2 text-gray-600">点击图片标记你已拥有的纪念币</p>
-            <div class="mt-4 flex flex-col sm:flex-row items-center justify-center gap-2">
+            
+            <!-- 搜索框 -->
+            <div class="mt-4 max-w-2xl mx-auto">
+                <div class="relative">
+                    <input type="text" id="searchInput" placeholder="搜索纪念币名称..." 
+                           class="w-full rounded-md border border-gray-300 p-3 pl-10 text-base focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.416l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
+                    </svg>
+                </div>
+            </div>
+            
+            <div class="mt-4 flex flex-col sm:flex-row items-center justify-center gap-2 flex-wrap">
                 <p class="text-lg font-semibold text-gray-700" id="countDisplay">加载中...</p>
                 <div class="flex items-center space-x-2 mt-4 sm:mt-0">
-                    <select id="themeFilter" class="rounded-md border border-gray-300 p-2 text-sm"></select>
-                    <select id="denominationFilter" class="rounded-md border border-gray-300 p-2 text-sm"></select>
+                    <select id="themeFilter" class="rounded-md border border-gray-300 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="">所有主题</option>
+                    </select>
+                    <select id="denominationFilter" class="rounded-md border border-gray-300 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="">所有面额</option>
+                    </select>
                     <button id="sortOrderToggle" class="bg-blue-500 hover:bg-blue-600 text-white rounded-md p-2 text-sm flex items-center transition-colors">
                         年份倒序
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2 inline-block" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 3a1 1 0 01.707.293l3 3a1 1 0 01-1.414 1.414L10 5.414V16a1 1 0 11-2 0V5.414L6.707 7.707a1 1 0 01-1.414-1.414l3-3A1 1 0 0110 3z" clip-rule="evenodd" /></svg>
@@ -211,6 +235,7 @@
         let myCollection = []; // 存储已收藏的纪念币ID
         const storageKey = 'myCoinCollection'; // 本地存储的键名
         let currentSortOrder = 'desc';
+        let searchTimeout = null;
 
         const mainContainer = document.getElementById('main-container');
         const countDisplay = document.getElementById('countDisplay');
@@ -218,6 +243,7 @@
         const denominationFilter = document.getElementById('denominationFilter');
         const sortOrderToggle = document.getElementById('sortOrderToggle');
         const saveStatus = document.getElementById('save-status');
+        const searchInput = document.getElementById('searchInput');
 
         // 加载本地收藏数据
         function loadCollection() {
@@ -248,18 +274,37 @@
             }
         }
 
+        // 防抖函数 - 避免输入时频繁渲染
+        function debounce(func, delay = 300) {
+            return function() {
+                const context = this;
+                const args = arguments;
+                clearTimeout(searchTimeout);
+                searchTimeout = setTimeout(() => func.apply(context, args), delay);
+            };
+        }
+
         // 渲染 UI
         function renderUI() {
-            mainContainer.innerHTML = '';
+            // 显示骨架屏
+            mainContainer.innerHTML = `
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 justify-center">
+                    ${Array(10).fill().map(() => `
+                        <div class="bg-gray-200 rounded-lg overflow-hidden skeleton h-64"></div>
+                    `).join('')}
+                </div>
+            `;
 
             const selectedTheme = themeFilter.value;
             const selectedDenomination = denominationFilter.value;
+            const searchTerm = searchInput.value.toLowerCase().trim();
 
             // 筛选纪念币
             let filteredCoins = allCoinsData.filter(coin => {
                 const matchesTheme = selectedTheme === '' || coin.theme === selectedTheme;
                 const matchesDenomination = selectedDenomination === '' || coin.denomination === selectedDenomination;
-                return matchesTheme && matchesDenomination;
+                const matchesSearch = searchTerm === '' || coin.name.toLowerCase().includes(searchTerm);
+                return matchesTheme && matchesDenomination && matchesSearch;
             });
 
             // 按年份分组
@@ -279,8 +324,16 @@
             const collectedCoinsCount = myCollection.length;
             countDisplay.textContent = `已收藏 ${collectedCoinsCount} / ${totalCoins} 枚`;
 
+            // 清空容器准备渲染
+            mainContainer.innerHTML = '';
+
             if (Object.keys(groupedCoins).length === 0) {
-                mainContainer.innerHTML = '<p class="text-center text-gray-500 text-xl mt-10">没有找到符合条件的纪念币。</p>';
+                let emptyMessage = '没有找到符合条件的纪念币';
+                if (searchTerm) {
+                    emptyMessage = `没有找到包含"${searchTerm}"的纪念币`;
+                }
+                mainContainer.innerHTML = `<p class="text-center text-gray-500 text-xl mt-10">${emptyMessage}</p>`;
+                return;
             }
 
             // 渲染每个年份组
@@ -307,7 +360,8 @@
                                 src="${coin.imageUrl}" 
                                 alt="${coin.name}" 
                                 class="absolute top-0 left-0 w-full h-full object-contain rounded-lg ${imgClass} transition-all duration-500 ease-in-out" 
-                                onerror="this.onerror=null;this.src='https://placehold.co/300x300/F0F0F0/888888?text=Photo not found'">
+                                loading="lazy"
+                                onerror="this.onerror=null;this.src='https://placehold.co/300x300/F0F0F0/888888?text=图片未找到'">
                         </div>
                         <div class="mt-4 text-center">
                             <p class="font-semibold text-lg">${coin.name}</p>
@@ -344,13 +398,16 @@
             themeFilter.innerHTML = '<option value="">所有主题</option>' + themes.map(t => `<option value="${t}">${t}</option>`).join('');
             denominationFilter.innerHTML = '<option value="">所有面额</option>' + denominations.map(d => `<option value="${d}">${d}</option>`).join('');
 
-            themeFilter.addEventListener('change', () => renderUI());
-            denominationFilter.addEventListener('change', () => renderUI());
+            themeFilter.addEventListener('change', renderUI);
+            denominationFilter.addEventListener('change', renderUI);
             sortOrderToggle.addEventListener('click', () => {
                 currentSortOrder = currentSortOrder === 'desc' ? 'asc' : 'desc';
                 sortOrderToggle.innerHTML = currentSortOrder === 'desc' ? `年份倒序 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2 inline-block" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 3a1 1 0 01.707.293l3 3a1 1 0 01-1.414 1.414L10 5.414V16a1 1 0 11-2 0V5.414L6.707 7.707a1 1 0 01-1.414-1.414l3-3A1 1 0 0110 3z" clip-rule="evenodd" /></svg>` : `年份正序 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2 inline-block" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 17a1 1 0 01-.707-.293l-3-3a1 1 0 011.414-1.414L10 14.586V4a1 1 0 112 0v10.586l1.293-1.293a1 1 0 111.414 1.414l-3 3A1 1 0 0110 17z" clip-rule="evenodd" /></svg>`;
                 renderUI();
             });
+            
+            // 添加搜索事件监听，使用防抖优化性能
+            searchInput.addEventListener('input', debounce(renderUI));
         }
 
         // 初始化应用
@@ -363,24 +420,3 @@
     </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
