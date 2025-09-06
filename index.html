@@ -36,6 +36,104 @@
         .skeleton {
             animation: pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
         }
+        /* 收藏概览抽屉样式 */
+        .collection-overview {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1rem;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        .collection-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem;
+            cursor: pointer;
+        }
+        .collection-summary {
+            display: flex;
+            align-items: center;
+            flex: 1;
+        }
+        .collection-count {
+            margin-right: 1rem;
+            font-weight: 600;
+            color: #374151;
+        }
+        .progress-container {
+            flex: 1;
+            height: 8px;
+            background-color: #E5E7EB;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .progress-bar {
+            height: 100%;
+            background-color: #4F46E5;
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+        .toggle-button {
+            background-color: #4F46E5;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 0.5rem 0.75rem;
+            font-size: 1.25rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+        }
+        .toggle-button:hover {
+            background-color: #4338CA;
+        }
+        .collection-details {
+            padding: 0 1rem 1rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        .collection-overview.expanded .collection-details {
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+        .overview-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .overview-column h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 0.5rem;
+        }
+        .stats-list {
+            space-y: 0.5rem;
+        }
+        .stat-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+        .stat-label {
+            font-size: 0.875rem;
+            color: #4B5563;
+        }
+        .stat-value {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #1F2937;
+        }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans p-4 sm:p-8">
@@ -43,6 +141,33 @@
         <header class="text-center mb-10">
             <h1 class="text-4xl sm:text-5xl font-extrabold text-blue-800 leading-tight">我的纪念币收藏</h1>
             <p class="text-xl sm:text-2xl mt-2 text-gray-600">点击图片标记你已拥有的纪念币</p>
+            
+            <!-- 收藏概览抽屉 -->
+            <div id="collectionOverview" class="collection-overview mt-4 max-w-2xl mx-auto">
+                <div class="collection-header" id="overviewHeader">
+                    <div class="collection-summary">
+                        <span class="collection-count" id="overviewCount">已收藏 0 / 0 枚</span>
+                        <div class="progress-container">
+                            <div class="progress-bar" id="progressBar" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    <svg id="toggle-icon" class="w-6 h-6 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>                    
+                </div>
+                <div class="collection-details" id="overviewDetails">
+                    <div class="overview-grid">
+                        <div class="overview-column">
+                            <h3>按主题收藏</h3>
+                            <div class="stats-list" id="themeStats"></div>
+                        </div>
+                        <div class="overview-column">
+                            <h3>按年份收藏</h3>
+                            <div class="stats-list" id="yearStats"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             
             <!-- 搜索框 -->
             <div class="mt-4 max-w-2xl mx-auto">
@@ -56,7 +181,7 @@
             </div>
             
             <div class="mt-4 flex flex-col sm:flex-row items-center justify-center gap-2 flex-wrap">
-                <p class="text-lg font-semibold text-gray-700" id="countDisplay">加载中...</p>
+                <!-- <p class="text-lg font-semibold text-gray-700" id="countDisplay">加载中...</p> -->
                 <div class="flex items-center space-x-2 mt-4 sm:mt-0">
                     <select id="themeFilter" class="rounded-md border border-gray-300 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
                         <option value="">所有主题</option>
@@ -245,6 +370,7 @@
         const saveStatus = document.getElementById('save-status');
         const searchInput = document.getElementById('searchInput');
 
+
         // 加载本地收藏数据
         function loadCollection() {
             try {
@@ -388,6 +514,7 @@
             }
             saveCollection();
             renderUI();
+            updateCollectionOverview(); // 更新收藏概览
         }
 
         // 填充筛选下拉菜单
@@ -410,11 +537,103 @@
             searchInput.addEventListener('input', debounce(renderUI));
         }
 
+        // 更新收藏概览
+        function updateCollectionOverview() {
+            const totalCoins = allCoinsData.length;
+            const collectedCoinsCount = myCollection.length;
+            const completionRate = totalCoins > 0 ? (collectedCoinsCount / totalCoins) * 100 : 0;
+            
+            // 更新标题和进度条
+            document.getElementById('overviewCount').textContent = `已收藏 ${collectedCoinsCount} / ${totalCoins} 枚`;
+            document.getElementById('progressBar').style.width = `${completionRate}%`;
+            
+            // 按主题计算收藏完成度
+            const themesData = {};
+            allCoinsData.forEach(coin => {
+                if (!themesData[coin.theme]) {
+                    themesData[coin.theme] = { total: 0, collected: 0 };
+                }
+                themesData[coin.theme].total++;
+                if (myCollection.includes(coin.id)) {
+                    themesData[coin.theme].collected++;
+                }
+            });
+            
+            // 渲染主题统计
+            const themeStatsContainer = document.getElementById('themeStats');
+            themeStatsContainer.innerHTML = '';
+            
+            Object.entries(themesData)
+                .sort((a, b) => b[1].collected / b[1].total - a[1].collected / a[1].total)
+                .forEach(([theme, stats]) => {
+                    const themeRate = (stats.collected / stats.total) * 100;
+                    const statItem = document.createElement('div');
+                    statItem.className = 'stat-item';
+                    statItem.innerHTML = `
+                        <span class="stat-label">${theme}</span>
+                        <span class="stat-value">${stats.collected}/${stats.total} (${themeRate.toFixed(0)}%)</span>
+                    `;
+                    themeStatsContainer.appendChild(statItem);
+                });
+            
+            // 按年份计算收藏完成度
+            const yearsData = {};
+            allCoinsData.forEach(coin => {
+                if (!yearsData[coin.year]) {
+                    yearsData[coin.year] = { total: 0, collected: 0 };
+                }
+                yearsData[coin.year].total++;
+                if (myCollection.includes(coin.id)) {
+                    yearsData[coin.year].collected++;
+                }
+            });
+            
+            // 渲染年份统计
+            const yearStatsContainer = document.getElementById('yearStats');
+            yearStatsContainer.innerHTML = '';
+            
+            Object.entries(yearsData)
+                .sort((a, b) => parseInt(b[0]) - parseInt(a[0]))
+                .forEach(([year, stats]) => {
+                    const yearRate = (stats.collected / stats.total) * 100;
+                    const statItem = document.createElement('div');
+                    statItem.className = 'stat-item';
+                    statItem.innerHTML = `
+                        <span class="stat-label">${year}年</span>
+                        <span class="stat-value">${stats.collected}/${stats.total} (${yearRate.toFixed(0)}%)</span>
+                    `;
+                    yearStatsContainer.appendChild(statItem);
+                });
+        }
+        
+        // 切换收藏概览抽屉状态
+        function toggleOverview() {
+            const overviewElement = document.getElementById('collectionOverview');
+            const toggleIcon = document.getElementById('toggle-icon');
+
+            overviewElement.classList.toggle('expanded');
+            
+            if (overviewElement.classList.contains('expanded')) {
+                toggleIcon.style.transform = 'rotate(180deg)';                
+            } else {
+                toggleIcon.style.transform = 'rotate(0deg)';                
+            }
+        }
+        
         // 初始化应用
         window.onload = () => {
             loadCollection();
             populateFilters(allCoinsData);
             renderUI();
+            updateCollectionOverview();
+            
+            // 添加抽屉切换事件监听
+            document.getElementById('overviewHeader').addEventListener('click', toggleOverview);
+            document.getElementById('toggle-icon').addEventListener('click', (e) => {
+                e.stopPropagation(); // 阻止事件冒泡
+                toggleOverview();
+  
+            });
         };
 
     </script>
