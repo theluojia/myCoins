@@ -71,28 +71,9 @@
         }
         .progress-bar {
             height: 100%;
-            background-color: #4F46E5;
+            background-color:  #3B82F6;
             border-radius: 4px;
             transition: width 0.3s ease;
-        }
-        .toggle-button {
-            background-color: #4F46E5;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            padding: 0.5rem 0.75rem;
-            font-size: 1.25rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: background-color 0.2s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-        }
-        .toggle-button:hover {
-            background-color: #4338CA;
         }
         .collection-details {
             padding: 0 1rem 1rem;
@@ -155,20 +136,22 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                     </svg>                    
                 </div>
+
                 <div class="collection-details" id="overviewDetails">
                     <div class="overview-grid">
-                        <div class="overview-column">
-                            <h3>按主题收藏</h3>
-                            <div class="stats-list" id="themeStats"></div>
+                        <div class="p-4 bg-gray-50 rounded-lg">
+                            <h3 class="font-semibold text-gray-800 mb-2">按主题分类</h3>
+                            <ul id="themeStats"></ul>
                         </div>
-                        <div class="overview-column">
-                            <h3>按年份收藏</h3>
-                            <div class="stats-list" id="yearStats"></div>
+                        <div class="p-4 bg-gray-50 rounded-lg">
+                            <h3 class="font-semibold text-gray-800 mb-2">按年份分类</h3>
+                            <ul id="yearStats"></ul>
                         </div>
                     </div>
                 </div>
             </div>
-            
+
+           
             <!-- 搜索框 -->
             <div class="mt-4 max-w-2xl mx-auto">
                 <div class="relative">
