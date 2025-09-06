@@ -137,11 +137,11 @@
                 <div class="collection-details" id="overviewDetails">
                     <div class="overview-grid">
                         <div class="p-4 bg-gray-50 rounded-lg">
-                            <h3 class="font-semibold text-gray-800 mb-2">按主题分类</h3>
+                            <h3 class="font-semibold text-gray-800 mb-2">按主题收藏</h3>
                             <ul id="themeStats"></ul>
                         </div>
                         <div class="p-4 bg-gray-50 rounded-lg">
-                            <h3 class="font-semibold text-gray-800 mb-2">按年份分类</h3>
+                            <h3 class="font-semibold text-gray-800 mb-2">按年份收藏</h3>
                             <ul id="yearStats"></ul>
                         </div>
                     </div>
@@ -168,6 +168,9 @@
                     </select>
                     <select id="denominationFilter" class="rounded-md border border-gray-300 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
                         <option value="">所有面额</option>
+                    </select>
+                    <select id="yearFilter" class="rounded-md border border-gray-300 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="">所有年份</option>
                     </select>
                     <button id="sortOrderToggle" class="bg-blue-500 hover:bg-blue-600 text-white rounded-md p-2 text-sm flex items-center transition-colors">
                         年份倒序
@@ -345,6 +348,7 @@
         const mainContainer = document.getElementById('main-container');
         const themeFilter = document.getElementById('themeFilter');
         const denominationFilter = document.getElementById('denominationFilter');
+        const yearFilter = document.getElementById('yearFilter');
         const sortOrderToggle = document.getElementById('sortOrderToggle');
         const saveStatus = document.getElementById('save-status');
         const searchInput = document.getElementById('searchInput');
@@ -402,14 +406,16 @@
 
             const selectedTheme = themeFilter.value;
             const selectedDenomination = denominationFilter.value;
+            const selectedYear = yearFilter.value;
             const searchTerm = searchInput.value.toLowerCase().trim();
 
             // 筛选纪念币
             let filteredCoins = allCoinsData.filter(coin => {
                 const matchesTheme = selectedTheme === '' || coin.theme === selectedTheme;
                 const matchesDenomination = selectedDenomination === '' || coin.denomination === selectedDenomination;
+                const matchesYear = selectedYear === '' || coin.year.toString() === selectedYear;
                 const matchesSearch = searchTerm === '' || coin.name.toLowerCase().includes(searchTerm);
-                return matchesTheme && matchesDenomination && matchesSearch;
+                return matchesTheme && matchesDenomination && matchesYear && matchesSearch;
             });
 
             // 按年份分组
@@ -498,12 +504,15 @@
         function populateFilters(coins) {
             const themes = [...new Set(coins.map(coin => coin.theme))].sort();
             const denominations = [...new Set(coins.map(coin => coin.denomination))].sort();
+            const years = [...new Set(coins.map(coin => coin.year))].sort((a, b) => b - a);
 
             themeFilter.innerHTML = '<option value="">所有主题</option>' + themes.map(t => `<option value="${t}">${t}</option>`).join('');
             denominationFilter.innerHTML = '<option value="">所有面额</option>' + denominations.map(d => `<option value="${d}">${d}</option>`).join('');
+            yearFilter.innerHTML = '<option value="">所有年份</option>' + years.map(y => `<option value="${y}">${y}年</option>`).join('');
 
             themeFilter.addEventListener('change', renderUI);
             denominationFilter.addEventListener('change', renderUI);
+            yearFilter.addEventListener('change', renderUI);
             sortOrderToggle.addEventListener('click', () => {
                 currentSortOrder = currentSortOrder === 'desc' ? 'asc' : 'desc';
                 sortOrderToggle.innerHTML = currentSortOrder === 'desc' ? `年份倒序 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2 inline-block" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 3a1 1 0 01.707.293l3 3a1 1 0 01-1.414 1.414L10 5.414V16a1 1 0 11-2 0V5.414L6.707 7.707a1 1 0 01-1.414-1.414l3-3A1 1 0 0110 3z" clip-rule="evenodd" /></svg>` : `年份正序 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2 inline-block" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 17a1 1 0 01-.707-.293l-3-3a1 1 0 011.414-1.414L10 14.586V4a1 1 0 112 0v10.586l1.293-1.293a1 1 0 111.414 1.414l-3 3A1 1 0 0110 17z" clip-rule="evenodd" /></svg>`;
