@@ -117,6 +117,12 @@
         #denominationFilter {
             width: 95px;
         }
+        #sizeFilter {
+            width: 95px;
+        }
+        #metalFilter {
+            width: 95px;
+        }
         #yearFilter {
             width: 95px;
         }
@@ -128,7 +134,6 @@
             <h1 class="text-4xl sm:text-5xl font-extrabold text-blue-800 leading-tight">我的纪念币收藏</h1>
             <p class="text-xl sm:text-2xl mt-2 text-gray-600">点击图片标记你已拥有的纪念币</p>
             
-            <!-- 收藏概览抽屉 -->
             <div id="collectionOverview" class="collection-overview mt-4 max-w-2xl mx-auto">
                 <div class="collection-header" id="overviewHeader">
                     <div class="collection-summary">
@@ -157,7 +162,6 @@
             </div>
 
            
-            <!-- 搜索框 -->
             <div class="mt-4 max-w-2xl mx-auto">
                 <div class="relative">
                     <input type="text" id="searchInput" placeholder="搜索纪念币名称..." 
@@ -168,28 +172,44 @@
                 </div>
             </div>
             
-            <div class="mt-4 flex flex-col sm:flex-row items-center justify-center gap-2 flex-wrap">
-
-                <div class="flex items-center space-x-2 mt-4 sm:mt-0">
-                    <select id="themeFilter" class="rounded-md border border-gray-300 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <div class="mt-4 flex flex-wrap items-center justify-center gap-2">
+                <div class="flex flex-wrap items-center justify-center gap-2">
+                    <select id="themeFilter" class="w-24 rounded-md border border-gray-300 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
                         <option value="">所有主题</option>
                     </select>
-                    <select id="denominationFilter" class="rounded-md border border-gray-300 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <select id="denominationFilter" class="w-24 rounded-md border border-gray-300 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
                         <option value="">所有面额</option>
                     </select>
-                    <select id="yearFilter" class="rounded-md border border-gray-300 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <select id="sizeFilter" class="w-24 rounded-md border border-gray-300 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="">所有大小</option>
+                    </select>
+                    <select id="metalFilter" class="w-24 rounded-md border border-gray-300 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="">所有材质</option>
+                    </select>
+                    <select id="yearFilter" class="w-24 rounded-md border border-gray-300 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
                         <option value="">所有年份</option>
                     </select>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <button id="clearFiltersBtn" class="bg-green-500 hover:bg-green-600 text-white rounded-md p-2 text-sm flex items-center transition-colors" aria-label="清除所有过滤">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline-block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 12a9 9 0 1 1-4-7.5" />
+                            <polyline points="21 3 21 8 16 8" />
+                        </svg>
+                    </button>   
                     <button id="sortOrderToggle" class="bg-blue-500 hover:bg-blue-600 text-white rounded-md p-2 text-sm flex items-center transition-colors">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline-block" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 3a1 1 0 01.707.293l3 3a1 1 0 01-1.414 1.414L10 5.414V16a1 1 0 11-2 0V5.414L6.707 7.707a1 1 0 01-1.414-1.414l3-3A1 1 0 0110 3z" clip-rule="evenodd" /></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline-block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 19V5" />
+                            <polyline points="5 12 12 5 19 12" />
+                        </svg>
                     </button>
                 </div>
             </div>
+
             <p id="save-status" class="text-sm text-green-600 mt-2 opacity-0">已更新</p>
         </header>
 
         <main id="main-container">
-            <!-- Coin list will be dynamically rendered here -->
         </main>
     </div>
 
@@ -212,152 +232,7 @@
     </footer>
 
     <script>
-        let allCoinsData = [
-            // 从 PDF 中提取的所有纪念币数据
-            { id: 'JB01-1', name: '中华人民共和国成立三十五周年－祖国万岁', year: 1984, theme: '建国', denomination: '1元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191218606812793604.png' },
-            { id: 'JB01-2', name: '中华人民共和国成立三十五周年－民族大团结', year: 1984, theme: '建国', denomination: '1元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191218606812745721.png' },
-            { id: 'JB01-3', name: '中华人民共和国成立三十五周年－开国大典', year: 1984, theme: '建国', denomination: '1元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191218606812775057.png' },
-            { id: 'JB02', name: '庆祝西藏自治区成立20周年', year: 1985, theme: '自治区', denomination: '1元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113609481580507.jpg' },
-            { id: 'JB03', name: '新疆维吾尔自治区成立30周年', year: 1985, theme: '自治区', denomination: '1元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113609179158344.jpg' },
-            { id: 'JB04', name: '国际和平年', year: 1986, theme: '国际事件', denomination: '1元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113608659512639.jpg' },
-            { id: 'JB05', name: '内蒙古自治区成立四十周年', year: 1987, theme: '自治区', denomination: '1元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113608493193804.jpg' },
-            { id: 'JB06-1', name: '中华人民共和国第六届运动会－足球', year: 1987, theme: '体育赛事', denomination: '1角', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113617022989283.jpg' },
-            { id: 'JB06-2', name: '中华人民共和国第六届运动会－体操', year: 1987, theme: '体育赛事', denomination: '1角', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113617023045498.jpg' },
-            { id: 'JB06-3', name: '中华人民共和国第六届运动会－排球', year: 1987, theme: '体育赛事', denomination: '1角', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113617023016978.jpg' },
-            { id: 'JB07', name: '宁夏回族自治区成立三十周年', year: 1988, theme: '自治区', denomination: '1元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191104394866078309.jpg' },
-            { id: 'JB08', name: '中国人民银行成立四十周年', year: 1988, theme: '国内事件', denomination: '1元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113607944869626.jpg' },
-            { id: 'JB09', name: '广西壮族自治区成立三十周年', year: 1988, theme: '自治区', denomination: '1元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113607766141545.jpg' },
-            { id: 'JB10', name: '中华人民共和国成立四十周年', year: 1989, theme: '建国', denomination: '1元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113607413518389.jpg' },
-            { id: 'JB11-1', name: '第十一届亚洲运动会－射箭', year: 1990, theme: '体育赛事', denomination: '1元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113618895895536.jpg' },
-            { id: 'JB11-2', name: '第十一届亚洲运动会－武术', year: 1990, theme: '体育赛事', denomination: '1元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113607275604639.jpg' },
-            { id: 'JB12-1', name: '全民义务植树运动十周年－绶带/铁锹/小数', year: 1991, theme: '国内事件', denomination: '1元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113607111530416.jpg' },
-            { id: 'JB12-2', name: '全民义务植树运动十周年－女青年头像', year: 1991, theme: '国内事件', denomination: '1元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113620152943909.jpg' },
-            { id: 'JB12-3', name: '全民义务植树运动十周年－华表/地球/小鸟', year: 1991, theme: '国内事件', denomination: '1元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113620152971941.jpg' },
-            { id: 'JB13-1', name: '中国共产党成立七十周年－第一次全国代表大会', year: 1991, theme: '建党', denomination: '1元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113621949618103.jpg' },
-            { id: 'JB13-2', name: '中国共产党成立七十周年－遵义会议', year: 1991, theme: '建党', denomination: '1元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113621949599683.jpg' },
-            { id: 'JB13-3', name: '中国共产党成立七十周年－第十一届三中全会', year: 1991, theme: '建党', denomination: '1元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191104394891115870.jpg' },
-            { id: 'JB14-1', name: '第一届世界女子足球锦标赛－踢球', year: 1991, theme: '体育赛事', denomination: '1元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113606320147326.jpg' },
-            { id: 'JB14-2', name: '第一届世界女子足球锦标赛－扑球', year: 1991, theme: '体育赛事', denomination: '1元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113622576278540.jpg' },
-            { id: 'JB15', name: '宪法颁布十周年', year: 1992, theme: '国内事件', denomination: '1元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113606185108477.jpg' },
-            { id: 'JB16', name: '宋庆龄诞辰100周年', year: 1993, theme: '伟人诞辰', denomination: '1元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113606075576748.jpg' },
-            { id: 'JB17', name: '中国珍稀野生动物－大熊猫', year: 1993, theme: '珍稀动物', denomination: '5元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113605968524497.jpg' },
-            { id: 'JB18', name: '毛泽东诞辰100周年', year: 1993, theme: '伟人诞辰', denomination: '1元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191209360109762913.jpg' },
-            { id: 'JB19', name: '希望工程实施5周年', year: 1994, theme: '国内事件', denomination: '1元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191209360110270320.jpg' },
-            { id: 'JB20', name: '第43届世界乒乓球锦标赛', year: 1995, theme: '体育赛事', denomination: '1元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191209360110732202.jpg' },
-            { id: 'JB21', name: '中国抗日战争和世界反法西斯战争胜利 50周年', year: 1995, theme: '抗日胜利', denomination: '1元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113605363975573.jpg' },
-            { id: 'JB22', name: '联合国第四次世界妇女大会', year: 1995, theme: '国际事件', denomination: '1元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191104395575706459.jpg' },
-            { id: 'JB23', name: '联合国成立五十周年', year: 1995, theme: '国际事件', denomination: '1元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113605060824740.jpg' },
-            { id: 'JB24', name: '中国珍稀野生动物－金丝猴', year: 1995, theme: '珍稀动物', denomination: '5元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113585763419413.jpg' },
-            { id: 'JB25', name: '朱德诞辰110周年', year: 1996, theme: '伟人诞辰', denomination: '1元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113585640992894.jpg' },
-            { id: 'JB26', name: '中国珍稀野生动物－白鳍豚', year: 1996, theme: '珍稀动物', denomination: '5元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113585522302498.jpg' },
-            { id: 'JB27', name: '中国珍稀野生动物－华南虎', year: 1996, theme: '珍稀动物', denomination: '5元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113585402459994.png' },
-            { id: 'JB28-1', name: '庆祝中华人民共和国香港特别行政区成立－基本法', year: 1997, theme: '特区', denomination: '10元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113585246573884.jpg' },
-            { id: 'JB28-2', name: '庆祝中华人民共和国香港特别行政区成立－维多利亚港', year: 1997, theme: '特区', denomination: '10元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113623728305880.jpg' },
-            { id: 'JB29', name: '周恩来诞辰100周年', year: 1998, theme: '伟人诞辰', denomination: '1元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113584992618629.jpg' },
-            { id: 'JB30', name: '中国珍稀野生动物－朱鹮', year: 1998, theme: '珍稀动物', denomination: '5元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113584841904785.jpg' },
-            { id: 'JB31', name: '中国珍稀野生动物－丹顶鹤', year: 1998, theme: '珍稀动物', denomination: '5元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113584694226267.jpg' },
-            { id: 'JB32', name: '中国珍稀野生动物－褐马鸡', year: 1998, theme: '珍稀动物', denomination: '5元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113584549375502.jpg' },
-            { id: 'JB33', name: '中国珍稀野生动物－扬子鳄', year: 1998, theme: '珍稀动物', denomination: '5元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113584421836886.jpg' },
-            { id: 'JB34', name: '刘少奇诞辰100周年', year: 1998, theme: '伟人诞辰', denomination: '1元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113584244885828.jpg' },
-            { id: 'JB35', name: '中国珍稀野生动物－中华鲟', year: 1999, theme: '珍稀动物', denomination: '5元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113584062660234.png' },
-            { id: 'JB36', name: '中国珍稀野生动物－金斑喙凤蝶', year: 1999, theme: '珍稀动物', denomination: '5元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113583881200836.jpg' },
-            { id: 'JB37', name: '中国人民政治协商会议成立五十周年', year: 1999, theme: '人大与政协', denomination: '1元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191104395631295504.jpg' },
-            { id: 'JB38', name: '中华人民共和国成立五十周年', year: 1999, theme: '建国', denomination: '10元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113583496238161.jpg' },
-            { id: 'JC01', name: '中华人民共和国成立五十周年（纪念钞）', year: 1999, theme: '建国', denomination: '10元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic7/201910/P020250109386550623406.png' },
-            { id: 'JB39-1', name: '庆祝中华人民共和国澳门特别行政区成立－基本法', year: 1999, theme: '特区', denomination: '10元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113583202247558.jpg' },
-            { id: 'JB39-2', name: '庆祝中华人民共和国澳门特别行政区成立－妈祖阁和帆船', year: 1999, theme: '特区', denomination: '10元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113624546987867.jpg' },
-            { id: 'JB40', name: '敦煌藏经洞发现100周年', year: 2000, theme: '国内事件', denomination: '1元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191209357108725125.jpg' },
-            { id: 'JB41', name: '迎接新世纪', year: 2000, theme: '国内事件', denomination: '10元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191209357109292046.jpg' },
-            { id: 'JC01', name: '迎接新世纪（纪念钞）', year: 2000, theme: '国内事件', denomination: '100元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic7/201910/P020250109387549060556.png' },
-            { id: 'JB42', name: '西藏和平解放五十周年', year: 2001, theme: '国内事件', denomination: '5元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113582084137101.jpg' },
-            { id: 'JB43', name: '辛亥革命90周年', year: 2001, theme: '国内事件', denomination: '5元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113581684424644.jpg' },
-            { id: 'JB44', name: '世界文化遗产－万里长城', year: 2002, theme: '世界文遗', denomination: '5元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113608840519251.jpg' },
-            { id: 'JB45', name: '世界文化遗产－秦始皇陵及兵马俑坑', year: 2002, theme: '世界文遗', denomination: '5元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113608606484871.jpg' },
-            { id: 'JB46', name: '2003年贺岁（癸未）', year: 2003, theme: '生肖一轮', denomination: '1元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113608461237739.jpg' },
-            { id: 'JB47', name: '中国宝岛台湾－朝天宫', year: 2003, theme: '宝岛台湾', denomination: '5元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113608283047309.jpg' },
-            { id: 'JB48', name: '中国宝岛台湾－赤嵌楼', year: 2003, theme: '宝岛台湾', denomination: '5元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113608099381118.jpg' },
-            { id: 'JB49', name: '世界文化遗产－曲阜孔庙孔林孔府', year: 2003, theme: '世界文遗', denomination: '5元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113607940317676.jpg' },
-            { id: 'JB50', name: '世界文化遗产－明清故宫', year: 2003, theme: '世界文遗', denomination: '5元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113607702910067.jpg' },
-            { id: 'JB51', name: '2004年贺岁（甲申）', year: 2004, theme: '生肖一轮', denomination: '1元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113607510394463.jpg' },
-            { id: 'JB52', name: '中国宝岛台湾－鹅銮鼻', year: 2004, theme: '宝岛台湾', denomination: '5元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113607360505230.jpg' },
-            { id: 'JB53', name: '中国宝岛台湾－日月潭', year: 2004, theme: '宝岛台湾', denomination: '5元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113607153854645.jpg' },
-            { id: 'JB54', name: '邓小平诞辰100周年', year: 2004, theme: '伟人诞辰', denomination: '1元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113606995944383.jpg' },
-            { id: 'JB55', name: '人民代表大会成立五十周年', year: 2004, theme: '人大与政协', denomination: '1元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113606811817225.jpg' },
-            { id: 'JB56', name: '世界文化遗产－苏州古典园林', year: 2004, theme: '世界文遗', denomination: '5元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113606634476325.jpg' },
-            { id: 'JB57', name: '世界文化遗产－周口店"北京人"遗址', year: 2004, theme: '世界文遗', denomination: '5元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113606454377798.jpg' },
-            { id: 'JB58', name: '2005年贺岁（乙酉）', year: 2005, theme: '生肖一轮', denomination: '10元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113606292893003.jpg' },
-            { id: 'JB59', name: '世界文化遗产－丽江古城', year: 2005, theme: '世界文遗', denomination: '10元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113606135894792.jpg' },
-            { id: 'JB60', name: '世界文化遗产－青城山与都江堰', year: 2005, theme: '世界文遗', denomination: '10元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113605934561374.jpg' },
-            { id: 'JB61', name: '陈云诞辰100周年', year: 2005, theme: '伟人诞辰', denomination: '1元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113605759031564.jpg' },
-            { id: 'JB62', name: '中国宝岛台湾－敬字亭', year: 2005, theme: '宝岛台湾', denomination: '5元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113598297056461.jpg' },
-            { id: 'JB63', name: '2006年贺岁（丙戍）', year: 2006, theme: '生肖一轮', denomination: '1元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113598138821823.jpg' },
-            { id: 'JB64', name: '第 29 届奥林匹克运动会－举重', year: 2006, theme: '奥运', denomination: '1元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113597903843885.jpg' },
-            { id: 'JB65', name: '第 29 届奥林匹克运动会－游泳', year: 2006, theme: '奥运', denomination: '1元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113597721104657.jpg' },
-            { id: 'JB66', name: '世界文化遗产－龙门石窟', year: 2006, theme: '世界文遗', denomination: '5元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113597530126575.jpg' },
-            { id: 'JB67', name: '世界文化遗产－颐和园', year: 2006, theme: '世界文遗', denomination: '5元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113597352240675.jpg' },
-            { id: 'JB68', name: '2007年贺岁（丁亥）', year: 2006, theme: '生肖一轮', denomination: '1元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113590445859028.jpg' },
-            { id: 'JB69', name: '第 29 届奥林匹克运动会－体操', year: 2007, theme: '奥运', denomination: '1元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113590215774216.jpg' },
-            { id: 'JB70', name: '第 29 届奥林匹克运动会－射箭', year: 2007, theme: '奥运', denomination: '1元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113589991882092.jpg' },
-            { id: 'JB71', name: '第 29 届奥林匹克运动会－乒乓球', year: 2007, theme: '奥运', denomination: '1元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113589804379457.jpg' },
-            { id: 'JB72', name: '2008年贺岁（戊子）', year: 2008, theme: '生肖一轮', denomination: '1元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113596297291234.png' },
-            { id: 'JB73', name: '第 29 届奥林匹克运动会－足球', year: 2008, theme: '奥运', denomination: '1元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113589613099876.jpg' },
-            { id: 'JB74', name: '第 29 届奥林匹克运动会－击剑', year: 2008, theme: '奥运', denomination: '1元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113586894287258.jpg' },
-            { id: 'JB75', name: '第 29 届奥林匹克运动会－现代五项', year: 2008, theme: '奥运', denomination: '1元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113586707350647.jpg' },
-            { id: 'JC03', name: '第 29 届奥林匹克运动会（纪念钞）', year: 2008, theme: '奥运', denomination: '10元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic7/201910/P020191031554770972379.jpg' },
-            { id: 'JB76', name: '2009年贺岁（己丑）', year: 2009, theme: '生肖一轮', denomination: '1元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113586500758305.jpg' },
-            { id: 'JB77', name: '“和”字书法－篆书', year: 2009, theme: '“和”字书法', denomination: '1元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113586034551332.jpg' },
-            { id: 'JB78', name: '环境保护 - 关注', year: 2009, theme: '环境保护', denomination: '1元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113585849256956.jpg' },
-            { id: 'JB79', name: '中国2010年上海世博会', year: 2010, theme: '国际事件', denomination: '1元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113585667450246.jpg' },
-            { id: 'JB80', name: '2010年贺岁（庚寅）', year: 2010, theme: '生肖一轮', denomination: '1元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113564684324236.jpg' },
-            { id: 'JB81', name: '“和”字书法－隶书', year: 2010, theme: '“和”字书法', denomination: '1元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113564482042357.jpg' },
-            { id: 'JB82', name: '环境保护 - 参与', year: 2010, theme: '环境保护', denomination: '1元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113583334104357.png' },
-            { id: 'JB83', name: '中国共产党成立90周年', year: 2011, theme: '建党', denomination: '5元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113576737412658.png' },
-            { id: 'JB84', name: '2011年贺岁（辛卯）', year: 2011, theme: '生肖一轮', denomination: '1元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113572401020704.png' },
-            { id: 'JB85', name: '2012年贺岁（壬辰）', year: 2012, theme: '生肖一轮', denomination: '1元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113563957379565.jpg' },
-            { id: 'JB86', name: '2013年贺岁（癸巳）', year: 2013, theme: '生肖一轮', denomination: '1元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113562135288497.png' },
-            { id: 'JB87', name: '“和”字书法－行书', year: 2013, theme: '“和”字书法', denomination: '5元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113553584391546.png' },
-            { id: 'JB88', name: '2014年贺岁（甲午）', year: 2013, theme: '生肖一轮', denomination: '1元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113550579416620.png' },
-            { id: 'JB89', name: '“和”字书法－草书', year: 2014, theme: '“和”字书法', denomination: '5元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113539834189005.jpg' },
-            { id: 'JB90', name: '2015年贺岁（乙未）', year: 2015, theme: '生肖二轮', denomination: '10元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113539609026460.jpg' },
-            { id: 'JB91', name: '中国人民抗日战争暨世界反法西斯战争胜利70周年', year: 2015, theme: '抗日胜利', denomination: '1元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113539380286012.jpg' },
-            { id: 'JB92', name: '中国航天', year: 2015, theme: '中国科技', denomination: '10元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113537210388159.jpg' },
-            { id: 'JC04', name: '中国航天（纪念钞）', year: 2015, theme: '中国科技', denomination: '100元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic7/201910/P020191107548483163131.png' },
-            { id: 'JB93', name: '2016年贺岁（丙申）', year: 2016, theme: '生肖二轮', denomination: '10元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113536930956340.jpg' },
-            { id: 'JB94', name: '孙中山先生诞辰150周年', year: 2016, theme: '伟人诞辰', denomination: '5元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113536604912354.jpg' },
-            { id: 'JB95', name: '2017年贺岁（丁酉）', year: 2017, theme: '生肖二轮', denomination: '10元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113392346636187.jpg' },
-            { id: 'JB96', name: '中国人民解放军建军90周年', year: 2017, theme: '建军', denomination: '10元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113535174885699.jpg' },
-            { id: 'JB97', name: '“和”字书法－楷书', year: 2017, theme: '“和”字书法', denomination: '5元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113520230705779.jpg' },
-            { id: 'JB98', name: '2018年贺岁（戊戍）', year: 2018, theme: '生肖二轮', denomination: '10元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113390059211953.jpg' },
-            { id: 'JB99', name: '中国高铁', year: 2018, theme: '中国科技', denomination: '10元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113514058639151.png' },
-            { id: 'JB100', name: '庆祝改革开放40周年', year: 2018, theme: '国内事件', denomination: '10元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113510982416688.png' },
-            { id: 'JC05', name: '人民币发行七十周年（纪念钞）', year: 2018, theme: '国内事件', denomination: '50元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic7/201910/P020191112544869888951.png' },
-            { id: 'JB101', name: '2019年贺岁（己亥）', year: 2019, theme: '生肖二轮', denomination: '10元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113409055349807.png' },
-            { id: 'JB102', name: '中华人民共和国成立70周年', year: 2019, theme: '建国', denomination: '10元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113408870683241.png' },
-            { id: 'JB103', name: '世界文化和自然遗产－泰山', year: 2019, theme: '世界双遗', denomination: '5元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113397244607886.png' },
-            { id: 'JB104', name: '2020年贺岁（庚子）', year: 2020, theme: '生肖二轮', denomination: '10元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/201912/P020191218514567766949.png' },
-            { id: 'JB105', name: '世界文化和自然遗产－武夷山', year: 2020, theme: '世界双遗', denomination: '5元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/202106/P020210622560517361496.jpg' },
-            { id: 'JB106', name: '2021年贺岁（辛丑）', year: 2021, theme: '生肖二轮', denomination: '10元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/202106/P020210622560315980825.jpg' },
-            { id: 'JB107', name: '中国共产党成立100周年', year: 2021, theme: '建党', denomination: '10元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/202106/P020210622559953019265.jpg' },
-            { id: 'JB108-1', name: '第 24 界冬季奥林匹克运动会－冰上运动项目', year: 2021, theme: '奥运', denomination: '5元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/202110/P020211026521805894184.png' },
-            { id: 'JB108-2', name: '第 24 界冬季奥林匹克运动会－雪上运动项目', year: 2021, theme: '奥运', denomination: '5元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/202110/P020211026521805913417.png' },
-            { id: 'JC06-1', name: '第 24 界冬季奥林匹克运动会（纪念钞）－冰上运动项目', year: 2021, theme: '奥运', denomination: '20元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic7/202112/P020220119410413596837.jpg' },
-            { id: 'JC06-2', name: '第 24 界冬季奥林匹克运动会（纪念钞）－雪上运动项目', year: 2021, theme: '奥运', denomination: '20元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic7/202112/P020220119410413602020.jpg' },            
-            { id: 'JB109', name: '2022年贺岁（壬寅）', year: 2022, theme: '生肖二轮', denomination: '10元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/202201/P020220106359344147195.jpg' },
-            { id: 'JB110', name: '2023年贺岁（癸卯）', year: 2023, theme: '生肖二轮', denomination: '10元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/202212/P020221228502463247729.jpg' },
-            { id: 'JB111', name: '世界文化和自然遗产－黄山', year: 2023, theme: '世界双遗', denomination: '5元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/202303/P020230322302296005956.jpg' },
-            { id: 'JB112', name: '世界文化和自然遗产－峨眉山-乐山大佛', year: 2023, theme: '世界双遗', denomination: '5元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/202303/P020230322304572464807.jpg' },
-            { id: 'JB113', name: '三江源国家公园', year: 2023, theme: '国家公园', denomination: '10元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/202308/P020230822522169098084.png' },
-            { id: 'JB114', name: '大熊猫国家公园', year: 2023, theme: '国家公园', denomination: '10元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/202308/P020230822522617452454.png' },
-            { id: 'JB115', name: '中国京剧艺术－生角', year: 2023, theme: '京剧艺术', denomination: '5元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/202311/P020231108413031823084.png' },
-            { id: 'JB116', name: '2024年贺岁（甲辰）', year: 2024, theme: '生肖二轮', denomination: '10元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/202312/P020231218346762752972.png' },
-            { id: 'JC07', name: '2024年贺岁（纪念钞）', year: 2024, theme: '生肖纪念钞', denomination: '20元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic7/202312/P020231225531470816809.jpg' },
-            { id: 'JB117', name: '东北虎豹国家公园', year: 2024, theme: '国家公园', denomination: '10元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/202408/P020240829598150671298.png' },
-            { id: 'JB118', name: '中国京剧艺术－旦角', year: 2024, theme: '京剧艺术', denomination: '5元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/202411/P020241105392349747480.jpg' },
-            { id: 'JB119', name: '2025年贺岁（乙巳）', year: 2025, theme: '生肖二轮', denomination: '10元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic6/202412/P020241219370620873816.png' },
-            { id: 'JC08', name: '2025年贺岁（纪念钞）', year: 2025, theme: '生肖纪念钞', denomination: '20元', imageUrl: 'https://www.cbpm.cn/cn/rmbpic/rmbpic7/202412/P020250109363432190336.png' },
-            { id: 'JB120', name: '海南热带雨林国家公园', year: 2025, theme: '国家公园', denomination: '10元', imageUrl: 'https://imgbdb4.bendibao.com/tybdb/news/20254/14/2025414162241_20036.png' },
-            { id: 'JB121', name: '中国人民抗日战争暨世界反法西斯战争胜利80周年', year: 2025, theme: '抗日胜利', denomination: '10元', imageUrl: 'https://n.sinaimg.cn/spider20250828/480/w640h640/20250828/c50a-80c1e586ab20570e38f9d1450a140d25.jpg' },
-        ];
+        let allCoinsData = []; 
 
         let myCollection = []; // 存储已收藏的纪念币ID
         const storageKey = 'myCoinCollection'; // 本地存储的键名
@@ -367,7 +242,10 @@
         const mainContainer = document.getElementById('main-container');
         const themeFilter = document.getElementById('themeFilter');
         const denominationFilter = document.getElementById('denominationFilter');
+        const sizeFilter = document.getElementById('sizeFilter');
+        const metalFilter = document.getElementById('metalFilter');
         const yearFilter = document.getElementById('yearFilter');
+        const clearFiltersBtn = document.getElementById('clearFiltersBtn'); 
         const sortOrderToggle = document.getElementById('sortOrderToggle');
         const saveStatus = document.getElementById('save-status');
         const searchInput = document.getElementById('searchInput');
@@ -425,6 +303,8 @@
 
             const selectedTheme = themeFilter.value;
             const selectedDenomination = denominationFilter.value;
+            const selectedSize = sizeFilter.value;
+            const selectedMetal = metalFilter.value;
             const selectedYear = yearFilter.value;
             const searchTerm = searchInput.value.toLowerCase().trim();
 
@@ -432,9 +312,11 @@
             let filteredCoins = allCoinsData.filter(coin => {
                 const matchesTheme = selectedTheme === '' || coin.theme === selectedTheme;
                 const matchesDenomination = selectedDenomination === '' || coin.denomination === selectedDenomination;
+                const matchesSize = selectedSize === '' || coin.size === selectedSize;
+                const matchesMetal = selectedMetal === '' || coin.metal === selectedMetal;
                 const matchesYear = selectedYear === '' || coin.year.toString() === selectedYear;
                 const matchesSearch = searchTerm === '' || coin.name.toLowerCase().includes(searchTerm);
-                return matchesTheme && matchesDenomination && matchesYear && matchesSearch;
+                return matchesTheme && matchesDenomination && matchesSize && matchesMetal && matchesYear && matchesSearch;
             });
 
             // 按年份分组
@@ -494,7 +376,7 @@
                         </div>
                         <div class="mt-4 text-center">
                             <p class="font-semibold text-lg">${coin.name}</p>
-                            <p class="text-sm text-gray-600">${coin.denomination}</p>
+                            <p class="text-sm text-gray-600">${coin.denomination} / ${coin.size} / ${coin.metal}</p>
                         </div>
                     `;
                     coinGrid.appendChild(coinCard);
@@ -524,18 +406,26 @@
         function populateFilters(coins) {
             const themes = [...new Set(coins.map(coin => coin.theme))].sort();
             const denominations = [...new Set(coins.map(coin => coin.denomination))].sort();
+            const sizes = [...new Set(coins.map(coin => coin.size))].sort((a, b) => parseInt(a) - parseInt(b));
+            const metals = [...new Set(coins.map(coin => coin.metal))].sort();
             const years = [...new Set(coins.map(coin => coin.year))].sort((a, b) => b - a);
 
             themeFilter.innerHTML = '<option value="">所有主题</option>' + themes.map(t => `<option value="${t}">${t}</option>`).join('');
             denominationFilter.innerHTML = '<option value="">所有面额</option>' + denominations.map(d => `<option value="${d}">${d}</option>`).join('');
+            sizeFilter.innerHTML = '<option value="">所有大小</option>' + sizes.map(s => `<option value="${s}">${s}</option>`).join('');
+            metalFilter.innerHTML = '<option value="">所有材质</option>' + metals.map(m => `<option value="${m}">${m}</option>`).join('');
             yearFilter.innerHTML = '<option value="">所有年份</option>' + years.map(y => `<option value="${y}">${y}年</option>`).join('');
 
             themeFilter.addEventListener('change', renderUI);
             denominationFilter.addEventListener('change', renderUI);
+            sizeFilter.addEventListener('change', renderUI);
+            metalFilter.addEventListener('change', renderUI);
             yearFilter.addEventListener('change', renderUI);
             sortOrderToggle.addEventListener('click', () => {
                 currentSortOrder = currentSortOrder === 'desc' ? 'asc' : 'desc';
-                sortOrderToggle.innerHTML = currentSortOrder === 'desc' ? `<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline-block" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 3a1 1 0 01.707.293l3 3a1 1 0 01-1.414 1.414L10 5.414V16a1 1 0 11-2 0V5.414L6.707 7.707a1 1 0 01-1.414-1.414l3-3A1 1 0 0110 3z" clip-rule="evenodd" /></svg>` : `<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline-block" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 17a1 1 0 01-.707-.293l-3-3a1 1 0 011.414-1.414L10 14.586V4a1 1 0 112 0v10.586l1.293-1.293a1 1 0 111.414 1.414l-3 3A1 1 0 0110 17z" clip-rule="evenodd" /></svg>`;
+                sortOrderToggle.innerHTML = currentSortOrder === 'desc' ? 
+                `<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline-block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">  <path d="M12 19V5" />  <polyline points="5 12 12 5 19 12" /> </svg>` : 
+                `<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline-block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">  <path d="M12 5v14" />  <polyline points="19 12 12 19 5 12" /> </svg>`;
                 renderUI();
             });
             
@@ -656,20 +546,64 @@
             }
         }
         
+        /**
+         * 从指定的 JSON 文件加载数据。
+         * @param {string} url - JSON 文件的 URL。
+         * @returns {Promise<Array>} 返回一个 Promise，成功时解析为数据数组。
+         */
+        async function loadData(url) {
+            try {
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error(`网络请求失败，状态码: ${response.status}`);
+                }
+                const data = await response.json();
+                return data;
+            } catch (error) {
+                console.error('加载数据时出错:', error);
+                throw error; // 继续抛出错误，让调用者可以捕获
+            }
+        }
+
+        function clearFilters() {
+            themeFilter.value = '';
+            denominationFilter.value = '';
+            sizeFilter.value = '';
+            metalFilter.value = '';
+            yearFilter.value = '';
+            searchInput.value = '';
+            renderUI(); // Re-render the UI after clearing the filters
+        }
+
         // 初始化应用
         window.onload = () => {
-            loadCollection();
-            populateFilters(allCoinsData);
-            renderUI();
-            updateCollectionOverview();
-            
-            // 添加抽屉切换事件监听
-            document.getElementById('overviewHeader').addEventListener('click', toggleOverview);
-            document.getElementById('toggle-icon').addEventListener('click', (e) => {
-                e.stopPropagation(); // 阻止事件冒泡
-                toggleOverview();
-  
-            });
+            // 在这里调用 loadData() 并处理返回的 Promise
+            loadData('coin_data.json')
+                .then(data => {
+                    // 1. 数据加载成功后，将数据赋值给 allCoinsData
+                    allCoinsData = data;
+
+                    // 2. 然后，再调用所有依赖这些数据的初始化函数
+                    loadCollection();
+                    populateFilters(allCoinsData);
+                    renderUI();
+                    updateCollectionOverview();
+
+                    // 3. 最后，添加事件监听器
+                    document.getElementById('overviewHeader').addEventListener('click', toggleOverview);
+                    document.getElementById('toggle-icon').addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        toggleOverview();
+                    });
+ 
+                    // Add listen for clicks on the filter clean button
+                    clearFiltersBtn.addEventListener('click', clearFilters); 
+
+                })
+                .catch(error => {
+                    // 如果数据加载失败，可以在这里处理，例如显示错误消息给用户
+                    console.error('无法初始化应用，因为数据加载失败。');
+                });
         };
 
     </script>
