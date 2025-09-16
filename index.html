@@ -117,6 +117,12 @@
         #denominationFilter {
             width: 95px;
         }
+        #sizeFilter {
+            width: 95px;
+        }
+        #metalFilter {
+            width: 95px;
+        }
         #yearFilter {
             width: 95px;
         }
@@ -128,7 +134,6 @@
             <h1 class="text-4xl sm:text-5xl font-extrabold text-blue-800 leading-tight">我的纪念币收藏</h1>
             <p class="text-xl sm:text-2xl mt-2 text-gray-600">点击图片标记你已拥有的纪念币</p>
             
-            <!-- 收藏概览抽屉 -->
             <div id="collectionOverview" class="collection-overview mt-4 max-w-2xl mx-auto">
                 <div class="collection-header" id="overviewHeader">
                     <div class="collection-summary">
@@ -157,7 +162,6 @@
             </div>
 
            
-            <!-- 搜索框 -->
             <div class="mt-4 max-w-2xl mx-auto">
                 <div class="relative">
                     <input type="text" id="searchInput" placeholder="搜索纪念币名称..." 
@@ -177,6 +181,12 @@
                     <select id="denominationFilter" class="rounded-md border border-gray-300 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
                         <option value="">所有面额</option>
                     </select>
+                    <select id="sizeFilter" class="rounded-md border border-gray-300 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="">所有大小</option>
+                    </select>
+                    <select id="metalFilter" class="rounded-md border border-gray-300 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="">所有材质</option>
+                    </select>
                     <select id="yearFilter" class="rounded-md border border-gray-300 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
                         <option value="">所有年份</option>
                     </select>
@@ -189,7 +199,6 @@
         </header>
 
         <main id="main-container">
-            <!-- Coin list will be dynamically rendered here -->
         </main>
     </div>
 
@@ -222,6 +231,8 @@
         const mainContainer = document.getElementById('main-container');
         const themeFilter = document.getElementById('themeFilter');
         const denominationFilter = document.getElementById('denominationFilter');
+        const sizeFilter = document.getElementById('sizeFilter');
+        const metalFilter = document.getElementById('metalFilter');
         const yearFilter = document.getElementById('yearFilter');
         const sortOrderToggle = document.getElementById('sortOrderToggle');
         const saveStatus = document.getElementById('save-status');
@@ -280,6 +291,8 @@
 
             const selectedTheme = themeFilter.value;
             const selectedDenomination = denominationFilter.value;
+            const selectedSize = sizeFilter.value;
+            const selectedMetal = metalFilter.value;
             const selectedYear = yearFilter.value;
             const searchTerm = searchInput.value.toLowerCase().trim();
 
@@ -287,9 +300,11 @@
             let filteredCoins = allCoinsData.filter(coin => {
                 const matchesTheme = selectedTheme === '' || coin.theme === selectedTheme;
                 const matchesDenomination = selectedDenomination === '' || coin.denomination === selectedDenomination;
+                const matchesSize = selectedSize === '' || coin.size === selectedSize;
+                const matchesMetal = selectedMetal === '' || coin.metal === selectedMetal;
                 const matchesYear = selectedYear === '' || coin.year.toString() === selectedYear;
                 const matchesSearch = searchTerm === '' || coin.name.toLowerCase().includes(searchTerm);
-                return matchesTheme && matchesDenomination && matchesYear && matchesSearch;
+                return matchesTheme && matchesDenomination && matchesSize && matchesMetal && matchesYear && matchesSearch;
             });
 
             // 按年份分组
@@ -349,7 +364,7 @@
                         </div>
                         <div class="mt-4 text-center">
                             <p class="font-semibold text-lg">${coin.name}</p>
-                            <p class="text-sm text-gray-600">${coin.denomination}</p>
+                            <p class="text-sm text-gray-600">${coin.denomination} / ${coin.size} / ${coin.metal}</p>
                         </div>
                     `;
                     coinGrid.appendChild(coinCard);
@@ -379,14 +394,20 @@
         function populateFilters(coins) {
             const themes = [...new Set(coins.map(coin => coin.theme))].sort();
             const denominations = [...new Set(coins.map(coin => coin.denomination))].sort();
+            const sizes = [...new Set(coins.map(coin => coin.size))].sort((a, b) => parseInt(a) - parseInt(b));
+            const metals = [...new Set(coins.map(coin => coin.metal))].sort();
             const years = [...new Set(coins.map(coin => coin.year))].sort((a, b) => b - a);
 
             themeFilter.innerHTML = '<option value="">所有主题</option>' + themes.map(t => `<option value="${t}">${t}</option>`).join('');
             denominationFilter.innerHTML = '<option value="">所有面额</option>' + denominations.map(d => `<option value="${d}">${d}</option>`).join('');
+            sizeFilter.innerHTML = '<option value="">所有大小</option>' + sizes.map(s => `<option value="${s}">${s}</option>`).join('');
+            metalFilter.innerHTML = '<option value="">所有材质</option>' + metals.map(m => `<option value="${m}">${m}</option>`).join('');
             yearFilter.innerHTML = '<option value="">所有年份</option>' + years.map(y => `<option value="${y}">${y}年</option>`).join('');
 
             themeFilter.addEventListener('change', renderUI);
             denominationFilter.addEventListener('change', renderUI);
+            sizeFilter.addEventListener('change', renderUI);
+            metalFilter.addEventListener('change', renderUI);
             yearFilter.addEventListener('change', renderUI);
             sortOrderToggle.addEventListener('click', () => {
                 currentSortOrder = currentSortOrder === 'desc' ? 'asc' : 'desc';
