@@ -172,29 +172,40 @@
                 </div>
             </div>
             
-            <div class="mt-4 flex flex-col sm:flex-row items-center justify-center gap-2 flex-wrap">
-
-                <div class="flex items-center space-x-2 mt-4 sm:mt-0">
-                    <select id="themeFilter" class="rounded-md border border-gray-300 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <div class="mt-4 flex flex-wrap items-center justify-center gap-2">
+                <div class="flex flex-wrap items-center justify-center gap-2">
+                    <select id="themeFilter" class="w-24 rounded-md border border-gray-300 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
                         <option value="">所有主题</option>
                     </select>
-                    <select id="denominationFilter" class="rounded-md border border-gray-300 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <select id="denominationFilter" class="w-24 rounded-md border border-gray-300 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
                         <option value="">所有面额</option>
                     </select>
-                    <select id="sizeFilter" class="rounded-md border border-gray-300 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <select id="sizeFilter" class="w-24 rounded-md border border-gray-300 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
                         <option value="">所有大小</option>
                     </select>
-                    <select id="metalFilter" class="rounded-md border border-gray-300 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <select id="metalFilter" class="w-24 rounded-md border border-gray-300 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
                         <option value="">所有材质</option>
                     </select>
-                    <select id="yearFilter" class="rounded-md border border-gray-300 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <select id="yearFilter" class="w-24 rounded-md border border-gray-300 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
                         <option value="">所有年份</option>
                     </select>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <button id="clearFiltersBtn" class="bg-green-500 hover:bg-green-600 text-white rounded-md p-2 text-sm flex items-center transition-colors" aria-label="清除所有过滤">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline-block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 12a9 9 0 1 1-4-7.5" />
+                            <polyline points="21 3 21 8 16 8" />
+                        </svg>
+                    </button>   
                     <button id="sortOrderToggle" class="bg-blue-500 hover:bg-blue-600 text-white rounded-md p-2 text-sm flex items-center transition-colors">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline-block" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 3a1 1 0 01.707.293l3 3a1 1 0 01-1.414 1.414L10 5.414V16a1 1 0 11-2 0V5.414L6.707 7.707a1 1 0 01-1.414-1.414l3-3A1 1 0 0110 3z" clip-rule="evenodd" /></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline-block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 19V5" />
+                            <polyline points="5 12 12 5 19 12" />
+                        </svg>
                     </button>
                 </div>
             </div>
+
             <p id="save-status" class="text-sm text-green-600 mt-2 opacity-0">已更新</p>
         </header>
 
@@ -234,6 +245,7 @@
         const sizeFilter = document.getElementById('sizeFilter');
         const metalFilter = document.getElementById('metalFilter');
         const yearFilter = document.getElementById('yearFilter');
+        const clearFiltersBtn = document.getElementById('clearFiltersBtn'); 
         const sortOrderToggle = document.getElementById('sortOrderToggle');
         const saveStatus = document.getElementById('save-status');
         const searchInput = document.getElementById('searchInput');
@@ -411,7 +423,9 @@
             yearFilter.addEventListener('change', renderUI);
             sortOrderToggle.addEventListener('click', () => {
                 currentSortOrder = currentSortOrder === 'desc' ? 'asc' : 'desc';
-                sortOrderToggle.innerHTML = currentSortOrder === 'desc' ? `<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline-block" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 3a1 1 0 01.707.293l3 3a1 1 0 01-1.414 1.414L10 5.414V16a1 1 0 11-2 0V5.414L6.707 7.707a1 1 0 01-1.414-1.414l3-3A1 1 0 0110 3z" clip-rule="evenodd" /></svg>` : `<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline-block" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 17a1 1 0 01-.707-.293l-3-3a1 1 0 011.414-1.414L10 14.586V4a1 1 0 112 0v10.586l1.293-1.293a1 1 0 111.414 1.414l-3 3A1 1 0 0110 17z" clip-rule="evenodd" /></svg>`;
+                sortOrderToggle.innerHTML = currentSortOrder === 'desc' ? 
+                `<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline-block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">  <path d="M12 19V5" />  <polyline points="5 12 12 5 19 12" /> </svg>` : 
+                `<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline-block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">  <path d="M12 5v14" />  <polyline points="19 12 12 19 5 12" /> </svg>`;
                 renderUI();
             });
             
@@ -551,6 +565,16 @@
             }
         }
 
+        function clearFilters() {
+            themeFilter.value = '';
+            denominationFilter.value = '';
+            sizeFilter.value = '';
+            metalFilter.value = '';
+            yearFilter.value = '';
+            searchInput.value = '';
+            renderUI(); // Re-render the UI after clearing the filters
+        }
+
         // 初始化应用
         window.onload = () => {
             // 在这里调用 loadData() 并处理返回的 Promise
@@ -571,6 +595,9 @@
                         e.stopPropagation();
                         toggleOverview();
                     });
+ 
+                    // Add listen for clicks on the filter clean button
+                    clearFiltersBtn.addEventListener('click', clearFilters); 
 
                 })
                 .catch(error => {
