@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>我的纪念币收藏（本地版）</title>
+    <title>我的纪念币收藏</title>
     <!-- 引入 Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -199,10 +199,30 @@
                 <div class="flex flex-wrap items-center justify-center gap-2">
                     <button id="sortOrderToggle" class="bg-blue-500 hover:bg-blue-600 text-white rounded-md p-2 text-sm flex items-center transition-colors">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline-block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M12 19V5" />
-                            <polyline points="5 12 12 5 19 12" />
+                            <line x1="3" y1="6" x2="15" y2="6" />
+                            <line x1="3" y1="12" x2="15" y2="12" />
+                            <line x1="3" y1="18" x2="15" y2="18" />
+                            <polyline points="19 19 19 5 16 8" />
                         </svg>
+                        年份升序
                     </button>
+                    <button id="exportBtn" class="bg-blue-500 hover:bg-blue-600 text-white rounded-md p-2 text-sm flex items-center transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline-block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                            <polyline points="7 10 12 15 17 10" />
+                            <line x1="12" y1="15" x2="12" y2="3" />
+                        </svg>
+                        导出数据
+                    </button>
+                    <label for="importFile" class="bg-blue-500 hover:bg-blue-600 text-white rounded-md p-2 text-sm flex items-center transition-colors cursor-pointer">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline-block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                            <polyline points="17 8 12 3 7 8" />
+                            <line x1="12" y1="3" x2="12" y2="15" />
+                        </svg>
+                        导入数据
+                    </label>
+                    <input type="file" id="importFile" accept=".json" class="hidden">
                 </div>        
             </div>
 
@@ -250,7 +270,6 @@
         const saveStatus = document.getElementById('save-status');
         const searchInput = document.getElementById('searchInput');
 
-
         // 加载本地收藏数据
         function loadCollection() {
             try {
@@ -279,6 +298,45 @@
                 console.error("保存本地收藏数据失败:", e);
             }
         }
+
+        // 导出数据
+        document.getElementById('exportBtn').addEventListener('click', () => {
+            const dataStr = JSON.stringify(myCollection);
+            const blob = new Blob([dataStr], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `coin_collection_backup_${new Date().toISOString().slice(0, 10)}.json`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        });
+
+        // 导入数据
+        document.getElementById('importFile').addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = (event) => {
+                try {
+                    const importedCollection = JSON.parse(event.target.result);
+                    if (Array.isArray(importedCollection)) {
+                        myCollection = importedCollection;
+                        saveCollection(); // 保存新数据
+                        renderUI(); // 重新渲染
+                        updateCollectionOverview(); // 更新概览
+                        alert('数据导入成功！');
+                    } else {
+                        throw new Error('导入的文件格式不正确');
+                    }
+                } catch (error) {
+                    console.error('导入失败:', error);
+                    alert('导入失败，请确保文件是有效的JSON格式。');
+                }
+            };
+            reader.readAsText(file);
+        });
 
         // 防抖函数 - 避免输入时频繁渲染
         function debounce(func, delay = 300) {
@@ -424,9 +482,22 @@
             sortOrderToggle.addEventListener('click', () => {
                 currentSortOrder = currentSortOrder === 'desc' ? 'asc' : 'desc';
                 sortOrderToggle.innerHTML = currentSortOrder === 'desc' ? 
-                `<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline-block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">  <path d="M12 19V5" />  <polyline points="5 12 12 5 19 12" /> </svg>` : 
-                `<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline-block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">  <path d="M12 5v14" />  <polyline points="19 12 12 19 5 12" /> </svg>`;
-                renderUI();
+                // Descending icon
+                `<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline-block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="3" y1="6" x2="15" y2="6" />
+                    <line x1="3" y1="12" x2="15" y2="12" />
+                    <line x1="3" y1="18" x2="15" y2="18" />
+                    <polyline points="19 19 19 5 16 8" />
+                </svg>年份升序` : 
+                // Ascending icon
+                `<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline-block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="3" y1="6" x2="15" y2="6" />
+                    <line x1="3" y1="12" x2="15" y2="12" />
+                    <line x1="3" y1="18" x2="15" y2="18" />
+                    <polyline points="19 5 19 19 16 16" />
+                </svg>年份降序`;
+
+              renderUI();
             });
             
             // 添加搜索事件监听，使用防抖优化性能
