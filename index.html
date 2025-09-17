@@ -142,8 +142,8 @@
     <div class="max-w-7xl mx-auto py-8">
         <header class="text-center mb-10">
             <h1 class="text-4xl sm:text-5xl font-extrabold text-blue-800 leading-tight">我的纪念币收藏</h1>
-            <p class="text-xl sm:text-2xl mt-2 text-gray-600"><b><i>单击</i></b>标记想收藏/<b><i>双击</i></b>标记已收藏</p>
-            
+            <p class="text-xl sm:text-2xl mt-2 text-gray-600"><b><i>单击</i></b>标记想收藏 / <b><i>双击</i></b>标记已收藏</p>
+
             <div id="collectionOverview" class="collection-overview mt-4 max-w-2xl mx-auto">
                 <div class="collection-header" id="overviewHeader">
                     <div class="collection-summary">
@@ -200,7 +200,7 @@
                         <option value="">所有年份</option>
                     </select>
                     <select id="statusFilter" class="w-24 rounded-md border border-gray-300 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-                        <option value="">全部状态</option>
+                        <option value="">所有状态</option>
                         <option value="uncollected">未收藏</option>
                         <option value="wishlist">想收藏</option>
                         <option value="collected">已收藏</option>
@@ -270,7 +270,6 @@
     <script>
         let allCoinsData = []; 
 
-        // 新增：区分已收藏和想收藏
         let myCollection = []; // 存储已收藏的纪念币ID
         let myWishlist = []; // 存储想收藏的纪念币ID
         const storageKey = 'myCoinCollection'; 
@@ -327,7 +326,7 @@
             }
         }
         
-        // 3. 导出/导入数据 - 需要修改以支持多状态
+        // 3. 导出/导入数据
         document.getElementById('exportBtn').addEventListener('click', () => {
             const data = {
                 collected: myCollection,
