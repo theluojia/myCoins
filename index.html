@@ -133,13 +133,16 @@
         #yearFilter {
             width: 95px;
         }
+        #statusFilter {
+            width: 95px;
+        }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans p-4 sm:p-8">
     <div class="max-w-7xl mx-auto py-8">
         <header class="text-center mb-10">
             <h1 class="text-4xl sm:text-5xl font-extrabold text-blue-800 leading-tight">我的纪念币收藏</h1>
-            <p class="text-xl sm:text-2xl mt-2 text-gray-600">单击标记想收藏/双击标记已收藏</p>
+            <p class="text-xl sm:text-2xl mt-2 text-gray-600"><b>单击</b>标记想收藏/<b>双击</b>标记已收藏</p>
             
             <div id="collectionOverview" class="collection-overview mt-4 max-w-2xl mx-auto">
                 <div class="collection-header" id="overviewHeader">
@@ -195,6 +198,12 @@
                     </select>
                     <select id="yearFilter" class="w-24 rounded-md border border-gray-300 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
                         <option value="">所有年份</option>
+                    </select>
+                    <select id="statusFilter" class="w-24 rounded-md border border-gray-300 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="">全部状态</option>
+                        <option value="uncollected">未收藏</option>
+                        <option value="wishlist">想收藏</option>
+                        <option value="collected">已收藏</option>
                     </select>
                     <button id="clearFiltersBtn" class="bg-green-500 hover:bg-green-600 text-white rounded-md p-2 text-sm flex items-center transition-colors" aria-label="清除所有过滤">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline-block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -276,6 +285,7 @@
         const sizeFilter = document.getElementById('sizeFilter');
         const metalFilter = document.getElementById('metalFilter');
         const yearFilter = document.getElementById('yearFilter');
+        const statusFilter = document.getElementById('statusFilter');
         const clearFiltersBtn = document.getElementById('clearFiltersBtn'); 
         const sortOrderToggle = document.getElementById('sortOrderToggle');
         const saveStatus = document.getElementById('save-status');
@@ -448,6 +458,7 @@
             const selectedSize = sizeFilter.value;
             const selectedMetal = metalFilter.value;
             const selectedYear = yearFilter.value;
+            const selectedStatus = statusFilter.value;
             const searchTerm = searchInput.value.toLowerCase().trim();
 
             // 1. 给容器添加淡出效果
@@ -463,7 +474,18 @@
                     const matchesMetal = selectedMetal === '' || coin.metal === selectedMetal;
                     const matchesYear = selectedYear === '' || coin.year.toString() === selectedYear;
                     const matchesSearch = searchTerm === '' || coin.name.toLowerCase().includes(searchTerm);
-                    return matchesTheme && matchesDenomination && matchesSize && matchesMetal && matchesYear && matchesSearch;
+
+                    // 新增的收藏状态筛选逻辑
+                    let matchesStatus = true;
+                    if (selectedStatus === 'collected') {
+                        matchesStatus = myCollection.includes(coin.id);
+                    } else if (selectedStatus === 'wishlist') {
+                        matchesStatus = myWishlist.includes(coin.id);
+                    } else if (selectedStatus === 'uncollected') {
+                        matchesStatus = !myCollection.includes(coin.id) && !myWishlist.includes(coin.id);
+                    }
+
+                    return matchesTheme && matchesDenomination && matchesSize && matchesMetal && matchesYear && matchesSearch && matchesStatus;
                 });
                 
                 // 按年份分组
@@ -665,6 +687,7 @@
             metalFilter.value = '';
             yearFilter.value = '';
             searchInput.value = '';
+            statusFilter.value = '';
             renderUI();
         }
         
@@ -735,6 +758,7 @@
             sizeFilter.addEventListener('change', renderUI);
             metalFilter.addEventListener('change', renderUI);
             yearFilter.addEventListener('change', renderUI);
+            statusFilter.addEventListener('change', renderUI);
             
             sortOrderToggle.addEventListener('click', () => {
                 currentSortOrder = currentSortOrder === 'desc' ? 'asc' : 'desc';
