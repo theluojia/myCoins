@@ -171,7 +171,6 @@
                 </div>
             </div>
 
-           
             <div class="mt-4 max-w-2xl mx-auto">
                 <div class="relative">
                     <input type="text" id="searchInput" placeholder="搜索纪念币名称..." 
@@ -212,37 +211,46 @@
                         </svg>
                     </button>   
                 </div>
-                <div class="flex flex-wrap items-center justify-center gap-2">
-                    <button id="sortOrderToggle" class="bg-blue-500 hover:bg-blue-600 text-white rounded-md p-2 text-sm flex items-center transition-colors">
+            </div>
+            <p id="save-status" class="text-sm text-green-600 mt-2 opacity-0">已更新</p>
+
+            <!-- 悬浮圆形按钮 & 菜单 -->
+            <div id="fabContainer" class="fixed bottom-1/4 right-6 z-50">
+
+                <!-- 弹出菜单 -->
+                <div id="fabMenu" class="hidden flex-col items-end space-y-3 mb-4 transition-all duration-300">
+                    <button id="sortOrderToggle" class="w-10 h-10 rounded-full bg-blue-400 text-white shadow-lg flex items-center justify-center hover:bg-blue-500 transition-colors">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline-block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <line x1="3" y1="6" x2="15" y2="6" />
                             <line x1="3" y1="12" x2="15" y2="12" />
                             <line x1="3" y1="18" x2="15" y2="18" />
                             <polyline points="19 19 19 5 16 8" />
                         </svg>
-                        年份升序
-                    </button>
-                    <button id="exportBtn" class="bg-blue-500 hover:bg-blue-600 text-white rounded-md p-2 text-sm flex items-center transition-colors">
+                    </button>    
+                    <button id="exportBtn" class="w-10 h-10 rounded-full bg-blue-400 text-white shadow-lg flex items-center justify-center hover:bg-blue-500 transition-colors">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline-block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
                             <polyline points="7 10 12 15 17 10" />
                             <line x1="12" y1="15" x2="12" y2="3" />
                         </svg>
-                        导出数据
-                    </button>
-                    <label for="importFile" class="bg-blue-500 hover:bg-blue-600 text-white rounded-md p-2 text-sm flex items-center transition-colors cursor-pointer">
+                    </button>    
+                    <label for="importFile" class="w-10 h-10 rounded-full bg-blue-400 text-white shadow-lg flex items-center justify-center hover:bg-blue-500 transition-colors">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline-block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
                             <polyline points="17 8 12 3 7 8" />
                             <line x1="12" y1="3" x2="12" y2="15" />
                         </svg>
-                        导入数据
-                    </label>
+                    </label>    
                     <input type="file" id="importFile" accept=".json" class="hidden">
-                </div>        
-            </div>
+                </div>
 
-            <p id="save-status" class="text-sm text-green-600 mt-2 opacity-0">已更新</p>
+                <!-- 主按钮 -->
+                <button id="fabButton" class="w-10 h-10 rounded-full bg-blue-600 text-white shadow-lg flex items-center justify-center hover:bg-blue-700 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path id="fab-icon-path" stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+                    </svg>
+                </button>
+            </div>
         </header>
 
         <main id="main-container">
@@ -290,6 +298,54 @@
         const saveStatus = document.getElementById('save-status');
         const searchInput = document.getElementById('searchInput');
 
+        const fabButton = document.getElementById('fabButton');
+        const fabMenu = document.getElementById('fabMenu');
+        const fabContainer = document.getElementById('fabContainer');
+        const exportBtn = document.getElementById('exportBtn'); 
+
+        /// 隐藏菜单的函数
+        function hideMenu() {
+            fabMenu.classList.add('hidden');
+            // 获取图标元素并改变其路径为“加号”
+            const fabIconPath = document.getElementById('fab-icon-path');
+            if (fabIconPath) {
+                fabIconPath.setAttribute('d', 'M12 4v16m8-8H4');
+            }
+        }
+
+        // 显示菜单的函数
+        function showMenu() {
+            fabMenu.classList.remove('hidden');
+            // 获取图标元素并改变其路径为“减号”
+            const fabIconPath = document.getElementById('fab-icon-path');
+            if (fabIconPath) {
+                fabIconPath.setAttribute('d', 'M4 12h16');
+            }
+        }
+
+        // 切换菜单显示/隐藏状态
+        fabButton.addEventListener('click', (e) => {
+        e.stopPropagation(); // 阻止点击事件冒泡
+        if (fabMenu.classList.contains('hidden')) {
+            showMenu();
+        } else {
+            hideMenu();
+        }
+        });
+
+        // 点击菜单内的任何元素时，阻止事件冒泡到 document
+        fabMenu.addEventListener('click', (e) => {
+        e.stopPropagation(); // 阻止点击事件冒泡，这样就不会触发 document 上的隐藏逻辑
+        });
+
+        // 当点击 fabContainer 以外的任何地方时，隐藏菜单
+        function handleDocumentClick(e) {
+            if (!fabContainer.contains(e.target)) {
+                hideMenu();
+            }
+        }
+        document.addEventListener('click', handleDocumentClick);
+
         // 1. 加载本地收藏数据
         function loadCollection() {
             try {
@@ -327,7 +383,12 @@
         }
         
         // 3. 导出/导入数据
-        document.getElementById('exportBtn').addEventListener('click', () => {
+        document.getElementById('exportBtn').addEventListener('click', (e) => {
+            e.stopPropagation(); // 阻止事件冒泡
+
+            // 临时移除全局点击监听器，防止下载时菜单意外关闭
+            document.removeEventListener('click', handleDocumentClick);
+
             const data = {
                 collected: myCollection,
                 wishlist: myWishlist
@@ -342,6 +403,12 @@
             a.click();
             document.body.removeChild(a);
             URL.revokeObjectURL(url);
+
+            // 在一个极小的延迟后，重新添加全局点击监听器
+            // 50ms 延迟足以跳过下载触发的事件，同时保证用户体验
+            setTimeout(() => {
+                document.addEventListener('click', handleDocumentClick);
+            }, 50);
         });
 
         document.getElementById('importFile').addEventListener('change', (e) => {
@@ -771,13 +838,13 @@
                     <line x1="3" y1="12" x2="15" y2="12" />
                     <line x1="3" y1="18" x2="15" y2="18" />
                     <polyline points="19 19 19 5 16 8" />
-                </svg>年份升序` : 
+                </svg>` : 
                 `<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline-block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <line x1="3" y1="6" x2="15" y2="6" />
                     <line x1="3" y1="12" x2="15" y2="12" />
                     <line x1="3" y1="18" x2="15" y2="18" />
                     <polyline points="19 5 19 19 16 16" />
-                </svg>年份降序`;
+                </svg>`;
                 renderUI();
             });
             
@@ -796,6 +863,3 @@
 </body>
 
 </html>
-
-
-
