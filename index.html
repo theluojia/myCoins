@@ -226,7 +226,13 @@
                             <line x1="3" y1="18" x2="15" y2="18" />
                             <polyline points="19 19 19 5 16 8" />
                         </svg>
-                    </button>    
+                    </button>
+                    <button id="toggleImageView" class="w-10 h-10 rounded-full bg-blue-400 text-white shadow-lg flex items-center justify-center hover:bg-blue-500 transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                            <circle cx="12" cy="12" r="3" />
+                        </svg>
+                    </button>
                     <button id="exportBtn" class="w-10 h-10 rounded-full bg-blue-400 text-white shadow-lg flex items-center justify-center hover:bg-blue-500 transition-colors">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline-block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
@@ -302,6 +308,7 @@
         const fabMenu = document.getElementById('fabMenu');
         const fabContainer = document.getElementById('fabContainer');
         const exportBtn = document.getElementById('exportBtn'); 
+
 
         /// 隐藏菜单的函数
         function hideMenu() {
@@ -611,8 +618,14 @@
                                 <div class="relative w-full aspect-square">
                                     <img 
                                         src="${coin.imageUrl}" 
-                                        alt="${coin.name}" 
-                                        class="absolute top-0 left-0 w-full h-full object-contain rounded-lg ${imgClass} transition-all duration-500 ease-in-out" 
+                                        alt="${coin.name}正面" 
+                                        class="front-image absolute top-0 left-0 w-full h-full object-contain rounded-lg ${imgClass} transition-all duration-500 ease-in-out" 
+                                        loading="lazy"
+                                        onerror="this.onerror=null;this.src='https://placehold.co/300x300/F0F0F0/888888?text=图片未找到'">
+                                    <img 
+                                        src="${coin.imageUrl2}" 
+                                        alt="${coin.name}背面" 
+                                        class="back-image absolute top-0 left-0 w-full h-full object-contain rounded-lg ${imgClass} transition-all duration-500 ease-in-out hidden"
                                         loading="lazy"
                                         onerror="this.onerror=null;this.src='https://placehold.co/300x300/F0F0F0/888888?text=图片未找到'">
                                     <div class="coin-check-icon absolute top-2 right-2 bg-green-500 text-white w-8 h-8 rounded-full flex items-center justify-center text-xl opacity-0 transition-opacity duration-300">
@@ -788,6 +801,8 @@
             }
         }
 
+
+
         window.onload = () => {
             loadData('coin_data.json')
                 .then(data => {
@@ -859,6 +874,24 @@
                 timeout = setTimeout(() => func.apply(context, args), delay);
             };
         }
+
+        const toggleImageView = document.getElementById('toggleImageView');
+
+        toggleImageView.addEventListener('click', function() {
+            // 使用 querySelectorAll 找到所有当前在页面上的图片
+            const allFrontImages = document.querySelectorAll('.front-image');
+            const allBackImages = document.querySelectorAll('.back-image');
+
+            // 遍历所有图片并切换它们的显示状态
+            allFrontImages.forEach(img => {
+                img.classList.toggle('hidden');
+            });
+
+            allBackImages.forEach(img => {
+                img.classList.toggle('hidden');
+            });
+        });
+
     </script>
 </body>
 
