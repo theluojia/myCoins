@@ -292,6 +292,8 @@
         let currentSortOrder = 'desc';
         let searchTimeout = null;
 
+        let isBackView = false;        
+
         const mainContainer = document.getElementById('main-container');
         const themeFilter = document.getElementById('themeFilter');
         const denominationFilter = document.getElementById('denominationFilter');
@@ -610,7 +612,10 @@
                                 cardStateClass = 'wishlist';
                                 imgClass = 'grayscale'; // 想收藏：图片保持黑白
                             }
-                            
+
+                            const frontImageClass = isBackView ? 'hidden' : '';
+                            const backImageClass = isBackView ? '' : 'hidden';
+
                             coinCard.className = `coin-card flex flex-col items-center p-4 bg-gray-100 rounded-xl shadow-lg transform transition-transform duration-300 hover:scale-105 cursor-pointer relative ${cardStateClass}`;
                             coinCard.setAttribute('data-coin-id', coin.id);
 
@@ -619,13 +624,13 @@
                                     <img 
                                         src="${coin.imageUrl}" 
                                         alt="${coin.name}正面" 
-                                        class="front-image absolute top-0 left-0 w-full h-full object-contain rounded-lg ${imgClass} transition-all duration-500 ease-in-out" 
+                                        class="front-image absolute top-0 left-0 w-full h-full object-contain rounded-lg ${imgClass} transition-all duration-500 ease-in-out ${frontImageClass}" 
                                         loading="lazy"
                                         onerror="this.onerror=null;this.src='https://placehold.co/300x300/F0F0F0/888888?text=图片未找到'">
                                     <img 
                                         src="${coin.imageUrl2}" 
                                         alt="${coin.name}背面" 
-                                        class="back-image absolute top-0 left-0 w-full h-full object-contain rounded-lg ${imgClass} transition-all duration-500 ease-in-out hidden"
+                                        class="back-image absolute top-0 left-0 w-full h-full object-contain rounded-lg ${imgClass} transition-all duration-500 ease-in-out ${backImageClass}"
                                         loading="lazy"
                                         onerror="this.onerror=null;this.src='https://placehold.co/300x300/F0F0F0/888888?text=图片未找到'">
                                     <div class="coin-check-icon absolute top-2 right-2 bg-green-500 text-white w-8 h-8 rounded-full flex items-center justify-center text-xl opacity-0 transition-opacity duration-300">
@@ -878,18 +883,8 @@
         const toggleImageView = document.getElementById('toggleImageView');
 
         toggleImageView.addEventListener('click', function() {
-            // 使用 querySelectorAll 找到所有当前在页面上的图片
-            const allFrontImages = document.querySelectorAll('.front-image');
-            const allBackImages = document.querySelectorAll('.back-image');
-
-            // 遍历所有图片并切换它们的显示状态
-            allFrontImages.forEach(img => {
-                img.classList.toggle('hidden');
-            });
-
-            allBackImages.forEach(img => {
-                img.classList.toggle('hidden');
-            });
+            isBackView = !isBackView; // 切换状态
+            renderUI(); // 重新渲染页面
         });
 
     </script>
