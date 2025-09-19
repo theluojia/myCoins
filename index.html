@@ -79,9 +79,9 @@
             background-color:  #3B82F6;
             border-radius: 4px;
             transition: width 0.3s ease;
-            position: absolute; /* <--- 必须有这个 */
-            top: 0; /* <--- 必须有这个 */
-            left: 0; /* <--- 必须有这个 */
+            position: absolute; 
+            top: 0;
+            left: 0;
         }
         .progress-bar.collected {
             background-color: #3B82F6; /* 蓝色，代表已收藏 */
@@ -155,16 +155,16 @@
     <div class="max-w-7xl mx-auto py-8">
         <header class="text-center mb-10">
             <h1 class="text-4xl sm:text-5xl font-extrabold text-blue-800 leading-tight">我的纪念币收藏</h1>
-            <p class="text-xl sm:text-2xl mt-2 text-gray-600"><b><i>单击</i></b>标记想收藏 / <b><i>双击</i></b>标记已收藏</p>
+            <p class="text-xl sm:text-2xl mt-2 text-gray-600"><b><i>双击</i></b>标记已收藏 / <b><i>单击</i></b>标记想收藏</p>
 
             <div id="collectionOverview" class="collection-overview mt-4 max-w-2xl mx-auto">
                 <div class="collection-header" id="overviewHeader">
                     <div class="collection-summary">
                         <span class="collection-count" id="overviewCount">已收藏 0 / 想收藏 0 / 总数 0 枚</span>
-<div class="progress-container">
-    <div class="progress-bar collected" id="collectedProgressBar" style="width: 0%"></div>
-    <div class="progress-bar wishlist" id="wishlistProgressBar" style="width: 0%"></div>
-</div>
+                        <div class="progress-container">
+                            <div class="progress-bar collected" id="collectedProgressBar" style="width: 0%"></div>
+                            <div class="progress-bar wishlist" id="wishlistProgressBar" style="width: 0%"></div>
+                        </div>
                     </div>
                     <svg id="toggle-icon" class="w-6 h-6 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
@@ -281,7 +281,8 @@
         <div class="max-w-7xl mx-auto">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-2 items-center">
                 <div class="text-center md:text-left">
-                    <p class="text-sm md:text-base opacity-90">此网页应用的所有数据均存储在本地浏览器中</p>
+                    <p class="text-sm md:text-base opacity-90">此网页的所有数据均存储在本地浏览器中
+                    </p>
                 </div>
                 <div class="text-center">
                     <p class="text-sm md:text-base font-medium">Copyright © 2025 theluojia</p>
@@ -647,12 +648,12 @@
                                         class="back-image absolute top-0 left-0 w-full h-full object-contain rounded-lg ${imgClass} transition-all duration-500 ease-in-out ${backImageClass}"
                                         loading="lazy"
                                         onerror="this.onerror=null;this.src='https://placehold.co/300x300/F0F0F0/888888?text=图片未找到'">
-                                    <div class="coin-check-icon absolute top-2 right-2 bg-green-500 text-white w-8 h-8 rounded-full flex items-center justify-center text-xl opacity-0 transition-opacity duration-300">
+                                    <div class="coin-check-icon absolute top-2 right-2 bg-blue-500 text-white w-8 h-8 rounded-full flex items-center justify-center text-xl opacity-0 transition-opacity duration-300">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                             <polyline points="20 6 9 17 4 12" />
                                         </svg>
                                     </div>
-                                    <div class="coin-wish-icon absolute top-2 right-2 bg-red-500 text-white w-8 h-8 rounded-full flex items-center justify-center text-xl opacity-0 transition-opacity duration-300">
+                                    <div class="coin-wish-icon absolute top-2 right-2 bg-amber-400 text-white w-8 h-8 rounded-full flex items-center justify-center text-xl opacity-0 transition-opacity duration-300">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" stroke="none">
                                             <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
                                         </svg>
@@ -722,26 +723,27 @@
             Object.entries(themesData)
                 .sort((a, b) => b[1].collected / b[1].total - a[1].collected / a[1].total)
                 .forEach(([theme, stats]) => {
-                    const themeRate = (stats.collected / stats.total) * 100;
+                    const collectedRate = (stats.collected / stats.total) * 100;
+                    const totalGoalRate = ((stats.collected + stats.wishlisted) / stats.total) * 100;
                     
                     const statButton = document.createElement('button');
                     statButton.className = 'w-full text-left p-0 rounded-xl hover:bg-gray-200 transition-colors duration-200';
                     statButton.innerHTML = `
                         <div class="flex justify-between items-center mb-1">
                             <span class="text-sm text-gray-700 font-medium">${theme}</span>
-                            <span class="text-xs font-medium text-gray-500">${stats.collected}/${stats.total} </span>
+                            <span class="text-xs font-medium text-gray-500"><span style="color: #3B82F6;">${stats.collected}</span>/<span style="color: #FBBF24;">${stats.wishlisted}</span>/${stats.total} </span>
                         </div>
                         <div class="progress-container">
-                            <div class="progress-bar" style="width: ${themeRate}%"></div>
+                            <div class="progress-bar" style="width: ${totalGoalRate}%; background: linear-gradient(to right, #3B82F6 0%, #3B82F6 ${collectedRate}%, #FBBF24 ${collectedRate}%, #FBBF24 100%);"></div>
                         </div>
                     `;
-                    
+
                     statButton.addEventListener('click', () => {
                         themeFilter.value = theme;
                         renderUI();
                         toggleOverview(); 
                     });
-                    
+
                     const statItem = document.createElement('li');
                     statItem.appendChild(statButton);
                     themeStatsContainer.appendChild(statItem);
@@ -767,17 +769,18 @@
             Object.entries(yearsData)
                 .sort((a, b) => parseInt(b[0]) - parseInt(a[0]))
                 .forEach(([year, stats]) => {
-                    const yearRate = (stats.collected / stats.total) * 100;
+                    const collectedRate = (stats.collected / stats.total) * 100;
+                    const totalGoalRate = ((stats.collected + stats.wishlisted) / stats.total) * 100;
 
                     const statButton = document.createElement('button');
                     statButton.className = 'w-full text-left p-0 rounded-xl hover:bg-gray-200 transition-colors duration-200';
                     statButton.innerHTML = `
                         <div class="flex justify-between items-center mb-1">
                             <span class="text-sm text-gray-700 font-medium">${year}年</span>
-                            <span class="text-xs font-medium text-gray-500">${stats.collected}/${stats.total} </span>
+                            <span class="text-xs font-medium text-gray-500"><span style="color: #3B82F6;">${stats.collected}</span>/<span style="color: #FBBF24;">${stats.wishlisted}</span>/${stats.total} </span>
                         </div>
                         <div class="progress-container">
-                            <div class="progress-bar" style="width: ${yearRate}%"></div>
+                            <div class="progress-bar" style="width: ${totalGoalRate}%; background: linear-gradient(to right, #3B82F6 0%, #3B82F6 ${collectedRate}%, #FBBF24 ${collectedRate}%, #FBBF24 100%);"></div>
                         </div>
                     `;
 
@@ -786,7 +789,7 @@
                         renderUI();
                         toggleOverview(); 
                     });
-                    
+
                     const statItem = document.createElement('li');
                     statItem.appendChild(statButton);
                     yearStatsContainer.appendChild(statItem);
