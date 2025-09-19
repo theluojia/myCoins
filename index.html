@@ -543,7 +543,7 @@
         // 5. 渲染 UI - 需要更新卡片样式和事件监听
         function renderUI() {
             const mainContainer = document.getElementById('main-container');
-            const selectedTheme = themeFilter.value;
+            const selectedTheme = decodeURIComponent(themeFilter.value);
             const selectedDenomination = denominationFilter.value;
             const selectedSize = sizeFilter.value;
             const selectedMetal = metalFilter.value;
@@ -865,7 +865,7 @@
             const metals = [...new Set(coins.map(coin => coin.metal))].sort();
             const years = [...new Set(coins.map(coin => coin.year))].sort((a, b) => b - a);
 
-            themeFilter.innerHTML = '<option value="">所有主题</option>' + themes.map(t => `<option value="${t}">${t}</option>`).join('');
+            themeFilter.innerHTML = '<option value="">所有主题</option>' + themes.map(t => `<option value="${encodeURIComponent(t)}">${t}</option>`).join('');
             denominationFilter.innerHTML = '<option value="">所有面额</option>' + denominations.map(d => `<option value="${d}">${d}</option>`).join('');
             sizeFilter.innerHTML = '<option value="">所有大小</option>' + sizes.map(s => `<option value="${s}">${s}</option>`).join('');
             metalFilter.innerHTML = '<option value="">所有材质</option>' + metals.map(m => `<option value="${m}">${m}</option>`).join('');
