@@ -739,7 +739,7 @@
                     `;
 
                     statButton.addEventListener('click', () => {
-                        themeFilter.value = theme;
+                        themeFilter.value = encodeURIComponent(theme);
                         renderUI();
                         toggleOverview(); 
                     });
