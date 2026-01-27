@@ -325,6 +325,13 @@
         const fabContainer = document.getElementById('fabContainer');
         const exportBtn = document.getElementById('exportBtn'); 
 
+        const mintConfig = {
+            "上海": { short: "沪", color: "bg-gradient-to-br from-purple-300 to-purple-700", fullName: "上海造币有限公司" },
+            "沈阳": { short: "沈", color: "bg-gradient-to-br from-red-300 to-red-700", fullName: "沈阳造币有限公司" },
+            "南京": { short: "宁", color: "bg-gradient-to-br from-teal-300 to-teal-700", fullName: "南京造币有限公司" },
+            "深圳": { short: "深", color: "bg-gradient-to-br from-blue-300 to-blue-700", fullName: "深圳国宝造币有限公司" }
+        };
+
 
         /// 隐藏菜单的函数
         function hideMenu() {
@@ -633,8 +640,26 @@
                             coinCard.className = `coin-card flex flex-col items-center p-4 bg-gray-100 rounded-xl shadow-lg transform transition-transform duration-300 hover:scale-105 cursor-pointer relative ${cardStateClass}`;
                             coinCard.setAttribute('data-coin-id', coin.id);
 
+                            let mintBadgesHTML = '';
+                            if (coin.mints && Array.isArray(coin.mints) && coin.mints.length > 0) {
+                                mintBadgesHTML = `<div class="absolute top-2 left-2 z-10 flex flex-col gap-1">`;
+                                
+                                coin.mints.forEach(mintName => {
+                                    const config = mintConfig[mintName] || { short: "厂", color: "bg-gray-400", fullName: mintName };
+                                    mintBadgesHTML += `
+                                        <div class="${config.color} w-6 h-6 rounded-full flex items-center justify-center text-white text-[10px] font-bold shadow-sm border border-white/30">
+                                            ${config.short}
+                                        </div>
+                                    `;
+                                });
+    
+                            mintBadgesHTML += `</div>`;
+}
+
                             coinCard.innerHTML = `
                                 <div class="relative w-full aspect-square">
+                                    ${mintBadgesHTML}
+
                                     <img 
                                         src="${coin.imageUrl}" 
                                         alt="${coin.name}正面" 
