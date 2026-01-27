@@ -326,10 +326,10 @@
         const exportBtn = document.getElementById('exportBtn'); 
 
         const mintConfig = {
-            "上海": { short: "沪", color: "bg-gradient-to-br from-purple-300 to-purple-700", fullName: "上海造币有限公司" },
-            "沈阳": { short: "沈", color: "bg-gradient-to-br from-red-300 to-red-700", fullName: "沈阳造币有限公司" },
-            "南京": { short: "宁", color: "bg-gradient-to-br from-teal-300 to-teal-700", fullName: "南京造币有限公司" },
-            "深圳": { short: "深", color: "bg-gradient-to-br from-blue-300 to-blue-700", fullName: "深圳国宝造币有限公司" }
+            "上海": { short: "沪", color: "bg-purple-500/40", fullName: "上海造币有限公司" },
+            "沈阳": { short: "沈", color: "bg-red-500/40", fullName: "沈阳造币有限公司" },
+            "南京": { short: "宁", color: "bg-teal-500/40", fullName: "南京造币有限公司" },
+            "深圳": { short: "深", color: "bg-blue-500/40", fullName: "深圳国宝造币有限公司" }
         };
 
 
@@ -647,7 +647,7 @@
                                 coin.mints.forEach(mintName => {
                                     const config = mintConfig[mintName] || { short: "厂", color: "bg-gray-400", fullName: mintName };
                                     mintBadgesHTML += `
-                                        <div class="${config.color} w-6 h-6 rounded-full flex items-center justify-center text-white text-[10px] font-bold shadow-sm border border-white/30">
+                                        <div class="${config.color} w-6 h-6 rounded-full flex items-center justify-center text-white text-[10px] font-bold border border-white/40 backdrop-blur-[2px] shadow-sm">
                                             ${config.short}
                                         </div>
                                     `;
