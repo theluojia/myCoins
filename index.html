@@ -185,47 +185,47 @@
                 </div>
             </div>
 
-            <div class="mt-4 max-w-2xl mx-auto">
-                <div class="relative">
-                    <input type="text" id="searchInput" placeholder="搜索纪念币名称..." 
-                           class="w-full rounded-md border border-gray-300 p-3 pl-10 text-base focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <div id="filterSection" class="collection-overview mt-4 max-w-2xl mx-auto p-2">
+                <div class="relative mb-4">
+                    <input type="text" id="searchInput" placeholder="搜索纪念币名称 ..." 
+                        class="w-full rounded-md border border-gray-300 p-2 pl-10 text-base focus:outline-none focus:ring-2 focus:ring-blue-500">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.416l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
                     </svg>
                 </div>
-            </div>
-            
-            <div class="mt-4 flex flex-wrap items-center justify-center gap-2">
+
                 <div class="flex flex-wrap items-center justify-center gap-2">
-                    <select id="themeFilter" class="w-24 rounded-md border border-gray-300 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <select id="themeFilter" class="rounded-md border border-gray-300 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
                         <option value="">所有主题</option>
                     </select>
-                    <select id="denominationFilter" class="w-24 rounded-md border border-gray-300 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <select id="denominationFilter" class="rounded-md border border-gray-300 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
                         <option value="">所有面额</option>
                     </select>
-                    <select id="sizeFilter" class="w-24 rounded-md border border-gray-300 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <select id="sizeFilter" class="rounded-md border border-gray-300 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
                         <option value="">所有大小</option>
                     </select>
-                    <select id="metalFilter" class="w-24 rounded-md border border-gray-300 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <select id="metalFilter" class="rounded-md border border-gray-300 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
                         <option value="">所有材质</option>
                     </select>
-                    <select id="yearFilter" class="w-24 rounded-md border border-gray-300 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <select id="yearFilter" class="rounded-md border border-gray-300 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
                         <option value="">所有年份</option>
                     </select>
-                    <select id="statusFilter" class="w-24 rounded-md border border-gray-300 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <select id="statusFilter" class="rounded-md border border-gray-300 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
                         <option value="">所有状态</option>
                         <option value="uncollected">未收藏</option>
                         <option value="wishlist">想收藏</option>
                         <option value="collected">已收藏</option>
                     </select>
-                    <button id="clearFiltersBtn" class="bg-green-500 hover:bg-green-600 text-white rounded-md p-2 text-sm flex items-center transition-colors" aria-label="清除所有过滤">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline-block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <button id="clearFiltersBtn" class="bg-green-500 hover:bg-green-600 text-white rounded-md p-2 text-sm flex items-center transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M21 12a9 9 0 1 1-4-7.5" />
                             <polyline points="21 3 21 8 16 8" />
                         </svg>
-                    </button>   
+                    </button>
                 </div>
             </div>
+
+
             <p id="save-status" class="text-sm text-green-600 mt-2 opacity-0">已更新</p>
 
             <!-- 悬浮圆形按钮 & 菜单 -->
