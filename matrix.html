@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8" />
+<title>纪念币点阵展示</title>
+
+<style>
+body {
+  font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+
+.coin {
+  width: 800px;
+  margin: 20px auto;
+  border: 2px solid #000;
+}
+
+.header {
+  text-align: center;
+  border-bottom: 2px solid #000;
+  padding: 8px 0;
+}
+
+.header h2 {
+  margin: 0;
+  font-size: 22px;
+}
+
+.header .code {
+  font-size: 18px;
+  margin-top: 4px;
+}
+
+.mints {
+  display: flex;
+}
+
+.mint {
+  flex: 1;
+  border-right: 2px solid #000;
+  padding: 10px;
+}
+
+.mint:last-child {
+  border-right: none;
+}
+
+.mint-name {
+  text-align: center;
+  margin-bottom: 6px;
+  font-size: 16px;
+}
+
+/* ================= 点阵核心样式 ================= */
+
+.matrix {
+  display: grid;
+  grid-template-rows: repeat(10, 18px); /* 固定 10 行（竖向） */
+  grid-auto-flow: column;               /* 按列排 */
+  gap: 2px;
+  justify-content: center;
+}
+
+.cell {
+  width: 18px;
+  height: 18px;
+  border: 1px solid #e0e0e0;
+}
+
+.cell.black {
+  background: #000;
+}
+
+/* 中间窄分隔（原来的空行） */
+.gap-column {
+  width: 8px;            /* 比正常点阵窄 */
+  grid-row: 1 / -1;      /* 贯穿 10 行 */
+}
+</style>
+</head>
+
+<body>
+
+<div id="app"></div>
+
+<script>
+fetch("matrix.json")
+  .then(res => res.json())
+  .then(data => renderCoins(data.coins));
+
+function renderCoins(coins) {
+  const app = document.getElementById("app");
+
+  coins.forEach(coin => {
+    const coinDiv = document.createElement("div");
+    coinDiv.className = "coin";
+
+    coinDiv.innerHTML = `
+      <div class="header">
+        <h2>${coin.name}</h2>
+        <div class="code">${coin.code}</div>
+      </div>
+    `;
+
+    const mintsDiv = document.createElement("div");
+    mintsDiv.className = "mints";
+
+    coin.mints.forEach(mint => {
+      const mintDiv = document.createElement("div");
+      mintDiv.className = "mint";
+
+      mintDiv.innerHTML = `<div class="mint-name">${mint.name}</div>`;
+
+      const matrix = document.createElement("div");
+      matrix.className = "matrix";
+
+      mint.data.forEach(col => {
+        // 窄分隔列
+        if (col === "") {
+          const gap = document.createElement("div");
+          gap.className = "gap-column";
+          matrix.appendChild(gap);
+          return;
+        }
+
+        // 正常点阵列（10 行）
+        col.split("").forEach(bit => {
+          const cell = document.createElement("div");
+          cell.className = "cell" + (bit === "1" ? " black" : "");
+          matrix.appendChild(cell);
+        });
+      });
+
+      mintDiv.appendChild(matrix);
+      mintsDiv.appendChild(mintDiv);
+    });
+
+    coinDiv.appendChild(mintsDiv);
+    app.appendChild(coinDiv);
+  });
+}
+</script>
+
+</body>
+</html>
