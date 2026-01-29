@@ -216,7 +216,7 @@
                         <option value="wishlist">想收藏</option>
                         <option value="collected">已收藏</option>
                     </select>
-                    <button id="clearFiltersBtn" class="bg-green-500 hover:bg-green-600 text-white rounded-md p-2 text-sm flex items-center transition-colors">
+                    <button id="clearFiltersBtn" class="bg-green-500 hover:bg-green-600 text-white rounded-md p-2 text-sm flex items-center transition-colors" title="清除过滤条件">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M21 12a9 9 0 1 1-4-7.5" />
                             <polyline points="21 3 21 8 16 8" />
@@ -233,7 +233,7 @@
 
                 <!-- 弹出菜单 -->
                 <div id="fabMenu" class="hidden flex-col items-end space-y-3 mb-4 transition-all duration-300">
-                    <button id="sortOrderToggle" class="w-10 h-10 rounded-full bg-blue-400 text-white shadow-lg flex items-center justify-center hover:bg-blue-500 transition-colors">
+                    <button id="sortOrderToggle" class="w-10 h-10 rounded-full bg-blue-400 text-white shadow-lg flex items-center justify-center hover:bg-blue-500 transition-colors" title="排列正序逆序">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline-block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <line x1="3" y1="6" x2="15" y2="6" />
                             <line x1="3" y1="12" x2="15" y2="12" />
@@ -241,30 +241,51 @@
                             <polyline points="19 19 19 5 16 8" />
                         </svg>
                     </button>
-                    <button id="toggleImageView" class="w-10 h-10 rounded-full bg-blue-400 text-white shadow-lg flex items-center justify-center hover:bg-blue-500 transition-colors">
+                    <button id="toggleImageView" class="w-10 h-10 rounded-full bg-blue-400 text-white shadow-lg flex items-center justify-center hover:bg-blue-500 transition-colors" title="切换正面反面">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="-1.5 -2.5 24 24" width="16" height="16" fill="currentColor">
                               <path d="m4.859 5.308 1.594-.488a1 1 0 0 1 .585 1.913l-3.825 1.17a1 1 0 0 1-1.249-.665L.794 3.413a1 1 0 1 1 1.913-.585l.44 1.441C5.555.56 10.332-1.035 14.573.703a9.381 9.381 0 0 1 5.38 5.831 1 1 0 1 1-1.905.608A7.381 7.381 0 0 0 4.86 5.308zm12.327 8.195-1.775.443a1 1 0 1 1-.484-1.94l3.643-.909a.997.997 0 0 1 .61-.08 1 1 0 0 1 .84.75l.968 3.88a1 1 0 0 1-1.94.484l-.33-1.322a9.381 9.381 0 0 1-16.384-1.796l-.26-.634a1 1 0 1 1 1.851-.758l.26.633a7.381 7.381 0 0 0 13.001 1.25z"/>
                         </svg>
                     </button>
-                    <button id="exportBtn" class="w-10 h-10 rounded-full bg-blue-400 text-white shadow-lg flex items-center justify-center hover:bg-blue-500 transition-colors">
+                    <button id="exportBtn" class="w-10 h-10 rounded-full bg-blue-400 text-white shadow-lg flex items-center justify-center hover:bg-blue-500 transition-colors" title="导出收藏记录">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline-block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
                             <polyline points="7 10 12 15 17 10" />
                             <line x1="12" y1="15" x2="12" y2="3" />
                         </svg>
                     </button>    
-                    <label for="importFile" class="w-10 h-10 rounded-full bg-blue-400 text-white shadow-lg flex items-center justify-center hover:bg-blue-500 transition-colors">
+                    <label for="importFile" class="w-10 h-10 rounded-full bg-blue-400 text-white shadow-lg flex items-center justify-center hover:bg-blue-500 transition-colors" title="导入收藏记录">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline-block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
                             <polyline points="17 8 12 3 7 8" />
                             <line x1="12" y1="3" x2="12" y2="15" />
                         </svg>
-                    </label>    
+                    </label>
                     <input type="file" id="importFile" accept=".json" class="hidden">
+                    <button
+                    onclick="location.href='matrix.html'"
+                    class="w-10 h-10 rounded-full bg-blue-400 text-white shadow-lg flex items-center justify-center hover:bg-blue-500 transition-colors"
+                    title="展示防伪点阵"
+                    >
+                    <!-- Dot Matrix SVG Icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                        <rect x="1"  y="1"  width="3" height="3" rx="0.5"/>
+                        <rect x="6.5" y="1"  width="3" height="3" rx="0.5"/>
+                        <!-- <rect x="12" y="1"  width="3" height="3" rx="0.5"/> -->
+
+                        <rect x="1"  y="6.5" width="3" height="3" rx="0.5"/>
+                        <!-- <rect x="6.5" y="6.5" width="3" height="3" rx="0.5"/> -->
+                        <rect x="12" y="6.5" width="3" height="3" rx="0.5"/>
+
+                        <rect x="1"  y="12" width="3" height="3" rx="0.5"/>
+                        <rect x="6.5" y="12" width="3" height="3" rx="0.5"/>
+                        <rect x="12" y="12" width="3" height="3" rx="0.5"/>
+                    </svg>
+                    </button>
+
                 </div>
 
                 <!-- 主按钮 -->
-                <button id="fabButton" class="w-10 h-10 rounded-full bg-blue-600 text-white shadow-lg flex items-center justify-center hover:bg-blue-700 transition-colors">
+                <button id="fabButton" class="w-10 h-10 rounded-full bg-blue-600 text-white shadow-lg flex items-center justify-center hover:bg-blue-700 transition-colors" title="展开/收起菜单">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path id="fab-icon-path" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
                     </svg>
