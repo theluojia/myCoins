@@ -4,10 +4,14 @@
 <meta charset="UTF-8" />
 <title>纪念币点阵展示</title>
 
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+
 <style>
 body {
   font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
 }
+
+/* ================= 通用纪念币样式 ================= */
 
 .coin {
   width: 800px;
@@ -51,12 +55,12 @@ body {
   font-size: 16px;
 }
 
-/* ================= 点阵核心样式 ================= */
+/* ================= 点阵 ================= */
 
 .matrix {
   display: grid;
-  grid-template-rows: repeat(10, 18px); /* 固定 10 行（竖向） */
-  grid-auto-flow: column;               /* 按列排 */
+  grid-template-rows: repeat(10, 18px);
+  grid-auto-flow: column;
   gap: 2px;
   justify-content: center;
 }
@@ -71,10 +75,66 @@ body {
   background: #000;
 }
 
-/* 中间窄分隔（原来的空行） */
 .gap-column {
-  width: 8px;            /* 比正常点阵窄 */
-  grid-row: 1 / -1;      /* 贯穿 10 行 */
+  width: 8px;
+  grid-row: 1 / -1;
+}
+
+/* ================= 点阵试验场 ================= */
+
+.lab {
+  width: 800px;
+  margin: 40px auto;
+  border: 2px solid #000;
+}
+
+.lab-header {
+  text-align: center;
+  border-bottom: 2px solid #000;
+  padding: 8px 0;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.lab-input {
+  padding: 12px;
+}
+
+.lab-input label {
+  display: block;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.lab-input input,
+.lab-input textarea {
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 4px;
+  padding: 6px;
+  font-family: monospace;
+  font-size: 14px;
+}
+
+.lab-input textarea {
+  height: 110px;
+}
+
+.version-block {
+  border: 1px dashed #aaa;
+  padding: 8px;
+  margin-top: 12px;
+}
+
+.lab-actions {
+  margin-top: 12px;
+}
+
+.lab-actions button {
+  margin-right: 10px;
+  padding: 6px 14px;
+  font-size: 14px;
+  cursor: pointer;
 }
 </style>
 </head>
@@ -83,62 +143,182 @@ body {
 
 <div id="app"></div>
 
+<!-- ================= 点阵试验场 ================= -->
+
+<div class="lab">
+  <div class="lab-header">点阵试验场</div>
+
+  <div class="lab-input">
+    <label>纪念币名称</label>
+    <input id="lab-name" value="2026年贺岁（丙午）">
+
+    <label>纪念币编号</label>
+    <input id="lab-code" value="JB126">
+
+    <div class="version-block">
+      <strong>版本 1</strong>
+      <label>纪念币版本</label>
+      <input id="mint-1" value="沈阳">
+      <label>点阵数据</label>
+      <textarea id="data-1">[
+  "1111111111",
+  "1110101011",
+  "1001010011",
+  "",
+  "1111111111",
+  "1010110011"
+]</textarea>
+    </div>
+
+    <div class="version-block">
+      <strong>版本 2</strong>
+      <label>纪念币版本</label>
+      <input id="mint-2" value="上海">
+      <label>点阵数据</label>
+      <textarea id="data-2">[
+  "1111111111",
+  "1110101001",
+  "1001010001",
+  "",
+  "1111111111",
+  "1010110011"
+]</textarea>
+    </div>
+
+    <div class="version-block">
+      <strong>版本 3</strong>
+      <label>纪念币版本</label>
+      <input id="mint-3" value="南京">
+      <label>点阵数据</label>
+      <textarea id="data-3">[
+  "1111111111",
+  "1110101001",
+  "1001010011",
+  "",
+  "1111111111",
+  "1010110011"
+]</textarea>
+    </div>
+
+    <div class="lab-actions">
+      <button onclick="generateLab()">生成点阵</button>
+      <button onclick="exportPreview()">保存成图片</button>
+    </div>
+  </div>
+</div>
+
 <script>
+/* ================= 读取正式 JSON ================= */
+
 fetch("matrix.json")
   .then(res => res.json())
   .then(data => renderCoins(data.coins));
 
 function renderCoins(coins) {
   const app = document.getElementById("app");
-
   coins.forEach(coin => {
-    const coinDiv = document.createElement("div");
-    coinDiv.className = "coin";
-
-    coinDiv.innerHTML = `
-      <div class="header">
-        <h2>${coin.name}</h2>
-        <div class="code">${coin.code}</div>
-      </div>
-    `;
-
-    const mintsDiv = document.createElement("div");
-    mintsDiv.className = "mints";
-
-    coin.mints.forEach(mint => {
-      const mintDiv = document.createElement("div");
-      mintDiv.className = "mint";
-
-      mintDiv.innerHTML = `<div class="mint-name">${mint.name}</div>`;
-
-      const matrix = document.createElement("div");
-      matrix.className = "matrix";
-
-      mint.data.forEach(col => {
-        // 窄分隔列
-        if (col === "") {
-          const gap = document.createElement("div");
-          gap.className = "gap-column";
-          matrix.appendChild(gap);
-          return;
-        }
-
-        // 正常点阵列（10 行）
-        col.split("").forEach(bit => {
-          const cell = document.createElement("div");
-          cell.className = "cell" + (bit === "1" ? " black" : "");
-          matrix.appendChild(cell);
-        });
-      });
-
-      mintDiv.appendChild(matrix);
-      mintsDiv.appendChild(mintDiv);
-    });
-
-    coinDiv.appendChild(mintsDiv);
-    app.appendChild(coinDiv);
+    app.appendChild(buildCoin(coin.name, coin.code, coin.mints));
   });
 }
+
+/* ================= 公共方法 ================= */
+
+function createMatrix(data) {
+  const matrix = document.createElement("div");
+  matrix.className = "matrix";
+
+  data.forEach(col => {
+    if (col === "") {
+      const gap = document.createElement("div");
+      gap.className = "gap-column";
+      matrix.appendChild(gap);
+      return;
+    }
+    col.split("").forEach(bit => {
+      const cell = document.createElement("div");
+      cell.className = "cell" + (bit === "1" ? " black" : "");
+      matrix.appendChild(cell);
+    });
+  });
+  return matrix;
+}
+
+function buildCoin(name, code, mints) {
+  const coin = document.createElement("div");
+  coin.className = "coin";
+
+  coin.innerHTML = `
+    <div class="header">
+      <h2>${name}</h2>
+      <div class="code">${code}</div>
+    </div>
+  `;
+
+  const mintsDiv = document.createElement("div");
+  mintsDiv.className = "mints";
+
+  mints.forEach(m => {
+    const mintDiv = document.createElement("div");
+    mintDiv.className = "mint";
+    mintDiv.innerHTML = `<div class="mint-name">${m.name}</div>`;
+    mintDiv.appendChild(createMatrix(m.data));
+    mintsDiv.appendChild(mintDiv);
+  });
+
+  coin.appendChild(mintsDiv);
+  return coin;
+}
+
+/* ================= 试验场逻辑（修复版） ================= */
+
+function generateLab() {
+  const name = document.getElementById("lab-name").value;
+  const code = document.getElementById("lab-code").value;
+  const mints = [];
+
+  [1,2,3].forEach(i => {
+    const mint = document.getElementById(`mint-${i}`).value.trim();
+    const dataText = document.getElementById(`data-${i}`).value.trim();
+    if (!mint || !dataText) return;
+    mints.push({ name: mint, data: JSON.parse(dataText) });
+  });
+
+  const old = document.getElementById("lab-generated");
+  if (old) old.remove();
+
+  const container = document.createElement("div");
+  container.id = "lab-generated";
+  document.body.appendChild(container);
+
+  container.appendChild(buildCoin(name, code, mints));
+}
+
+/* ================= 导出图片（修复版） ================= */
+
+function exportPreview() {
+  const wrapper = document.getElementById("lab-generated");
+  if (!wrapper) {
+    alert("请先生成点阵");
+    return;
+  }
+
+  const coin = wrapper.querySelector(".coin");
+  if (!coin) {
+    alert("未找到可导出的表格");
+    return;
+  }
+
+  html2canvas(coin, {
+    scale: 3,
+    backgroundColor: "#fff"
+  }).then(canvas => {
+    const a = document.createElement("a");
+    a.download = "dot-matrix.png";
+    a.href = canvas.toDataURL("image/png");
+    a.click();
+  });
+}
+
 </script>
 
 </body>
