@@ -80,6 +80,38 @@ body {
   grid-row: 1 / -1;
 }
 
+/* ================= 顶部导出按钮 ================= */
+
+.export-all {
+  width: 800px;
+  margin: 30px auto 10px;
+  text-align: right;
+}
+
+.export-all button {
+  padding: 6px 14px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* 装饰性分隔符 */
+.decorator {
+  width: 800px;
+  margin: 20px auto;
+  text-align: center;
+  color: #999;
+}
+
+.decorator::before,
+.decorator::after {
+  content: "";
+  display: inline-block;
+  width: 200px;
+  border-top: 1px dashed #bbb;
+  vertical-align: middle;
+  margin: 0 12px;
+}
+
 /* ================= 点阵试验场 ================= */
 
 .lab {
@@ -128,6 +160,7 @@ body {
 
 .lab-actions {
   margin-top: 12px;
+  text-align: right;
 }
 
 .lab-actions button {
@@ -142,6 +175,13 @@ body {
 <body>
 
 <div id="app"></div>
+
+<!-- ========== 新增：导出所有表格按钮 ========== -->
+<div class="export-all">
+  <button onclick="exportAllCoins()">保存上方所有表格为图片</button>
+</div>
+
+<div class="decorator">◆ ◆ ◆</div>
 
 <!-- ================= 点阵试验场 ================= -->
 
@@ -269,7 +309,7 @@ function buildCoin(name, code, mints) {
   return coin;
 }
 
-/* ================= 试验场逻辑（修复版） ================= */
+/* ================= 试验场逻辑 ================= */
 
 function generateLab() {
   const name = document.getElementById("lab-name").value;
@@ -293,7 +333,7 @@ function generateLab() {
   container.appendChild(buildCoin(name, code, mints));
 }
 
-/* ================= 导出图片（修复版） ================= */
+/* ================= 单个试验场导出 ================= */
 
 function exportPreview() {
   const wrapper = document.getElementById("lab-generated");
@@ -303,11 +343,6 @@ function exportPreview() {
   }
 
   const coin = wrapper.querySelector(".coin");
-  if (!coin) {
-    alert("未找到可导出的表格");
-    return;
-  }
-
   html2canvas(coin, {
     scale: 3,
     backgroundColor: "#fff"
@@ -319,6 +354,36 @@ function exportPreview() {
   });
 }
 
+/* ================= 新增：导出所有展示表格 ================= */
+
+function exportAllCoins() {
+  const coins = document.querySelectorAll("#app .coin");
+  if (!coins.length) {
+    alert("当前没有可导出的表格");
+    return;
+  }
+
+  const temp = document.createElement("div");
+  temp.style.background = "#fff";
+  temp.style.display = "inline-block";
+
+  coins.forEach(c => {
+    temp.appendChild(c.cloneNode(true));
+  });
+
+  document.body.appendChild(temp);
+
+  html2canvas(temp, {
+    scale: 3,
+    backgroundColor: "#fff"
+  }).then(canvas => {
+    const a = document.createElement("a");
+    a.download = "all-coins.png";
+    a.href = canvas.toDataURL("image/png");
+    a.click();
+    temp.remove();
+  });
+}
 </script>
 
 </body>
