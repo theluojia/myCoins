@@ -305,7 +305,7 @@
                     </p>
                 </div>
                 <div class="text-center">
-                    <p class="text-sm md:text-base font-medium">Copyright © 2025 theluojia</p>
+                    <p class="text-sm md:text-base font-medium">Copyright © 2025-<span id="current-year"></span> theluojia</p>
                 </div>
                 <div class="text-center md:text-right">
                     <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" class="text-sm md:text-base text-blue-200 hover:text-white transition-colors duration-200 underline decoration-dashed underline-offset-2">
@@ -353,6 +353,7 @@
             "深圳": { short: "深", color: "bg-blue-500/40", fullName: "深圳国宝造币有限公司" }
         };
 
+        document.getElementById('current-year').textContent = new Date().getFullYear();
 
         /// 隐藏菜单的函数
         function hideMenu() {
