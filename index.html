@@ -347,10 +347,20 @@
         const exportBtn = document.getElementById('exportBtn'); 
 
         const mintConfig = {
+            // 原有造币厂
             "上海": { short: "沪", color: "bg-purple-500/40", fullName: "上海造币有限公司" },
             "沈阳": { short: "沈", color: "bg-red-500/40", fullName: "沈阳造币有限公司" },
             "南京": { short: "宁", color: "bg-teal-500/40", fullName: "南京造币有限公司" },
-            "深圳": { short: "深", color: "bg-blue-500/40", fullName: "深圳国宝造币有限公司" }
+            "深圳": { short: "深", color: "bg-blue-500/40", fullName: "深圳国宝造币有限公司" },
+
+            // 新增印钞厂
+            "成都": { short: "成", color: "bg-orange-500/40", fullName: "成都印钞有限公司" },
+            "北京": { short: "京", color: "bg-indigo-500/40", fullName: "北京印钞有限公司" },
+            "上钞": { short: "沪", color: "bg-fuchsia-500/40", fullName: "上海印钞有限公司" }, // 区别于上海造币
+            "西安": { short: "西", color: "bg-emerald-500/40", fullName: "西安印钞有限公司" },
+            "石家庄": { short: "石", color: "bg-amber-500/40", fullName: "石家庄印钞有限公司" },
+            "南昌": { short: "昌", color: "bg-pink-500/40", fullName: "南昌印钞有限公司" },
+            "广州": { short: "穗", color: "bg-cyan-500/40", fullName: "广州印钞有限公司" }
         };
 
         document.getElementById('current-year').textContent = new Date().getFullYear();
