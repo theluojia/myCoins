@@ -9,6 +9,8 @@
 <style>
 body {
   font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+  background-color: #f9f9f9;
+  padding-bottom: 50px;
 }
 
 /* ================= 通用纪念币样式 ================= */
@@ -17,6 +19,7 @@ body {
   width: 800px;
   margin: 20px auto;
   border: 2px solid #000;
+  background: #fff;
 }
 
 .header {
@@ -42,7 +45,10 @@ body {
 .mint {
   flex: 1;
   border-right: 2px solid #000;
-  padding: 10px;
+  padding: 40px 10px; /* 增加边距适配旋转 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .mint:last-child {
@@ -51,11 +57,12 @@ body {
 
 .mint-name {
   text-align: center;
-  margin-bottom: 6px;
+  margin-bottom: 20px;
   font-size: 16px;
+  font-weight: bold;
 }
 
-/* ================= 点阵 ================= */
+/* ================= 点阵样式 ================= */
 
 .matrix {
   display: grid;
@@ -63,6 +70,9 @@ body {
   grid-auto-flow: column;
   gap: 2px;
   justify-content: center;
+  /* 关键：增加过渡动画 */
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
 }
 
 .cell {
@@ -80,7 +90,41 @@ body {
   grid-row: 1 / -1;
 }
 
-/* ================= 顶部导出按钮 ================= */
+/* ================= 悬浮旋转按钮 (SVG 图标) ================= */
+
+.rotate-float-btn {
+  position: fixed;
+  right: 40px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 56px;
+  height: 56px;
+  background-color: #ffffff;
+  color: #000;
+  border-radius: 50%;
+  border: 2px solid #000;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.rotate-float-btn:hover {
+  background-color: #000;
+  color: #fff;
+  transform: translateY(-50%) rotate(90deg); /* 悬浮时按钮自己也微动 */
+}
+
+.rotate-float-btn svg {
+  width: 28px;
+  height: 28px;
+  fill: currentColor;
+}
+
+/* ================= 其他 UI ================= */
 
 .export-all {
   width: 800px;
@@ -89,12 +133,17 @@ body {
 }
 
 .export-all button {
-  padding: 6px 14px;
+  padding: 8px 16px;
   font-size: 14px;
   cursor: pointer;
+  background: #fff;
+  border: 1px solid #000;
 }
 
-/* 装饰性分隔符 */
+.export-all button:hover {
+  background: #eee;
+}
+
 .decorator {
   width: 800px;
   margin: 20px auto;
@@ -112,12 +161,11 @@ body {
   margin: 0 12px;
 }
 
-/* ================= 点阵试验场 ================= */
-
 .lab {
   width: 800px;
   margin: 20px auto;
   border: 2px solid #000;
+  background: #fff;
 }
 
 .lab-header {
@@ -177,82 +225,64 @@ body {
 
 <div id="app"></div>
 
-<!-- ========== 新增：导出所有表格按钮 ========== -->
+<button class="rotate-float-btn" onclick="rotateAllMatrices()" title="顺时针旋转90度">
+  <svg viewBox="0 0 24 24">
+    <path d="M7.11 8.53L5.7 7.11C4.8 8.27 4.24 9.61 4.07 11h2.02c.18-.85.49-1.65.99-2.39c.01-.03.02-.05.03-.08zM11 4.07V2.05c-2.01.2-3.84 1-5.32 2.21L7.1 5.69c1.11-.86 2.44-1.44 3.9-1.62zm7.32.19C16.84 3.05 15.01 2.25 13 2.05v2.02c1.46.18 2.79.76 3.9 1.62l1.42-1.42zM18.3 7.11l-1.41 1.41c.5.74.81 1.54.99 2.39h2.02c-.17-1.39-.73-2.73-1.6-3.8zM6.09 13H4.07c.17 1.39.72 2.73 1.6 3.8l1.41-1.41c-.51-.74-.82-1.54-.99-2.39zm12.11 4.08l1.41 1.41c.87-1.07 1.43-2.41 1.6-3.8h-2.02c-.18.85-.5 1.65-.99 2.39zM7.1 18.31l-1.42 1.42C7.16 20.94 9 21.74 11 21.94v-2.02c-1.46-.18-2.79-.76-3.9-1.61zm11.2-1.41c-.01.03-.02.05-.03.08c-.5.74-.81 1.54-.99 2.39h2.02c-.17-1.38-.72-2.73-1.6-3.8l-1.41 1.41c.01-.03.01-.05.01-.08zM13 19.92v2.02c2.01-.2 3.84-1 5.32-2.21l-1.42-1.42c-1.11.85-2.44 1.43-3.9 1.61zM12 8l-4 4h3v4h2v-4h3l-4-4z"/>
+  </svg>
+</button>
+
 <div class="export-all">
   <button onclick="exportAllCoins()">保存上方所有表格为图片</button>
 </div>
 
 <div class="decorator">◆ ◆ ◆</div>
 
-<!-- ================= 点阵试验场 ================= -->
-
 <div class="lab">
   <div class="lab-header">点阵试验场</div>
-
   <div class="lab-input">
     <label>纪念币名称</label>
     <input id="lab-name" value="2026年贺岁（丙午）">
-
     <label>纪念币编号</label>
     <input id="lab-code" value="JB126">
-
     <div class="version-block">
       <strong>版本 1</strong>
       <label>纪念币版本</label>
       <input id="mint-1" value="沈阳">
       <label>点阵数据</label>
-      <textarea id="data-1">[
-  "1111111111",
-  "1110101011",
-  "1001010011",
-  "",
-  "1111111111",
-  "1010110011"
-]</textarea>
+      <textarea id="data-1">["1111111111","1110101011","1001010011","","1111111111","1010110011"]</textarea>
     </div>
-
     <div class="version-block">
       <strong>版本 2</strong>
       <label>纪念币版本</label>
       <input id="mint-2" value="上海">
       <label>点阵数据</label>
-      <textarea id="data-2">[
-  "1111111111",
-  "1110101001",
-  "1001010001",
-  "",
-  "1111111111",
-  "1010110011"
-]</textarea>
+      <textarea id="data-2">["1111111111","1110101001","1001010001","","1111111111","1010110011"]</textarea>
     </div>
-
     <div class="version-block">
       <strong>版本 3</strong>
       <label>纪念币版本</label>
       <input id="mint-3" value="南京">
       <label>点阵数据</label>
-      <textarea id="data-3">[
-  "1111111111",
-  "1110101001",
-  "1001010011",
-  "",
-  "1111111111",
-  "1010110011"
-]</textarea>
+      <textarea id="data-3">["1111111111","1110101001","1001010011","","1111111111","1010110011"]</textarea>
     </div>
   </div>
 </div>
+
 <div class="lab-actions">
   <button onclick="generateLab()">生成点阵</button>
   <button onclick="exportPreview()">保存成图片</button>
 </div>
 
 <script>
-/* ================= 读取正式 JSON ================= */
+/* 全局旋转角度累计 */
+let globalDegree = 0; 
+
+/* ================= 数据加载 ================= */
 
 fetch("matrix.json")
   .then(res => res.json())
-  .then(data => renderCoins(data.coins));
+  .then(data => renderCoins(data.coins))
+  .catch(() => console.log("等待输入数据..."));
 
 function renderCoins(coins) {
   const app = document.getElementById("app");
@@ -261,11 +291,13 @@ function renderCoins(coins) {
   });
 }
 
-/* ================= 公共方法 ================= */
+/* ================= 核心构建逻辑 ================= */
 
 function createMatrix(data) {
   const matrix = document.createElement("div");
   matrix.className = "matrix";
+  // 初始应用全局角度
+  matrix.style.transform = `rotate(${globalDegree}deg)`;
 
   data.forEach(col => {
     if (col === "") {
@@ -286,14 +318,7 @@ function createMatrix(data) {
 function buildCoin(name, code, mints) {
   const coin = document.createElement("div");
   coin.className = "coin";
-
-  coin.innerHTML = `
-    <div class="header">
-      <h2>${name}</h2>
-      <div class="code">${code}</div>
-    </div>
-  `;
-
+  coin.innerHTML = `<div class="header"><h2>${name}</h2><div class="code">${code}</div></div>`;
   const mintsDiv = document.createElement("div");
   mintsDiv.className = "mints";
 
@@ -309,7 +334,18 @@ function buildCoin(name, code, mints) {
   return coin;
 }
 
-/* ================= 试验场逻辑 ================= */
+/* ================= 旋转逻辑 (修复逆时针回弹问题) ================= */
+
+function rotateAllMatrices() {
+  globalDegree += 90; // 永远累加，不重置为0
+  
+  const allMatrices = document.querySelectorAll('.matrix');
+  allMatrices.forEach(m => {
+    m.style.transform = `rotate(${globalDegree}deg)`;
+  });
+}
+
+/* ================= 试验场 ================= */
 
 function generateLab() {
   const name = document.getElementById("lab-name").value;
@@ -320,7 +356,7 @@ function generateLab() {
     const mint = document.getElementById(`mint-${i}`).value.trim();
     const dataText = document.getElementById(`data-${i}`).value.trim();
     if (!mint || !dataText) return;
-    mints.push({ name: mint, data: JSON.parse(dataText) });
+    try { mints.push({ name: mint, data: JSON.parse(dataText) }); } catch(e) {}
   });
 
   const old = document.getElementById("lab-generated");
@@ -329,60 +365,47 @@ function generateLab() {
   const container = document.createElement("div");
   container.id = "lab-generated";
   document.body.appendChild(container);
-
   container.appendChild(buildCoin(name, code, mints));
 }
 
-/* ================= 单个试验场导出 ================= */
+/* ================= 导出 ================= */
 
-function exportPreview() {
-  const wrapper = document.getElementById("lab-generated");
-  if (!wrapper) {
-    alert("请先生成点阵");
-    return;
-  }
-
-  const coin = wrapper.querySelector(".coin");
-  html2canvas(coin, {
+function saveCanvas(el, filename, callback) {
+  html2canvas(el, {
     scale: 3,
-    backgroundColor: "#fff"
+    backgroundColor: "#fff",
+    // 确保旋转在导出时生效
+    logging: false
   }).then(canvas => {
     const a = document.createElement("a");
-    a.download = "dot-matrix.png";
+    a.download = filename;
     a.href = canvas.toDataURL("image/png");
     a.click();
+    if(callback) callback();
   });
 }
 
-/* ================= 新增：导出所有展示表格 ================= */
+function exportPreview() {
+  const wrapper = document.getElementById("lab-generated");
+  if (!wrapper) return alert("请先生成");
+  saveCanvas(wrapper.querySelector(".coin"), "preview.png");
+}
 
 function exportAllCoins() {
   const coins = document.querySelectorAll("#app .coin");
-  if (!coins.length) {
-    alert("当前没有可导出的表格");
-    return;
-  }
+  if (!coins.length) return alert("无可导出内容");
 
   const temp = document.createElement("div");
-  temp.style.background = "#fff";
-  temp.style.display = "inline-block";
-
-  coins.forEach(c => {
-    temp.appendChild(c.cloneNode(true));
-  });
-
+  temp.style.cssText = "background:#fff; padding:20px; display:inline-block;";
+  coins.forEach(c => temp.appendChild(c.cloneNode(true)));
   document.body.appendChild(temp);
-
-  html2canvas(temp, {
-    scale: 3,
-    backgroundColor: "#fff"
-  }).then(canvas => {
-    const a = document.createElement("a");
-    a.download = "all-coins.png";
-    a.href = canvas.toDataURL("image/png");
-    a.click();
-    temp.remove();
+  
+  // 修正克隆后的旋转状态
+  temp.querySelectorAll('.matrix').forEach((m, idx) => {
+    m.style.transform = `rotate(${globalDegree}deg)`;
   });
+
+  saveCanvas(temp, "all-coins.png", () => temp.remove());
 }
 </script>
 
