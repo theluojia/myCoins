@@ -85,18 +85,21 @@ body {
   background: #000;
 }
 
+/* 分析模式下的专属颜色 */
+.analysis-active .mint-0 .cell.black.diff { background: #ff4d4f; border-color: #ff4d4f; }
+.analysis-active .mint-1 .cell.black.diff { background: #1890ff; border-color: #1890ff; }
+.analysis-active .mint-2 .cell.black.diff { background: #52c41a; border-color: #52c41a; }
+
 .gap-column {
   width: 8px;
   grid-row: 1 / -1;
 }
 
-/* ================= 悬浮按钮 (仅修改此处：替换SVG及适配) ================= */
+/* ================= 悬浮按钮 (风格保持一致) ================= */
 
-.rotate-float-btn {
+.rotate-float-btn, .analysis-float-btn {
   position: fixed;
   right: 40px;
-  top: 50%;
-  transform: translateY(-50%);
   width: 56px;
   height: 56px;
   background-color: #ffffff;
@@ -112,31 +115,19 @@ body {
   transition: all 0.3s ease;
 }
 
-.rotate-float-btn:hover {
-  background-color: #f0f0f0;
-  /* 移除了旋转 transform */
+/* 两个按钮上下排列 */
+.rotate-float-btn { top: calc(50% - 35px); }
+.analysis-float-btn { top: calc(50% + 35px); }
+
+.rotate-float-btn:hover, .analysis-float-btn:hover {
+  background-color: #000;
+  color: #fff;
 }
 
-.rotate-float-btn svg {
-  width: 32px; /* 网页端大小 */
-  height: 32px;
+.rotate-float-btn svg, .analysis-float-btn svg {
+  width: 28px;
+  height: 28px;
   fill: currentColor;
-}
-
-/* 手机端自适应样式 */
-@media screen and (max-width: 768px) {
-  .rotate-float-btn {
-    right: 20px;
-    top: auto;
-    bottom: 30px; /* 手机端移至右下角 */
-    transform: none;
-    width: 68px; /* 手机端按钮加大 */
-    height: 68px;
-  }
-  .rotate-float-btn svg {
-    width: 40px; /* 手机端图标加大 */
-    height: 40px;
-  }
 }
 
 /* ================= 其他 UI ================= */
@@ -247,6 +238,12 @@ body {
   </svg>
 </button>
 
+<button class="analysis-float-btn" onclick="toggleAnalysis()" title="差异颜色分析">
+  <svg id="Capa_1" version="1.1" viewBox="0 0 362.5 442" xmlns="http://www.w3.org/2000/svg">
+    <g><path d="M134.4,214.6c-16.6-5.5-30-17.2-37.8-32.8c-16.1-32.3-3-71.6,29.2-87.8l-13.2-26.4C65.7,91,46.7,148.2,70.1,195   c16.6,33.2,50.2,52.4,85.1,52.4c14.3,0,28.7-3.2,42.3-10L184.3,211C168.7,218.8,150.9,220.1,134.4,214.6z"/><path d="M353.9,363.1l-80.3-120c9.5-12.7,17.2-27.2,22.5-43.1C322.6,120.5,279.5,34.3,200,7.8C120.5-18.7,34.3,24.5,7.8,104   c-26.5,79.5,16.7,165.7,96.2,192.2c15.9,5.3,32,7.8,47.9,7.8c12.7,0,25.2-1.6,37.3-4.7l80.4,120.3c9.8,14.6,25.9,22.5,42.3,22.5   c9.7,0,19.5-2.8,28.1-8.5C363.2,417.9,369.5,386.4,353.9,363.1z M113.3,268.1c-64.1-21.3-98.8-90.8-77.5-154.9   c17.1-51.3,65-83.8,116.3-83.8c12.8,0,25.8,2,38.6,6.3c64.1,21.3,98.8,90.8,77.5,154.9C246.8,254.7,177.3,289.5,113.3,268.1z  M332.5,395.4c-1.1,5.6-4.3,10.4-9,13.5c-9.7,6.5-22.9,3.9-29.4-5.8l-76.4-114.2c12.8-6.1,24.7-14,35.4-23.5l76.3,114.1   C332.5,384.2,333.6,389.9,332.5,395.4z"/></g>
+  </svg>
+</button>
+
 <div class="export-all">
   <button onclick="exportAllCoins()">保存上方所有表格为图片</button>
 </div>
@@ -309,22 +306,31 @@ function renderCoins(coins) {
 
 /* ================= 核心构建逻辑 ================= */
 
-function createMatrix(data) {
+function createMatrix(data, mintIndex, allMintsData) {
   const matrix = document.createElement("div");
-  matrix.className = "matrix";
-  // 初始应用全局角度
+  matrix.className = `matrix mint-${mintIndex}`;
   matrix.style.transform = `rotate(${globalDegree}deg)`;
 
-  data.forEach(col => {
+  data.forEach((col, colIdx) => {
     if (col === "") {
       const gap = document.createElement("div");
       gap.className = "gap-column";
       matrix.appendChild(gap);
       return;
     }
-    col.split("").forEach(bit => {
+    col.split("").forEach((bit, rowIdx) => {
       const cell = document.createElement("div");
       cell.className = "cell" + (bit === "1" ? " black" : "");
+      
+      // 差异分析预处理：标记出非共有的点
+      if (bit === "1" && allMintsData) {
+        const isCommon = allMintsData.every(m => {
+          const targetCol = m.data[colIdx];
+          return targetCol && targetCol[rowIdx] === "1";
+        });
+        if (!isCommon) cell.classList.add("diff");
+      }
+
       matrix.appendChild(cell);
     });
   });
@@ -338,11 +344,11 @@ function buildCoin(name, code, mints) {
   const mintsDiv = document.createElement("div");
   mintsDiv.className = "mints";
 
-  mints.forEach(m => {
+  mints.forEach((m, idx) => {
     const mintDiv = document.createElement("div");
     mintDiv.className = "mint";
     mintDiv.innerHTML = `<div class="mint-name">${m.name}</div>`;
-    mintDiv.appendChild(createMatrix(m.data));
+    mintDiv.appendChild(createMatrix(m.data, idx, mints));
     mintsDiv.appendChild(mintDiv);
   });
 
@@ -350,15 +356,20 @@ function buildCoin(name, code, mints) {
   return coin;
 }
 
-/* ================= 旋转逻辑 (修复逆时针回弹问题) ================= */
+/* ================= 旋转逻辑 ================= */
 
 function rotateAllMatrices() {
-  globalDegree += 90; // 永远累加，不重置为0
-  
+  globalDegree += 90;
   const allMatrices = document.querySelectorAll('.matrix');
   allMatrices.forEach(m => {
     m.style.transform = `rotate(${globalDegree}deg)`;
   });
+}
+
+/* ================= 差异分析切换 ================= */
+
+function toggleAnalysis() {
+  document.body.classList.toggle('analysis-active');
 }
 
 /* ================= 试验场 ================= */
@@ -390,7 +401,6 @@ function saveCanvas(el, filename, callback) {
   html2canvas(el, {
     scale: 3,
     backgroundColor: "#fff",
-    // 确保旋转在导出时生效
     logging: false
   }).then(canvas => {
     const a = document.createElement("a");
@@ -413,11 +423,12 @@ function exportAllCoins() {
 
   const temp = document.createElement("div");
   temp.style.cssText = "background:#fff; padding:20px; display:inline-block;";
+  if (document.body.classList.contains('analysis-active')) temp.classList.add('analysis-active');
+  
   coins.forEach(c => temp.appendChild(c.cloneNode(true)));
   document.body.appendChild(temp);
   
-  // 修正克隆后的旋转状态
-  temp.querySelectorAll('.matrix').forEach((m, idx) => {
+  temp.querySelectorAll('.matrix').forEach((m) => {
     m.style.transform = `rotate(${globalDegree}deg)`;
   });
 
