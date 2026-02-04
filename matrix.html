@@ -90,6 +90,20 @@ body {
 .analysis-active .mint-1 .cell.black.diff { background: #1890ff; border-color: #1890ff; }
 .analysis-active .mint-2 .cell.black.diff { background: #52c41a; border-color: #52c41a; }
 
+/* ===== 新增：按造币厂名称绑定差异颜色 ===== */
+.analysis-active .mint[data-mint="沈阳"] .cell.black.diff {
+  background: #ff4d4f;
+  border-color: #ff4d4f;
+}
+.analysis-active .mint[data-mint="上海"] .cell.black.diff {
+  background: #1890ff;
+  border-color: #1890ff;
+}
+.analysis-active .mint[data-mint="南京"] .cell.black.diff {
+  background: #52c41a;
+  border-color: #52c41a;
+}
+
 .gap-column {
   width: 8px;
   grid-row: 1 / -1;
@@ -256,13 +270,13 @@ body {
     <label>纪念币名称</label>
     <input id="lab-name" value="2026年贺岁（丙午）">
     <label>纪念币编号</label>
-    <input id="lab-code" value="JB126">
+    <input id="lab-code" value="JB123">
     <div class="version-block">
       <strong>版本 1</strong>
       <label>纪念币版本</label>
       <input id="mint-1" value="沈阳">
       <label>点阵数据</label>
-      <textarea id="data-1">["1111111111","1110101011","1001010011","","1111111111","1010110011"]</textarea>
+      <textarea id="data-1">["1111111111","1110101011","1001010011","","1111111111","1010110001"]</textarea>
     </div>
     <div class="version-block">
       <strong>版本 2</strong>
@@ -347,6 +361,7 @@ function buildCoin(name, code, mints) {
   mints.forEach((m, idx) => {
     const mintDiv = document.createElement("div");
     mintDiv.className = "mint";
+    mintDiv.dataset.mint = m.name;
     mintDiv.innerHTML = `<div class="mint-name">${m.name}</div>`;
     mintDiv.appendChild(createMatrix(m.data, idx, mints));
     mintsDiv.appendChild(mintDiv);
