@@ -76,7 +76,7 @@
         }
         .progress-bar {
             height: 100%;
-            background-color:  #3B82F6;
+            background-color:  #22C55E;
             border-radius: 4px;
             transition: width 0.3s ease;
             position: absolute; 
@@ -84,7 +84,7 @@
             left: 0;
         }
         .progress-bar.collected {
-            background-color: #3B82F6; /* 蓝色，代表已收藏 */
+            background-color: #22C55E; /* 绿色，代表已收藏 */
             z-index: 2; /* 确保它在想收藏之上 */
         }
 
@@ -695,7 +695,7 @@
                                         class="back-image absolute top-0 left-0 w-full h-full object-contain rounded-lg ${imgClass} transition-all duration-500 ease-in-out ${backImageClass}"
                                         loading="lazy"
                                         onerror="this.onerror=null;this.src='https://placehold.co/300x300/F0F0F0/888888?text=图片未找到'">
-                                    <div class="coin-check-icon absolute top-2 right-2 bg-blue-500 text-white w-8 h-8 rounded-full flex items-center justify-center text-xl opacity-0 transition-opacity duration-300">
+                                    <div class="coin-check-icon absolute top-2 right-2 bg-green-500 text-white w-8 h-8 rounded-full flex items-center justify-center text-xl opacity-0 transition-opacity duration-300">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
                                             <polyline points="20 6 9 17 4 12" />
                                         </svg>
@@ -740,7 +740,7 @@
             const totalGoalRate = totalCoins > 0 ? ((collectedCoinsCount + wishlistCoinsCount) / totalCoins) * 100 : 0;
             
             document.getElementById('overviewCount').innerHTML = `
-                已收藏 <span style="color: #3B82F6;">${collectedCoinsCount}</span> / 
+                已收藏 <span style="color: #22C55E;">${collectedCoinsCount}</span> / 
                 想收藏 <span style="color: #FBBF24;">${wishlistCoinsCount}</span> / 
                 总数 ${totalCoins} 枚
             `;
@@ -778,7 +778,7 @@
                     statButton.innerHTML = `
                         <div class="flex justify-between items-center mb-1">
                             <span class="text-sm text-gray-700 font-medium">${theme}</span>
-                            <span class="text-xs font-medium text-gray-500"><span style="color: #3B82F6;">${stats.collected}</span>/<span style="color: #FBBF24;">${stats.wishlisted}</span>/${stats.total} </span>
+                            <span class="text-xs font-medium text-gray-500"><span style="color: #22C55E;">${stats.collected}</span>/<span style="color: #FBBF24;">${stats.wishlisted}</span>/${stats.total} </span>
                         </div>
                         <div class="progress-container">
                             <div class="progress-bar wishlist" style="width: ${totalGoalRate}%;"></div>
@@ -825,7 +825,7 @@
                     statButton.innerHTML = `
                         <div class="flex justify-between items-center mb-1">
                             <span class="text-sm text-gray-700 font-medium">${year}年</span>
-                            <span class="text-xs font-medium text-gray-500"><span style="color: #3B82F6;">${stats.collected}</span>/<span style="color: #FBBF24;">${stats.wishlisted}</span>/${stats.total} </span>
+                            <span class="text-xs font-medium text-gray-500"><span style="color: #22C55E;">${stats.collected}</span>/<span style="color: #FBBF24;">${stats.wishlisted}</span>/${stats.total} </span>
                         </div>
                         <div class="progress-container">
                             <div class="progress-bar wishlist" style="width: ${totalGoalRate}%;"></div>
