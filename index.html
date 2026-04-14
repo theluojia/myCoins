@@ -278,6 +278,12 @@
                         </svg>
                     </button>
 
+                    <button id="sendEmailBtn" class="w-10 h-10 rounded-full bg-blue-400 text-white shadow-lg flex items-center justify-center hover:bg-blue-500 transition-colors" title="联系作者">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                            <polyline points="22,6 12,13 2,6"></polyline>
+                        </svg>
+                    </button>
                 </div>
 
                 <!-- 主按钮 -->
@@ -286,6 +292,7 @@
                         <path id="fab-icon-path" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
                     </svg>
                 </button>
+
             </div>
         </header>
 
@@ -681,9 +688,9 @@
 
                             let mintBadgesHTML = '';
                             if (coin.mints && Array.isArray(coin.mints) && coin.mints.length > 0) {
-                                mintBadgesHTML = `<div class="absolute top-2 left-2 z-10 flex flex-col gap-1">`;
-                                
-                                coin.mints.forEach(mintName => {
+                                    mintBadgesHTML = `<div class="absolute bottom-2 left-2 z-20 flex flex-row gap-1">`;
+
+                                    coin.mints.forEach(mintName => {
                                     const config = mintConfig[mintName] || { short: "厂", color: "bg-gray-400", fullName: mintName };
                                     mintBadgesHTML += `
                                         <div class="${config.color} w-6 h-6 rounded-full flex items-center justify-center text-white text-[10px] font-bold border border-white/40 backdrop-blur-[2px] shadow-sm">
@@ -691,9 +698,9 @@
                                         </div>
                                     `;
                                 });
-    
-                            mintBadgesHTML += `</div>`;
-}
+
+                                mintBadgesHTML += `</div>`;
+                            }                   
 
                             coinCard.innerHTML = `
                                 <div class="relative w-full aspect-square">
@@ -921,7 +928,19 @@
                     console.error('无法初始化应用，因为数据加载失败。');
                 });
         };
-        
+
+        // 发送邮件功能
+        const sendEmailBtn = document.getElementById('sendEmailBtn');
+        if (sendEmailBtn) {
+            sendEmailBtn.addEventListener('click', (e) => {
+                e.stopPropagation(); // 阻止冒泡防止菜单意外关闭
+                const email = "theluojia@qq.com";
+                const subject = encodeURIComponent("我的纪念币收藏网站-交流");
+                // 使用 mailto 协议唤起系统默认邮件客户端
+                window.location.href = `mailto:${email}?subject=${subject}`;
+            });
+        }
+
         // 填充筛选下拉菜单
         function populateFilters(coins) {
             const themes = [...new Set(coins.map(coin => coin.theme))].sort();
