@@ -3,177 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="中国纪念币收藏追踪工具，支持收藏管理、筛选搜索、点阵防伪图案查看">
+    <meta name="theme-color" content="#1e40af">
     <title>我的纪念币收藏</title>
-    <!-- 引入 Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        /* 使用 Inter 字体 */
-        body {
-            font-family: 'Inter', sans-serif;
-        }
-        /* 收藏后的视觉效果：复选标记 */
-        .coin-card.collected .coin-check-icon {
-            opacity: 1;
-        }
-        .coin-card.collected img {
-            filter: none; /* 图片恢复彩色 */
-        }
-        /* 收藏后的视觉效果：复选标记 */
-        .coin-card.wishlist .coin-wish-icon {
-            opacity: 1; /* 显示心形图标 */
-        }        
-        /* 动画效果 */
-        @keyframes fade-in-out {
-            0% { opacity: 0; transform: translateY(10px); }
-            10% { opacity: 1; transform: translateY(0); }
-            90% { opacity: 1; transform: translateY(0); }
-            100% { opacity: 0; transform: translateY(10px); }
-        }
-        #save-status {
-            animation: fade-in-out 3s ease-in-out;
-        }
-        /* 骨架屏动画 */
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-        .skeleton {
-            animation: pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-        }
-        /* 收藏概览抽屉样式 */
-        .collection-overview {
-            background-color: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            margin-bottom: 1rem;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-        .collection-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 1rem;
-            cursor: pointer;
-        }
-        .collection-summary {
-            display: flex;
-            align-items: center;
-            flex: 1;
-        }
-        .collection-count {
-            margin-right: 1rem;
-            font-weight: 600;
-            color: #374151;
-        }
-        .progress-container {
-            flex: 1;
-            height: 8px;
-            background-color: #E5E7EB;
-            border-radius: 4px;
-            overflow: hidden;
-            position: relative; /* 相对定位以包含绝对定位的子元素 */
-        }
-        .progress-bar {
-            height: 100%;
-            background-color:  #22C55E;
-            border-radius: 4px;
-            transition: width 0.3s ease;
-            position: absolute; 
-            top: 0;
-            left: 0;
-        }
-        .progress-bar.collected {
-            background-color: #22C55E; /* 绿色，代表已收藏 */
-            z-index: 2; /* 确保它在想收藏之上 */
-        }
-
-        .progress-bar.wishlist {
-            background-color: #FBBF24; /* 琥珀色，代表想收藏 */
-            z-index: 1; /* 确保它在已收藏之下 */
-        }
-        .collection-details {
-            padding: 0;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease, padding 0.3s ease;
-        }
-        .collection-overview.expanded .collection-details {
-            padding: 0 1rem 1rem;
-            max-height: 70vh;
-            overflow-y: auto;
-        }
-        .overview-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-        .overview-column h3 {
-            font-size: 1rem;
-            font-weight: 600;
-            color: #374151;
-            margin-bottom: 0.5rem;
-        }
-        .stat-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 0.5rem;
-        }
-        .stat-label {
-            font-size: 0.875rem;
-            color: #4B5563;
-        }
-        .stat-value {
-            font-size: 0.875rem;
-            font-weight: 500;
-            color: #1F2937;
-        }
-        /* 设置主题下拉框的固定宽度 */
-        #themeFilter {
-            width: 95px;
-        }
-        #denominationFilter {
-            width: 95px;
-        }
-        #sizeFilter {
-            width: 95px;
-        }
-        #metalFilter {
-            width: 95px;
-        }
-        #yearFilter {
-            width: 95px;
-        }
-        #statusFilter {
-            width: 95px;
-        }
-    </style>
+    <!-- PWA manifest -->
+    <link rel="manifest" href="manifest.json">
+    <!-- 预编译静态样式（首屏渲染关键路径） -->
+    <link rel="stylesheet" href="styles.css">
+    <!-- Tailwind CDN 保留（处理动态添加的类，不影响首屏） -->
+    <script src="https://cdn.tailwindcss.com" defer></script>
+    <!-- pinyin-pro 拼音搜索 -->
+    <script src="https://cdn.jsdelivr.net/npm/pinyin-pro@3.26.0/dist/index.umd.min.js" defer></script>
+    <!-- Fuse.js 模糊搜索 -->
+    <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.min.js" defer></script>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans p-4 sm:p-8">
     <div class="max-w-7xl mx-auto py-8">
         <header class="text-center mb-10">
             <h1 class="text-4xl sm:text-5xl font-extrabold text-blue-800 leading-tight">我的纪念币收藏</h1>
             <p class="text-xl sm:text-2xl mt-2 text-gray-600">
-                <b class="text-[#22C55E]"><i>双击</i></b>标记已收藏 / 
+                <b class="text-[#22C55E]"><i>双击</i></b>标记已收藏 /
                 <b class="text-[#FBBF24]"><i>单击</i></b>标记想收藏
             </p>
-            <div id="collectionOverview" class="collection-overview mt-4 max-w-2xl mx-auto">
-                <div class="collection-header" id="overviewHeader">
+
+            <!-- 收藏概览 -->
+            <div id="collectionOverview" class="collection-overview mt-4 max-w-2xl mx-auto" role="region" aria-label="收藏概览">
+                <div class="collection-header" id="overviewHeader" role="button" aria-expanded="false" aria-controls="overviewDetails" tabindex="0">
                     <div class="collection-summary">
-                        <span class="collection-count" id="overviewCount">已收藏 0 / 想收藏 0 / 总数 0 枚</span>
-                        <div class="progress-container">
+                        <span class="collection-count" id="overviewCount" aria-live="polite">已收藏 0 / 想收藏 0 / 总数 0 枚</span>
+                        <div class="progress-container" role="progressbar" aria-label="收藏进度">
                             <div class="progress-bar collected" id="collectedProgressBar" style="width: 0%"></div>
                             <div class="progress-bar wishlist" id="wishlistProgressBar" style="width: 0%"></div>
                         </div>
                     </div>
-                    <svg id="toggle-icon" class="w-6 h-6 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <svg id="toggle-icon" class="w-6 h-6 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                    </svg>                    
+                    </svg>
                 </div>
 
-                <div class="collection-details" id="overviewDetails">
+                <div class="collection-details" id="overviewDetails" role="region">
                     <div class="overview-grid">
                         <div class="p-4 bg-gray-50 rounded-lg">
                             <h3 class="font-semibold text-gray-800 mb-2">按主题收藏</h3>
@@ -187,39 +55,42 @@
                 </div>
             </div>
 
-            <div id="filterSection" class="collection-overview mt-4 max-w-2xl mx-auto p-2">
+            <!-- 筛选区域 -->
+            <div id="filterSection" class="filter-section mt-4 max-w-2xl mx-auto" role="search" aria-label="筛选纪念币">
                 <div class="relative mb-4">
-                    <input type="text" id="searchInput" placeholder="搜索纪念币名称 ..." 
-                        class="w-full rounded-md border border-gray-300 p-2 pl-10 text-base focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+                    <label for="searchInput" class="sr-only">搜索纪念币名称</label>
+                    <input type="text" id="searchInput" placeholder="搜索纪念币名称 ..."
+                        class="w-full rounded-md border border-gray-300 p-2 pl-10 text-base focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        autocomplete="off" aria-label="搜索纪念币名称">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                         <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.416l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
                     </svg>
                 </div>
 
                 <div class="flex flex-wrap items-center justify-center gap-2">
-                    <select id="themeFilter" class="rounded-md border border-gray-300 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <select id="themeFilter" class="rounded-md border border-gray-300 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" aria-label="按主题筛选">
                         <option value="">所有主题</option>
                     </select>
-                    <select id="denominationFilter" class="rounded-md border border-gray-300 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <select id="denominationFilter" class="rounded-md border border-gray-300 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" aria-label="按面额筛选">
                         <option value="">所有面额</option>
                     </select>
-                    <select id="sizeFilter" class="rounded-md border border-gray-300 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <select id="sizeFilter" class="rounded-md border border-gray-300 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" aria-label="按大小筛选">
                         <option value="">所有大小</option>
                     </select>
-                    <select id="metalFilter" class="rounded-md border border-gray-300 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <select id="metalFilter" class="rounded-md border border-gray-300 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" aria-label="按材质筛选">
                         <option value="">所有材质</option>
                     </select>
-                    <select id="yearFilter" class="rounded-md border border-gray-300 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <select id="yearFilter" class="rounded-md border border-gray-300 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" aria-label="按年份筛选">
                         <option value="">所有年份</option>
                     </select>
-                    <select id="statusFilter" class="rounded-md border border-gray-300 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <select id="statusFilter" class="rounded-md border border-gray-300 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" aria-label="按收藏状态筛选">
                         <option value="">所有状态</option>
                         <option value="uncollected">未收藏</option>
                         <option value="wishlist">想收藏</option>
                         <option value="collected">已收藏</option>
                     </select>
-                    <button id="clearFiltersBtn" class="bg-green-500 hover:bg-green-600 text-white rounded-md p-2 text-sm flex items-center transition-colors" title="清除过滤条件">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <button id="clearFiltersBtn" class="bg-green-500 hover:bg-green-600 text-white rounded-md p-2 text-sm flex items-center transition-colors" title="清除过滤条件" aria-label="清除所有筛选条件">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                             <path d="M21 12a9 9 0 1 1-4-7.5" />
                             <polyline points="21 3 21 8 16 8" />
                         </svg>
@@ -227,34 +98,31 @@
                 </div>
             </div>
 
+            <p id="save-status" class="text-sm text-green-600 mt-2 opacity-0" role="status" aria-live="polite">已更新</p>
 
-            <p id="save-status" class="text-sm text-green-600 mt-2 opacity-0">已更新</p>
-
-            <!-- 悬浮圆形按钮 & 菜单 -->
+            <!-- 悬浮按钮 & 菜单 -->
             <div id="fabContainer" class="fixed bottom-1/4 right-2 z-50">
-
-                <!-- 弹出菜单 -->
-                <div id="fabMenu" class="hidden flex-col items-end space-y-3 mb-4 transition-all duration-300">
-                    <button id="sortOrderToggle" class="w-10 h-10 rounded-full bg-blue-400 text-white shadow-lg flex items-center justify-center hover:bg-blue-500 transition-colors" title="排列正序逆序">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 15 15" fill="none">
+                <div id="fabMenu" class="hidden flex-col items-end space-y-3 mb-4 transition-all duration-300" role="menu" aria-label="操作菜单">
+                    <button id="sortOrderToggle" class="w-10 h-10 rounded-full bg-blue-400 text-white shadow-lg flex items-center justify-center hover:bg-blue-500 transition-colors" title="排列正序逆序" aria-label="切换排序顺序" role="menuitem">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 15 15" fill="none" aria-hidden="true">
                             <path d="M11.5 0.5H12C12 0.223858 11.7761 0 11.5 0V0.5ZM4.5 0.5L4.85355 0.146447C4.65829 -0.0488155 4.34171 -0.0488155 4.14645 0.146447L4.5 0.5ZM10 1H11.5V0H10V1ZM11 0.5V6.5H12V0.5H11ZM10 7H13V6H10V7ZM11.578 8H11V9H11.578V8ZM12.9743 11.6581L13.3665 10.4815L12.4179 10.1653L12.0257 11.3419L12.9743 11.6581ZM11 12H12.5V11H11V12ZM11.9743 14.6581L12.9743 11.6581L12.0257 11.3419L11.0257 14.3419L11.9743 14.6581ZM9 10C9 11.1046 9.89543 12 11 12V11C10.4477 11 10 10.5523 10 10H9ZM11 8C9.89543 8 9 8.89543 9 10H10C10 9.44772 10.4477 9 11 9V8ZM11.578 9C12.1823 9 12.609 9.59201 12.4179 10.1653L13.3665 10.4815C13.7735 9.26071 12.8648 8 11.578 8V9ZM4.14645 0.146447L1.14645 3.14645L1.85355 3.85355L4.85355 0.853553L4.14645 0.146447ZM4.14645 0.853553L7.14645 3.85355L7.85355 3.14645L4.85355 0.146447L4.14645 0.853553ZM4 0.5V15H5V0.5H4Z" fill="currentColor"/>
                         </svg>
-                    </button>                    
-                    <button id="toggleImageView" class="w-10 h-10 rounded-full bg-blue-400 text-white shadow-lg flex items-center justify-center hover:bg-blue-500 transition-colors" title="切换正面反面">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    </button>
+                    <button id="toggleImageView" class="w-10 h-10 rounded-full bg-blue-400 text-white shadow-lg flex items-center justify-center hover:bg-blue-500 transition-colors" title="切换正面反面" aria-label="切换正面/背面图片" role="menuitem">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                             <path d="M15 21h2v-2h-2v2zm4-12h2V7h-2v2zM3 5v14c0 1.1.9 2 2 2h4v-2H5V5h4V3H5c-1.1 0-2 .9-2 2zm16-2v2h2c0-1.1-.9-2-2-2zm-8 20h2V1h-2v22zm8-6h2v-2h-2v2zM15 5h2V3h-2v2zm4 8h2v-2h-2v2zm0 8c1.1 0 2-.9 2-2h-2v2z"/>
                         </svg>
                     </button>
-                    <button id="exportBtn" class="w-10 h-10 rounded-full bg-blue-400 text-white shadow-lg flex items-center justify-center hover:bg-blue-500 transition-colors" title="导出收藏记录">
-                        <svg class="icon icon-tabler icon-tabler-database-export" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                    <button id="exportBtn" class="w-10 h-10 rounded-full bg-blue-400 text-white shadow-lg flex items-center justify-center hover:bg-blue-500 transition-colors" title="导出收藏记录" aria-label="导出收藏数据" role="menuitem">
+                        <svg class="icon icon-tabler icon-tabler-database-export" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                             <path d="M0 0h24v24H0z" fill="none" stroke="none"/>
                             <ellipse cx="12" cy="6" rx="8" ry="3"/>
                             <path d="M4 6v6c0 1.657 3.582 3 8 3a19.84 19.84 0 0 0 3.302 -.267m4.698 -2.733v-6"/>
                             <path d="M4 12v6c0 1.599 3.335 2.905 7.538 2.995m8.462 -6.995v-2m-6 7h7m-3 -3l3 3l-3 3"/>
                         </svg>
                     </button>
-                    <label for="importFile" class="w-10 h-10 rounded-full bg-blue-400 text-white shadow-lg flex items-center justify-center hover:bg-blue-500 transition-colors cursor-pointer" title="导入收藏记录">
-                        <svg class="icon icon-tabler icon-tabler-database-import" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                    <label for="importFile" class="w-10 h-10 rounded-full bg-blue-400 text-white shadow-lg flex items-center justify-center hover:bg-blue-500 transition-colors cursor-pointer" title="导入收藏记录" aria-label="导入收藏数据" role="menuitem" tabindex="0">
+                        <svg class="icon icon-tabler icon-tabler-database-import" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                             <path d="M0 0h24v24H0z" fill="none" stroke="none"/>
                             <ellipse cx="12" cy="6" rx="8" ry="3"/>
                             <path d="M4 6v8m5.009 .783c.924 .14 1.933 .217 2.991 .217c4.418 0 8 -1.343 8 -3v-6"/>
@@ -262,24 +130,20 @@
                         </svg>
                     </label>
                     <input type="file" id="importFile" accept=".json" class="hidden">
-                    <button onclick="location.href='matrix.html'" class="w-10 h-10 rounded-full bg-blue-400 text-white shadow-lg flex items-center justify-center hover:bg-blue-500 transition-colors" title="展示防伪点阵">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                    <!-- 点阵查看器按钮：打开模态框而非跳转页面 -->
+                    <button id="openMatrixBtn" class="w-10 h-10 rounded-full bg-blue-400 text-white shadow-lg flex items-center justify-center hover:bg-blue-500 transition-colors" title="展示防伪点阵" aria-label="打开点阵防伪图案查看器" role="menuitem">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
                             <rect x="1"  y="1"  width="3" height="3" rx="0.5"/>
                             <rect x="6.5" y="1"  width="3" height="3" rx="0.5"/>
-                            <!-- <rect x="12" y="1"  width="3" height="3" rx="0.5"/> -->
-
                             <rect x="1"  y="6.5" width="3" height="3" rx="0.5"/>
-                            <!-- <rect x="6.5" y="6.5" width="3" height="3" rx="0.5"/> -->
                             <rect x="12" y="6.5" width="3" height="3" rx="0.5"/>
-
                             <rect x="1"  y="12" width="3" height="3" rx="0.5"/>
                             <rect x="6.5" y="12" width="3" height="3" rx="0.5"/>
                             <rect x="12" y="12" width="3" height="3" rx="0.5"/>
                         </svg>
                     </button>
-
-                    <button id="sendEmailBtn" class="w-10 h-10 rounded-full bg-blue-400 text-white shadow-lg flex items-center justify-center hover:bg-blue-500 transition-colors" title="联系作者">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <button id="sendEmailBtn" class="w-10 h-10 rounded-full bg-blue-400 text-white shadow-lg flex items-center justify-center hover:bg-blue-500 transition-colors" title="联系作者" aria-label="发送邮件联系作者" role="menuitem">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                             <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
                             <polyline points="22,6 12,13 2,6"></polyline>
                         </svg>
@@ -287,45 +151,95 @@
                 </div>
 
                 <!-- 主按钮 -->
-                <button id="fabButton" class="w-10 h-10 rounded-full bg-blue-600 text-white shadow-lg flex items-center justify-center hover:bg-blue-700 transition-colors" title="展开/收起菜单">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <button id="fabButton" class="w-10 h-10 rounded-full bg-blue-600 text-white shadow-lg flex items-center justify-center hover:bg-blue-700 transition-colors" title="展开/收起菜单" aria-label="展开/收起操作菜单" aria-expanded="false" aria-controls="fabMenu">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                         <path id="fab-icon-path" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
                     </svg>
                 </button>
-
             </div>
         </header>
 
-        <main id="main-container">
+        <main id="main-container" role="main" aria-label="纪念币列表">
         </main>
     </div>
 
-    <footer class="fixed bottom-0 left-0 right-0 bg-gradient-to-r from-blue-800/80 to-blue-600/80 text-white py-3 px-4 transition-all duration-300">
+    <!-- 矩阵查看器模态框（#13 整合） -->
+    <div id="matrixModal" class="matrix-modal-overlay hidden" style="display:none" role="dialog" aria-modal="true" aria-label="防伪点阵图案查看器">
+        <div class="matrix-modal-content relative">
+            <button id="matrixModalClose" class="modal-close-btn" aria-label="关闭点阵查看器" title="关闭">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+            </button>
+            <h2 class="text-2xl font-bold mb-5 text-center">防伪点阵图案</h2>
+            <div id="matrixApp"></div>
+            <div id="matrixActions" class="flex flex-wrap justify-center gap-3 mt-5">
+                <button id="matrixRotateBtn" class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm transition-colors" aria-label="顺时针旋转90度">
+                    旋转 90°
+                </button>
+                <button id="matrixAnalysisBtn" class="bg-gray-500 hover:bg-gray-700 text-white px-4 py-2 rounded-md text-sm transition-colors" aria-label="切换差异分析模式">
+                    差异分析
+                </button>
+            </div>
+            <!-- 试验场 -->
+            <div id="matrixLab" class="mt-5 border-2 rounded-lg overflow-hidden">
+                <div class="text-center font-bold p-3 border-b" style="font-size: 1.1rem;">点阵试验场</div>
+                <div class="p-3 matrix-lab-input">
+                    <label for="labName">纪念币名称</label>
+                    <input id="labName" value="2026年贺岁（丙午）">
+                    <label for="labCode">纪念币编号</label>
+                    <input id="labCode" value="JB123">
+                    <div class="matrix-version-block">
+                        <strong>版本 1</strong>
+                        <label for="mint-1">纪念币版本</label>
+                        <input id="mint-1" value="沈阳">
+                        <label for="data-1">点阵数据</label>
+                        <textarea id="data-1">["1111111111","1110101011","1001010011","","1111111111","1010110001"]</textarea>
+                    </div>
+                    <div class="matrix-version-block">
+                        <strong>版本 2</strong>
+                        <label for="mint-2">纪念币版本</label>
+                        <input id="mint-2" value="上海">
+                        <label for="data-2">点阵数据</label>
+                        <textarea id="data-2">["1111111111","1110101001","1001010001","","1111111111","1010110011"]</textarea>
+                    </div>
+                    <div class="matrix-version-block">
+                        <strong>版本 3</strong>
+                        <label for="mint-3">纪念币版本</label>
+                        <input id="mint-3" value="南京">
+                        <label for="data-3">点阵数据</label>
+                        <textarea id="data-3">["1111111111","1110101001","1001010011","","1111111111","1010110011"]</textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="flex justify-end gap-2 mt-3 mb-3">
+                <button id="matrixLabGenerate" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md text-sm">生成点阵</button>
+            </div>
+            <div id="matrixLabGenerated"></div>
+        </div>
+    </div>
+
+    <footer class="fixed bottom-0 left-0 right-0 footer-gradient py-3 px-4 transition-all duration-300">
         <div class="max-w-7xl mx-auto">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-2 items-center">
                 <div class="text-center md:text-left">
-                    <p class="text-sm md:text-base opacity-90">此网页的所有数据均存储在本地浏览器中
-                    </p>
+                    <p class="text-sm md:text-base opacity-90">此网页的所有数据均存储在本地浏览器中</p>
                 </div>
                 <div class="text-center">
-                    <p class="text-sm md:text-base font-medium">Copyright © 2025-<span id="current-year"></span> theluojia</p>
+                    <p class="text-sm md:text-base font-medium">Copyright &copy; 2025-<span id="current-year"></span> theluojia</p>
                 </div>
                 <div class="text-center md:text-right">
-                    <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans" 
-                    target="_blank" 
+                    <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans"
+                    target="_blank"
                     class="inline-flex items-center gap-1 text-sm md:text-base text-blue-200 hover:text-white transition-colors duration-200 underline decoration-dashed underline-offset-2">
-                        <img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" 
-                            alt="CC BY-NC-SA 4.0" 
-                            class="h-6 w-auto" />
-                        <img src="https://mirrors.creativecommons.org/presskit/icons/by.svg" 
-                            alt="CC BY-NC-SA 4.0" 
-                            class="h-6 w-auto" />
-                        <img src="https://mirrors.creativecommons.org/presskit/icons/nc.svg" 
-                            alt="CC BY-NC-SA 4.0" 
-                            class="h-6 w-auto" />
-                        <img src="https://mirrors.creativecommons.org/presskit/icons/sa.svg" 
-                            alt="CC BY-NC-SA 4.0" 
-                            class="h-6 w-auto" />
+                        <img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg"
+                            alt="CC" class="h-6 w-auto" loading="lazy" decoding="async">
+                        <img src="https://mirrors.creativecommons.org/presskit/icons/by.svg"
+                            alt="BY" class="h-6 w-auto" loading="lazy" decoding="async">
+                        <img src="https://mirrors.creativecommons.org/presskit/icons/nc.svg"
+                            alt="NC" class="h-6 w-auto" loading="lazy" decoding="async">
+                        <img src="https://mirrors.creativecommons.org/presskit/icons/sa.svg"
+                            alt="SA" class="h-6 w-auto" loading="lazy" decoding="async">
                         <span>CC BY-NC-SA 4.0</span>
                     </a>
                 </div>
@@ -334,666 +248,793 @@
     </footer>
 
     <script>
-        let allCoinsData = []; 
+    /* ============================================================
+       数据层：IndexedDB 替代 localStorage（#12）
+       ============================================================ */
+    const DB_NAME = 'myCoinsDB';
+    const DB_VERSION = 1;
+    const STORE_COLLECTED = 'collected';
+    const STORE_WISHLIST = 'wishlist';
 
-        let myCollection = []; // 存储已收藏的纪念币ID
-        let myWishlist = []; // 存储想收藏的纪念币ID
-        const storageKey = 'myCoinCollection'; 
-        const wishlistStorageKey = 'myCoinWishlist';
-
-        let currentSortOrder = 'desc';
-        let searchTimeout = null;
-
-        let isBackView = false;        
-
-        const mainContainer = document.getElementById('main-container');
-        const themeFilter = document.getElementById('themeFilter');
-        const denominationFilter = document.getElementById('denominationFilter');
-        const sizeFilter = document.getElementById('sizeFilter');
-        const metalFilter = document.getElementById('metalFilter');
-        const yearFilter = document.getElementById('yearFilter');
-        const statusFilter = document.getElementById('statusFilter');
-        const clearFiltersBtn = document.getElementById('clearFiltersBtn'); 
-        const sortOrderToggle = document.getElementById('sortOrderToggle');
-        const saveStatus = document.getElementById('save-status');
-        const searchInput = document.getElementById('searchInput');
-
-        const fabButton = document.getElementById('fabButton');
-        const fabMenu = document.getElementById('fabMenu');
-        const fabContainer = document.getElementById('fabContainer');
-        const exportBtn = document.getElementById('exportBtn'); 
-
-        const mintConfig = {
-            "上海": { short: "沪", color: "bg-purple-500/40", fullName: "上海造币有限公司" },
-            "沈阳": { short: "沈", color: "bg-red-500/40", fullName: "沈阳造币有限公司" },
-            "南京": { short: "宁", color: "bg-teal-500/40", fullName: "南京造币有限公司" },
-
-            "成都": { short: "成", color: "bg-orange-500/40", fullName: "成都印钞有限公司" },
-            "北京": { short: "京", color: "bg-indigo-500/40", fullName: "北京印钞有限公司" },
-            "上钞": { short: "沪", color: "bg-fuchsia-500/40", fullName: "上海印钞有限公司" }, // 区别于上海造币
-            "西安": { short: "西", color: "bg-emerald-500/40", fullName: "西安印钞有限公司" },
-            "石家庄": { short: "石", color: "bg-amber-500/40", fullName: "石家庄印钞有限公司" },
-            "南昌": { short: "昌", color: "bg-pink-500/40", fullName: "南昌印钞有限公司" },
-            "广州": { short: "穗", color: "bg-cyan-500/40", fullName: "广州印钞有限公司" }
-        };
-
-        document.getElementById('current-year').textContent = new Date().getFullYear();
-
-        /// 隐藏菜单的函数
-        function hideMenu() {
-            fabMenu.classList.add('hidden');
-            // 获取图标元素并改变其路径为“加号”
-            const fabIconPath = document.getElementById('fab-icon-path');
-            if (fabIconPath) {
-                fabIconPath.setAttribute('d', 'M12 4v16m8-8H4');
-            }
-        }
-
-        // 显示菜单的函数
-        function showMenu() {
-            fabMenu.classList.remove('hidden');
-            // 获取图标元素并改变其路径为“减号”
-            const fabIconPath = document.getElementById('fab-icon-path');
-            if (fabIconPath) {
-                fabIconPath.setAttribute('d', 'M4 12h16');
-            }
-        }
-
-        // 切换菜单显示/隐藏状态
-        fabButton.addEventListener('click', (e) => {
-        e.stopPropagation(); // 阻止点击事件冒泡
-        if (fabMenu.classList.contains('hidden')) {
-            showMenu();
-        } else {
-            hideMenu();
-        }
-        });
-
-        // 点击菜单内的任何元素时，阻止事件冒泡到 document
-        fabMenu.addEventListener('click', (e) => {
-        e.stopPropagation(); // 阻止点击事件冒泡，这样就不会触发 document 上的隐藏逻辑
-        });
-
-        // 当点击 fabContainer 以外的任何地方时，隐藏菜单
-        function handleDocumentClick(e) {
-            if (!fabContainer.contains(e.target)) {
-                hideMenu();
-            }
-        }
-        document.addEventListener('click', handleDocumentClick);
-
-        // 1. 加载本地收藏数据
-        function loadCollection() {
-            try {
-                const savedCollection = localStorage.getItem(storageKey);
-                const savedWishlist = localStorage.getItem(wishlistStorageKey);
-                if (savedCollection) {
-                    myCollection = JSON.parse(savedCollection);
-                } else {
-                    myCollection = [];
+    function openDB() {
+        return new Promise((resolve, reject) => {
+            const req = indexedDB.open(DB_NAME, DB_VERSION);
+            req.onupgradeneeded = (e) => {
+                const db = e.target.result;
+                if (!db.objectStoreNames.contains(STORE_COLLECTED)) {
+                    db.createObjectStore(STORE_COLLECTED, { keyPath: 'id' });
                 }
-                if (savedWishlist) {
-                    myWishlist = JSON.parse(savedWishlist);
-                } else {
-                    myWishlist = [];
-                }
-            } catch (e) {
-                console.error("加载本地收藏数据失败:", e);
-                myCollection = [];
-                myWishlist = [];
-            }
-        }
-
-        // 2. 保存收藏数据到本地
-        function saveCollection() {
-            try {
-                localStorage.setItem(storageKey, JSON.stringify(myCollection));
-                localStorage.setItem(wishlistStorageKey, JSON.stringify(myWishlist));
-                saveStatus.style.opacity = '1';
-                setTimeout(() => {
-                    saveStatus.style.opacity = '0';
-                }, 2000);
-            } catch (e) {
-                console.error("保存本地收藏数据失败:", e);
-            }
-        }
-        
-        // 3. 导出/导入数据
-        document.getElementById('exportBtn').addEventListener('click', (e) => {
-            e.stopPropagation(); // 阻止事件冒泡
-
-            // 临时移除全局点击监听器，防止下载时菜单意外关闭
-            document.removeEventListener('click', handleDocumentClick);
-
-            const data = {
-                collected: myCollection,
-                wishlist: myWishlist
-            };
-            const dataStr = JSON.stringify(data);
-            const blob = new Blob([dataStr], { type: 'application/json' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `coin_collection_backup_${new Date().toISOString().slice(0, 10)}.json`;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
-
-            // 在一个极小的延迟后，重新添加全局点击监听器
-            // 50ms 延迟足以跳过下载触发的事件，同时保证用户体验
-            setTimeout(() => {
-                document.addEventListener('click', handleDocumentClick);
-            }, 50);
-        });
-
-        document.getElementById('importFile').addEventListener('change', (e) => {
-            const file = e.target.files[0];
-            if (!file) return;
-            const reader = new FileReader();
-            reader.onload = (event) => {
-                try {
-                    const importedData = JSON.parse(event.target.result);
-                    if (importedData.collected && importedData.wishlist) {
-                        myCollection = importedData.collected;
-                        myWishlist = importedData.wishlist;
-                        saveCollection(); 
-                        renderUI(); 
-                        updateCollectionOverview(); 
-                        alert('数据导入成功！');
-                    } else {
-                        throw new Error('导入的文件格式不正确');
-                    }
-                } catch (error) {
-                    console.error('导入失败:', error);
-                    alert('导入失败，请确保文件是有效的JSON格式。');
+                if (!db.objectStoreNames.contains(STORE_WISHLIST)) {
+                    db.createObjectStore(STORE_WISHLIST, { keyPath: 'id' });
                 }
             };
-            reader.readAsText(file);
+            req.onsuccess = (e) => resolve(e.target.result);
+            req.onerror = (e) => reject(e.target.error);
         });
+    }
 
-        // 4. 新的交互函数
-        let clickTimer = null;
-        let clickCount = 0;
+    async function dbGetAll(storeName) {
+        const db = await openDB();
+        return new Promise((resolve, reject) => {
+            const tx = db.transaction(storeName, 'readonly');
+            const req = tx.objectStore(storeName).getAll();
+            req.onsuccess = () => resolve(req.result.map(r => r.id));
+            req.onerror = () => reject(req.error);
+        });
+    }
 
-        function handleCoinCardClick(coinId) {
-            clickCount++;
+    async function dbSetAll(storeName, ids) {
+        const db = await openDB();
+        return new Promise((resolve, reject) => {
+            const tx = db.transaction(storeName, 'readwrite');
+            const store = tx.objectStore(storeName);
+            store.clear();
+            ids.forEach(id => store.put({ id }));
+            tx.oncomplete = () => resolve();
+            tx.onerror = () => reject(tx.error);
+        });
+    }
 
-            if (clickCount === 1) {
-                clickTimer = setTimeout(() => {
-                    // 单击逻辑: 在未收藏和想收藏之间切换
-                    const isCollected = myCollection.includes(coinId);
-                    const isWishlisted = myWishlist.includes(coinId);
+    /* 迁移：首次使用 IndexedDB 时从 localStorage 迁移数据 */
+    async function migrateStorage() {
+        try {
+            const hasRunMigration = localStorage.getItem('myCoinMigrated');
+            if (hasRunMigration) return;
+            const savedCollection = localStorage.getItem('myCoinCollection');
+            const savedWishlist = localStorage.getItem('myCoinWishlist');
+            if (savedCollection) {
+                await dbSetAll(STORE_COLLECTED, JSON.parse(savedCollection));
+            }
+            if (savedWishlist) {
+                await dbSetAll(STORE_WISHLIST, JSON.parse(savedWishlist));
+            }
+            localStorage.setItem('myCoinMigrated', '1');
+        } catch (e) {
+            console.warn('IndexedDB 迁移失败，继续使用 localStorage:', e);
+        }
+    }
 
-                    if (isCollected) {
-                        // 如果已收藏，单击不改变状态
-                        // 用户预期双击/长按才能取消已收藏
-                        console.log('请双击或长按来取消收藏');
-                    } else if (isWishlisted) {
-                        // 从想收藏 -> 未收藏
-                        myWishlist = myWishlist.filter(id => id !== coinId);
-                    } else {
-                        // 从未收藏 -> 想收藏
-                        myWishlist.push(coinId);
-                    }
-                    saveCollection();
+    /* ============================================================
+       全局状态
+       ============================================================ */
+    let allCoinsData = [];
+    let myCollection = [];
+    let myWishlist = [];
+    let currentSortOrder = 'desc';
+    let isBackView = false;
+    let searchTimeout = null;
+    let fuseIndex = null; // Fuse.js 索引
+
+    const mainContainer = document.getElementById('main-container');
+    const themeFilter = document.getElementById('themeFilter');
+    const denominationFilter = document.getElementById('denominationFilter');
+    const sizeFilter = document.getElementById('sizeFilter');
+    const metalFilter = document.getElementById('metalFilter');
+    const yearFilter = document.getElementById('yearFilter');
+    const statusFilter = document.getElementById('statusFilter');
+    const clearFiltersBtn = document.getElementById('clearFiltersBtn');
+    const sortOrderToggle = document.getElementById('sortOrderToggle');
+    const saveStatus = document.getElementById('save-status');
+    const searchInput = document.getElementById('searchInput');
+
+    const fabButton = document.getElementById('fabButton');
+    const fabMenu = document.getElementById('fabMenu');
+    const fabContainer = document.getElementById('fabContainer');
+    const exportBtn = document.getElementById('exportBtn');
+
+    const mintConfig = {
+        "上海": { short: "沪", color: "bg-purple-500/40", fullName: "上海造币有限公司" },
+        "沈阳": { short: "沈", color: "bg-red-500/40", fullName: "沈阳造币有限公司" },
+        "南京": { short: "宁", color: "bg-teal-500/40", fullName: "南京造币有限公司" },
+        "成都": { short: "成", color: "bg-orange-500/40", fullName: "成都印钞有限公司" },
+        "北京": { short: "京", color: "bg-indigo-500/40", fullName: "北京印钞有限公司" },
+        "上钞": { short: "沪", color: "bg-fuchsia-500/40", fullName: "上海印钞有限公司" },
+        "西安": { short: "西", color: "bg-emerald-500/40", fullName: "西安印钞有限公司" },
+        "石家庄": { short: "石", color: "bg-amber-500/40", fullName: "石家庄印钞有限公司" },
+        "南昌": { short: "昌", color: "bg-pink-500/40", fullName: "南昌印钞有限公司" },
+        "广州": { short: "穗", color: "bg-cyan-500/40", fullName: "广州印钞有限公司" }
+    };
+
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+
+    /* ============================================================
+       FAB 菜单
+       ============================================================ */
+    function hideMenu() {
+        fabMenu.classList.add('hidden');
+        fabButton.setAttribute('aria-expanded', 'false');
+        const fabIconPath = document.getElementById('fab-icon-path');
+        if (fabIconPath) fabIconPath.setAttribute('d', 'M12 4v16m8-8H4');
+    }
+
+    function showMenu() {
+        fabMenu.classList.remove('hidden');
+        fabButton.setAttribute('aria-expanded', 'true');
+        const fabIconPath = document.getElementById('fab-icon-path');
+        if (fabIconPath) fabIconPath.setAttribute('d', 'M4 12h16');
+    }
+
+    fabButton.addEventListener('click', (e) => {
+        e.stopPropagation();
+        fabMenu.classList.contains('hidden') ? showMenu() : hideMenu();
+    });
+
+    fabMenu.addEventListener('click', (e) => e.stopPropagation());
+
+    function handleDocumentClick(e) {
+        if (!fabContainer.contains(e.target)) hideMenu();
+    }
+    document.addEventListener('click', handleDocumentClick);
+
+    /* ============================================================
+       收藏数据加载与保存（#12 IndexedDB）
+       ============================================================ */
+    async function loadCollection() {
+        await migrateStorage();
+        try {
+            myCollection = await dbGetAll(STORE_COLLECTED);
+            myWishlist = await dbGetAll(STORE_WISHLIST);
+        } catch (e) {
+            console.error('加载收藏数据失败:', e);
+            myCollection = [];
+            myWishlist = [];
+        }
+    }
+
+    async function saveCollection() {
+        try {
+            await Promise.all([
+                dbSetAll(STORE_COLLECTED, myCollection),
+                dbSetAll(STORE_WISHLIST, myWishlist)
+            ]);
+            saveStatus.style.opacity = '1';
+            setTimeout(() => { saveStatus.style.opacity = '0'; }, 2000);
+        } catch (e) {
+            console.error('保存收藏数据失败:', e);
+        }
+    }
+
+    /* ============================================================
+       导出/导入
+       ============================================================ */
+    exportBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        document.removeEventListener('click', handleDocumentClick);
+        const data = { collected: myCollection, wishlist: myWishlist };
+        const blob = new Blob([JSON.stringify(data)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `coin_collection_backup_${new Date().toISOString().slice(0, 10)}.json`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        setTimeout(() => { document.addEventListener('click', handleDocumentClick); }, 50);
+    });
+
+    document.getElementById('importFile').addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = async (event) => {
+            try {
+                const importedData = JSON.parse(event.target.result);
+                if (importedData.collected && importedData.wishlist) {
+                    myCollection = importedData.collected;
+                    myWishlist = importedData.wishlist;
+                    await saveCollection();
                     renderUI();
                     updateCollectionOverview();
-                    clickCount = 0;
-                }, 300); // 300毫秒内没有第二次点击则执行单击逻辑
-            } else if (clickCount === 2) {
-                // 双击逻辑: 在未收藏和已收藏之间切换
-                clearTimeout(clickTimer);
+                    alert('数据导入成功！');
+                } else {
+                    throw new Error('导入的文件格式不正确');
+                }
+            } catch (error) {
+                console.error('导入失败:', error);
+                alert('导入失败，请确保文件是有效的JSON格式。');
+            }
+        };
+        reader.readAsText(file);
+    });
+
+    /* ============================================================
+       交互函数（双击/长按）
+       ============================================================ */
+    let clickTimer = null;
+    let clickCount = 0;
+
+    function handleCoinCardClick(coinId) {
+        clickCount++;
+        if (clickCount === 1) {
+            clickTimer = setTimeout(() => {
                 const isCollected = myCollection.includes(coinId);
                 const isWishlisted = myWishlist.includes(coinId);
-                
                 if (isCollected) {
-                    // 从已收藏 -> 未收藏
-                    myCollection = myCollection.filter(id => id !== coinId);
+                    // 已收藏时单击不改变状态
+                } else if (isWishlisted) {
+                    myWishlist = myWishlist.filter(id => id !== coinId);
                 } else {
-                    // 从未收藏 -> 已收藏
-                    if (isWishlisted) {
-                        // 如果在想收藏列表中，先移除
-                        myWishlist = myWishlist.filter(id => id !== coinId);
-                    }
-                    myCollection.push(coinId);
+                    myWishlist.push(coinId);
                 }
                 saveCollection();
                 renderUI();
                 updateCollectionOverview();
                 clickCount = 0;
-            }
-        }
-
-        // 移动端长按事件
-        let pressTimer;
-        function handleTouchStart(e, coinId) {
-            pressTimer = setTimeout(() => {
-                // 长按逻辑同双击
-                const isCollected = myCollection.includes(coinId);
-                const isWishlisted = myWishlist.includes(coinId);
-                
-                if (isCollected) {
-                    myCollection = myCollection.filter(id => id !== coinId);
-                } else {
-                    if (isWishlisted) {
-                        myWishlist = myWishlist.filter(id => id !== coinId);
-                    }
-                    myCollection.push(coinId);
-                }
-                saveCollection();
-                renderUI();
-                updateCollectionOverview();
-                e.preventDefault(); // 阻止默认的上下文菜单弹出
-            }, 500); // 500毫秒触发长按
-        }
-
-        function handleTouchEnd() {
-            clearTimeout(pressTimer);
-        }
-        
-        // 5. 渲染 UI - 需要更新卡片样式和事件监听
-        function renderUI() {
-            const mainContainer = document.getElementById('main-container');
-            const selectedTheme = decodeURIComponent(themeFilter.value);
-            const selectedDenomination = denominationFilter.value;
-            const selectedSize = sizeFilter.value;
-            const selectedMetal = metalFilter.value;
-            const selectedYear = yearFilter.value;
-            const selectedStatus = statusFilter.value;
-            const searchTerm = searchInput.value.toLowerCase().trim();
-
-            // 1. 给容器添加淡出效果
-            mainContainer.classList.add('fade-out');
-
-            // 2. 使用延时来等待淡出动画完成
-            setTimeout(() => {
-                // 筛选纪念币
-                let filteredCoins = allCoinsData.filter(coin => {
-                    const matchesTheme = selectedTheme === '' || coin.theme === selectedTheme;
-                    const matchesDenomination = selectedDenomination === '' || coin.denomination === selectedDenomination;
-                    const matchesSize = selectedSize === '' || coin.size === selectedSize;
-                    const matchesMetal = selectedMetal === '' || coin.metal === selectedMetal;
-                    const matchesYear = selectedYear === '' || coin.year.toString() === selectedYear;
-                    const matchesSearch = searchTerm === '' || coin.name.toLowerCase().includes(searchTerm);
-
-                    // 新增的收藏状态筛选逻辑
-                    let matchesStatus = true;
-                    if (selectedStatus === 'collected') {
-                        matchesStatus = myCollection.includes(coin.id);
-                    } else if (selectedStatus === 'wishlist') {
-                        matchesStatus = myWishlist.includes(coin.id);
-                    } else if (selectedStatus === 'uncollected') {
-                        matchesStatus = !myCollection.includes(coin.id) && !myWishlist.includes(coin.id);
-                    }
-
-                    return matchesTheme && matchesDenomination && matchesSize && matchesMetal && matchesYear && matchesSearch && matchesStatus;
-                });
-                
-                // 按年份分组
-                const groupedCoins = filteredCoins.reduce((acc, coin) => {
-                    const year = coin.year;
-                    if (!acc[year]) {
-                        acc[year] = [];
-                    }
-                    acc[year].push(coin);
-                    return acc;
-                }, {});
-
-                // 排序年份
-                const sortedYears = Object.keys(groupedCoins).sort((a, b) => currentSortOrder === 'desc' ? b - a : a - b);
-
-                // 清空容器准备渲染
-                mainContainer.innerHTML = '';
-
-                if (Object.keys(groupedCoins).length === 0) {
-                    let emptyMessage = '没有找到符合条件的纪念币';
-                    if (searchTerm) {
-                        emptyMessage = `没有找到包含"${searchTerm}"的纪念币`;
-                    }
-                    mainContainer.innerHTML = `<p class="text-center text-gray-500 text-xl mt-10">${emptyMessage}</p>`;
-                } else {
-                    // 渲染每个年份组
-                    sortedYears.forEach(year => {
-                        const yearSection = document.createElement('div');
-                        yearSection.className = 'my-8';
-                        yearSection.innerHTML = `
-                            <h2 class="text-xl font-bold mb-4 text-center md:text-left">${year}年</h2>
-                            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 justify-center"></div>
-                        `;
-                        const coinGrid = yearSection.querySelector('div.grid');
-
-                        groupedCoins[year].reverse();
-                        groupedCoins[year].forEach(coin => {
-                            const isCollected = myCollection.includes(coin.id);
-                            const isWishlisted = myWishlist.includes(coin.id);
-                            
-                            const coinCard = document.createElement('div');
-                            let cardStateClass = '';
-                            let imgClass = 'grayscale';
-                            
-                            if (isCollected) {
-                                cardStateClass = 'collected';
-                                imgClass = 'filter-none'; // 已收藏：图片彩色
-                            } else if (isWishlisted) {
-                                cardStateClass = 'wishlist';
-                                imgClass = 'grayscale'; // 想收藏：图片保持黑白
-                            }
-
-                            const frontImageClass = isBackView ? 'hidden' : '';
-                            const backImageClass = isBackView ? '' : 'hidden';
-
-                            coinCard.className = `coin-card flex flex-col items-center p-4 bg-gray-100 rounded-xl shadow-lg transform transition-transform duration-300 hover:scale-105 cursor-pointer relative ${cardStateClass}`;
-                            coinCard.setAttribute('data-coin-id', coin.id);
-
-                            let mintBadgesHTML = '';
-                            if (coin.mints && Array.isArray(coin.mints) && coin.mints.length > 0) {
-                                    mintBadgesHTML = `<div class="absolute bottom-2 left-2 z-20 flex flex-row gap-1">`;
-
-                                    coin.mints.forEach(mintName => {
-                                    const config = mintConfig[mintName] || { short: "厂", color: "bg-gray-400", fullName: mintName };
-                                    mintBadgesHTML += `
-                                        <div class="${config.color} w-6 h-6 rounded-full flex items-center justify-center text-white text-[10px] font-bold border border-white/40 backdrop-blur-[2px] shadow-sm">
-                                            ${config.short}
-                                        </div>
-                                    `;
-                                });
-
-                                mintBadgesHTML += `</div>`;
-                            }                   
-
-                            coinCard.innerHTML = `
-                                <div class="relative w-full aspect-square">
-                                    ${mintBadgesHTML}
-
-                                    <img 
-                                        src="${coin.imageUrl}" 
-                                        alt="${coin.name}正面" 
-                                        class="front-image absolute top-0 left-0 w-full h-full object-contain rounded-lg ${imgClass} transition-all duration-500 ease-in-out ${frontImageClass}" 
-                                        loading="lazy"
-                                        onerror="this.onerror=null;this.src='https://placehold.co/300x300/F0F0F0/888888?text=图片未找到'">
-                                    <img 
-                                        src="${coin.imageUrl2}" 
-                                        alt="${coin.name}背面" 
-                                        class="back-image absolute top-0 left-0 w-full h-full object-contain rounded-lg ${imgClass} transition-all duration-500 ease-in-out ${backImageClass}"
-                                        loading="lazy"
-                                        onerror="this.onerror=null;this.src='https://placehold.co/300x300/F0F0F0/888888?text=图片未找到'">
-                                    <div class="coin-check-icon absolute top-2 right-2 bg-green-500 text-white w-8 h-8 rounded-full flex items-center justify-center text-xl opacity-0 transition-opacity duration-300">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                                            <polyline points="20 6 9 17 4 12" />
-                                        </svg>
-                                    </div>
-                                    <div class="coin-wish-icon absolute top-2 right-2 bg-amber-400 text-white w-8 h-8 rounded-full flex items-center justify-center text-xl opacity-0 transition-opacity duration-300">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" stroke="none">
-                                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                        </svg>
-                                    </div>
-                                </div>
-                                <div class="mt-4 text-center">
-                                    <p class="font-semibold text-sm">${coin.name}</p>
-                                    <p class="text-[12px] text-gray-500">${coin.denomination} • ${coin.size} • ${coin.metal}</p>
-                                </div>
-                            `;
-                            coinGrid.appendChild(coinCard);
-
-                            // 修改事件监听器
-                            coinCard.addEventListener('click', (e) => handleCoinCardClick(coin.id));
-                            coinCard.addEventListener('touchend', handleTouchEnd);
-                            coinCard.addEventListener('touchstart', (e) => handleTouchStart(e, coin.id));
-                        });
-                        mainContainer.appendChild(yearSection);
-                    });
-                }
-                
-                // 3. 移除淡出效果并添加淡入效果
-                mainContainer.classList.remove('fade-out');
-                mainContainer.classList.add('fade-in');
-                
-            }, 300); // 延时时间与 CSS 过渡时间一致
-        }
-        
-        // 6. 更新概览 - 需要同时统计已收藏和想收藏
-        function updateCollectionOverview() {
-            const totalCoins = allCoinsData.length;
-            const collectedCoinsCount = myCollection.length;
-            const wishlistCoinsCount = myWishlist.length;
-            // 计算“已收藏”的百分比
-            const collectedRate = totalCoins > 0 ? (collectedCoinsCount / totalCoins) * 100 : 0;
-            // 计算“想收藏”的百分比 (包括已收藏)
-            const totalGoalRate = totalCoins > 0 ? ((collectedCoinsCount + wishlistCoinsCount) / totalCoins) * 100 : 0;
-            
-            document.getElementById('overviewCount').innerHTML = `
-                已收藏 <span style="color: #22C55E;">${collectedCoinsCount}</span> / 
-                想收藏 <span style="color: #FBBF24;">${wishlistCoinsCount}</span> / 
-                总数 ${totalCoins} 枚
-            `;
-
-            // 更新“已收藏”进度条的宽度 (蓝色)
-            document.getElementById('collectedProgressBar').style.width = `${collectedRate}%`;
-            // 更新“想收藏”进度条的宽度 (琥珀色)
-            document.getElementById('wishlistProgressBar').style.width = `${totalGoalRate}%`;
-
-            const themesData = {};
-            allCoinsData.forEach(coin => {
-                if (!themesData[coin.theme]) {
-                    themesData[coin.theme] = { total: 0, collected: 0, wishlisted: 0 };
-                }
-                themesData[coin.theme].total++;
-                if (myCollection.includes(coin.id)) {
-                    themesData[coin.theme].collected++;
-                }
-                if (myWishlist.includes(coin.id)) {
-                    themesData[coin.theme].wishlisted++;
-                }
-            });
-            
-            const themeStatsContainer = document.getElementById('themeStats');
-            themeStatsContainer.innerHTML = '';
-            
-            Object.entries(themesData)
-                .sort((a, b) => b[1].collected / b[1].total - a[1].collected / a[1].total)
-                .forEach(([theme, stats]) => {
-                    const collectedRate = (stats.collected / stats.total) * 100;
-                    const totalGoalRate = ((stats.collected + stats.wishlisted) / stats.total) * 100;
-                    
-                    const statButton = document.createElement('button');
-                    statButton.className = 'w-full text-left p-0 rounded-xl hover:bg-gray-200 transition-colors duration-200';
-                    statButton.innerHTML = `
-                        <div class="flex justify-between items-center mb-1">
-                            <span class="text-sm text-gray-700 font-medium">${theme}</span>
-                            <span class="text-xs font-medium text-gray-500"><span style="color: #22C55E;">${stats.collected}</span>/<span style="color: #FBBF24;">${stats.wishlisted}</span>/${stats.total} </span>
-                        </div>
-                        <div class="progress-container">
-                            <div class="progress-bar wishlist" style="width: ${totalGoalRate}%;"></div>
-                            <div class="progress-bar collected" style="width: ${collectedRate}%;"></div>
-                        </div>                        
-                    `;
-
-                    statButton.addEventListener('click', () => {
-                        themeFilter.value = encodeURIComponent(theme);
-                        renderUI();
-                        toggleOverview(); 
-                    });
-
-                    const statItem = document.createElement('li');
-                    statItem.appendChild(statButton);
-                    themeStatsContainer.appendChild(statItem);
-                });
-            
-            const yearsData = {};
-            allCoinsData.forEach(coin => {
-                if (!yearsData[coin.year]) {
-                    yearsData[coin.year] = { total: 0, collected: 0, wishlisted: 0 };
-                }
-                yearsData[coin.year].total++;
-                if (myCollection.includes(coin.id)) {
-                    yearsData[coin.year].collected++;
-                }
-                if (myWishlist.includes(coin.id)) {
-                    yearsData[coin.year].wishlisted++;
-                }
-            });
-            
-            const yearStatsContainer = document.getElementById('yearStats');
-            yearStatsContainer.innerHTML = '';
-            
-            Object.entries(yearsData)
-                .sort((a, b) => parseInt(b[0]) - parseInt(a[0]))
-                .forEach(([year, stats]) => {
-                    const collectedRate = (stats.collected / stats.total) * 100;
-                    const totalGoalRate = ((stats.collected + stats.wishlisted) / stats.total) * 100;
-
-                    const statButton = document.createElement('button');
-                    statButton.className = 'w-full text-left p-0 rounded-xl hover:bg-gray-200 transition-colors duration-200';
-                    statButton.innerHTML = `
-                        <div class="flex justify-between items-center mb-1">
-                            <span class="text-sm text-gray-700 font-medium">${year}年</span>
-                            <span class="text-xs font-medium text-gray-500"><span style="color: #22C55E;">${stats.collected}</span>/<span style="color: #FBBF24;">${stats.wishlisted}</span>/${stats.total} </span>
-                        </div>
-                        <div class="progress-container">
-                            <div class="progress-bar wishlist" style="width: ${totalGoalRate}%;"></div>
-                            <div class="progress-bar collected" style="width: ${collectedRate}%;"></div>
-                        </div>
-                    `;
-
-                    statButton.addEventListener('click', () => {
-                        yearFilter.value = year;
-                        renderUI();
-                        toggleOverview(); 
-                    });
-
-                    const statItem = document.createElement('li');
-                    statItem.appendChild(statButton);
-                    yearStatsContainer.appendChild(statItem);
-                });
-        }
-
-        function clearFilters() {
-            themeFilter.value = '';
-            denominationFilter.value = '';
-            sizeFilter.value = '';
-            metalFilter.value = '';
-            yearFilter.value = '';
-            searchInput.value = '';
-            statusFilter.value = '';
-            renderUI();
-        }
-        
-        function toggleOverview() {
-            const overviewElement = document.getElementById('collectionOverview');
-            const toggleIcon = document.getElementById('toggle-icon');
-
-            overviewElement.classList.toggle('expanded');
-            
-            if (overviewElement.classList.contains('expanded')) {
-                toggleIcon.style.transform = 'rotate(180deg)'; 
+            }, 300);
+        } else if (clickCount === 2) {
+            clearTimeout(clickTimer);
+            const isCollected = myCollection.includes(coinId);
+            const isWishlisted = myWishlist.includes(coinId);
+            if (isCollected) {
+                myCollection = myCollection.filter(id => id !== coinId);
             } else {
-                toggleIcon.style.transform = 'rotate(0deg)'; 
+                if (isWishlisted) myWishlist = myWishlist.filter(id => id !== coinId);
+                myCollection.push(coinId);
             }
+            saveCollection();
+            renderUI();
+            updateCollectionOverview();
+            clickCount = 0;
         }
-        
-        async function loadData(url) {
-            try {
-                const response = await fetch(url);
-                if (!response.ok) {
-                    throw new Error(`网络请求失败，状态码: ${response.status}`);
-                }
-                const data = await response.json();
-                return data;
-            } catch (error) {
-                console.error('加载数据时出错:', error);
-                throw error; 
+    }
+
+    let pressTimer;
+    function handleTouchStart(e, coinId) {
+        pressTimer = setTimeout(() => {
+            const isCollected = myCollection.includes(coinId);
+            const isWishlisted = myWishlist.includes(coinId);
+            if (isCollected) {
+                myCollection = myCollection.filter(id => id !== coinId);
+            } else {
+                if (isWishlisted) myWishlist = myWishlist.filter(id => id !== coinId);
+                myCollection.push(coinId);
             }
-        }
+            saveCollection();
+            renderUI();
+            updateCollectionOverview();
+            e.preventDefault();
+        }, 500);
+    }
+    function handleTouchEnd() { clearTimeout(pressTimer); }
 
+    /* ============================================================
+       渲染 UI
+       ============================================================ */
+    function renderUI() {
+        const selectedTheme = decodeURIComponent(themeFilter.value);
+        const selectedDenomination = denominationFilter.value;
+        const selectedSize = sizeFilter.value;
+        const selectedMetal = metalFilter.value;
+        const selectedYear = yearFilter.value;
+        const selectedStatus = statusFilter.value;
+        const searchTerm = searchInput.value.toLowerCase().trim();
 
+        mainContainer.classList.add('fade-out');
 
-        window.onload = () => {
-            loadData('coin_data.json')
-                .then(data => {
-                    allCoinsData = data;
-                    loadCollection();
-                    populateFilters(allCoinsData);
-                    renderUI();
-                    updateCollectionOverview();
-
-                    document.getElementById('overviewHeader').addEventListener('click', toggleOverview);
-                    document.getElementById('toggle-icon').addEventListener('click', (e) => {
-                        e.stopPropagation();
-                        toggleOverview();
-                    });
-                    clearFiltersBtn.addEventListener('click', clearFilters);
-                })
-                .catch(error => {
-                    console.error('无法初始化应用，因为数据加载失败。');
+        setTimeout(() => {
+            // 筛选逻辑：优先使用 Fuse.js 模糊搜索（#11）
+            let filteredCoins;
+            if (searchTerm && fuseIndex) {
+                const fuseResults = fuseIndex.search(searchTerm);
+                const fuseIds = new Set(fuseResults.map(r => r.item.id));
+                filteredCoins = allCoinsData.filter(coin => {
+                    if (!fuseIds.has(coin.id)) return false;
+                    return matchesFilters(coin, selectedTheme, selectedDenomination, selectedSize, selectedMetal, selectedYear, selectedStatus);
                 });
-        };
+            } else {
+                filteredCoins = allCoinsData.filter(coin =>
+                    matchesFilters(coin, selectedTheme, selectedDenomination, selectedSize, selectedMetal, selectedYear, selectedStatus, searchTerm)
+                );
+            }
 
-        // 发送邮件功能
-        const sendEmailBtn = document.getElementById('sendEmailBtn');
-        if (sendEmailBtn) {
-            sendEmailBtn.addEventListener('click', (e) => {
-                e.stopPropagation(); // 阻止冒泡防止菜单意外关闭
-                const email = "theluojia@qq.com";
-                const subject = encodeURIComponent("我的纪念币收藏网站-交流");
-                // 使用 mailto 协议唤起系统默认邮件客户端
-                window.location.href = `mailto:${email}?subject=${subject}`;
-            });
-        }
+            // 按年份分组
+            const groupedCoins = filteredCoins.reduce((acc, coin) => {
+                const year = coin.year;
+                if (!acc[year]) acc[year] = [];
+                acc[year].push(coin);
+                return acc;
+            }, {});
 
-        // 填充筛选下拉菜单
-        function populateFilters(coins) {
-            const themes = [...new Set(coins.map(coin => coin.theme))].sort();
-            const denominations = [...new Set(coins.map(coin => coin.denomination))].sort();
-            const sizes = [...new Set(coins.map(coin => coin.size))].sort((a, b) => parseInt(a) - parseInt(b));
-            const metals = [...new Set(coins.map(coin => coin.metal))].sort();
-            const years = [...new Set(coins.map(coin => coin.year))].sort((a, b) => b - a);
+            const sortedYears = Object.keys(groupedCoins).sort((a, b) => currentSortOrder === 'desc' ? b - a : a - b);
+            mainContainer.innerHTML = '';
 
-            themeFilter.innerHTML = '<option value="">所有主题</option>' + themes.map(t => `<option value="${encodeURIComponent(t)}">${t}</option>`).join('');
-            denominationFilter.innerHTML = '<option value="">所有面额</option>' + denominations.map(d => `<option value="${d}">${d}</option>`).join('');
-            sizeFilter.innerHTML = '<option value="">所有大小</option>' + sizes.map(s => `<option value="${s}">${s}</option>`).join('');
-            metalFilter.innerHTML = '<option value="">所有材质</option>' + metals.map(m => `<option value="${m}">${m}</option>`).join('');
-            yearFilter.innerHTML = '<option value="">所有年份</option>' + years.map(y => `<option value="${y}">${y}年</option>`).join('');
+            if (sortedYears.length === 0) {
+                let emptyMessage = searchTerm ? `没有找到包含"${searchTerm}"的纪念币` : '没有找到符合条件的纪念币';
+                mainContainer.innerHTML = `<p class="text-center text-gray-500 text-xl mt-10">${emptyMessage}</p>`;
+            } else {
+                sortedYears.forEach(year => {
+                    const yearSection = document.createElement('div');
+                    yearSection.className = 'my-8';
+                    yearSection.innerHTML = `
+                        <h2 class="text-xl font-bold mb-4 text-center md:text-left">${year}年</h2>
+                        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 justify-center"></div>
+                    `;
+                    const coinGrid = yearSection.querySelector('div.grid');
 
-            themeFilter.addEventListener('change', renderUI);
-            denominationFilter.addEventListener('change', renderUI);
-            sizeFilter.addEventListener('change', renderUI);
-            metalFilter.addEventListener('change', renderUI);
-            yearFilter.addEventListener('change', renderUI);
-            statusFilter.addEventListener('change', renderUI);
-            
-            sortOrderToggle.addEventListener('click', () => {
-                currentSortOrder = currentSortOrder === 'desc' ? 'asc' : 'desc';
-                sortOrderToggle.innerHTML = currentSortOrder === 'desc' ? 
-                `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 15 15" fill="none">
-                    <path d="M11.5 0.5H12C12 0.223858 11.7761 0 11.5 0V0.5ZM4.5 0.5L4.85355 0.146447C4.65829 -0.0488155 4.34171 -0.0488155 4.14645 0.146447L4.5 0.5ZM10 1H11.5V0H10V1ZM11 0.5V6.5H12V0.5H11ZM10 7H13V6H10V7ZM11.578 8H11V9H11.578V8ZM12.9743 11.6581L13.3665 10.4815L12.4179 10.1653L12.0257 11.3419L12.9743 11.6581ZM11 12H12.5V11H11V12ZM11.9743 14.6581L12.9743 11.6581L12.0257 11.3419L11.0257 14.3419L11.9743 14.6581ZM9 10C9 11.1046 9.89543 12 11 12V11C10.4477 11 10 10.5523 10 10H9ZM11 8C9.89543 8 9 8.89543 9 10H10C10 9.44772 10.4477 9 11 9V8ZM11.578 9C12.1823 9 12.609 9.59201 12.4179 10.1653L13.3665 10.4815C13.7735 9.26071 12.8648 8 11.578 8V9ZM4.14645 0.146447L1.14645 3.14645L1.85355 3.85355L4.85355 0.853553L4.14645 0.146447ZM4.14645 0.853553L7.14645 3.85355L7.85355 3.14645L4.85355 0.146447L4.14645 0.853553ZM4 0.5V15H5V0.5H4Z" fill="currentColor"/>
-                </svg>` : 
-                `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 15 15" fill="none">
-                    <path d="M11.5 0.5H12C12 0.223858 11.7761 0 11.5 0V0.5ZM12.5 11.5L12.9743 11.6581L12.5 11.5ZM12.9819 10.0543L12.5076 9.89614L12.9819 10.0543ZM4.5 14.5L4.14645 14.8536C4.24021 14.9473 4.36739 15 4.5 15C4.63261 15 4.75978 14.9473 4.85355 14.8536L4.5 14.5ZM10 1H11.5V0H10V1ZM11 0.5V6.5H12V0.5H11ZM10 7H13V6H10V7ZM11.8617 8H11V9H11.8617V8ZM12.9743 11.6581L13.4563 10.2124L12.5076 9.89614L12.0257 11.3419L12.9743 11.6581ZM11 12H12.5V11H11V12ZM11.9743 14.6581L12.9743 11.6581L12.0257 11.3419L11.0257 14.3419L11.9743 14.6581ZM9 10C9 11.1046 9.89543 12 11 12V11C10.4477 11 10 10.5523 10 10H9ZM11 8C9.89543 8 9 8.89543 9 10H10C10 9.44772 10.4477 9 11 9V8ZM11.8617 9C12.3264 9 12.6545 9.45527 12.5076 9.89614L13.4563 10.2124C13.8191 9.12397 13.0089 8 11.8617 8V9ZM4.85355 14.8536L7.85355 11.8536L7.14645 11.1464L4.14645 14.1464L4.85355 14.8536ZM4.85355 14.1464L1.85355 11.1464L1.14645 11.8536L4.14645 14.8536L4.85355 14.1464ZM4 0V14.5H5V0H4Z" fill="currentColor"/>
-                </svg>`;
-                renderUI();
-            });
-            
-            searchInput.addEventListener('input', debounce(renderUI));
-        }
+                    groupedCoins[year].reverse();
+                    groupedCoins[year].forEach(coin => {
+                        const isCollected = myCollection.includes(coin.id);
+                        const isWishlisted = myWishlist.includes(coin.id);
 
-        function debounce(func, delay = 300) {
-            let timeout;
-            return function(...args) {
-                const context = this;
-                clearTimeout(timeout);
-                timeout = setTimeout(() => func.apply(context, args), delay);
-            };
-        }
+                        const cardStateClass = isCollected ? 'collected' : (isWishlisted ? 'wishlist' : '');
+                        const imgClass = isCollected ? 'filter-none' : 'grayscale';
+                        const frontImageClass = isBackView ? 'hidden' : '';
+                        const backImageClass = isBackView ? '' : 'hidden';
 
-        const toggleImageView = document.getElementById('toggleImageView');
+                        const coinCard = document.createElement('div');
+                        coinCard.className = `coin-card flex flex-col items-center p-4 bg-gray-100 rounded-xl shadow-lg transform transition-transform duration-300 hover:scale-105 cursor-pointer relative ${cardStateClass}`;
+                        coinCard.setAttribute('data-coin-id', coin.id);
+                        coinCard.setAttribute('role', 'article');
+                        coinCard.setAttribute('aria-label', `${coin.name}，${coin.year}年，${coin.denomination}`);
+                        coinCard.setAttribute('tabindex', '0');
 
-        toggleImageView.addEventListener('click', function() {
-            isBackView = !isBackView; // 切换状态
-            renderUI(); // 重新渲染页面
+                        // 造币厂徽章
+                        let mintBadgesHTML = '';
+                        if (coin.mints && coin.mints.length > 0) {
+                            mintBadgesHTML = '<div class="absolute bottom-2 left-2 z-20 flex flex-row gap-1">';
+                            coin.mints.forEach(mintName => {
+                                const config = mintConfig[mintName] || { short: "厂", color: "bg-gray-400", fullName: mintName };
+                                mintBadgesHTML += `
+                                    <div class="${config.color} w-6 h-6 rounded-full flex items-center justify-center text-white text-[10px] font-bold border border-white/40 backdrop-blur-[2px] shadow-sm" title="${config.fullName}">
+                                        ${config.short}
+                                    </div>`;
+                            });
+                            mintBadgesHTML += '</div>';
+                        }
+
+                        coinCard.innerHTML = `
+                            <div class="relative w-full aspect-square">
+                                ${mintBadgesHTML}
+                                <img
+                                    src="${coin.imageUrl}"
+                                    alt="${coin.name}正面"
+                                    class="front-image absolute top-0 left-0 w-full h-full object-contain rounded-lg ${imgClass} transition-all duration-500 ease-in-out ${frontImageClass}"
+                                    loading="lazy"
+                                    decoding="async"
+                                    onerror="this.onerror=null;this.src='https://placehold.co/300x300/F0F0F0/888888?text=图片加载失败'">
+                                <img
+                                    src="${coin.imageUrl2}"
+                                    alt="${coin.name}背面"
+                                    class="back-image absolute top-0 left-0 w-full h-full object-contain rounded-lg ${imgClass} transition-all duration-500 ease-in-out ${backImageClass}"
+                                    loading="lazy"
+                                    decoding="async"
+                                    onerror="this.onerror=null;this.src='https://placehold.co/300x300/F0F0F0/888888?text=图片加载失败'">
+                                <div class="coin-check-icon absolute top-2 right-2 bg-green-500 text-white w-8 h-8 rounded-full flex items-center justify-center text-xl opacity-0 transition-opacity duration-300" aria-hidden="true">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
+                                </div>
+                                <div class="coin-wish-icon absolute top-2 right-2 bg-amber-400 text-white w-8 h-8 rounded-full flex items-center justify-center text-xl opacity-0 transition-opacity duration-300" aria-hidden="true">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                                </div>
+                            </div>
+                            <div class="mt-4 text-center">
+                                <p class="font-semibold text-sm">${coin.name}</p>
+                                <p class="text-[12px] text-gray-500">${coin.denomination} &bull; ${coin.size} &bull; ${coin.metal}</p>
+                            </div>`;
+
+                        coinGrid.appendChild(coinCard);
+                        coinCard.addEventListener('click', () => handleCoinCardClick(coin.id));
+                        coinCard.addEventListener('touchend', handleTouchEnd);
+                        coinCard.addEventListener('touchstart', (e) => handleTouchStart(e, coin.id));
+                        // 键盘交互（#7 无障碍）
+                        coinCard.addEventListener('keydown', (e) => {
+                            if (e.key === 'Enter' || e.key === ' ') {
+                                e.preventDefault();
+                                handleCoinCardClick(coin.id);
+                            }
+                        });
+                    });
+                    mainContainer.appendChild(yearSection);
+                });
+            }
+
+            mainContainer.classList.remove('fade-out');
+            mainContainer.classList.add('fade-in');
+        }, 300);
+    }
+
+    function matchesFilters(coin, theme, denom, size, metal, year, status, searchTerm) {
+        if (theme && coin.theme !== theme) return false;
+        if (denom && coin.denomination !== denom) return false;
+        if (size && coin.size !== size) return false;
+        if (metal && coin.metal !== metal) return false;
+        if (year && coin.year.toString() !== year) return false;
+        if (searchTerm && !coin.name.toLowerCase().includes(searchTerm)) return false;
+        if (status === 'collected' && !myCollection.includes(coin.id)) return false;
+        if (status === 'wishlist' && !myWishlist.includes(coin.id)) return false;
+        if (status === 'uncollected' && (myCollection.includes(coin.id) || myWishlist.includes(coin.id))) return false;
+        return true;
+    }
+
+    /* ============================================================
+       收藏概览
+       ============================================================ */
+    function updateCollectionOverview() {
+        const totalCoins = allCoinsData.length;
+        const collectedCoinsCount = myCollection.length;
+        const wishlistCoinsCount = myWishlist.length;
+        const collectedRate = totalCoins > 0 ? (collectedCoinsCount / totalCoins) * 100 : 0;
+        const totalGoalRate = totalCoins > 0 ? ((collectedCoinsCount + wishlistCoinsCount) / totalCoins) * 100 : 0;
+
+        document.getElementById('overviewCount').innerHTML = `已收藏 <span style="color: #22C55E;">${collectedCoinsCount}</span> / 想收藏 <span style="color: #FBBF24;">${wishlistCoinsCount}</span> / 总数 ${totalCoins} 枚`;
+        document.getElementById('collectedProgressBar').style.width = `${collectedRate}%`;
+        document.getElementById('wishlistProgressBar').style.width = `${totalGoalRate}%`;
+
+        // 主题统计
+        const themesData = {};
+        allCoinsData.forEach(coin => {
+            if (!themesData[coin.theme]) themesData[coin.theme] = { total: 0, collected: 0, wishlisted: 0 };
+            themesData[coin.theme].total++;
+            if (myCollection.includes(coin.id)) themesData[coin.theme].collected++;
+            if (myWishlist.includes(coin.id)) themesData[coin.theme].wishlisted++;
         });
+        const themeStatsContainer = document.getElementById('themeStats');
+        themeStatsContainer.innerHTML = '';
+        Object.entries(themesData)
+            .sort((a, b) => b[1].collected / b[1].total - a[1].collected / a[1].total)
+            .forEach(([theme, stats]) => {
+                const cr = (stats.collected / stats.total) * 100;
+                const tr = ((stats.collected + stats.wishlisted) / stats.total) * 100;
+                const statButton = document.createElement('button');
+                statButton.className = 'w-full text-left p-0 rounded-xl hover:bg-gray-200 transition-colors duration-200';
+                statButton.innerHTML = `
+                    <div class="flex justify-between items-center mb-1">
+                        <span class="text-sm text-gray-700 font-medium">${theme}</span>
+                        <span class="text-xs font-medium text-gray-500"><span style="color: #22C55E;">${stats.collected}</span>/<span style="color: #FBBF24;">${stats.wishlisted}</span>/${stats.total}</span>
+                    </div>
+                    <div class="progress-container">
+                        <div class="progress-bar wishlist" style="width: ${tr}%;"></div>
+                        <div class="progress-bar collected" style="width: ${cr}%;"></div>
+                    </div>`;
+                statButton.addEventListener('click', () => {
+                    themeFilter.value = encodeURIComponent(theme);
+                    renderUI();
+                    toggleOverview();
+                });
+                const li = document.createElement('li');
+                li.appendChild(statButton);
+                themeStatsContainer.appendChild(li);
+            });
 
+        // 年份统计
+        const yearsData = {};
+        allCoinsData.forEach(coin => {
+            if (!yearsData[coin.year]) yearsData[coin.year] = { total: 0, collected: 0, wishlisted: 0 };
+            yearsData[coin.year].total++;
+            if (myCollection.includes(coin.id)) yearsData[coin.year].collected++;
+            if (myWishlist.includes(coin.id)) yearsData[coin.year].wishlisted++;
+        });
+        const yearStatsContainer = document.getElementById('yearStats');
+        yearStatsContainer.innerHTML = '';
+        Object.entries(yearsData)
+            .sort((a, b) => parseInt(b[0]) - parseInt(a[0]))
+            .forEach(([year, stats]) => {
+                const cr = (stats.collected / stats.total) * 100;
+                const tr = ((stats.collected + stats.wishlisted) / stats.total) * 100;
+                const statButton = document.createElement('button');
+                statButton.className = 'w-full text-left p-0 rounded-xl hover:bg-gray-200 transition-colors duration-200';
+                statButton.innerHTML = `
+                    <div class="flex justify-between items-center mb-1">
+                        <span class="text-sm text-gray-700 font-medium">${year}年</span>
+                        <span class="text-xs font-medium text-gray-500"><span style="color: #22C55E;">${stats.collected}</span>/<span style="color: #FBBF24;">${stats.wishlisted}</span>/${stats.total}</span>
+                    </div>
+                    <div class="progress-container">
+                        <div class="progress-bar wishlist" style="width: ${tr}%;"></div>
+                        <div class="progress-bar collected" style="width: ${cr}%;"></div>
+                    </div>`;
+                statButton.addEventListener('click', () => {
+                    yearFilter.value = year;
+                    renderUI();
+                    toggleOverview();
+                });
+                const li = document.createElement('li');
+                li.appendChild(statButton);
+                yearStatsContainer.appendChild(li);
+            });
+    }
+
+    function clearFilters() {
+        themeFilter.value = '';
+        denominationFilter.value = '';
+        sizeFilter.value = '';
+        metalFilter.value = '';
+        yearFilter.value = '';
+        searchInput.value = '';
+        statusFilter.value = '';
+        renderUI();
+    }
+
+    function toggleOverview() {
+        const overview = document.getElementById('collectionOverview');
+        const toggleIcon = document.getElementById('toggle-icon');
+        const header = document.getElementById('overviewHeader');
+        overview.classList.toggle('expanded');
+        const expanded = overview.classList.contains('expanded');
+        toggleIcon.style.transform = expanded ? 'rotate(180deg)' : 'rotate(0deg)';
+        header.setAttribute('aria-expanded', expanded.toString());
+    }
+
+    /* ============================================================
+       数据加载 & Fuse.js 模糊搜索初始化（#11）
+       ============================================================ */
+    async function loadData(url) {
+        const response = await fetch(url);
+        if (!response.ok) throw new Error(`网络请求失败: ${response.status}`);
+        return response.json();
+    }
+
+    function initFuse() {
+        if (typeof Fuse !== 'undefined' && allCoinsData.length > 0) {
+            // 注入拼音字段（pinyin-pro）
+            if (typeof pinyinPro !== 'undefined') {
+                const { pinyin } = pinyinPro;
+                allCoinsData.forEach(coin => {
+                    if (!coin.namePinyin) {
+                        coin.namePinyin = pinyin(coin.name, { toneType: 'none', type: 'array' }).join('');
+                    }
+                    if (!coin.themePinyin) {
+                        coin.themePinyin = pinyin(coin.theme, { toneType: 'none', type: 'array' }).join('');
+                    }
+                });
+            }
+            fuseIndex = new Fuse(allCoinsData, {
+                keys: [
+                    { name: 'name', weight: 2 },
+                    { name: 'namePinyin', weight: 1.5 },
+                    { name: 'theme', weight: 1.5 },
+                    { name: 'themePinyin', weight: 1 },
+                    { name: 'id', weight: 1 }
+                ],
+                threshold: 0.3,
+                ignoreLocation: true,
+                includeScore: true
+            });
+        }
+    }
+
+    /* ============================================================
+       矩阵查看器模态框（#13 整合）
+       ============================================================ */
+    const matrixModal = document.getElementById('matrixModal');
+    const matrixModalClose = document.getElementById('matrixModalClose');
+    const matrixApp = document.getElementById('matrixApp');
+    let matrixData = null;
+    let matrixDegree = 0;
+
+    function openMatrixModal() {
+        matrixModal.classList.remove('hidden');
+        matrixModal.style.display = '';
+        document.body.style.overflow = 'hidden';
+        matrixDegree = 0;
+        if (matrixData) renderMatrixCoins(matrixData);
+        matrixModalClose.focus();
+        // Escape 关闭
+        matrixModal.onkeydown = (e) => {
+            if (e.key === 'Escape') closeMatrixModal();
+        };
+    }
+
+    function closeMatrixModal() {
+        matrixModal.classList.add('hidden');
+        matrixModal.style.display = 'none';
+        document.body.style.overflow = '';
+        document.getElementById('openMatrixBtn').focus();
+    }
+
+    matrixModalClose.addEventListener('click', closeMatrixModal);
+    matrixModal.addEventListener('click', (e) => {
+        if (e.target === matrixModal) closeMatrixModal();
+    });
+
+    document.getElementById('openMatrixBtn').addEventListener('click', (e) => {
+        e.stopPropagation();
+        hideMenu();
+        openMatrixModal();
+    });
+
+    // 旋转
+    document.getElementById('matrixRotateBtn').addEventListener('click', () => {
+        matrixDegree += 90;
+        matrixApp.querySelectorAll('.matrix-grid').forEach(m => {
+            m.style.transform = `rotate(${matrixDegree}deg)`;
+        });
+    });
+
+    // 差异分析
+    document.getElementById('matrixAnalysisBtn').addEventListener('click', () => {
+        document.body.classList.toggle('analysis-active');
+    });
+
+    // 试验场
+    document.getElementById('matrixLabGenerate').addEventListener('click', () => {
+        const name = document.getElementById('labName').value;
+        const code = document.getElementById('labCode').value;
+        const mints = [];
+        [1, 2, 3].forEach(i => {
+            const mint = document.getElementById(`mint-${i}`).value.trim();
+            const dataText = document.getElementById(`data-${i}`).value.trim();
+            if (!mint || !dataText) return;
+            try { mints.push({ name: mint, data: JSON.parse(dataText) }); } catch(e) {}
+        });
+        const old = document.getElementById('matrixLabGenerated');
+        if (old) old.innerHTML = '';
+        const container = document.createElement('div');
+        container.id = 'matrixLabGenerated';
+        mints.forEach(() => {});
+        if (mints.length > 0) {
+            container.appendChild(buildMatrixCoin(name, code, mints));
+        }
+        document.getElementById('matrixLabGenerated').replaceWith(container);
+    });
+
+    function createMatrixGrid(data, mintIndex, allMintsData) {
+        const grid = document.createElement('div');
+        grid.className = 'matrix-grid';
+        grid.style.transform = `rotate(${matrixDegree}deg)`;
+        data.forEach((col, colIdx) => {
+            if (col === '') {
+                const gap = document.createElement('div');
+                gap.className = 'matrix-gap-column';
+                grid.appendChild(gap);
+                return;
+            }
+            col.split('').forEach((bit, rowIdx) => {
+                const cell = document.createElement('div');
+                cell.className = 'matrix-cell' + (bit === '1' ? ' black' : '');
+                if (bit === '1' && allMintsData) {
+                    const isCommon = allMintsData.every(m => {
+                        const targetCol = m.data[colIdx];
+                        return targetCol && targetCol[rowIdx] === '1';
+                    });
+                    if (!isCommon) cell.classList.add('diff');
+                }
+                grid.appendChild(cell);
+            });
+        });
+        return grid;
+    }
+
+    function buildMatrixCoin(name, code, mints) {
+        const coin = document.createElement('div');
+        coin.className = 'matrix-coin';
+        coin.innerHTML = `<div class="matrix-coin-header"><h2>${name}</h2><div class="code">${code}</div></div>`;
+        const mintsDiv = document.createElement('div');
+        mintsDiv.className = 'matrix-mints';
+        mints.forEach((m, idx) => {
+            const mintDiv = document.createElement('div');
+            mintDiv.className = 'matrix-mint';
+            mintDiv.dataset.mint = m.name;
+            mintDiv.innerHTML = `<div class="matrix-mint-name">${m.name}</div>`;
+            mintDiv.appendChild(createMatrixGrid(m.data, idx, mints));
+            mintsDiv.appendChild(mintDiv);
+        });
+        coin.appendChild(mintsDiv);
+        return coin;
+    }
+
+    function renderMatrixCoins(coins) {
+        matrixApp.innerHTML = '';
+        coins.forEach(coin => {
+            matrixApp.appendChild(buildMatrixCoin(coin.name, coin.code, coin.mints));
+        });
+    }
+
+    // 加载矩阵数据
+    fetch('matrix.json')
+        .then(res => res.json())
+        .then(data => { matrixData = data.coins; })
+        .catch(() => console.log('矩阵数据加载失败'));
+
+    /* ============================================================
+       其他事件
+       ============================================================ */
+    document.getElementById('sendEmailBtn').addEventListener('click', (e) => {
+        e.stopPropagation();
+        hideMenu();
+        window.location.href = `mailto:theluojia@qq.com?subject=${encodeURIComponent('我的纪念币收藏网站-交流')}`;
+    });
+
+    document.getElementById('toggleImageView').addEventListener('click', () => {
+        isBackView = !isBackView;
+        renderUI();
+    });
+
+    sortOrderToggle.addEventListener('click', () => {
+        currentSortOrder = currentSortOrder === 'desc' ? 'asc' : 'desc';
+        sortOrderToggle.innerHTML = currentSortOrder === 'desc'
+            ? `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 15 15" fill="none" aria-hidden="true"><path d="M11.5 0.5H12C12 0.223858 11.7761 0 11.5 0V0.5ZM4.5 0.5L4.85355 0.146447C4.65829 -0.0488155 4.34171 -0.0488155 4.14645 0.146447L4.5 0.5ZM10 1H11.5V0H10V1ZM11 0.5V6.5H12V0.5H11ZM10 7H13V6H10V7ZM11.578 8H11V9H11.578V8ZM12.9743 11.6581L13.3665 10.4815L12.4179 10.1653L12.0257 11.3419L12.9743 11.6581ZM11 12H12.5V11H11V12ZM11.9743 14.6581L12.9743 11.6581L12.0257 11.3419L11.0257 14.3419L11.9743 14.6581ZM9 10C9 11.1046 9.89543 12 11 12V11C10.4477 11 10 10.5523 10 10H9ZM11 8C9.89543 8 9 8.89543 9 10H10C10 9.44772 10.4477 9 11 9V8ZM11.578 9C12.1823 9 12.609 9.59201 12.4179 10.1653L13.3665 10.4815C13.7735 9.26071 12.8648 8 11.578 8V9ZM4.14645 0.146447L1.14645 3.14645L1.85355 3.85355L4.85355 0.853553L4.14645 0.146447ZM4.14645 0.853553L7.14645 3.85355L7.85355 3.14645L4.85355 0.146447L4.14645 0.853553ZM4 0.5V15H5V0.5H4Z" fill="currentColor"/></svg>`
+            : `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 15 15" fill="none" aria-hidden="true"><path d="M11.5 0.5H12C12 0.223858 11.7761 0 11.5 0V0.5ZM12.5 11.5L12.9743 11.6581L12.5 11.5ZM12.9819 10.0543L12.5076 9.89614L12.9819 10.0543ZM4.5 14.5L4.14645 14.8536C4.24021 14.9473 4.36739 15 4.5 15C4.63261 15 4.75978 14.9473 4.85355 14.8536L4.5 14.5ZM10 1H11.5V0H10V1ZM11 0.5V6.5H12V0.5H11ZM10 7H13V6H10V7ZM11.8617 8H11V9H11.8617V8ZM12.9743 11.6581L13.4563 10.2124L12.5076 9.89614L12.0257 11.3419L12.9743 11.6581ZM11 12H12.5V11H11V12ZM11.9743 14.6581L12.9743 11.6581L12.0257 11.3419L11.0257 14.3419L11.9743 14.6581ZM9 10C9 11.1046 9.89543 12 11 12V11C10.4477 11 10 10.5523 10 10H9ZM11 8C9.89543 8 9 8.89543 9 10H10C10 9.44772 10.4477 9 11 9V8ZM11.8617 9C12.3264 9 12.6545 9.45527 12.5076 9.89614L13.4563 10.2124C13.8191 9.12397 13.0089 8 11.8617 8V9ZM4.85355 14.8536L7.85355 11.8536L7.14645 11.1464L4.14645 14.1464L4.85355 14.8536ZM4.85355 14.1464L1.85355 11.1464L1.14645 11.8536L4.14645 14.8536L4.85355 14.1464ZM4 0V14.5H5V0H4Z" fill="currentColor"/></svg>`;
+        renderUI();
+    });
+
+    function debounce(func, delay = 300) {
+        let timeout;
+        return function(...args) {
+            const context = this;
+            clearTimeout(timeout);
+            timeout = setTimeout(() => func.apply(context, args), delay);
+        };
+    }
+
+    function populateFilters(coins) {
+        const themes = [...new Set(coins.map(coin => coin.theme))].sort();
+        const denominations = [...new Set(coins.map(coin => coin.denomination))].sort();
+        const sizes = [...new Set(coins.map(coin => coin.size))].sort((a, b) => parseInt(a) - parseInt(b));
+        const metals = [...new Set(coins.map(coin => coin.metal))].sort();
+        const years = [...new Set(coins.map(coin => coin.year))].sort((a, b) => b - a);
+
+        themeFilter.innerHTML = '<option value="">所有主题</option>' + themes.map(t => `<option value="${encodeURIComponent(t)}">${t}</option>`).join('');
+        denominationFilter.innerHTML = '<option value="">所有面额</option>' + denominations.map(d => `<option value="${d}">${d}</option>`).join('');
+        sizeFilter.innerHTML = '<option value="">所有大小</option>' + sizes.map(s => `<option value="${s}">${s}</option>`).join('');
+        metalFilter.innerHTML = '<option value="">所有材质</option>' + metals.map(m => `<option value="${m}">${m}</option>`).join('');
+        yearFilter.innerHTML = '<option value="">所有年份</option>' + years.map(y => `<option value="${y}">${y}年</option>`).join('');
+
+        themeFilter.addEventListener('change', renderUI);
+        denominationFilter.addEventListener('change', renderUI);
+        sizeFilter.addEventListener('change', renderUI);
+        metalFilter.addEventListener('change', renderUI);
+        yearFilter.addEventListener('change', renderUI);
+        statusFilter.addEventListener('change', renderUI);
+
+        searchInput.addEventListener('input', debounce(renderUI));
+    }
+
+    /* ============================================================
+       初始化
+       ============================================================ */
+    window.addEventListener('DOMContentLoaded', async () => {
+        try {
+            allCoinsData = await loadData('coin_data.json');
+            await loadCollection();
+            populateFilters(allCoinsData);
+            // 延迟初始化 Fuse.js（等待 pinyin-pro + fuse.js CDN 加载）
+            setTimeout(initFuse, 1500);
+            renderUI();
+            updateCollectionOverview();
+
+            document.getElementById('overviewHeader').addEventListener('click', toggleOverview);
+            document.getElementById('overviewHeader').addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleOverview(); }
+            });
+            document.getElementById('toggle-icon').addEventListener('click', (e) => {
+                e.stopPropagation();
+                toggleOverview();
+            });
+            clearFiltersBtn.addEventListener('click', clearFilters);
+        } catch (error) {
+            console.error('无法初始化应用:', error);
+            mainContainer.innerHTML = '<p class="text-center text-red-500 text-xl mt-10">数据加载失败，请刷新页面重试</p>';
+        }
+    });
+
+    /* ============================================================
+       PWA Service Worker 注册（#8）
+       ============================================================ */
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('./sw.js').catch(() => {});
+        });
+    }
     </script>
 </body>
-
 </html>
