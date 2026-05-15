@@ -44,6 +44,52 @@
         #save-status {
             animation: fade-in-out 3s ease-in-out;
         }
+
+        /* 点阵模态框 */
+        #matrixModal {
+            display: none;
+        }
+        #matrixModal.active {
+            display: flex;
+        }
+        .matrix-cell {
+            width: 18px;
+            height: 18px;
+            border: 1px solid #e0e0e0;
+        }
+        .matrix-cell.filled {
+            background: #000;
+        }
+        #matrixModal .matrix-body {
+            display: grid;
+            grid-template-rows: repeat(10, 18px);
+            grid-auto-flow: column;
+            gap: 2px;
+            justify-content: center;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .matrix-gap {
+            width: 8px;
+            grid-row: 1 / -1;
+        }
+        #matrixModal .mint-section {
+            flex: 1;
+            border-right: 2px solid #000;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #matrixModal .mint-section:last-child {
+            border-right: none;
+        }
+        #matrixModal.analysis-active .mint-index-0 .matrix-cell.filled.matrix-diff { background: #ff4d4f; border-color: #ff4d4f; }
+        #matrixModal.analysis-active .mint-index-1 .matrix-cell.filled.matrix-diff { background: #1890ff; border-color: #1890ff; }
+        #matrixModal.analysis-active .mint-index-2 .matrix-cell.filled.matrix-diff { background: #52c41a; border-color: #52c41a; }
+        #matrixModal.analysis-active .mint-section[data-mint="沈阳"] .matrix-cell.filled.matrix-diff { background: #ff4d4f; border-color: #ff4d4f; }
+        #matrixModal.analysis-active .mint-section[data-mint="上海"] .matrix-cell.filled.matrix-diff { background: #1890ff; border-color: #1890ff; }
+        #matrixModal.analysis-active .mint-section[data-mint="南京"] .matrix-cell.filled.matrix-diff { background: #52c41a; border-color: #52c41a; }
+
         /* 骨架屏动画 */
         @keyframes pulse {
             0%, 100% { opacity: 1; }
@@ -289,7 +335,7 @@
                         </svg>
                     </label>
                     <input type="file" id="importFile" accept=".json" class="hidden">
-                    <button onclick="location.href='matrix.html'" class="w-10 h-10 rounded-full bg-blue-400 text-white shadow-lg flex items-center justify-center hover:bg-blue-500 transition-colors" title="展示防伪点阵">
+                    <button onclick="location.href='matrix.html'" class="w-10 h-10 rounded-full bg-blue-400 text-white shadow-lg flex items-center justify-center hover:bg-blue-500 transition-colors" title="点阵试验场">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
                             <rect x="1"  y="1"  width="3" height="3" rx="0.5"/>
                             <rect x="6.5" y="1"  width="3" height="3" rx="0.5"/>
@@ -332,6 +378,40 @@
                 <img id="zoomModalImg" class="max-w-[90vw] max-h-[85vh] object-contain rounded-lg" src="" alt="">
             </div>
         </div>
+
+        <!-- 点阵弹窗 -->
+        <div id="matrixModal" class="fixed inset-0 z-[100] items-center justify-center bg-black/90 p-4 overflow-y-auto">
+            <div class="relative bg-white rounded-lg shadow-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto">
+                <!-- 关闭按钮 -->
+                <button id="closeMatrixModal" class="absolute top-2 right-2 z-10 w-8 h-8 bg-gray-200 hover:bg-gray-300 rounded-full flex items-center justify-center text-xl font-bold text-gray-600 transition-colors">
+                    &times;
+                </button>
+                <!-- 标题 -->
+                <div id="matrixModalTitle" class="text-center py-4 border-b border-gray-200">
+                    <h2 class="text-lg font-bold"></h2>
+                    <p class="text-sm text-gray-500 mt-1"></p>
+                </div>
+                <!-- 点阵展示区 -->
+                <div id="matrixModalContent" class="p-4 flex items-stretch"></div>
+                <!-- 底部操作按钮 -->
+                <div class="flex items-center justify-center gap-4 pb-4 px-4">
+                    <button id="matrixRotateBtn" class="px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg text-sm font-medium transition-colors flex items-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 1024 1024" fill="currentColor">
+                            <path d="M480.5 251.2c13-1.6 25.9-2.4 38.8-2.5v63.9c0 6.5 7.5 10.1 12.6 6.1L660 217.6c4-3.2 4-9.2 0-12.3l-128-101c-5.1-4-12.6-0.4-12.6 6.1l-0.2 64c-118.6 0.5-235.8 53.4-314.6 154.2-69.6 89.2-95.7 198.6-81.1 302.4h74.9c-0.9-5.3-1.7-10.7-2.4-16.1-5.1-42.1-2.1-84.1 8.9-124.8 11.4-42.2 31-81.1 58.1-115.8 27.2-34.7 60.3-63.2 98.4-84.3 37-20.6 76.9-33.6 119.1-38.8z"/>
+                            <path d="M880 418H352c-17.7 0-32 14.3-32 32v414c0 17.7 14.3 32 32 32h528c17.7 0 32-14.3 32-32V450c0-17.7-14.3-32-32-32z m-44 402H396V494h440v326z"/>
+                        </svg>
+                        旋转
+                    </button>
+                    <button id="matrixAnalysisBtn" class="px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg text-sm font-medium transition-colors flex items-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 362.5 442" fill="currentColor">
+                            <path d="M134.4,214.6c-16.6-5.5-30-17.2-37.8-32.8c-16.1-32.3-3-71.6,29.2-87.8l-13.2-26.4C65.7,91,46.7,148.2,70.1,195c16.6,33.2,50.2,52.4,85.1,52.4c14.3,0,28.7-3.2,42.3-10L184.3,211C168.7,218.8,150.9,220.1,134.4,214.6z"/>
+                            <path d="M353.9,363.1l-80.3-120c9.5-12.7,17.2-27.2,22.5-43.1C322.6,120.5,279.5,34.3,200,7.8C120.5-18.7,34.3,24.5,7.8,104c-26.5,79.5,16.7,165.7,96.2,192.2c15.9,5.3,32,7.8,47.9,7.8c12.7,0,25.2-1.6,37.3-4.7l80.4,120.3c9.8,14.6,25.9,22.5,42.3,22.5c9.7,0,19.5-2.8,28.1-8.5C363.2,417.9,369.5,386.4,353.9,363.1z M113.3,268.1c-64.1-21.3-98.8-90.8-77.5-154.9c17.1-51.3,65-83.8,116.3-83.8c12.8,0,25.8,2,38.6,6.3c64.1,21.3,98.8,90.8,77.5,154.9C246.8,254.7,177.3,289.5,113.3,268.1z M332.5,395.4c-1.1,5.6-4.3,10.4-9,13.5c-9.7,6.5-22.9,3.9-29.4-5.8l-76.4-114.2c12.8-6.1,24.7-14,35.4-23.5l76.3,114.1C332.5,384.2,333.6,389.9,332.5,395.4z"/>
+                        </svg>
+                        差异分析
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <footer class="fixed bottom-0 left-0 right-0 bg-gradient-to-r from-blue-800/80 to-blue-600/80 text-white py-3 px-4 transition-all duration-300">
@@ -368,7 +448,8 @@
     </footer>
 
     <script>
-        let allCoinsData = []; 
+        let allCoinsData = [];
+        let matrixDataMap = {}; // coinCode -> matrix data object
 
         let myCollection = []; // 存储已收藏的纪念币ID
         let myWishlist = []; // 存储想收藏的纪念币ID
@@ -562,6 +643,99 @@
             document.getElementById('zoomModalImg').src = '';
         }
 
+        // 点阵弹窗相关
+        let matrixDegree = 0;
+        let matrixAnalysisActive = false;
+
+        function openMatrixModal(coinId) {
+            const matrixData = matrixDataMap[coinId];
+            if (!matrixData) return;
+
+            const modal = document.getElementById('matrixModal');
+            const title = modal.querySelector('#matrixModalTitle h2');
+            const subtitle = modal.querySelector('#matrixModalTitle p');
+            title.textContent = matrixData.name;
+            subtitle.textContent = matrixData.code;
+
+            matrixDegree = 0;
+            matrixAnalysisActive = false;
+            modal.classList.remove('analysis-active');
+            renderMatrixContent(matrixData);
+            modal.classList.add('active');
+        }
+
+        function renderMatrixContent(matrixData) {
+            const content = document.getElementById('matrixModalContent');
+            content.innerHTML = '';
+
+            const mints = matrixData.mints;
+            mints.forEach((m, mintIdx) => {
+                const mintDiv = document.createElement('div');
+                mintDiv.className = `mint-section mint-index-${mintIdx}`;
+                mintDiv.dataset.mint = m.name;
+
+                const nameDiv = document.createElement('div');
+                nameDiv.className = 'font-bold text-sm mb-3';
+                nameDiv.textContent = m.name;
+                mintDiv.appendChild(nameDiv);
+
+                const gridDiv = document.createElement('div');
+                gridDiv.className = 'matrix-body';
+                gridDiv.style.transform = `rotate(${matrixDegree}deg)`;
+
+                m.data.forEach((col, colIdx) => {
+                    if (col === '') {
+                        const gap = document.createElement('div');
+                        gap.className = 'matrix-gap';
+                        gridDiv.appendChild(gap);
+                        return;
+                    }
+                    col.split('').forEach((bit, rowIdx) => {
+                        const cell = document.createElement('div');
+                        cell.className = 'matrix-cell' + (bit === '1' ? ' filled' : '');
+                        if (bit === '1') {
+                            const isCommon = mints.every(m2 => {
+                                const targetCol = m2.data[colIdx];
+                                return targetCol && targetCol[rowIdx] === '1';
+                            });
+                            if (!isCommon) cell.classList.add('matrix-diff');
+                        }
+                        gridDiv.appendChild(cell);
+                    });
+                });
+
+                mintDiv.appendChild(gridDiv);
+                content.appendChild(mintDiv);
+            });
+        }
+
+        function closeMatrixModal() {
+            document.getElementById('matrixModal').classList.remove('active');
+        }
+
+        // 点阵旋转
+        document.getElementById('matrixRotateBtn').addEventListener('click', () => {
+            matrixDegree += 90;
+            document.querySelectorAll('#matrixModalContent .matrix-body').forEach(m => {
+                m.style.transform = `rotate(${matrixDegree}deg)`;
+            });
+        });
+
+        // 点阵差异分析
+        document.getElementById('matrixAnalysisBtn').addEventListener('click', () => {
+            matrixAnalysisActive = !matrixAnalysisActive;
+            const modal = document.getElementById('matrixModal');
+            modal.classList.toggle('analysis-active', matrixAnalysisActive);
+            const btn = document.getElementById('matrixAnalysisBtn');
+            btn.classList.toggle('bg-blue-100', matrixAnalysisActive);
+        });
+
+        // 关闭点阵弹窗
+        document.getElementById('closeMatrixModal').addEventListener('click', closeMatrixModal);
+        document.getElementById('matrixModal').addEventListener('click', (e) => {
+            if (e.target.id === 'matrixModal') closeMatrixModal();
+        });
+
         // 5. 渲染 UI - 需要更新卡片样式和事件监听
         function renderUI() {
             const mainContainer = document.getElementById('main-container');
@@ -689,6 +863,15 @@
                                         class="back-image absolute top-0 left-0 w-full h-full object-contain rounded-lg ${imgClass} transition-all duration-500 ease-in-out ${backImageClass}"
                                         loading="lazy"
                                         onerror="this.onerror=null;this.src='https://placehold.co/300x300/F0F0F0/888888?text=图片未找到'">
+
+                                    <!-- 点阵图标（底部右侧） -->
+                                    ${matrixDataMap[coin.id] ? `<div class="matrix-icon absolute bottom-2 right-2 z-20 w-7 h-7 bg-white/80 rounded flex items-center justify-center shadow-sm cursor-pointer hover:bg-white transition-colors" title="查看防伪点阵">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-700" viewBox="0 0 24 24" fill="none">
+                                            <rect x="3" y="3" width="4" height="4" fill="currentColor"/><rect x="9" y="3" width="4" height="4" fill="currentColor"/>
+                                            <rect x="3" y="9" width="4" height="4" fill="currentColor"/><rect x="15" y="9" width="4" height="4" fill="currentColor"/>
+                                            <rect x="9" y="15" width="4" height="4" fill="currentColor"/><rect x="15" y="15" width="4" height="4" fill="currentColor"/>
+                                        </svg>
+                                    </div>` : ''}
 
                                     <!-- 默认圆形轮廓图标（未收藏状态） -->
                                     <div class="coin-default-icon status-toggle absolute top-2 right-2 bg-white/70 text-gray-400 w-8 h-8 rounded-full flex items-center justify-center text-xl backdrop-blur-[2px] shadow-sm">
@@ -828,6 +1011,15 @@
                             imageContainer.addEventListener('touchmove', () => {
                                 clearTimeout(imgPressTimer);
                             });
+
+                            // 点阵图标点击
+                            const matrixIcon = coinCard.querySelector('.matrix-icon');
+                            if (matrixIcon) {
+                                matrixIcon.addEventListener('click', (e) => {
+                                    e.stopPropagation();
+                                    openMatrixModal(coin.id);
+                                });
+                            }
                         });
                         mainContainer.appendChild(yearSection);
                     });
@@ -997,9 +1189,15 @@
 
 
         window.onload = () => {
-            loadData('coin_data.json')
-                .then(data => {
-                    allCoinsData = data;
+            Promise.all([
+                loadData('coin_data.json'),
+                loadData('matrix.json').catch(() => ({ coins: [] }))
+            ]).then(([coinsData, matrixData]) => {
+                    allCoinsData = coinsData;
+                    // 构建点阵数据映射：用 coin code 作为 key
+                    matrixData.coins.forEach(entry => {
+                        matrixDataMap[entry.code] = entry;
+                    });
                     loadCollection();
                     populateFilters(allCoinsData);
                     renderUI();
