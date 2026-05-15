@@ -18,9 +18,21 @@
         .coin-card.collected img {
             filter: none; /* 图片恢复彩色 */
         }
-        /* 收藏后的视觉效果：复选标记 */
+        /* 想收藏的视觉效果：心形图标 */
         .coin-card.wishlist .coin-wish-icon {
             opacity: 1; /* 显示心形图标 */
+        }
+        /* 默认状态的圆形轮廓图标（未收藏且非想收藏时显示） */
+        .coin-card .coin-default-icon {
+            opacity: 0.5;
+            transition: opacity 0.3s;
+        }
+        .coin-card:hover .coin-default-icon {
+            opacity: 0.8;
+        }
+        .coin-card.collected .coin-default-icon,
+        .coin-card.wishlist .coin-default-icon {
+            opacity: 0;
         }        
         /* 动画效果 */
         @keyframes fade-in-out {
@@ -149,6 +161,13 @@
         #statusFilter {
             width: 95px;
         }
+        /* 图片放大弹窗 */
+        #zoomModal {
+            display: none;
+        }
+        #zoomModal.active {
+            display: flex;
+        }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans p-4 sm:p-8">
@@ -156,6 +175,7 @@
         <header class="text-center mb-10">
             <h1 class="text-4xl sm:text-5xl font-extrabold text-blue-800 leading-tight">我的纪念币收藏</h1>
             <p class="text-xl sm:text-2xl mt-2 text-gray-600">
+                右上角图标：
                 <b class="text-[#22C55E]"><i>双击</i></b>标记已收藏 / 
                 <b class="text-[#FBBF24]"><i>单击</i></b>标记想收藏
             </p>
@@ -305,6 +325,13 @@
 
         <main id="main-container">
         </main>
+
+        <!-- 图片放大弹窗 -->
+        <div id="zoomModal" class="fixed inset-0 z-[100] items-center justify-center bg-black/90 hidden" onclick="closeCoinZoom()">
+            <div class="relative max-w-[90vw] max-h-[90vh]">
+                <img id="zoomModalImg" class="max-w-[90vw] max-h-[85vh] object-contain rounded-lg" src="" alt="">
+            </div>
+        </div>
     </div>
 
     <footer class="fixed bottom-0 left-0 right-0 bg-gradient-to-r from-blue-800/80 to-blue-600/80 text-white py-3 px-4 transition-all duration-300">
@@ -519,86 +546,22 @@
             reader.readAsText(file);
         });
 
-        // 4. 新的交互函数
-        let clickTimer = null;
-        let clickCount = 0;
-
-        function handleCoinCardClick(coinId) {
-            clickCount++;
-
-            if (clickCount === 1) {
-                clickTimer = setTimeout(() => {
-                    // 单击逻辑: 在未收藏和想收藏之间切换
-                    const isCollected = myCollection.includes(coinId);
-                    const isWishlisted = myWishlist.includes(coinId);
-
-                    if (isCollected) {
-                        // 如果已收藏，单击不改变状态
-                        // 用户预期双击/长按才能取消已收藏
-                        console.log('请双击或长按来取消收藏');
-                    } else if (isWishlisted) {
-                        // 从想收藏 -> 未收藏
-                        myWishlist = myWishlist.filter(id => id !== coinId);
-                    } else {
-                        // 从未收藏 -> 想收藏
-                        myWishlist.push(coinId);
-                    }
-                    saveCollection();
-                    renderUI();
-                    updateCollectionOverview();
-                    clickCount = 0;
-                }, 300); // 300毫秒内没有第二次点击则执行单击逻辑
-            } else if (clickCount === 2) {
-                // 双击逻辑: 在未收藏和已收藏之间切换
-                clearTimeout(clickTimer);
-                const isCollected = myCollection.includes(coinId);
-                const isWishlisted = myWishlist.includes(coinId);
-                
-                if (isCollected) {
-                    // 从已收藏 -> 未收藏
-                    myCollection = myCollection.filter(id => id !== coinId);
-                } else {
-                    // 从未收藏 -> 已收藏
-                    if (isWishlisted) {
-                        // 如果在想收藏列表中，先移除
-                        myWishlist = myWishlist.filter(id => id !== coinId);
-                    }
-                    myCollection.push(coinId);
-                }
-                saveCollection();
-                renderUI();
-                updateCollectionOverview();
-                clickCount = 0;
-            }
+        // 4. 图片放大弹窗
+        function openCoinZoom(coin, viewMode) {
+            const zoomModal = document.getElementById('zoomModal');
+            const zoomModalImg = document.getElementById('zoomModalImg');
+            const img = viewMode === 'back' ? coin.imageUrl2 : coin.imageUrl;
+            zoomModalImg.src = img;
+            zoomModalImg.alt = coin.name + (viewMode === 'back' ? ' 背面' : ' 正面');
+            zoomModal.classList.add('active');
         }
 
-        // 移动端长按事件
-        let pressTimer;
-        function handleTouchStart(e, coinId) {
-            pressTimer = setTimeout(() => {
-                // 长按逻辑同双击
-                const isCollected = myCollection.includes(coinId);
-                const isWishlisted = myWishlist.includes(coinId);
-                
-                if (isCollected) {
-                    myCollection = myCollection.filter(id => id !== coinId);
-                } else {
-                    if (isWishlisted) {
-                        myWishlist = myWishlist.filter(id => id !== coinId);
-                    }
-                    myCollection.push(coinId);
-                }
-                saveCollection();
-                renderUI();
-                updateCollectionOverview();
-                e.preventDefault(); // 阻止默认的上下文菜单弹出
-            }, 500); // 500毫秒触发长按
+        function closeCoinZoom() {
+            const zoomModal = document.getElementById('zoomModal');
+            zoomModal.classList.remove('active');
+            document.getElementById('zoomModalImg').src = '';
         }
 
-        function handleTouchEnd() {
-            clearTimeout(pressTimer);
-        }
-        
         // 5. 渲染 UI - 需要更新卡片样式和事件监听
         function renderUI() {
             const mainContainer = document.getElementById('main-container');
@@ -674,6 +637,7 @@
                         groupedCoins[year].forEach(coin => {
                             const isCollected = myCollection.includes(coin.id);
                             const isWishlisted = myWishlist.includes(coin.id);
+                            const cardViewMode = isBackView ? 'back' : 'front';
                             
                             const coinCard = document.createElement('div');
                             let cardStateClass = '';
@@ -687,8 +651,8 @@
                                 imgClass = 'grayscale'; // 想收藏：图片保持黑白
                             }
 
-                            const frontImageClass = isBackView ? 'hidden' : '';
-                            const backImageClass = isBackView ? '' : 'hidden';
+                            const frontImageClass = cardViewMode === 'back' ? 'hidden' : '';
+                            const backImageClass = cardViewMode === 'front' ? 'hidden' : '';
 
                             coinCard.className = `coin-card flex flex-col items-center p-4 bg-gray-100 rounded-xl shadow-lg transform transition-transform duration-300 hover:scale-105 cursor-pointer relative ${cardStateClass}`;
                             coinCard.setAttribute('data-coin-id', coin.id);
@@ -710,26 +674,35 @@
                             }                   
 
                             coinCard.innerHTML = `
-                                <div class="relative w-full aspect-square">
+                                <div class="image-container relative w-full aspect-square cursor-pointer">
                                     ${mintBadgesHTML}
 
-                                    <img 
-                                        src="${coin.imageUrl}" 
-                                        alt="${coin.name}正面" 
-                                        class="front-image absolute top-0 left-0 w-full h-full object-contain rounded-lg ${imgClass} transition-all duration-500 ease-in-out ${frontImageClass}" 
+                                    <img
+                                        src="${coin.imageUrl}"
+                                        alt="${coin.name}正面"
+                                        class="front-image absolute top-0 left-0 w-full h-full object-contain rounded-lg ${imgClass} transition-all duration-500 ease-in-out ${frontImageClass}"
                                         loading="lazy"
                                         onerror="this.onerror=null;this.src='https://placehold.co/300x300/F0F0F0/888888?text=图片未找到'">
-                                    <img 
-                                        src="${coin.imageUrl2}" 
-                                        alt="${coin.name}背面" 
+                                    <img
+                                        src="${coin.imageUrl2}"
+                                        alt="${coin.name}背面"
                                         class="back-image absolute top-0 left-0 w-full h-full object-contain rounded-lg ${imgClass} transition-all duration-500 ease-in-out ${backImageClass}"
                                         loading="lazy"
                                         onerror="this.onerror=null;this.src='https://placehold.co/300x300/F0F0F0/888888?text=图片未找到'">
+
+                                    <!-- 默认圆形轮廓图标（未收藏状态） -->
+                                    <div class="coin-default-icon status-toggle absolute top-2 right-2 bg-white/70 text-gray-400 w-8 h-8 rounded-full flex items-center justify-center text-xl backdrop-blur-[2px] shadow-sm">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <circle cx="12" cy="12" r="10"/>
+                                        </svg>
+                                    </div>
+                                    <!-- 已收藏：绿色对勾 -->
                                     <div class="coin-check-icon absolute top-2 right-2 bg-green-500 text-white w-8 h-8 rounded-full flex items-center justify-center text-xl opacity-0 transition-opacity duration-300">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
                                             <polyline points="20 6 9 17 4 12" />
                                         </svg>
                                     </div>
+                                    <!-- 想收藏：金色爱心 -->
                                     <div class="coin-wish-icon absolute top-2 right-2 bg-amber-400 text-white w-8 h-8 rounded-full flex items-center justify-center text-xl opacity-0 transition-opacity duration-300">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor" stroke="none">
                                             <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
@@ -743,10 +716,118 @@
                             `;
                             coinGrid.appendChild(coinCard);
 
-                            // 修改事件监听器
-                            coinCard.addEventListener('click', (e) => handleCoinCardClick(coin.id));
-                            coinCard.addEventListener('touchend', handleTouchEnd);
-                            coinCard.addEventListener('touchstart', (e) => handleTouchStart(e, coin.id));
+                            // 设置三个图标的可见性，隐藏的图标禁用 pointer-events 防止点击穿透
+                            const cardStatusToggle = coinCard.querySelector('.status-toggle');
+                            const cardCheckIcon = coinCard.querySelector('.coin-check-icon');
+                            const cardWishIcon = coinCard.querySelector('.coin-wish-icon');
+                            function updateIconPointerEvents() {
+                                if (isCollected) {
+                                    cardCheckIcon.style.pointerEvents = 'auto';
+                                    cardStatusToggle.style.pointerEvents = 'none';
+                                    cardWishIcon.style.pointerEvents = 'none';
+                                } else if (isWishlisted) {
+                                    cardWishIcon.style.pointerEvents = 'auto';
+                                    cardStatusToggle.style.pointerEvents = 'none';
+                                    cardCheckIcon.style.pointerEvents = 'none';
+                                } else {
+                                    cardStatusToggle.style.pointerEvents = 'auto';
+                                    cardCheckIcon.style.pointerEvents = 'none';
+                                    cardWishIcon.style.pointerEvents = 'none';
+                                }
+                            }
+                            updateIconPointerEvents();
+
+                            // 右上角图标统一绑定单击/双击
+                            const activeIcon = isCollected ? cardCheckIcon : (isWishlisted ? cardWishIcon : cardStatusToggle);
+                            let statusClickCount = 0;
+                            let statusClickTimer = null;
+                            activeIcon.style.cursor = 'pointer';
+                            activeIcon.addEventListener('click', (e) => {
+                                e.stopPropagation();
+                                statusClickCount++;
+                                if (statusClickCount === 1) {
+                                    statusClickTimer = setTimeout(() => {
+                                        // 单击：想收藏切换
+                                        const nowCollected = myCollection.includes(coin.id);
+                                        const nowWishlisted = myWishlist.includes(coin.id);
+                                        if (nowCollected) return;
+                                        if (nowWishlisted) {
+                                            myWishlist = myWishlist.filter(id => id !== coin.id);
+                                        } else {
+                                            myWishlist.push(coin.id);
+                                        }
+                                        saveCollection();
+                                        renderUI();
+                                        updateCollectionOverview();
+                                        statusClickCount = 0;
+                                    }, 300);
+                                } else if (statusClickCount === 2) {
+                                    clearTimeout(statusClickTimer);
+                                    // 双击：已收藏切换
+                                    const nowCollected = myCollection.includes(coin.id);
+                                    const nowWishlisted = myWishlist.includes(coin.id);
+                                    if (nowCollected) {
+                                        myCollection = myCollection.filter(id => id !== coin.id);
+                                    } else {
+                                        if (nowWishlisted) {
+                                            myWishlist = myWishlist.filter(id => id !== coin.id);
+                                        }
+                                        myCollection.push(coin.id);
+                                    }
+                                    saveCollection();
+                                    renderUI();
+                                    updateCollectionOverview();
+                                    statusClickCount = 0;
+                                }
+                            });
+
+                            // 图片区域：单击翻面（仅当前卡片），双击放大
+                            const imageContainer = coinCard.querySelector('.image-container');
+                            let imgClickCount = 0;
+                            let imgClickTimer = null;
+                            imageContainer.addEventListener('click', (e) => {
+                                e.stopPropagation();
+                                imgClickCount++;
+                                if (imgClickCount === 1) {
+                                    imgClickTimer = setTimeout(() => {
+                                        // 单击：只切换当前卡片的正反面
+                                        const frontImg = imageContainer.querySelector('.front-image');
+                                        const backImg = imageContainer.querySelector('.back-image');
+                                        if (frontImg.classList.contains('hidden')) {
+                                            frontImg.classList.remove('hidden');
+                                            backImg.classList.add('hidden');
+                                        } else {
+                                            backImg.classList.remove('hidden');
+                                            frontImg.classList.add('hidden');
+                                        }
+                                        imgClickCount = 0;
+                                    }, 300);
+                                } else if (imgClickCount === 2) {
+                                    clearTimeout(imgClickTimer);
+                                    // 双击：放大当前图片
+                                    const frontImg = imageContainer.querySelector('.front-image');
+                                    const viewMode = frontImg.classList.contains('hidden') ? 'back' : 'front';
+                                    openCoinZoom(coin, viewMode);
+                                    imgClickCount = 0;
+                                }
+                            });
+
+                            // 移动端长按图片区域：放大
+                            let imgPressTimer = null;
+                            imageContainer.addEventListener('touchstart', (e) => {
+                                imgPressTimer = setTimeout(() => {
+                                    const frontImg = imageContainer.querySelector('.front-image');
+                                    const viewMode = frontImg.classList.contains('hidden') ? 'back' : 'front';
+                                    openCoinZoom(coin, viewMode);
+                                    e.preventDefault();
+                                }, 500);
+                            }, { passive: false });
+                            imageContainer.addEventListener('touchend', () => {
+                                clearTimeout(imgPressTimer);
+                            });
+                            imageContainer.addEventListener('touchmove', () => {
+                                clearTimeout(imgPressTimer);
+                            });
                         });
                         mainContainer.appendChild(yearSection);
                     });
