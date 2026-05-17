@@ -89,6 +89,10 @@
         #matrixModal.analysis-active .mint-section[data-mint="沈阳"] .matrix-cell.filled.matrix-diff { background: #ff4d4f; border-color: #ff4d4f; }
         #matrixModal.analysis-active .mint-section[data-mint="上海"] .matrix-cell.filled.matrix-diff { background: #1890ff; border-color: #1890ff; }
         #matrixModal.analysis-active .mint-section[data-mint="南京"] .matrix-cell.filled.matrix-diff { background: #52c41a; border-color: #52c41a; }
+        /* 旋转90/270度时切换纵向排列避免重叠 */
+        #matrixModalContent.wide-mode { flex-direction: column; }
+        #matrixModalContent.wide-mode .mint-section { border-right: none; border-bottom: 2px solid #000; }
+        #matrixModalContent.wide-mode .mint-section:last-child { border-bottom: none; }
 
         /* 骨架屏动画 */
         @keyframes pulse {
@@ -660,6 +664,7 @@
             matrixDegree = 0;
             matrixAnalysisActive = false;
             modal.classList.remove('analysis-active');
+            document.getElementById('matrixModalContent').classList.remove('wide-mode');
             renderMatrixContent(matrixData);
             modal.classList.add('active');
         }
@@ -719,6 +724,7 @@
             document.querySelectorAll('#matrixModalContent .matrix-body').forEach(m => {
                 m.style.transform = `rotate(${matrixDegree}deg)`;
             });
+            document.getElementById('matrixModalContent').classList.toggle('wide-mode', matrixDegree % 180 !== 0);
         });
 
         // 点阵差异分析

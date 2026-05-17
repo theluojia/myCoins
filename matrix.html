@@ -55,6 +55,10 @@ body {
   border-right: none;
 }
 
+.mints.wide-mode { flex-direction: column; }
+.mints.wide-mode .mint { border-right: none; border-bottom: 2px solid #000; }
+.mints.wide-mode .mint:last-child { border-bottom: none; }
+
 .mint-name {
   text-align: center;
   margin-bottom: 20px;
@@ -320,6 +324,9 @@ function rotateAllMatrices() {
   const allMatrices = document.querySelectorAll('.matrix');
   allMatrices.forEach(m => {
     m.style.transform = `rotate(${globalDegree}deg)`;
+  });
+  document.querySelectorAll('.mints').forEach(m => {
+    m.classList.toggle('wide-mode', globalDegree % 180 !== 0);
   });
 }
 
