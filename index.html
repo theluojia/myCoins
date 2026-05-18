@@ -988,115 +988,155 @@
                 return;
             }
 
-            // 创建隐藏容器，包含标题+点阵
-            const wrapper = document.createElement('div');
-            wrapper.style.cssText = 'position:fixed;left:0;top:0;z-index:-1;width:600px;height:500px;overflow:hidden;opacity:0;pointer-events:none;';
-
-            const saveCard = document.createElement('div');
-            saveCard.style.cssText = 'width:600px;background:#fff;border:2px solid #000;';
-
-            // 标题区域
-            const saveHeader = document.createElement('div');
-            saveHeader.style.cssText = 'text-align:center;border-bottom:2px solid #000;padding:8px 0;';
-            const h2 = document.createElement('h2');
-            h2.style.cssText = 'margin:0;font-size:22px;font-weight:bold;';
-            h2.textContent = title;
-            saveHeader.appendChild(h2);
-            if (subtitle) {
-                const code = document.createElement('div');
-                code.style.cssText = 'font-size:18px;margin-top:4px;';
-                code.textContent = subtitle;
-                saveHeader.appendChild(code);
-            }
-            saveCard.appendChild(saveHeader);
-
-            // 点阵区域
-            const saveContent = document.createElement('div');
-            saveContent.id = 'matrixModalContent';
-            saveContent.style.cssText = 'display:flex;flex-direction:row;';
-
-            const mints = currentMatrixData.mints;
-            const mintWidth = (600 - 2) / mints.length; // subtract border, divide evenly
-
-            mints.forEach((m, mintIdx) => {
-                const mintDiv = document.createElement('div');
-                mintDiv.className = 'mint-section mint-index-' + mintIdx;
-                mintDiv.dataset.mint = m.name;
-                mintDiv.style.cssText = 'flex:1;width:' + mintWidth + 'px;border-right:2px solid #000;padding:5px 10px;display:flex;flex-direction:column;align-items:center;';
-                if (mintIdx === mints.length - 1) mintDiv.style.borderRight = 'none';
-
-                const nameDiv = document.createElement('div');
-                nameDiv.style.cssText = 'font-weight:bold;font-size:14px;margin-bottom:8px;';
-                nameDiv.textContent = m.name;
-                mintDiv.appendChild(nameDiv);
-
-                // 计算点阵自然尺寸
-                const natW = m.data.reduce((w, col) => col === '' ? w + 8 : w + 20, 0) - 2;
-                const natH = 198;
-                const rotW = (deg === 90 || deg === 270) ? natH : natW;
-                const rotH = (deg === 90 || deg === 270) ? natW : natH;
-                const availW = mintWidth - 20;
-                const scale = Math.min(availW / rotW, 0.85);
-
-                const gridDiv = document.createElement('div');
-                gridDiv.className = 'matrix-body';
-                gridDiv.style.cssText = 'display:grid;grid-template-rows:repeat(10,18px);grid-auto-flow:column;gap:2px;justify-content:center;';
-                if (deg !== 0) gridDiv.style.transform = 'rotate(' + deg + 'deg) scale(' + scale.toFixed(3) + ')';
-
-                const mintMints = mints;
-                m.data.forEach((col, colIdx) => {
-                    if (col === '') {
-                        const gap = document.createElement('div');
-                        gap.className = 'matrix-gap';
-                        gap.style.cssText = 'width:8px;grid-row:1/-1;';
-                        gridDiv.appendChild(gap);
-                        return;
-                    }
-                    col.split('').forEach((bit, rowIdx) => {
-                        const cell = document.createElement('div');
-                        cell.className = 'matrix-cell' + (bit === '1' ? ' filled' : '');
-                        cell.style.cssText = 'width:18px;height:18px;border:1px solid #e0e0e0;';
-                        if (bit === '1') {
-                            cell.style.background = '#000';
-                            if (matrixAnalysisActive) {
-                                const isCommon = mintMints.every(m2 => {
-                                    const targetCol = m2.data[colIdx];
-                                    return targetCol && targetCol[rowIdx] === '1';
-                                });
-                                if (!isCommon) {
-                                    const colors = { '沈阳': '#ff4d4f', '上海': '#1890ff', '南京': '#52c41a' };
-                                    const c = colors[m.name] || '#000';
-                                    cell.style.background = c;
-                                    cell.style.borderColor = c;
-                                }
-                            }
-                        }
-                        gridDiv.appendChild(cell);
-                    });
-                });
-
-                mintDiv.appendChild(gridDiv);
-                saveContent.appendChild(mintDiv);
-            });
-
-            saveCard.appendChild(saveContent);
-            wrapper.appendChild(saveCard);
-            document.body.appendChild(wrapper);
-
-            // Wait a frame for layout, then screenshot
-            requestAnimationFrame(() => {
-                html2canvas(saveCard, { scale: 2, backgroundColor: '#ffffff', logging: false }).then(canvas => {
-                    const a = document.createElement('a');
-                    a.download = filename;
-                    a.href = canvas.toDataURL('image/png');
-                    a.click();
-                }).finally(() => {
-                    document.body.removeChild(wrapper);
-                    btn.disabled = false;
-                    btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> 保存图片`;
-                });
+            drawMatrixToCanvas(currentMatrixData, title, subtitle, deg, matrixAnalysisActive, (blob) => {
+                const a = document.createElement('a');
+                a.download = filename;
+                a.href = URL.createObjectURL(blob);
+                a.click();
+                URL.revokeObjectURL(a.href);
+                btn.disabled = false;
+                btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> 保存图片`;
             });
         });
+
+        // 用 Canvas API 直接绘制点阵图（毫秒级，跳过 html2canvas）
+        function drawMatrixToCanvas(data, title, subtitle, deg, analysisActive, callback) {
+            const mints = data.mints;
+            const CELL = 18, GAP = 2, ROWS = 10, GAPCOL = 8;
+            const ROWH = CELL + GAP;
+            const nameH = 24, headerH = 48, border = 4, pad = 10;
+
+            // 计算每个 mint 的自然宽高
+            const mintDims = mints.map(m => {
+                let w = 0;
+                m.data.forEach(col => { w += col === '' ? GAPCOL : CELL + GAP; });
+                if (w > 0) w -= GAP;
+                return { w, h: ROWS * ROWH - GAP };
+            });
+
+            const mintCount = mints.length;
+            const contentW = 600;
+            const mintW = (contentW - border * 2) / mintCount;
+
+            let maxGridH = 0;
+            mintDims.forEach(d => { maxGridH = Math.max(maxGridH, d.h); });
+
+            const canvasW = contentW;
+            const canvasH = headerH + pad + nameH + maxGridH + pad;
+
+            const dpr = 2;
+            const canvas = document.createElement('canvas');
+            canvas.width = canvasW * dpr;
+            canvas.height = canvasH * dpr;
+            const ctx = canvas.getContext('2d');
+            ctx.scale(dpr, dpr);
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, canvasW, canvasH);
+
+            // 外边框
+            ctx.strokeStyle = '#000000';
+            ctx.lineWidth = 2;
+            ctx.strokeRect(1, 1, canvasW - 2, canvasH - 2);
+
+            // 标题
+            ctx.fillStyle = '#000000';
+            ctx.textAlign = 'center';
+            ctx.font = 'bold 18px sans-serif';
+            ctx.fillText(title, canvasW / 2, 28);
+            if (subtitle) {
+                ctx.font = '14px sans-serif';
+                ctx.fillText(subtitle, canvasW / 2, 42);
+            }
+
+            // 分隔线
+            ctx.beginPath();
+            ctx.moveTo(2, headerH);
+            ctx.lineTo(canvasW - 2, headerH);
+            ctx.stroke();
+
+            // 绘制每个 mint
+            const gridTop = headerH + pad + nameH;
+            mints.forEach((mint, mintIdx) => {
+                const x0 = border + mintIdx * mintW;
+                const y0 = headerH + pad;
+
+                // 分隔线
+                if (mintIdx > 0) {
+                    ctx.strokeStyle = '#000';
+                    ctx.lineWidth = 2;
+                    ctx.beginPath();
+                    ctx.moveTo(x0, headerH);
+                    ctx.lineTo(x0, canvasH - 2);
+                    ctx.stroke();
+                }
+
+                // mint 名称
+                ctx.fillStyle = '#000';
+                ctx.font = 'bold 13px sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillText(mint.name, x0 + mintW / 2, y0 + 14);
+
+                // 计算缩放（以中心点为基准做旋转）
+                const nd = mintDims[mintIdx];
+                const isRotated = deg === 90 || deg === 270;
+                const rotW = isRotated ? nd.h : nd.w;
+                const availW = mintW - pad * 2;
+                const scale = Math.min(availW / rotW, 0.85);
+
+                // 目标区域的中心点
+                const cx = x0 + mintW / 2;
+                const cy = gridTop + maxGridH / 2;
+
+                ctx.save();
+                ctx.translate(cx, cy);
+                if (deg !== 0) {
+                    ctx.rotate(deg * Math.PI / 180);
+                }
+                ctx.scale(scale, scale);
+                // 把原点移到网格中心，这样(0,0)就是网格中心，向四周延伸
+                ctx.translate(-nd.w / 2, -nd.h / 2);
+
+                // 画格子
+                let colX = 0;
+                mint.data.forEach((col, colIdx) => {
+                    if (col === '') {
+                        colX += GAPCOL;
+                    } else {
+                        for (let r = 0; r < ROWS; r++) {
+                            const bit = col[r];
+                            let color = null;
+                            if (bit === '1') {
+                                color = '#000000';
+                                if (analysisActive) {
+                                    const allSame = mints.every(m2 => {
+                                        const c2 = m2.data[colIdx];
+                                        return c2 && c2[r] === '1';
+                                    });
+                                    if (!allSame) {
+                                        const diffColors = { '沈阳': '#ff4d4f', '上海': '#1890ff', '南京': '#52c41a' };
+                                        color = diffColors[mint.name] || '#000000';
+                                    }
+                                }
+                            }
+                            if (color) {
+                                ctx.fillStyle = color;
+                            } else {
+                                ctx.fillStyle = '#ffffff';
+                            }
+                            ctx.fillRect(colX, r * ROWH, CELL, CELL);
+                            ctx.strokeStyle = '#e0e0e0';
+                            ctx.lineWidth = 1;
+                            ctx.strokeRect(colX, r * ROWH, CELL, CELL);
+                        }
+                        colX += CELL + GAP;
+                    }
+                });
+
+                ctx.restore();
+            });
+
+            canvas.toBlob(blob => callback(blob), 'image/png');
+        }
 
         // 关闭点阵弹窗
         document.getElementById('closeMatrixModal').addEventListener('click', closeMatrixModal);
@@ -1278,22 +1318,31 @@
         }
 
         function exportLabPreview() {
-            const wrapper = document.getElementById('lab-generated');
-            if (!wrapper || !wrapper.querySelector('.lab-coin')) return alert('请先生成');
+            const name = document.getElementById('lab-name')?.value || '点阵';
+            const code = document.getElementById('lab-code')?.value || '';
+            const mints = [];
+
+            [1, 2, 3].forEach(i => {
+                const mintName = document.getElementById(`mint-${i}`)?.value.trim();
+                const dataText = document.getElementById(`data-${i}`)?.value.trim();
+                if (!mintName || !dataText) return;
+                try { mints.push({ name: mintName, data: JSON.parse(dataText) }); } catch (e) {}
+            });
+
+            if (!mints.length) return alert('请先填写数据');
 
             const suffixes = [];
             const deg = labGlobalDegree % 360;
             if (deg !== 0) suffixes.push(`_rotate${deg}`);
             if (labAnalysisActive) suffixes.push('_showdiff');
-            const name = document.getElementById('lab-name')?.value || '点阵';
             const filename = name + suffixes.join('') + '.png';
 
-            const coin = wrapper.querySelector('.lab-coin');
-            html2canvas(coin, { scale: 3, backgroundColor: '#ffffff', logging: false }).then(canvas => {
+            drawMatrixToCanvas({ mints }, name, code, deg, labAnalysisActive, (blob) => {
                 const a = document.createElement('a');
                 a.download = filename;
-                a.href = canvas.toDataURL('image/png');
+                a.href = URL.createObjectURL(blob);
                 a.click();
+                URL.revokeObjectURL(a.href);
             });
         }
 
