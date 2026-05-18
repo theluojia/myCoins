@@ -569,7 +569,7 @@
 
         <!-- 点阵弹窗 -->
         <div id="matrixModal" class="fixed inset-0 z-[100] items-center justify-center bg-black/90 p-4 overflow-y-auto">
-            <div class="relative bg-white rounded-lg shadow-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto" style="overflow-x:hidden;">
+            <div class="relative bg-white rounded-lg shadow-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto">
                 <!-- 关闭按钮 -->
                 <button id="closeMatrixModal" class="absolute top-2 right-2 z-10 w-8 h-8 bg-gray-200 hover:bg-gray-300 rounded-full flex items-center justify-center text-xl font-bold text-gray-600 transition-colors">
                     &times;
@@ -869,19 +869,12 @@
             matrixAnalysisActive = false;
             modal.classList.remove('analysis-active');
             modal.classList.add('active');
-            renderMatrixContent(matrixData);
-        }
 
-        function renderMatrixContent(matrixData) {
+            // 先渲染结构，等布局完成后测量宽度再缩放
             const content = document.getElementById('matrixModalContent');
-            content.innerHTML = '';
-
             const mints = matrixData.mints;
             const mintCount = mints.length;
-            // 直接用实际内容区域宽度，减去内边距
-            const pad = 32; // #matrixModalContent 的 p-4 = 16px × 2
-            const containerWidth = content.offsetWidth - pad || 311;
-            const availWidth = containerWidth / mintCount - 20; // 减去 mint-section padding
+            content.innerHTML = '';
 
             mints.forEach((m, mintIdx) => {
                 const mintDiv = document.createElement('div');
@@ -895,6 +888,7 @@
 
                 const gridDiv = document.createElement('div');
                 gridDiv.className = 'matrix-body';
+                gridDiv.style.transformOrigin = 'center top';
 
                 m.data.forEach((col, colIdx) => {
                     if (col === '') {
@@ -917,15 +911,22 @@
                     });
                 });
 
-                // Measure natural size and apply uniform scale
-                const natW = gridDiv.offsetWidth || 108;
-                const natH = gridDiv.offsetHeight || 198;
-                const rotW = (matrixDegree % 180 !== 0) ? natH : natW;
-                const scale = Math.min(availWidth / rotW, 0.85);
-                gridDiv.style.transform = `rotate(${matrixDegree}deg) scale(${scale.toFixed(3)})`;
-
                 mintDiv.appendChild(gridDiv);
                 content.appendChild(mintDiv);
+            });
+
+            // 等浏览器布局完成后测量
+            requestAnimationFrame(() => {
+                const gridDivs = content.querySelectorAll('.matrix-body');
+                gridDivs.forEach(gridDiv => {
+                    const natW = gridDiv.offsetWidth || 108;
+                    const natH = gridDiv.offsetHeight || 198;
+                    const rotW = (matrixDegree % 180 !== 0) ? natH : natW;
+                    const mintSection = gridDiv.closest('.mint-section');
+                    const availW = (mintSection?.offsetWidth || 200) - 20;
+                    const scale = Math.min(availW / rotW, 0.85);
+                    gridDiv.style.transform = `rotate(${matrixDegree}deg) scale(${scale.toFixed(3)})`;
+                });
             });
         }
 
