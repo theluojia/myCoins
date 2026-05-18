@@ -6,6 +6,7 @@
     <title>我的纪念币收藏</title>
     <!-- 引入 Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
     <style>
         /* 使用 Inter 字体 */
         body {
@@ -75,7 +76,7 @@
         #matrixModal .mint-section {
             flex: 1;
             border-right: 2px solid #000;
-            padding: 10px;
+            padding: 5px 10px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -89,10 +90,193 @@
         #matrixModal.analysis-active .mint-section[data-mint="沈阳"] .matrix-cell.filled.matrix-diff { background: #ff4d4f; border-color: #ff4d4f; }
         #matrixModal.analysis-active .mint-section[data-mint="上海"] .matrix-cell.filled.matrix-diff { background: #1890ff; border-color: #1890ff; }
         #matrixModal.analysis-active .mint-section[data-mint="南京"] .matrix-cell.filled.matrix-diff { background: #52c41a; border-color: #52c41a; }
-        /* 旋转90/270度时切换纵向排列避免重叠 */
-        #matrixModalContent.wide-mode { flex-direction: column; }
-        #matrixModalContent.wide-mode .mint-section { border-right: none; border-bottom: 2px solid #000; }
-        #matrixModalContent.wide-mode .mint-section:last-child { border-bottom: none; }
+
+        /* ================= 点阵试验场样式 ================= */
+
+        #matrixLabModal .lab-coin {
+            width: 800px;
+            margin: 20px auto;
+            border: 2px solid #000;
+            background: #fff;
+        }
+
+        #matrixLabModal .lab-header {
+            text-align: center;
+            border-bottom: 2px solid #000;
+            padding: 8px 0;
+        }
+
+        #matrixLabModal .lab-header h2 {
+            margin: 0;
+            font-size: 22px;
+        }
+
+        #matrixLabModal .lab-header .code {
+            font-size: 18px;
+            margin-top: 4px;
+        }
+
+        #matrixLabModal .lab-mints {
+            display: flex;
+        }
+
+        #matrixLabModal .lab-mint {
+            flex: 1;
+            border-right: 2px solid #000;
+            padding: 5px 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #matrixLabModal .lab-mint:last-child {
+            border-right: none;
+        }
+
+        #matrixLabModal .lab-mint-name {
+            text-align: center;
+            margin-bottom: 8px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        #matrixLabModal .lab-matrix {
+            display: grid;
+            grid-template-rows: repeat(10, 18px);
+            grid-auto-flow: column;
+            gap: 2px;
+            justify-content: center;
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            will-change: transform;
+        }
+
+        #matrixLabModal .lab-cell {
+            width: 18px;
+            height: 18px;
+            border: 1px solid #e0e0e0;
+        }
+
+        #matrixLabModal .lab-cell.black {
+            background: #000;
+        }
+
+        #matrixLabModal.analysis-active .lab-mint[data-mint="沈阳"] .lab-cell.black.lab-diff {
+            background: #ff4d4f;
+            border-color: #ff4d4f;
+        }
+
+        #matrixLabModal.analysis-active .lab-mint[data-mint="上海"] .lab-cell.black.lab-diff {
+            background: #1890ff;
+            border-color: #1890ff;
+        }
+
+        #matrixLabModal.analysis-active .lab-mint[data-mint="南京"] .lab-cell.black.lab-diff {
+            background: #52c41a;
+            border-color: #52c41a;
+        }
+
+        #matrixLabModal .lab-gap-column {
+            width: 8px;
+            grid-row: 1 / -1;
+        }
+
+        #matrixLabModal .lab {
+            width: 800px;
+            margin: 20px auto;
+            border: 2px solid #000;
+            background: #fff;
+        }
+
+        #matrixLabModal .lab-header-form {
+            text-align: center;
+            border-bottom: 2px solid #000;
+            padding: 8px 0;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        #matrixLabModal .lab-input {
+            padding: 12px;
+        }
+
+        #matrixLabModal .lab-input label {
+            display: block;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        #matrixLabModal .lab-input input,
+        #matrixLabModal .lab-input textarea {
+            width: 100%;
+            box-sizing: border-box;
+            margin-top: 4px;
+            padding: 6px;
+            font-family: monospace;
+            font-size: 14px;
+        }
+
+        #matrixLabModal .lab-input textarea {
+            height: 110px;
+        }
+
+        #matrixLabModal .lab-version-block {
+            border: 1px dashed #aaa;
+            padding: 8px;
+            margin-top: 12px;
+        }
+
+        #matrixLabModal .lab-actions {
+            width: 800px;
+            margin: 30px auto 10px;
+            text-align: right;
+        }
+
+        #matrixLabModal .lab-actions button {
+            margin-right: 10px;
+            padding: 6px 14px;
+            font-size: 14px;
+            cursor: pointer;
+            border: 1px solid #888;
+            border-radius: 4px;
+            background: #f5f5f5;
+            color: #000;
+        }
+
+        #matrixLabModal .lab-actions button:hover {
+            background: #e0e0e0;
+        }
+
+        /* 悬浮按钮 - 仅在试验场弹窗打开时显示 */
+        #labRotateBtn, #labAnalysisBtn {
+            position: fixed;
+            right: 40px;
+            width: 56px;
+            height: 56px;
+            background-color: #ffffff;
+            color: #000;
+            border-radius: 50%;
+            border: 2px solid #000;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 9999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        #labRotateBtn { top: calc(50% - 35px); }
+        #labAnalysisBtn { top: calc(50% + 35px); }
+        #labRotateBtn:hover, #labAnalysisBtn:hover {
+            background-color: #000;
+            color: #fff;
+        }
+
+        #labRotateBtn svg, #labAnalysisBtn svg {
+            width: 28px;
+            height: 28px;
+            fill: currentColor;
+        }
 
         /* 骨架屏动画 */
         @keyframes pulse {
@@ -339,7 +523,7 @@
                         </svg>
                     </label>
                     <input type="file" id="importFile" accept=".json" class="hidden">
-                    <button onclick="location.href='matrix.html'" class="w-10 h-10 rounded-full bg-blue-400 text-white shadow-lg flex items-center justify-center hover:bg-blue-500 transition-colors" title="点阵试验场">
+                    <button onclick="openMatrixLab()" class="w-10 h-10 rounded-full bg-blue-400 text-white shadow-lg flex items-center justify-center hover:bg-blue-500 transition-colors" title="点阵试验场">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
                             <rect x="1"  y="1"  width="3" height="3" rx="0.5"/>
                             <rect x="6.5" y="1"  width="3" height="3" rx="0.5"/>
@@ -413,8 +597,28 @@
                         </svg>
                         差异分析
                     </button>
+                    <button id="matrixSaveBtn" class="px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg text-sm font-medium transition-colors flex items-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                            <polyline points="7 10 12 15 17 10"/>
+                            <line x1="12" y1="15" x2="12" y2="3"/>
+                        </svg>
+                        保存图片
+                    </button>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- 点阵试验场弹窗 -->
+    <div id="matrixLabModal" class="fixed inset-0 z-[100] items-center justify-center bg-black/90 p-4 overflow-y-auto" style="display:none;">
+        <div class="relative bg-white rounded-lg shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+            <!-- 关闭按钮 -->
+            <button id="closeMatrixLabModal" class="absolute top-2 right-2 z-10 w-8 h-8 bg-gray-200 hover:bg-gray-300 rounded-full flex items-center justify-center text-xl font-bold text-gray-600 transition-colors" style="z-index:10;">
+                &times;
+            </button>
+            <!-- 试验场内容 -->
+            <div id="matrixLabContent"></div>
         </div>
     </div>
 
@@ -664,7 +868,6 @@
             matrixDegree = 0;
             matrixAnalysisActive = false;
             modal.classList.remove('analysis-active');
-            document.getElementById('matrixModalContent').classList.remove('wide-mode');
             renderMatrixContent(matrixData);
             modal.classList.add('active');
         }
@@ -674,19 +877,22 @@
             content.innerHTML = '';
 
             const mints = matrixData.mints;
+            const containerWidth = content.parentElement?.offsetWidth || 736;
+            const mintCount = mints.length;
+            const availWidth = containerWidth / mintCount - 30;
+
             mints.forEach((m, mintIdx) => {
                 const mintDiv = document.createElement('div');
                 mintDiv.className = `mint-section mint-index-${mintIdx}`;
                 mintDiv.dataset.mint = m.name;
 
                 const nameDiv = document.createElement('div');
-                nameDiv.className = 'font-bold text-sm mb-3';
+                nameDiv.className = 'font-bold text-sm mb-1';
                 nameDiv.textContent = m.name;
                 mintDiv.appendChild(nameDiv);
 
                 const gridDiv = document.createElement('div');
                 gridDiv.className = 'matrix-body';
-                gridDiv.style.transform = `rotate(${matrixDegree}deg)`;
 
                 m.data.forEach((col, colIdx) => {
                     if (col === '') {
@@ -709,6 +915,13 @@
                     });
                 });
 
+                // Measure natural size and apply uniform scale
+                const natW = gridDiv.offsetWidth || 108;
+                const natH = gridDiv.offsetHeight || 198;
+                const rotW = (matrixDegree % 180 !== 0) ? natH : natW;
+                const scale = Math.min(availWidth / rotW, 0.85);
+                gridDiv.style.transform = `rotate(${matrixDegree}deg) scale(${scale.toFixed(3)})`;
+
                 mintDiv.appendChild(gridDiv);
                 content.appendChild(mintDiv);
             });
@@ -721,10 +934,19 @@
         // 点阵旋转
         document.getElementById('matrixRotateBtn').addEventListener('click', () => {
             matrixDegree += 90;
-            document.querySelectorAll('#matrixModalContent .matrix-body').forEach(m => {
-                m.style.transform = `rotate(${matrixDegree}deg)`;
+            const content = document.getElementById('matrixModalContent');
+            const containerWidth = content.parentElement?.offsetWidth || 736;
+            const mintSections = content.querySelectorAll('.mint-section');
+            const mintCount = mintSections.length || 1;
+            const availWidth = containerWidth / mintCount - 30;
+
+            content.querySelectorAll('.matrix-body').forEach(m => {
+                const natW = m.offsetWidth || 108;
+                const natH = m.offsetHeight || 198;
+                const rotW = (matrixDegree % 180 !== 0) ? natH : natW;
+                const scale = Math.min(availWidth / rotW, 0.85);
+                m.style.transform = `rotate(${matrixDegree}deg) scale(${scale.toFixed(3)})`;
             });
-            document.getElementById('matrixModalContent').classList.toggle('wide-mode', matrixDegree % 180 !== 0);
         });
 
         // 点阵差异分析
@@ -736,11 +958,368 @@
             btn.classList.toggle('bg-blue-100', matrixAnalysisActive);
         });
 
+        // 点阵保存为图片
+        document.getElementById('matrixSaveBtn').addEventListener('click', () => {
+            const btn = document.getElementById('matrixSaveBtn');
+            if (btn.disabled) return;
+            btn.disabled = true;
+            btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> 保存中...`;
+
+            const title = document.querySelector('#matrixModalTitle h2')?.textContent || '点阵';
+            const subtitle = document.querySelector('#matrixModalTitle p')?.textContent || '';
+
+            const suffixes = [];
+            const deg = matrixDegree % 360;
+            if (deg !== 0) suffixes.push(`_rotate${deg}`);
+            if (matrixAnalysisActive) suffixes.push('_showdiff');
+            const filename = title + suffixes.join('') + '.png';
+
+            // 获取当前点阵数据
+            let currentMatrixData = null;
+            for (const [code, data] of Object.entries(matrixDataMap)) {
+                if (data.name === title || data.code === subtitle) {
+                    currentMatrixData = data;
+                    break;
+                }
+            }
+            if (!currentMatrixData) {
+                btn.disabled = false;
+                btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> 保存图片`;
+                return;
+            }
+
+            // 创建隐藏容器，包含标题+点阵
+            const wrapper = document.createElement('div');
+            wrapper.style.cssText = 'position:fixed;left:0;top:0;z-index:-1;width:600px;height:500px;overflow:hidden;opacity:0;pointer-events:none;';
+
+            const saveCard = document.createElement('div');
+            saveCard.style.cssText = 'width:600px;background:#fff;border:2px solid #000;';
+
+            // 标题区域
+            const saveHeader = document.createElement('div');
+            saveHeader.style.cssText = 'text-align:center;border-bottom:2px solid #000;padding:8px 0;';
+            const h2 = document.createElement('h2');
+            h2.style.cssText = 'margin:0;font-size:22px;font-weight:bold;';
+            h2.textContent = title;
+            saveHeader.appendChild(h2);
+            if (subtitle) {
+                const code = document.createElement('div');
+                code.style.cssText = 'font-size:18px;margin-top:4px;';
+                code.textContent = subtitle;
+                saveHeader.appendChild(code);
+            }
+            saveCard.appendChild(saveHeader);
+
+            // 点阵区域
+            const saveContent = document.createElement('div');
+            saveContent.id = 'matrixModalContent';
+            saveContent.style.cssText = 'display:flex;flex-direction:row;';
+
+            const mints = currentMatrixData.mints;
+            const mintWidth = (600 - 2) / mints.length; // subtract border, divide evenly
+
+            mints.forEach((m, mintIdx) => {
+                const mintDiv = document.createElement('div');
+                mintDiv.className = 'mint-section mint-index-' + mintIdx;
+                mintDiv.dataset.mint = m.name;
+                mintDiv.style.cssText = 'flex:1;width:' + mintWidth + 'px;border-right:2px solid #000;padding:5px 10px;display:flex;flex-direction:column;align-items:center;';
+                if (mintIdx === mints.length - 1) mintDiv.style.borderRight = 'none';
+
+                const nameDiv = document.createElement('div');
+                nameDiv.style.cssText = 'font-weight:bold;font-size:14px;margin-bottom:8px;';
+                nameDiv.textContent = m.name;
+                mintDiv.appendChild(nameDiv);
+
+                // 计算点阵自然尺寸
+                const natW = m.data.reduce((w, col) => col === '' ? w + 8 : w + 20, 0) - 2;
+                const natH = 198;
+                const rotW = (deg === 90 || deg === 270) ? natH : natW;
+                const rotH = (deg === 90 || deg === 270) ? natW : natH;
+                const availW = mintWidth - 20;
+                const scale = Math.min(availW / rotW, 0.85);
+
+                const gridDiv = document.createElement('div');
+                gridDiv.className = 'matrix-body';
+                gridDiv.style.cssText = 'display:grid;grid-template-rows:repeat(10,18px);grid-auto-flow:column;gap:2px;justify-content:center;';
+                if (deg !== 0) gridDiv.style.transform = 'rotate(' + deg + 'deg) scale(' + scale.toFixed(3) + ')';
+
+                const mintMints = mints;
+                m.data.forEach((col, colIdx) => {
+                    if (col === '') {
+                        const gap = document.createElement('div');
+                        gap.className = 'matrix-gap';
+                        gap.style.cssText = 'width:8px;grid-row:1/-1;';
+                        gridDiv.appendChild(gap);
+                        return;
+                    }
+                    col.split('').forEach((bit, rowIdx) => {
+                        const cell = document.createElement('div');
+                        cell.className = 'matrix-cell' + (bit === '1' ? ' filled' : '');
+                        cell.style.cssText = 'width:18px;height:18px;border:1px solid #e0e0e0;';
+                        if (bit === '1') {
+                            cell.style.background = '#000';
+                            if (matrixAnalysisActive) {
+                                const isCommon = mintMints.every(m2 => {
+                                    const targetCol = m2.data[colIdx];
+                                    return targetCol && targetCol[rowIdx] === '1';
+                                });
+                                if (!isCommon) {
+                                    const colors = { '沈阳': '#ff4d4f', '上海': '#1890ff', '南京': '#52c41a' };
+                                    const c = colors[m.name] || '#000';
+                                    cell.style.background = c;
+                                    cell.style.borderColor = c;
+                                }
+                            }
+                        }
+                        gridDiv.appendChild(cell);
+                    });
+                });
+
+                mintDiv.appendChild(gridDiv);
+                saveContent.appendChild(mintDiv);
+            });
+
+            saveCard.appendChild(saveContent);
+            wrapper.appendChild(saveCard);
+            document.body.appendChild(wrapper);
+
+            // Wait a frame for layout, then screenshot
+            requestAnimationFrame(() => {
+                html2canvas(saveCard, { scale: 2, backgroundColor: '#ffffff', logging: false }).then(canvas => {
+                    const a = document.createElement('a');
+                    a.download = filename;
+                    a.href = canvas.toDataURL('image/png');
+                    a.click();
+                }).finally(() => {
+                    document.body.removeChild(wrapper);
+                    btn.disabled = false;
+                    btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> 保存图片`;
+                });
+            });
+        });
+
         // 关闭点阵弹窗
         document.getElementById('closeMatrixModal').addEventListener('click', closeMatrixModal);
         document.getElementById('matrixModal').addEventListener('click', (e) => {
             if (e.target.id === 'matrixModal') closeMatrixModal();
         });
+
+        // ================= 点阵试验场弹窗 =================
+
+        let labGlobalDegree = 0;
+        let labAnalysisActive = false;
+
+        function openMatrixLab() {
+            const modal = document.getElementById('matrixLabModal');
+            modal.style.display = 'flex';
+            document.getElementById('labRotateBtn').style.display = 'flex';
+            document.getElementById('labAnalysisBtn').style.display = 'flex';
+            labGlobalDegree = 0;
+            labAnalysisActive = false;
+            modal.classList.remove('analysis-active');
+            renderLabContent();
+        }
+
+        function closeMatrixLabModal() {
+            const modal = document.getElementById('matrixLabModal');
+            modal.style.display = 'none';
+            document.getElementById('labRotateBtn').style.display = 'none';
+            document.getElementById('labAnalysisBtn').style.display = 'none';
+            document.getElementById('lab-generated')?.remove();
+        }
+
+        function renderLabContent() {
+            const content = document.getElementById('matrixLabContent');
+            content.innerHTML = `
+                <div class="lab">
+                    <div class="lab-header-form">点阵试验场</div>
+                    <div class="lab-input">
+                        <label>纪念币名称</label>
+                        <input id="lab-name" value="2026年贺岁（丙午）">
+                        <label>纪念币编号</label>
+                        <input id="lab-code" value="JB123">
+                        <div class="lab-version-block">
+                            <strong>版本 1</strong>
+                            <label>纪念币版本</label>
+                            <input id="mint-1" value="沈阳">
+                            <label>点阵数据</label>
+                            <textarea id="data-1">["1111111111","1110101011","1001010011","","1111111111","1010110001"]</textarea>
+                        </div>
+                        <div class="lab-version-block">
+                            <strong>版本 2</strong>
+                            <label>纪念币版本</label>
+                            <input id="mint-2" value="上海">
+                            <label>点阵数据</label>
+                            <textarea id="data-2">["1111111111","1110101001","1001010001","","1111111111","1010110011"]</textarea>
+                        </div>
+                        <div class="lab-version-block">
+                            <strong>版本 3</strong>
+                            <label>纪念币版本</label>
+                            <input id="mint-3" value="南京">
+                            <label>点阵数据</label>
+                            <textarea id="data-3">["1111111111","1110101001","1001010011","","1111111111","1010110011"]</textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="lab-actions">
+                    <button onclick="generateLab()">生成点阵</button>
+                    <button onclick="exportLabPreview()">保存成图片</button>
+                </div>
+                <div id="lab-generated"></div>
+            `;
+        }
+
+        function labCreateMatrix(data, mintIndex, allMintsData) {
+            const matrix = document.createElement('div');
+            matrix.className = `lab-matrix lab-mint-${mintIndex}`;
+
+            data.forEach((col, colIdx) => {
+                if (col === '') {
+                    const gap = document.createElement('div');
+                    gap.className = 'lab-gap-column';
+                    matrix.appendChild(gap);
+                    return;
+                }
+                col.split('').forEach((bit, rowIdx) => {
+                    const cell = document.createElement('div');
+                    cell.className = 'lab-cell' + (bit === '1' ? ' black' : '');
+
+                    if (bit === '1' && allMintsData) {
+                        const isCommon = allMintsData.every(m => {
+                            const targetCol = m.data[colIdx];
+                            return targetCol && targetCol[rowIdx] === '1';
+                        });
+                        if (!isCommon) cell.classList.add('lab-diff');
+                    }
+
+                    matrix.appendChild(cell);
+                });
+            });
+
+            applyLabMatrixScale(matrix);
+            return matrix;
+        }
+
+        function applyLabMatrixScale(matrix) {
+            const degree = labGlobalDegree % 360;
+            const containerWidth = 800;
+            const mintCount = matrix.parentElement?.querySelectorAll('.lab-mint').length || 1;
+            const availWidth = containerWidth / mintCount - 30;
+
+            let natW = matrix.offsetWidth;
+            let natH = matrix.offsetHeight;
+            if (!natW || !natH) {
+                const cells = matrix.querySelectorAll('.lab-cell').length;
+                const gaps = matrix.querySelectorAll('.lab-gap-column').length;
+                const cols = Math.ceil(cells / 10);
+                natW = cols * 20 + gaps * 8;
+                natH = 10 * 18 + 9 * 2;
+            }
+
+            const rotW = (degree === 90 || degree === 270) ? natH : natW;
+            const scale = Math.min(availWidth / rotW, 0.85);
+            matrix.style.transform = `rotate(${degree}deg) scale(${scale.toFixed(3)})`;
+        }
+
+        function buildLabCoin(name, code, mints) {
+            const coin = document.createElement('div');
+            coin.className = 'lab-coin';
+            coin.innerHTML = `<div class="lab-header"><h2>${name}</h2><div class="code">${code}</div></div>`;
+            const mintsDiv = document.createElement('div');
+            mintsDiv.className = 'lab-mints';
+
+            mints.forEach((m, idx) => {
+                const mintDiv = document.createElement('div');
+                mintDiv.className = 'lab-mint';
+                mintDiv.dataset.mint = m.name;
+                mintDiv.innerHTML = `<div class="lab-mint-name">${m.name}</div>`;
+                mintDiv.appendChild(labCreateMatrix(m.data, idx, mints));
+                mintsDiv.appendChild(mintDiv);
+            });
+
+            coin.appendChild(mintsDiv);
+            return coin;
+        }
+
+        function rotateAllLabMatrices() {
+            labGlobalDegree += 90;
+            document.querySelectorAll('.lab-matrix').forEach(m => {
+                applyLabMatrixScale(m);
+            });
+        }
+
+        function toggleLabAnalysis() {
+            labAnalysisActive = !labAnalysisActive;
+            document.getElementById('matrixLabModal').classList.toggle('analysis-active', labAnalysisActive);
+            const btn = document.getElementById('labAnalysisBtn');
+            btn.style.backgroundColor = labAnalysisActive ? '#bfdbfe' : '#ffffff';
+            btn.style.color = labAnalysisActive ? '#1d4ed8' : '#000';
+        }
+
+        function generateLab() {
+            const name = document.getElementById('lab-name').value;
+            const code = document.getElementById('lab-code').value;
+            const mints = [];
+
+            [1, 2, 3].forEach(i => {
+                const mint = document.getElementById(`mint-${i}`).value.trim();
+                const dataText = document.getElementById(`data-${i}`).value.trim();
+                if (!mint || !dataText) return;
+                try { mints.push({ name: mint, data: JSON.parse(dataText) }); } catch (e) {}
+            });
+
+            const old = document.getElementById('lab-generated');
+            if (old) old.innerHTML = '';
+
+            const container = document.getElementById('lab-generated');
+            if (container) {
+                container.appendChild(buildLabCoin(name, code, mints));
+            }
+        }
+
+        function exportLabPreview() {
+            const wrapper = document.getElementById('lab-generated');
+            if (!wrapper || !wrapper.querySelector('.lab-coin')) return alert('请先生成');
+
+            const suffixes = [];
+            const deg = labGlobalDegree % 360;
+            if (deg !== 0) suffixes.push(`_rotate${deg}`);
+            if (labAnalysisActive) suffixes.push('_showdiff');
+            const name = document.getElementById('lab-name')?.value || '点阵';
+            const filename = name + suffixes.join('') + '.png';
+
+            const coin = wrapper.querySelector('.lab-coin');
+            html2canvas(coin, { scale: 3, backgroundColor: '#ffffff', logging: false }).then(canvas => {
+                const a = document.createElement('a');
+                a.download = filename;
+                a.href = canvas.toDataURL('image/png');
+                a.click();
+            });
+        }
+
+        // 试验场弹窗事件绑定
+        document.getElementById('closeMatrixLabModal').addEventListener('click', closeMatrixLabModal);
+        document.getElementById('matrixLabModal').addEventListener('click', (e) => {
+            if (e.target.id === 'matrixLabModal') closeMatrixLabModal();
+        });
+
+        // 试验场悬浮按钮
+        document.body.insertAdjacentHTML('beforeend', `
+            <button id="labRotateBtn" title="顺时针旋转90度">
+                <svg t="1569683458761" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="10582">
+                    <path d="M480.5 251.2c13-1.6 25.9-2.4 38.8-2.5v63.9c0 6.5 7.5 10.1 12.6 6.1L660 217.6c4-3.2 4-9.2 0-12.3l-128-101c-5.1-4-12.6-0.4-12.6 6.1l-0.2 64c-118.6 0.5-235.8 53.4-314.6 154.2-69.6 89.2-95.7 198.6-81.1 302.4h74.9c-0.9-5.3-1.7-10.7-2.4-16.1-5.1-42.1-2.1-84.1 8.9-124.8 11.4-42.2 31-81.1 58.1-115.8 27.2-34.7 60.3-63.2 98.4-84.3 37-20.6 76.9-33.6 119.1-38.8z"/>
+                    <path d="M880 418H352c-17.7 0-32 14.3-32 32v414c0 17.7 14.3 32 32 32h528c17.7 0 32-14.3 32-32V450c0-17.7-14.3-32-32-32z m-44 402H396V494h440v326z"/>
+                </svg>
+            </button>
+            <button id="labAnalysisBtn" title="差异颜色分析">
+                <svg id="Capa_1" version="1.1" viewBox="0 0 362.5 442" xmlns="http://www.w3.org/2000/svg">
+                    <g><path d="M134.4,214.6c-16.6-5.5-30-17.2-37.8-32.8c-16.1-32.3-3-71.6,29.2-87.8l-13.2-26.4C65.7,91,46.7,148.2,70.1,195c16.6,33.2,50.2,52.4,85.1,52.4c14.3,0,28.7-3.2,42.3-10L184.3,211C168.7,218.8,150.9,220.1,134.4,214.6z"/><path d="M353.9,363.1l-80.3-120c9.5-12.7,17.2-27.2,22.5-43.1C322.6,120.5,279.5,34.3,200,7.8C120.5-18.7,34.3,24.5,7.8,104c-26.5,79.5,16.7,165.7,96.2,192.2c15.9,5.3,32,7.8,47.9,7.8c12.7,0,25.2-1.6,37.3-4.7l80.4,120.3c9.8,14.6,25.9,22.5,42.3,22.5c9.7,0,19.5-2.8,28.1-8.5C363.2,417.9,369.5,386.4,353.9,363.1z M113.3,268.1c-64.1-21.3-98.8-90.8-77.5-154.9c17.1-51.3,65-83.8,116.3-83.8c12.8,0,25.8,2,38.6,6.3c64.1,21.3,98.8,90.8,77.5,154.9C246.8,254.7,177.3,289.5,113.3,268.1z M332.5,395.4c-1.1,5.6-4.3,10.4-9,13.5c-9.7,6.5-22.9,3.9-29.4-5.8l-76.4-114.2c12.8-6.1,24.7-14,35.4-23.5l76.3,114.1C332.5,384.2,333.6,389.9,332.5,395.4z"/></g>
+                </svg>
+            </button>
+        `);
+
+        document.getElementById('labRotateBtn').addEventListener('click', rotateAllLabMatrices);
+        document.getElementById('labAnalysisBtn').addEventListener('click', toggleLabAnalysis);
 
         // 5. 渲染 UI - 需要更新卡片样式和事件监听
         function renderUI() {

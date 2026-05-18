@@ -45,7 +45,7 @@ body {
 .mint {
   flex: 1;
   border-right: 2px solid #000;
-  padding: 40px 10px; /* 增加边距适配旋转 */
+  padding: 5px 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -55,13 +55,9 @@ body {
   border-right: none;
 }
 
-.mints.wide-mode { flex-direction: column; }
-.mints.wide-mode .mint { border-right: none; border-bottom: 2px solid #000; }
-.mints.wide-mode .mint:last-child { border-bottom: none; }
-
 .mint-name {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 8px;
   font-size: 16px;
   font-weight: bold;
 }
@@ -270,7 +266,6 @@ let globalDegree = 0;
 function createMatrix(data, mintIndex, allMintsData) {
   const matrix = document.createElement("div");
   matrix.className = `matrix mint-${mintIndex}`;
-  matrix.style.transform = `rotate(${globalDegree}deg)`;
 
   data.forEach((col, colIdx) => {
     if (col === "") {
@@ -294,7 +289,35 @@ function createMatrix(data, mintIndex, allMintsData) {
       matrix.appendChild(cell);
     });
   });
+
+  applyMatrixScale(matrix);
   return matrix;
+}
+
+function applyMatrixScale(matrix) {
+  const degree = globalDegree % 360;
+  const containerWidth = 800;
+  const mintCount = matrix.parentElement?.querySelectorAll('.mint').length || 1;
+  const availWidth = containerWidth / mintCount - 30;
+
+  // Compute natural size from DOM or data
+  let natW = matrix.offsetWidth;
+  let natH = matrix.offsetHeight;
+  if (!natW || !natH) {
+    const cells = matrix.querySelectorAll('.cell').length;
+    const gaps = matrix.querySelectorAll('.gap-column').length;
+    const cols = Math.ceil(cells / 10);
+    natW = cols * 20 + gaps * 8;
+    natH = 10 * 18 + 9 * 2;
+  }
+
+  const rotW = (degree === 90 || degree === 270) ? natH : natW;
+  const scale = Math.min(availWidth / rotW, 0.85);
+  matrix.style.transform = `rotate(${degree}deg) scale(${scale.toFixed(3)})`;
+}
+
+function applyAllScales() {
+  document.querySelectorAll('.matrix').forEach(applyMatrixScale);
 }
 
 function buildCoin(name, code, mints) {
@@ -323,10 +346,7 @@ function rotateAllMatrices() {
   globalDegree += 90;
   const allMatrices = document.querySelectorAll('.matrix');
   allMatrices.forEach(m => {
-    m.style.transform = `rotate(${globalDegree}deg)`;
-  });
-  document.querySelectorAll('.mints').forEach(m => {
-    m.classList.toggle('wide-mode', globalDegree % 180 !== 0);
+    applyMatrixScale(m);
   });
 }
 
