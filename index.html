@@ -870,12 +870,14 @@
             modal.classList.remove('analysis-active');
             modal.classList.add('active');
 
-            // 先渲染结构，等布局完成后测量宽度再缩放
+            renderMatrixContent(matrixData);
+        }
+
+        function renderMatrixContent(matrixData) {
             const content = document.getElementById('matrixModalContent');
-            const mints = matrixData.mints;
-            const mintCount = mints.length;
             content.innerHTML = '';
 
+            const mints = matrixData.mints;
             mints.forEach((m, mintIdx) => {
                 const mintDiv = document.createElement('div');
                 mintDiv.className = `mint-section mint-index-${mintIdx}`;
@@ -888,7 +890,6 @@
 
                 const gridDiv = document.createElement('div');
                 gridDiv.className = 'matrix-body';
-                gridDiv.style.transformOrigin = 'center top';
 
                 m.data.forEach((col, colIdx) => {
                     if (col === '') {
@@ -915,17 +916,32 @@
                 content.appendChild(mintDiv);
             });
 
-            // 等浏览器布局完成后测量
+            // 等布局完成后测量并缩放
             requestAnimationFrame(() => {
-                const gridDivs = content.querySelectorAll('.matrix-body');
-                gridDivs.forEach(gridDiv => {
+                content.querySelectorAll('.matrix-body').forEach(gridDiv => {
                     const natW = gridDiv.offsetWidth || 108;
                     const natH = gridDiv.offsetHeight || 198;
                     const rotW = (matrixDegree % 180 !== 0) ? natH : natW;
                     const mintSection = gridDiv.closest('.mint-section');
                     const availW = (mintSection?.offsetWidth || 200) - 20;
-                    const scale = Math.min(availW / rotW, 0.85);
-                    gridDiv.style.transform = `rotate(${matrixDegree}deg) scale(${scale.toFixed(3)})`;
+
+                    if (rotW > availW) {
+                        // 用 inline 样式缩小每个单元格来真正减小布局宽度
+                        const ratio = availW / rotW;
+                        const newCell = Math.round(18 * ratio);
+                        const newGap = Math.max(1, Math.round(2 * ratio));
+                        gridDiv.querySelectorAll('.matrix-cell').forEach(c => {
+                            c.style.width = newCell + 'px';
+                            c.style.height = newCell + 'px';
+                        });
+                        gridDiv.querySelectorAll('.matrix-gap').forEach(g => {
+                            g.style.width = newGap + 'px';
+                        });
+                        gridDiv.style.gridTemplateRows = 'repeat(10, ' + newCell + 'px)';
+                        gridDiv.style.gap = newGap + 'px';
+                    }
+
+                    gridDiv.style.transform = `rotate(${matrixDegree}deg)`;
                 });
             });
         }
@@ -938,18 +954,40 @@
         document.getElementById('matrixRotateBtn').addEventListener('click', () => {
             matrixDegree += 90;
             const content = document.getElementById('matrixModalContent');
-            const pad = 32;
-            const containerWidth = content.offsetWidth - pad || 311;
-            const mintSections = content.querySelectorAll('.mint-section');
-            const mintCount = mintSections.length || 1;
-            const availWidth = containerWidth / mintCount - 20;
-
             content.querySelectorAll('.matrix-body').forEach(m => {
                 const natW = m.offsetWidth || 108;
                 const natH = m.offsetHeight || 198;
                 const rotW = (matrixDegree % 180 !== 0) ? natH : natW;
-                const scale = Math.min(availWidth / rotW, 0.85);
-                m.style.transform = `rotate(${matrixDegree}deg) scale(${scale.toFixed(3)})`;
+                const mintSection = m.closest('.mint-section');
+                const availW = (mintSection?.offsetWidth || 200) - 20;
+
+                // 重置单元格尺寸
+                m.querySelectorAll('.matrix-cell').forEach(c => {
+                    c.style.width = '';
+                    c.style.height = '';
+                });
+                m.querySelectorAll('.matrix-gap').forEach(g => {
+                    g.style.width = '';
+                });
+                m.style.gridTemplateRows = 'repeat(10, 18px)';
+                m.style.gap = '2px';
+
+                if (rotW > availW) {
+                    const ratio = availW / rotW;
+                    const newCell = Math.round(18 * ratio);
+                    const newGap = Math.max(1, Math.round(2 * ratio));
+                    m.querySelectorAll('.matrix-cell').forEach(c => {
+                        c.style.width = newCell + 'px';
+                        c.style.height = newCell + 'px';
+                    });
+                    m.querySelectorAll('.matrix-gap').forEach(g => {
+                        g.style.width = newGap + 'px';
+                    });
+                    m.style.gridTemplateRows = 'repeat(10, ' + newCell + 'px)';
+                    m.style.gap = newGap + 'px';
+                }
+
+                m.style.transform = `rotate(${matrixDegree}deg)`;
             });
         });
 
