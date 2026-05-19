@@ -2,6 +2,7 @@
 <html lang="zh">
 <head>
 <meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <title>纪念币点阵展示</title>
 
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
@@ -11,15 +12,31 @@ body {
   font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
   background-color: #f9f9f9;
   padding-bottom: 50px;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
 }
 
 /* ================= 通用纪念币样式 ================= */
 
 .coin {
-  width: 800px;
+  width: min(800px, 90vw);
   margin: 20px auto;
   border: 2px solid #000;
   background: #fff;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* 点阵容器：固定宽高，旋转时不改变布局尺寸 */
+.matrix-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
 }
 
 .header {
@@ -40,15 +57,18 @@ body {
 
 .mints {
   display: flex;
+  overflow: hidden;
 }
 
 .mint {
   flex: 1;
+  min-width: 0;
   border-right: 2px solid #000;
   padding: 5px 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow: hidden;
 }
 
 .mint:last-child {
@@ -64,13 +84,18 @@ body {
 
 /* ================= 点阵样式 ================= */
 
+.matrix-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: width 0.5s ease, height 0.5s ease;
+}
+
 .matrix {
   display: grid;
   grid-template-rows: repeat(10, 18px);
   grid-auto-flow: column;
   gap: 2px;
-  justify-content: center;
-  /* 关键：增加过渡动画 */
   transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: transform;
 }
@@ -147,10 +172,12 @@ body {
 /* ================= 试验场 ================= */
 
 .lab {
-  width: 800px;
+  width: min(800px, 90vw);
   margin: 20px auto;
   border: 2px solid #000;
   background: #fff;
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
 .lab-header {
@@ -192,9 +219,10 @@ body {
 }
 
 .lab-actions {
-  width: 800px;
+  width: min(800px, 90vw);
   margin: 30px auto 10px;
   text-align: right;
+  box-sizing: border-box;
 }
 
 .lab-actions button {
@@ -290,30 +318,14 @@ function createMatrix(data, mintIndex, allMintsData) {
     });
   });
 
-  applyMatrixScale(matrix);
   return matrix;
 }
 
 function applyMatrixScale(matrix) {
   const degree = globalDegree % 360;
-  const containerWidth = 800;
-  const mintCount = matrix.parentElement?.querySelectorAll('.mint').length || 1;
-  const availWidth = containerWidth / mintCount - 30;
-
-  // Compute natural size from DOM or data
-  let natW = matrix.offsetWidth;
-  let natH = matrix.offsetHeight;
-  if (!natW || !natH) {
-    const cells = matrix.querySelectorAll('.cell').length;
-    const gaps = matrix.querySelectorAll('.gap-column').length;
-    const cols = Math.ceil(cells / 10);
-    natW = cols * 20 + gaps * 8;
-    natH = 10 * 18 + 9 * 2;
-  }
-
-  const rotW = (degree === 90 || degree === 270) ? natH : natW;
-  const scale = Math.min(availWidth / rotW, 0.85);
+  const scale = window._matrixFixedScale || 1;
   matrix.style.transform = `rotate(${degree}deg) scale(${scale.toFixed(3)})`;
+  matrix.style.transformOrigin = 'center center';
 }
 
 function applyAllScales() {
@@ -332,11 +344,73 @@ function buildCoin(name, code, mints) {
     mintDiv.className = "mint";
     mintDiv.dataset.mint = m.name;
     mintDiv.innerHTML = `<div class="mint-name">${m.name}</div>`;
-    mintDiv.appendChild(createMatrix(m.data, idx, mints));
+    const wrapper = document.createElement("div");
+    wrapper.className = "matrix-wrapper";
+    wrapper.appendChild(createMatrix(m.data, idx, mints));
+    mintDiv.appendChild(wrapper);
     mintsDiv.appendChild(mintDiv);
   });
 
   coin.appendChild(mintsDiv);
+
+  // Append to DOM so dimensions are accurate
+  const container = document.getElementById("lab-generated");
+  if (container) {
+    container.appendChild(coin);
+  } else {
+    const newContainer = document.createElement("div");
+    newContainer.id = "lab-generated";
+    document.body.appendChild(newContainer);
+    newContainer.appendChild(coin);
+  }
+
+  // Force layout then measure actual available space
+  coin.offsetHeight;
+
+  // Use clientWidth (inner, no borders) for accurate measurement
+  const coinInner = coin.clientWidth;
+  const mintCount = mints.length;
+  const separatorWidth = (mintCount - 1) * 2; // 2px border-right between mints
+  const spaceForAllMints = coinInner - separatorWidth;
+  const perMint = spaceForAllMints / mintCount;
+  const availWidth = perMint - 20; // subtract mint padding (5+5 top/bottom not needed, but left+right = 10+10)
+  const availHeight = window.innerHeight * 0.5;
+
+  // Natural matrix size (at 0°)
+  const firstMatrix = coin.querySelector('.matrix');
+  const totalCells = firstMatrix.querySelectorAll('.cell').length;
+  const totalGaps = firstMatrix.querySelectorAll('.gap-column').length;
+  const actualCols = Math.ceil(totalCells / 10);
+  const natW = actualCols * 20 + totalGaps * 8;
+  const natH = 10 * 18 + 9 * 2;
+
+  // Fixed scale based on 90° width constraint (tightest)
+  const scale90W = availWidth / natH;
+  const scale90H = availHeight / natW;
+  const fixedScale = Math.min(scale90W, scale90H, 1);
+
+  window._matrixFixedScale = fixedScale;
+
+  // Visual sizes at 0° and 90° with this scale
+  const vis0W = Math.ceil(natW * fixedScale);
+  const vis0H = Math.ceil(natH * fixedScale);
+  const vis90W = Math.ceil(natH * fixedScale);
+  const vis90H = Math.ceil(natW * fixedScale);
+
+  // Wrapper sized to the MAX of both states — always square, never resizes
+  const wrapperSize = Math.max(vis0W, vis0H, vis90W, vis90H);
+
+  coin.querySelectorAll('.matrix-wrapper').forEach(w => {
+    w.style.width = wrapperSize + 'px';
+    w.style.height = wrapperSize + 'px';
+  });
+
+  coin.querySelectorAll('.matrix').forEach(m => {
+    m.style.width = natW + 'px';
+    m.style.height = natH + 'px';
+    applyMatrixScale(m);
+  });
+
   return coin;
 }
 
@@ -344,8 +418,7 @@ function buildCoin(name, code, mints) {
 
 function rotateAllMatrices() {
   globalDegree += 90;
-  const allMatrices = document.querySelectorAll('.matrix');
-  allMatrices.forEach(m => {
+  document.querySelectorAll('.matrix').forEach(m => {
     applyMatrixScale(m);
   });
 }
@@ -372,6 +445,7 @@ function generateLab() {
 
   const old = document.getElementById("lab-generated");
   if (old) old.remove();
+  window._matrixFixedScale = undefined; // reset for new generation
 
   const container = document.createElement("div");
   container.id = "lab-generated";
