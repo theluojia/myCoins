@@ -391,17 +391,38 @@
         #zoomModal.active {
             display: flex;
         }
+
+        /* 顶部滚动提示条 */
+        #scrollHint {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 90;
+            transform: translateY(-100%);
+            transition: transform 0.3s ease-in-out;
+            background: linear-gradient(to right, rgba(30, 64, 175, 0.8), rgba(37, 99, 235, 0.8));
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            color: white;
+            text-align: center;
+            padding: 8px 16px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        #scrollHint.visible {
+            transform: translateY(0);
+        }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans p-4 sm:p-8">
+    <!-- 顶部滚动提示条 -->
+    <div id="scrollHint">
+        右上角图标：<b class="text-[#22C55E]">双击</b>已收藏 / <b class="text-[#FBBF24]">单击</b>想收藏
+    </div>
     <div class="max-w-7xl mx-auto py-8">
         <header class="text-center mb-10">
             <h1 class="text-4xl sm:text-5xl font-extrabold text-blue-800 leading-tight">我的纪念币收藏</h1>
-            <p class="text-xl sm:text-2xl mt-2 text-gray-600">
-                右上角图标：
-                <b class="text-[#22C55E]"><i>双击</i></b>标记已收藏 / 
-                <b class="text-[#FBBF24]"><i>单击</i></b>标记想收藏
-            </p>
             <div id="collectionOverview" class="collection-overview mt-4 max-w-2xl mx-auto">
                 <div class="collection-header" id="overviewHeader">
                     <div class="collection-summary">
@@ -1962,6 +1983,20 @@
             isBackView = !isBackView; // 切换状态
             renderUI(); // 重新渲染页面
         });
+
+        // 顶部滚动提示条
+        const scrollHint = document.getElementById('scrollHint');
+        let hintVisible = false;
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.scrollY || document.documentElement.scrollTop;
+            if (scrollTop > 200 && !hintVisible) {
+                hintVisible = true;
+                scrollHint.classList.add('visible');
+            } else if (scrollTop <= 200 && hintVisible) {
+                hintVisible = false;
+                scrollHint.classList.remove('visible');
+            }
+        }, { passive: true });
 
     </script>
 </body>
