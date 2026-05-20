@@ -94,10 +94,12 @@
         /* ================= 点阵试验场样式 ================= */
 
         #matrixLabModal .lab-coin {
-            width: 800px;
-            margin: 20px auto;
+            width: min(800px, 90vw);
+            margin: 10px auto;
             border: 2px solid #000;
             background: #fff;
+            overflow: hidden;
+            box-sizing: border-box;
         }
 
         #matrixLabModal .lab-header {
@@ -108,11 +110,11 @@
 
         #matrixLabModal .lab-header h2 {
             margin: 0;
-            font-size: 22px;
+            font-size: 16px;
         }
 
         #matrixLabModal .lab-header .code {
-            font-size: 18px;
+            font-size: 14px;
             margin-top: 4px;
         }
 
@@ -122,11 +124,13 @@
 
         #matrixLabModal .lab-mint {
             flex: 1;
+            min-width: 0;
             border-right: 2px solid #000;
             padding: 5px 10px;
             display: flex;
             flex-direction: column;
             align-items: center;
+            overflow: hidden;
         }
 
         #matrixLabModal .lab-mint:last-child {
@@ -147,7 +151,6 @@
             gap: 2px;
             justify-content: center;
             transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            will-change: transform;
         }
 
         #matrixLabModal .lab-cell {
@@ -164,12 +167,10 @@
             background: #ff4d4f;
             border-color: #ff4d4f;
         }
-
         #matrixLabModal.analysis-active .lab-mint[data-mint="上海"] .lab-cell.black.lab-diff {
             background: #1890ff;
             border-color: #1890ff;
         }
-
         #matrixLabModal.analysis-active .lab-mint[data-mint="南京"] .lab-cell.black.lab-diff {
             background: #52c41a;
             border-color: #52c41a;
@@ -180,11 +181,21 @@
             grid-row: 1 / -1;
         }
 
+        /* 试验场 wrapper：固定宽高，旋转时不改变布局 */
+        #matrixLabModal .lab-matrix-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
         #matrixLabModal .lab {
-            width: 800px;
-            margin: 20px auto;
+            width: min(800px, 90vw);
+            margin: 10px auto;
             border: 2px solid #000;
             background: #fff;
+            overflow: hidden;
+            box-sizing: border-box;
         }
 
         #matrixLabModal .lab-header-form {
@@ -226,13 +237,17 @@
         }
 
         #matrixLabModal .lab-actions {
-            width: 800px;
-            margin: 30px auto 10px;
-            text-align: right;
+            width: min(800px, 90vw);
+            margin: 10px auto;
+            text-align: center;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            box-sizing: border-box;
         }
 
         #matrixLabModal .lab-actions button {
-            margin-right: 10px;
             padding: 6px 14px;
             font-size: 14px;
             cursor: pointer;
@@ -240,42 +255,16 @@
             border-radius: 4px;
             background: #f5f5f5;
             color: #000;
+            flex: 0 0 auto;
         }
 
         #matrixLabModal .lab-actions button:hover {
             background: #e0e0e0;
         }
 
-        /* 悬浮按钮 - 仅在试验场弹窗打开时显示 */
-        #labRotateBtn, #labAnalysisBtn {
-            position: fixed;
-            right: 40px;
-            width: 56px;
-            height: 56px;
-            background-color: #ffffff;
-            color: #000;
-            border-radius: 50%;
-            border: 2px solid #000;
-            cursor: pointer;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            z-index: 9999;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-        }
-
-        #labRotateBtn { top: calc(50% - 35px); }
-        #labAnalysisBtn { top: calc(50% + 35px); }
-        #labRotateBtn:hover, #labAnalysisBtn:hover {
-            background-color: #000;
-            color: #fff;
-        }
-
-        #labRotateBtn svg, #labAnalysisBtn svg {
-            width: 28px;
-            height: 28px;
-            fill: currentColor;
+        #matrixLabModal .lab-actions button.active-btn {
+            background: #bfdbfe;
+            color: #1d4ed8;
         }
 
         /* 骨架屏动画 */
@@ -1182,20 +1171,18 @@
         function openMatrixLab() {
             const modal = document.getElementById('matrixLabModal');
             modal.style.display = 'flex';
-            document.getElementById('labRotateBtn').style.display = 'flex';
-            document.getElementById('labAnalysisBtn').style.display = 'flex';
             labGlobalDegree = 0;
             labAnalysisActive = false;
             modal.classList.remove('analysis-active');
+            window._labFixedScale = undefined;
             renderLabContent();
         }
 
         function closeMatrixLabModal() {
             const modal = document.getElementById('matrixLabModal');
             modal.style.display = 'none';
-            document.getElementById('labRotateBtn').style.display = 'none';
-            document.getElementById('labAnalysisBtn').style.display = 'none';
             document.getElementById('lab-generated')?.remove();
+            window._labFixedScale = undefined;
         }
 
         function renderLabContent() {
@@ -1233,10 +1220,24 @@
                 </div>
                 <div class="lab-actions">
                     <button onclick="generateLab()">生成点阵</button>
+                    <button id="labAnalysisBtnInline" title="差异颜色分析">差异</button>
+                    <button id="labRotateBtnInline" title="顺时针旋转90度">旋转</button>
                     <button onclick="exportLabPreview()">保存成图片</button>
                 </div>
                 <div id="lab-generated"></div>
             `;
+        }
+
+        function getLabMatrixSize(data) {
+            let totalCells = 0;
+            let totalGaps = 0;
+            data.forEach((col) => {
+                if (col === '') { totalGaps++; } else { totalCells += col.length; }
+            });
+            const cols = Math.ceil(totalCells / 10);
+            const natW = cols * 20 + totalGaps * 8;
+            const natH = 10 * 18 + 9 * 2;
+            return { natW, natH };
         }
 
         function labCreateMatrix(data, mintIndex, allMintsData) {
@@ -1266,32 +1267,34 @@
                 });
             });
 
-            applyLabMatrixScale(matrix);
             return matrix;
         }
 
         function applyLabMatrixScale(matrix) {
-            const degree = labGlobalDegree % 360;
-            const containerWidth = 800;
-            const mintCount = matrix.parentElement?.querySelectorAll('.lab-mint').length || 1;
-            const availWidth = containerWidth / mintCount - 30;
-
-            let natW = matrix.offsetWidth;
-            let natH = matrix.offsetHeight;
-            if (!natW || !natH) {
-                const cells = matrix.querySelectorAll('.lab-cell').length;
-                const gaps = matrix.querySelectorAll('.lab-gap-column').length;
-                const cols = Math.ceil(cells / 10);
-                natW = cols * 20 + gaps * 8;
-                natH = 10 * 18 + 9 * 2;
-            }
-
-            const rotW = (degree === 90 || degree === 270) ? natH : natW;
-            const scale = Math.min(availWidth / rotW, 0.85);
-            matrix.style.transform = `rotate(${degree}deg) scale(${scale.toFixed(3)})`;
+            const scale = window._labFixedScale || 1;
+            matrix.style.transform = `rotate(${labGlobalDegree}deg) scale(${scale.toFixed(3)})`;
+            matrix.style.transformOrigin = 'center center';
         }
 
         function buildLabCoin(name, code, mints) {
+            const coinWidth = Math.min(800, window.innerWidth * 0.9);
+            const mintCount = mints.length;
+            const separatorWidth = (mintCount - 1) * 2;
+            const perMintInner = (coinWidth - 4 - separatorWidth) / mintCount;
+            const availWidth = perMintInner - 20;
+            const availHeight = window.innerHeight * 0.5;
+
+            const { natW, natH } = getLabMatrixSize(mints[0].data);
+
+            const fixedScale = Math.min(availWidth / natH, availHeight / natW, 1);
+            window._labFixedScale = fixedScale;
+
+            const vis0W = natW * fixedScale;
+            const vis0H = natH * fixedScale;
+            const vis90W = natH * fixedScale;
+            const vis90H = natW * fixedScale;
+            const wrapperSize = Math.ceil(Math.max(vis0W, vis0H, vis90W, vis90H));
+
             const coin = document.createElement('div');
             coin.className = 'lab-coin';
             coin.innerHTML = `<div class="lab-header"><h2>${name}</h2><div class="code">${code}</div></div>`;
@@ -1303,7 +1306,19 @@
                 mintDiv.className = 'lab-mint';
                 mintDiv.dataset.mint = m.name;
                 mintDiv.innerHTML = `<div class="lab-mint-name">${m.name}</div>`;
-                mintDiv.appendChild(labCreateMatrix(m.data, idx, mints));
+
+                const wrapper = document.createElement('div');
+                wrapper.className = 'lab-matrix-wrapper';
+                wrapper.style.width = wrapperSize + 'px';
+                wrapper.style.height = wrapperSize + 'px';
+
+                const matrix = labCreateMatrix(m.data, idx, mints);
+                matrix.style.width = natW + 'px';
+                matrix.style.height = natH + 'px';
+                applyLabMatrixScale(matrix);
+
+                wrapper.appendChild(matrix);
+                mintDiv.appendChild(wrapper);
                 mintsDiv.appendChild(mintDiv);
             });
 
@@ -1321,9 +1336,8 @@
         function toggleLabAnalysis() {
             labAnalysisActive = !labAnalysisActive;
             document.getElementById('matrixLabModal').classList.toggle('analysis-active', labAnalysisActive);
-            const btn = document.getElementById('labAnalysisBtn');
-            btn.style.backgroundColor = labAnalysisActive ? '#bfdbfe' : '#ffffff';
-            btn.style.color = labAnalysisActive ? '#1d4ed8' : '#000';
+            const btn = document.getElementById('labAnalysisBtnInline');
+            if (btn) btn.classList.toggle('active-btn', labAnalysisActive);
         }
 
         function generateLab() {
@@ -1340,6 +1354,7 @@
 
             const old = document.getElementById('lab-generated');
             if (old) old.innerHTML = '';
+            window._labFixedScale = undefined;
 
             const container = document.getElementById('lab-generated');
             if (container) {
@@ -1382,23 +1397,15 @@
             if (e.target.id === 'matrixLabModal') closeMatrixLabModal();
         });
 
-        // 试验场悬浮按钮
-        document.body.insertAdjacentHTML('beforeend', `
-            <button id="labRotateBtn" title="顺时针旋转90度">
-                <svg t="1569683458761" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="10582">
-                    <path d="M480.5 251.2c13-1.6 25.9-2.4 38.8-2.5v63.9c0 6.5 7.5 10.1 12.6 6.1L660 217.6c4-3.2 4-9.2 0-12.3l-128-101c-5.1-4-12.6-0.4-12.6 6.1l-0.2 64c-118.6 0.5-235.8 53.4-314.6 154.2-69.6 89.2-95.7 198.6-81.1 302.4h74.9c-0.9-5.3-1.7-10.7-2.4-16.1-5.1-42.1-2.1-84.1 8.9-124.8 11.4-42.2 31-81.1 58.1-115.8 27.2-34.7 60.3-63.2 98.4-84.3 37-20.6 76.9-33.6 119.1-38.8z"/>
-                    <path d="M880 418H352c-17.7 0-32 14.3-32 32v414c0 17.7 14.3 32 32 32h528c17.7 0 32-14.3 32-32V450c0-17.7-14.3-32-32-32z m-44 402H396V494h440v326z"/>
-                </svg>
-            </button>
-            <button id="labAnalysisBtn" title="差异颜色分析">
-                <svg id="Capa_1" version="1.1" viewBox="0 0 362.5 442" xmlns="http://www.w3.org/2000/svg">
-                    <g><path d="M134.4,214.6c-16.6-5.5-30-17.2-37.8-32.8c-16.1-32.3-3-71.6,29.2-87.8l-13.2-26.4C65.7,91,46.7,148.2,70.1,195c16.6,33.2,50.2,52.4,85.1,52.4c14.3,0,28.7-3.2,42.3-10L184.3,211C168.7,218.8,150.9,220.1,134.4,214.6z"/><path d="M353.9,363.1l-80.3-120c9.5-12.7,17.2-27.2,22.5-43.1C322.6,120.5,279.5,34.3,200,7.8C120.5-18.7,34.3,24.5,7.8,104c-26.5,79.5,16.7,165.7,96.2,192.2c15.9,5.3,32,7.8,47.9,7.8c12.7,0,25.2-1.6,37.3-4.7l80.4,120.3c9.8,14.6,25.9,22.5,42.3,22.5c9.7,0,19.5-2.8,28.1-8.5C363.2,417.9,369.5,386.4,353.9,363.1z M113.3,268.1c-64.1-21.3-98.8-90.8-77.5-154.9c17.1-51.3,65-83.8,116.3-83.8c12.8,0,25.8,2,38.6,6.3c64.1,21.3,98.8,90.8,77.5,154.9C246.8,254.7,177.3,289.5,113.3,268.1z M332.5,395.4c-1.1,5.6-4.3,10.4-9,13.5c-9.7,6.5-22.9,3.9-29.4-5.8l-76.4-114.2c12.8-6.1,24.7-14,35.4-23.5l76.3,114.1C332.5,384.2,333.6,389.9,332.5,395.4z"/></g>
-                </svg>
-            </button>
-        `);
-
-        document.getElementById('labRotateBtn').addEventListener('click', rotateAllLabMatrices);
-        document.getElementById('labAnalysisBtn').addEventListener('click', toggleLabAnalysis);
+        // 试验场内联按钮事件
+        document.addEventListener('click', (e) => {
+            if (e.target.id === 'labRotateBtnInline') {
+                rotateAllLabMatrices();
+            }
+            if (e.target.id === 'labAnalysisBtnInline') {
+                toggleLabAnalysis();
+            }
+        });
 
         // 5. 渲染 UI - 需要更新卡片样式和事件监听
         function renderUI() {
