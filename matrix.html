@@ -31,14 +31,6 @@ body {
   box-sizing: border-box;
 }
 
-/* 点阵容器：固定宽高，旋转时不改变布局尺寸 */
-.matrix-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-shrink: 0;
-}
-
 .header {
   text-align: center;
   border-bottom: 2px solid #000;
@@ -57,7 +49,6 @@ body {
 
 .mints {
   display: flex;
-  overflow: hidden;
 }
 
 .mint {
@@ -82,22 +73,21 @@ body {
   font-weight: bold;
 }
 
-/* ================= 点阵样式 ================= */
-
+/* 点阵容器：固定宽高，flex 居中 */
 .matrix-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: width 0.5s ease, height 0.5s ease;
+  flex-shrink: 0;
 }
 
+/* 点阵网格 */
 .matrix {
   display: grid;
   grid-template-rows: repeat(10, 18px);
   grid-auto-flow: column;
   gap: 2px;
   transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  will-change: transform;
 }
 
 .cell {
@@ -111,11 +101,6 @@ body {
 }
 
 /* 分析模式下的专属颜色 */
-.analysis-active .mint-0 .cell.black.diff { background: #ff4d4f; border-color: #ff4d4f; }
-.analysis-active .mint-1 .cell.black.diff { background: #1890ff; border-color: #1890ff; }
-.analysis-active .mint-2 .cell.black.diff { background: #52c41a; border-color: #52c41a; }
-
-/* ===== 新增：按造币厂名称绑定差异颜色 ===== */
 .analysis-active .mint[data-mint="沈阳"] .cell.black.diff {
   background: #ff4d4f;
   border-color: #ff4d4f;
@@ -134,7 +119,7 @@ body {
   grid-row: 1 / -1;
 }
 
-/* ================= 悬浮按钮 (风格保持一致) ================= */
+/* ================= 悬浮按钮 ================= */
 
 .rotate-float-btn, .analysis-float-btn {
   position: fixed;
@@ -154,7 +139,6 @@ body {
   transition: all 0.3s ease;
 }
 
-/* 两个按钮上下排列 */
 .rotate-float-btn { top: calc(50% - 35px); }
 .analysis-float-btn { top: calc(50% + 35px); }
 
@@ -291,6 +275,22 @@ let globalDegree = 0;
 
 /* ================= 核心构建逻辑 ================= */
 
+function getMatrixSize(data) {
+  let totalCells = 0;
+  let totalGaps = 0;
+  data.forEach((col) => {
+    if (col === "") {
+      totalGaps++;
+    } else {
+      totalCells += col.length;
+    }
+  });
+  const cols = Math.ceil(totalCells / 10);
+  const natW = cols * 20 + totalGaps * 8;
+  const natH = 10 * 18 + 9 * 2;
+  return { natW, natH };
+}
+
 function createMatrix(data, mintIndex, allMintsData) {
   const matrix = document.createElement("div");
   matrix.className = `matrix mint-${mintIndex}`;
@@ -328,11 +328,29 @@ function applyMatrixScale(matrix) {
   matrix.style.transformOrigin = 'center center';
 }
 
-function applyAllScales() {
-  document.querySelectorAll('.matrix').forEach(applyMatrixScale);
-}
-
 function buildCoin(name, code, mints) {
+  const coinWidth = Math.min(800, window.innerWidth * 0.9);
+  const mintCount = mints.length;
+  // 每个厂可用宽度 = (币总宽 - 分隔线总宽) / 厂数 - mint padding
+  const separatorWidth = (mintCount - 1) * 2;
+  const perMintInner = (coinWidth - 4 - separatorWidth) / mintCount; // 4 = coin border left+right
+  const availWidth = perMintInner - 20; // left+right padding on .mint
+  const availHeight = window.innerHeight * 0.5;
+
+  // 矩阵自然尺寸（从数据算，不依赖 DOM）
+  const { natW, natH } = getMatrixSize(mints[0].data);
+
+  // 固定缩放：按 90° 旋转后（宽= natH）能装下为限
+  const fixedScale = Math.min(availWidth / natH, availHeight / natW, 1);
+  window._matrixFixedScale = fixedScale;
+
+  // 视觉尺寸：旋转 0° 和 90° 时各多大
+  const vis0W = natW * fixedScale;
+  const vis0H = natH * fixedScale;
+  const vis90W = natH * fixedScale;
+  const vis90H = natW * fixedScale;
+  const wrapperSize = Math.ceil(Math.max(vis0W, vis0H, vis90W, vis90H));
+
   const coin = document.createElement("div");
   coin.className = "coin";
   coin.innerHTML = `<div class="header"><h2>${name}</h2><div class="code">${code}</div></div>`;
@@ -346,14 +364,19 @@ function buildCoin(name, code, mints) {
     mintDiv.innerHTML = `<div class="mint-name">${m.name}</div>`;
     const wrapper = document.createElement("div");
     wrapper.className = "matrix-wrapper";
-    wrapper.appendChild(createMatrix(m.data, idx, mints));
+    wrapper.style.width = wrapperSize + 'px';
+    wrapper.style.height = wrapperSize + 'px';
+    const matrix = createMatrix(m.data, idx, mints);
+    matrix.style.width = natW + 'px';
+    matrix.style.height = natH + 'px';
+    applyMatrixScale(matrix);
+    wrapper.appendChild(matrix);
     mintDiv.appendChild(wrapper);
     mintsDiv.appendChild(mintDiv);
   });
 
   coin.appendChild(mintsDiv);
 
-  // Append to DOM so dimensions are accurate
   const container = document.getElementById("lab-generated");
   if (container) {
     container.appendChild(coin);
@@ -363,53 +386,6 @@ function buildCoin(name, code, mints) {
     document.body.appendChild(newContainer);
     newContainer.appendChild(coin);
   }
-
-  // Force layout then measure actual available space
-  coin.offsetHeight;
-
-  // Use clientWidth (inner, no borders) for accurate measurement
-  const coinInner = coin.clientWidth;
-  const mintCount = mints.length;
-  const separatorWidth = (mintCount - 1) * 2; // 2px border-right between mints
-  const spaceForAllMints = coinInner - separatorWidth;
-  const perMint = spaceForAllMints / mintCount;
-  const availWidth = perMint - 20; // subtract mint padding (5+5 top/bottom not needed, but left+right = 10+10)
-  const availHeight = window.innerHeight * 0.5;
-
-  // Natural matrix size (at 0°)
-  const firstMatrix = coin.querySelector('.matrix');
-  const totalCells = firstMatrix.querySelectorAll('.cell').length;
-  const totalGaps = firstMatrix.querySelectorAll('.gap-column').length;
-  const actualCols = Math.ceil(totalCells / 10);
-  const natW = actualCols * 20 + totalGaps * 8;
-  const natH = 10 * 18 + 9 * 2;
-
-  // Fixed scale based on 90° width constraint (tightest)
-  const scale90W = availWidth / natH;
-  const scale90H = availHeight / natW;
-  const fixedScale = Math.min(scale90W, scale90H, 1);
-
-  window._matrixFixedScale = fixedScale;
-
-  // Visual sizes at 0° and 90° with this scale
-  const vis0W = Math.ceil(natW * fixedScale);
-  const vis0H = Math.ceil(natH * fixedScale);
-  const vis90W = Math.ceil(natH * fixedScale);
-  const vis90H = Math.ceil(natW * fixedScale);
-
-  // Wrapper sized to the MAX of both states — always square, never resizes
-  const wrapperSize = Math.max(vis0W, vis0H, vis90W, vis90H);
-
-  coin.querySelectorAll('.matrix-wrapper').forEach(w => {
-    w.style.width = wrapperSize + 'px';
-    w.style.height = wrapperSize + 'px';
-  });
-
-  coin.querySelectorAll('.matrix').forEach(m => {
-    m.style.width = natW + 'px';
-    m.style.height = natH + 'px';
-    applyMatrixScale(m);
-  });
 
   return coin;
 }
@@ -445,7 +421,7 @@ function generateLab() {
 
   const old = document.getElementById("lab-generated");
   if (old) old.remove();
-  window._matrixFixedScale = undefined; // reset for new generation
+  window._matrixFixedScale = undefined;
 
   const container = document.createElement("div");
   container.id = "lab-generated";
