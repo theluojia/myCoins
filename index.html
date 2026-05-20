@@ -878,6 +878,10 @@
             content.innerHTML = '';
 
             const mints = matrixData.mints;
+            const ROWS = 10, CELL = 18, GAP = 2, GAPCOL = 8;
+            const natH = ROWS * CELL + (ROWS - 1) * GAP; // 198
+
+            // Build HTML first, no styles yet
             mints.forEach((m, mintIdx) => {
                 const mintDiv = document.createElement('div');
                 mintDiv.className = `mint-section mint-index-${mintIdx}`;
@@ -916,32 +920,47 @@
                 content.appendChild(mintDiv);
             });
 
-            // 等布局完成后测量并缩放
+            // Measure and apply styles after DOM is ready
             requestAnimationFrame(() => {
-                content.querySelectorAll('.matrix-body').forEach(gridDiv => {
-                    const natW = gridDiv.offsetWidth || 108;
-                    const natH = gridDiv.offsetHeight || 198;
-                    const rotW = (matrixDegree % 180 !== 0) ? natH : natW;
-                    const mintSection = gridDiv.closest('.mint-section');
-                    const availW = (mintSection?.offsetWidth || 200) - 20;
+                const availWidth = Math.min(
+                    content.clientWidth,
+                    window.innerWidth * 0.85
+                ) / mints.length - 20;
+                const availHeight = window.innerHeight * 0.35;
 
-                    if (rotW > availW) {
-                        // 用 inline 样式缩小每个单元格来真正减小布局宽度
-                        const ratio = availW / rotW;
-                        const newCell = Math.round(18 * ratio);
-                        const newGap = Math.max(1, Math.round(2 * ratio));
-                        gridDiv.querySelectorAll('.matrix-cell').forEach(c => {
-                            c.style.width = newCell + 'px';
-                            c.style.height = newCell + 'px';
-                        });
-                        gridDiv.querySelectorAll('.matrix-gap').forEach(g => {
-                            g.style.width = newGap + 'px';
-                        });
-                        gridDiv.style.gridTemplateRows = 'repeat(10, ' + newCell + 'px)';
-                        gridDiv.style.gap = newGap + 'px';
-                    }
+                // Natural matrix dimensions from data
+                const firstGrid = content.querySelector('.matrix-body');
+                const totalCells = firstGrid.querySelectorAll('.matrix-cell').length;
+                const totalGaps = firstGrid.querySelectorAll('.matrix-gap').length;
+                const actualCols = Math.ceil(totalCells / 10);
+                const natW = actualCols * (CELL + GAP) + totalGaps * GAPCOL - GAP;
 
-                    gridDiv.style.transform = `rotate(${matrixDegree}deg)`;
+                // Fixed scale based on 90° rotation (tightest width constraint)
+                const scale90W = availWidth / natH;
+                const scale90H = availHeight / natW;
+                const fixedScale = Math.min(scale90W, scale90H, 1);
+                window._modalFixedScale = fixedScale;
+
+                // Visual sizes at 0° and 90°
+                const vis0W = Math.ceil(natW * fixedScale);
+                const vis0H = Math.ceil(natH * fixedScale);
+                const vis90W = Math.ceil(natH * fixedScale);
+                const vis90H = Math.ceil(natW * fixedScale);
+                const wrapperSize = Math.max(vis0W, vis0H, vis90W, vis90H);
+
+                // Wrap each grid in a fixed-size container
+                content.querySelectorAll('.mint-section').forEach(section => {
+                    const grid = section.querySelector('.matrix-body');
+                    grid.style.width = natW + 'px';
+                    grid.style.height = natH + 'px';
+                    grid.style.transform = `rotate(${matrixDegree}deg) scale(${fixedScale.toFixed(3)})`;
+                    grid.style.transformOrigin = 'center center';
+
+                    // Create wrapper with fixed size
+                    const wrapper = document.createElement('div');
+                    wrapper.style.cssText = `display:flex;justify-content:center;align-items:center;width:${wrapperSize}px;height:${wrapperSize}px;flex-shrink:0;`;
+                    grid.parentNode.insertBefore(wrapper, grid);
+                    wrapper.appendChild(grid);
                 });
             });
         }
@@ -955,39 +974,8 @@
             matrixDegree += 90;
             const content = document.getElementById('matrixModalContent');
             content.querySelectorAll('.matrix-body').forEach(m => {
-                const natW = m.offsetWidth || 108;
-                const natH = m.offsetHeight || 198;
-                const rotW = (matrixDegree % 180 !== 0) ? natH : natW;
-                const mintSection = m.closest('.mint-section');
-                const availW = (mintSection?.offsetWidth || 200) - 20;
-
-                // 重置单元格尺寸
-                m.querySelectorAll('.matrix-cell').forEach(c => {
-                    c.style.width = '';
-                    c.style.height = '';
-                });
-                m.querySelectorAll('.matrix-gap').forEach(g => {
-                    g.style.width = '';
-                });
-                m.style.gridTemplateRows = 'repeat(10, 18px)';
-                m.style.gap = '2px';
-
-                if (rotW > availW) {
-                    const ratio = availW / rotW;
-                    const newCell = Math.round(18 * ratio);
-                    const newGap = Math.max(1, Math.round(2 * ratio));
-                    m.querySelectorAll('.matrix-cell').forEach(c => {
-                        c.style.width = newCell + 'px';
-                        c.style.height = newCell + 'px';
-                    });
-                    m.querySelectorAll('.matrix-gap').forEach(g => {
-                        g.style.width = newGap + 'px';
-                    });
-                    m.style.gridTemplateRows = 'repeat(10, ' + newCell + 'px)';
-                    m.style.gap = newGap + 'px';
-                }
-
-                m.style.transform = `rotate(${matrixDegree}deg)`;
+                const scale = window._modalFixedScale || 1;
+                m.style.transform = `rotate(${matrixDegree}deg) scale(${scale.toFixed(3)})`;
             });
         });
 
