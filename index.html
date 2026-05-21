@@ -413,6 +413,14 @@
         #scrollHint.visible {
             transform: translateY(0);
         }
+
+        /* 底部 footer 提示条 */
+        #footerHint {
+            transform: translateY(100%);
+        }
+        #footerHint.visible {
+            transform: translateY(0);
+        }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans p-4 sm:p-8">
@@ -632,7 +640,7 @@
         </div>
     </div>
 
-    <footer class="fixed bottom-0 left-0 right-0 bg-gradient-to-r from-blue-800/80 to-blue-600/80 text-white py-3 px-4 transition-all duration-300">
+    <footer id="footerHint" class="fixed bottom-0 left-0 right-0 bg-gradient-to-r from-blue-800/80 to-blue-600/80 text-white py-3 px-4 transition-all duration-300 transform translate-y-full">
         <div class="max-w-7xl mx-auto">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-2 items-center">
                 <div class="text-center md:text-left">
@@ -1984,17 +1992,22 @@
             renderUI(); // 重新渲染页面
         });
 
-        // 顶部滚动提示条
+        // 顶部和底部提示条联动
         const scrollHint = document.getElementById('scrollHint');
+        const footerHint = document.getElementById('footerHint');
         let hintVisible = false;
+        // 默认显示底部提示条
+        footerHint.classList.add('visible');
         window.addEventListener('scroll', () => {
             const scrollTop = window.scrollY || document.documentElement.scrollTop;
             if (scrollTop > 200 && !hintVisible) {
                 hintVisible = true;
                 scrollHint.classList.add('visible');
+                footerHint.classList.remove('visible');
             } else if (scrollTop <= 200 && hintVisible) {
                 hintVisible = false;
                 scrollHint.classList.remove('visible');
+                footerHint.classList.add('visible');
             }
         }, { passive: true });
 
