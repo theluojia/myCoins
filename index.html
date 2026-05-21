@@ -7,6 +7,7 @@
     <!-- 引入 Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
     <style>
         /* 使用 Inter 字体 */
         body {
@@ -421,6 +422,47 @@
         #footerHint.visible {
             transform: translateY(0);
         }
+
+        /* 统计概览弹窗 */
+        #statsModal {
+            display: none;
+        }
+        #statsModal.active {
+            display: flex;
+        }
+        .stats-card {
+            background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+            border-radius: 12px;
+            padding: 12px 16px;
+            text-align: center;
+            min-width: 100px;
+        }
+        .stats-card .stat-num {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1e40af;
+        }
+        .stats-card .stat-label-text {
+            font-size: 0.75rem;
+            color: #6b7280;
+            margin-top: 2px;
+        }
+        .stats-chart-section {
+            padding: 16px;
+        }
+        .stats-chart-section h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+        .stats-sub-label {
+            font-size: 0.75rem;
+            color: #9ca3af;
+            text-align: center;
+            margin-bottom: 8px;
+        }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans p-4 sm:p-8">
@@ -557,6 +599,14 @@
                         </svg>
                     </button>
 
+                    <button id="openStatsBtn" class="w-10 h-10 rounded-full bg-blue-400 text-white shadow-lg flex items-center justify-center hover:bg-blue-500 transition-colors" title="统计概览">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="18" y1="20" x2="18" y2="10"></line>
+                            <line x1="12" y1="20" x2="12" y2="4"></line>
+                            <line x1="6" y1="20" x2="6" y2="14"></line>
+                        </svg>
+                    </button>
+
                     <button id="sendEmailBtn" class="w-10 h-10 rounded-full bg-blue-400 text-white shadow-lg flex items-center justify-center hover:bg-blue-500 transition-colors" title="联系作者">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
@@ -637,6 +687,24 @@
             </button>
             <!-- 试验场内容 -->
             <div id="matrixLabContent"></div>
+        </div>
+    </div>
+
+    <!-- 统计概览弹窗 -->
+    <div id="statsModal" class="fixed inset-0 z-[100] items-center justify-center bg-black/90 p-4 overflow-y-auto">
+        <div class="relative bg-white rounded-lg shadow-2xl max-w-5xl w-full max-h-[90vh] overflow-y-auto">
+            <!-- 关闭按钮 -->
+            <button id="closeStatsModal" class="absolute top-3 right-3 z-10 w-8 h-8 bg-gray-200 hover:bg-gray-300 rounded-full flex items-center justify-center text-xl font-bold text-gray-600 transition-colors">
+                &times;
+            </button>
+            <!-- 标题 -->
+            <div class="text-center py-4 border-b border-gray-200">
+                <h2 class="text-xl font-bold text-gray-800">发行统计概览</h2>
+            </div>
+            <!-- 快速数字卡片 -->
+            <div id="statsCards" class="flex flex-wrap justify-center gap-3 p-4 border-b border-gray-200"></div>
+            <!-- 图表区域 -->
+            <div id="statsCharts" class="p-4 space-y-4"></div>
         </div>
     </div>
 
@@ -1191,6 +1259,551 @@
         document.getElementById('matrixModal').addEventListener('click', (e) => {
             if (e.target.id === 'matrixModal') closeMatrixModal();
         });
+
+        // ================= 统计概览 =================
+
+        let statsChartInstances = [];
+
+        function openStatsModal() {
+            const modal = document.getElementById('statsModal');
+            modal.classList.add('active');
+            renderStatsModal();
+        }
+
+        function closeStatsModalFn() {
+            const modal = document.getElementById('statsModal');
+            modal.classList.remove('active');
+            // 销毁所有图表实例
+            statsChartInstances.forEach(c => c.destroy());
+            statsChartInstances = [];
+        }
+
+        document.getElementById('closeStatsModal').addEventListener('click', closeStatsModalFn);
+        document.getElementById('statsModal').addEventListener('click', (e) => {
+            if (e.target.id === 'statsModal') closeStatsModalFn();
+        });
+        document.getElementById('openStatsBtn').addEventListener('click', (e) => {
+            e.stopPropagation();
+            openStatsModal();
+        });
+
+        function isChao(coin) {
+            return coin.name.includes('纪念钞');
+        }
+
+        function renderStatsModal() {
+            // 销毁旧图表
+            statsChartInstances.forEach(c => c.destroy());
+            statsChartInstances = [];
+
+            const biCoins = allCoinsData.filter(c => !isChao(c));
+            const chaoCoins = allCoinsData.filter(c => isChao(c));
+
+            const biTotal = biCoins.length;
+            const chaoTotal = chaoCoins.length;
+            const biFaceValue = biCoins.reduce((sum, c) => {
+                let num = parseFloat(c.denomination.match(/\d+\.?\d*/g)[0]);
+                if (c.denomination.includes('角')) num /= 10;
+                return sum + num;
+            }, 0);
+            const chaoFaceValue = chaoCoins.reduce((sum, c) => {
+                let num = parseFloat(c.denomination.match(/\d+\.?\d*/g)[0]);
+                if (c.denomination.includes('角')) num /= 10;
+                return sum + num;
+            }, 0);
+            const allFaceValue = biFaceValue + chaoFaceValue;
+
+            const years = [...new Set(allCoinsData.map(c => c.year))].sort((a, b) => a - b);
+            const minYear = years[0];
+            const maxYear = years[years.length - 1];
+
+            // --- 快速数字卡片 ---
+            const cards = [
+                { num: allCoinsData.length, label: '总币数' },
+                { num: biTotal, label: '纪念币总数' },
+                { num: biFaceValue.toFixed(1) + '元', label: '纪念币面值总额' },
+                { num: chaoTotal, label: '纪念钞总数' },
+                { num: chaoFaceValue.toFixed(1) + '元', label: '纪念钞面值总额' },
+                { num: `${minYear}~${maxYear}`, label: '年份跨度' },
+            ];
+            const cardsContainer = document.getElementById('statsCards');
+            cardsContainer.innerHTML = cards.map(c =>
+                `<div class="stats-card"><div class="stat-num">${c.num}</div><div class="stat-label-text">${c.label}</div></div>`
+            ).join('');
+
+            // --- 图表容器 ---
+            const chartsContainer = document.getElementById('statsCharts');
+            chartsContainer.innerHTML = `
+                <!-- Section 1: 历年发行趋势 -->
+                <div class="stats-chart-section">
+                    <h3>历年发行趋势</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-gray-50 rounded-lg p-4">
+                            <h3 class="text-sm font-semibold text-gray-700 mb-2">纪念币</h3>
+                            <canvas id="chartYearTrendBi" height="200"></canvas>
+                        </div>
+                        <div class="bg-gray-50 rounded-lg p-4">
+                            <h3 class="text-sm font-semibold text-gray-700 mb-2">纪念钞</h3>
+                            <canvas id="chartYearTrendChao" height="200"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <!-- Section 2: 材质分布 -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="stats-chart-section bg-gray-50 rounded-lg">
+                        <h3>纪念币材质分布</h3>
+                        <div class="stats-sub-label">共 ${biTotal} 枚</div>
+                        <canvas id="chartBiMetal"></canvas>
+                    </div>
+                    <div class="stats-chart-section bg-gray-50 rounded-lg">
+                        <h3>纪念钞材质分布</h3>
+                        <div class="stats-sub-label">共 ${chaoTotal} 枚</div>
+                        <canvas id="chartChaoMetal"></canvas>
+                    </div>
+                </div>
+                <!-- Section 3: 尺寸分布 -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="stats-chart-section bg-gray-50 rounded-lg">
+                        <h3>纪念币尺寸分布</h3>
+                        <div class="stats-sub-label">共 ${biTotal} 枚</div>
+                        <canvas id="chartBiSize"></canvas>
+                    </div>
+                    <div class="stats-chart-section bg-gray-50 rounded-lg">
+                        <h3>纪念钞尺寸分布</h3>
+                        <div class="stats-sub-label">共 ${chaoTotal} 枚</div>
+                        <canvas id="chartChaoSize"></canvas>
+                    </div>
+                </div>
+                <!-- Section 4: 面额统计 -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="stats-chart-section bg-gray-50 rounded-lg">
+                        <h3>纪念币面额统计</h3>
+                        <canvas id="chartBiDenom"></canvas>
+                        <div id="tableBiDenom" class="mt-2 text-sm text-gray-600"></div>
+                    </div>
+                    <div class="stats-chart-section bg-gray-50 rounded-lg">
+                        <h3>纪念钞面额统计</h3>
+                        <canvas id="chartChaoDenom"></canvas>
+                        <div id="tableChaoDenom" class="mt-2 text-sm text-gray-600"></div>
+                    </div>
+                </div>
+            `;
+
+            // --- Chart 1a: 纪念币历年发行趋势（双轴） ---
+            const biYearCounts = [];
+            const biYearFaceValues = [];
+            years.forEach(y => {
+                biYearCounts.push(biCoins.filter(c => c.year === y).length);
+                let val = 0;
+                biCoins.filter(c => c.year === y).forEach(c => {
+                    let num = parseFloat(c.denomination.match(/\d+\.?\d*/g)[0]);
+                    if (c.denomination.includes('角')) num /= 10;
+                    val += num;
+                });
+                biYearFaceValues.push(val);
+            });
+
+            const ctxYearBi = document.getElementById('chartYearTrendBi').getContext('2d');
+            const chartYearBi = new Chart(ctxYearBi, {
+                type: 'bar',
+                data: {
+                    labels: years.map(y => y + '年'),
+                    datasets: [
+                        {
+                            label: '发行数量（枚）',
+                            data: biYearCounts,
+                            backgroundColor: 'rgba(59, 130, 246, 0.5)',
+                            borderColor: 'rgba(59, 130, 246, 1)',
+                            borderWidth: 1,
+                            yAxisID: 'y',
+                            order: 2,
+                        },
+                        {
+                            label: '面值总和（元）',
+                            data: biYearFaceValues,
+                            type: 'line',
+                            borderColor: 'rgba(239, 68, 68, 1)',
+                            backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                            pointRadius: 2,
+                            pointHoverRadius: 5,
+                            tension: 0.3,
+                            yAxisID: 'y1',
+                            order: 1,
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    interaction: { mode: 'index', intersect: false },
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: function(ctx) {
+                                    if (ctx.dataset.label.includes('面值')) {
+                                        return ctx.dataset.label + ': ' + ctx.parsed.y.toFixed(1) + ' 元';
+                                    }
+                                    return ctx.dataset.label + ': ' + ctx.parsed.y + ' 枚';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            type: 'linear',
+                            display: true,
+                            position: 'left',
+                            title: { display: true, text: '数量（枚）' },
+                            ticks: { stepSize: 1 },
+                            grid: { drawOnChartArea: true },
+                        },
+                        y1: {
+                            type: 'linear',
+                            display: true,
+                            position: 'right',
+                            title: { display: true, text: '面值（元）' },
+                            grid: { drawOnChartArea: false },
+                        },
+                        x: {
+                            ticks: {
+                                callback: function(val, idx) {
+                                    const yearNum = years[idx];
+                                    return yearNum % 5 === 0 ? yearNum + '年' : '';
+                                },
+                                maxRotation: 45,
+                            }
+                        }
+                    }
+                }
+            });
+            statsChartInstances.push(chartYearBi);
+
+            // --- Chart 1b: 纪念钞历年发行趋势（双轴） ---
+            const chaoYearCounts = [];
+            const chaoYearFaceValues = [];
+            years.forEach(y => {
+                chaoYearCounts.push(chaoCoins.filter(c => c.year === y).length);
+                let val = 0;
+                chaoCoins.filter(c => c.year === y).forEach(c => {
+                    let num = parseFloat(c.denomination.match(/\d+\.?\d*/g)[0]);
+                    if (c.denomination.includes('角')) num /= 10;
+                    val += num;
+                });
+                chaoYearFaceValues.push(val);
+            });
+
+            const ctxYearChao = document.getElementById('chartYearTrendChao').getContext('2d');
+            const chartYearChao = new Chart(ctxYearChao, {
+                type: 'bar',
+                data: {
+                    labels: years.map(y => y + '年'),
+                    datasets: [
+                        {
+                            label: '发行数量（枚）',
+                            data: chaoYearCounts,
+                            backgroundColor: 'rgba(168, 85, 247, 0.5)',
+                            borderColor: 'rgba(168, 85, 247, 1)',
+                            borderWidth: 1,
+                            yAxisID: 'y',
+                            order: 2,
+                        },
+                        {
+                            label: '面值总和（元）',
+                            data: chaoYearFaceValues,
+                            type: 'line',
+                            borderColor: 'rgba(251, 146, 60, 1)',
+                            backgroundColor: 'rgba(251, 146, 60, 0.1)',
+                            pointRadius: 2,
+                            pointHoverRadius: 5,
+                            tension: 0.3,
+                            yAxisID: 'y1',
+                            order: 1,
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    interaction: { mode: 'index', intersect: false },
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: function(ctx) {
+                                    if (ctx.dataset.label.includes('面值')) {
+                                        return ctx.dataset.label + ': ' + ctx.parsed.y.toFixed(1) + ' 元';
+                                    }
+                                    return ctx.dataset.label + ': ' + ctx.parsed.y + ' 枚';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            type: 'linear',
+                            display: true,
+                            position: 'left',
+                            title: { display: true, text: '数量（枚）' },
+                            ticks: { stepSize: 1 },
+                            grid: { drawOnChartArea: true },
+                        },
+                        y1: {
+                            type: 'linear',
+                            display: true,
+                            position: 'right',
+                            title: { display: true, text: '面值（元）' },
+                            grid: { drawOnChartArea: false },
+                        },
+                        x: {
+                            ticks: {
+                                callback: function(val, idx) {
+                                    const yearNum = years[idx];
+                                    return yearNum % 5 === 0 ? yearNum + '年' : '';
+                                },
+                                maxRotation: 45,
+                            }
+                        }
+                    }
+                }
+            });
+            statsChartInstances.push(chartYearChao);
+
+            // --- Chart 2a: 纪念币材质（环形图） ---
+            const biMetalMap = {};
+            biCoins.forEach(c => { biMetalMap[c.metal] = (biMetalMap[c.metal] || 0) + 1; });
+            const sortedBiMetal = Object.entries(biMetalMap).sort((a, b) => b[1] - a[1]);
+
+            const ctxBiMetal = document.getElementById('chartBiMetal').getContext('2d');
+            const chartBiMetal = new Chart(ctxBiMetal, {
+                type: 'doughnut',
+                data: {
+                    labels: sortedBiMetal.map(e => e[0]),
+                    datasets: [{
+                        data: sortedBiMetal.map(e => e[1]),
+                        backgroundColor: [
+                            '#f59e0b','#3b82f6','#10b981','#ef4444','#8b5cf6',
+                            '#ec4899','#14b8a6','#f97316','#6366f1','#06b6d4','#84cc16'
+                        ],
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { position: 'bottom', labels: { font: { size: 11 } } },
+                        tooltip: {
+                            callbacks: {
+                                label: function(ctx) {
+                                    const total = ctx.dataset.data.reduce((a, b) => a + b, 0);
+                                    const pct = ((ctx.parsed / total) * 100).toFixed(1);
+                                    return ctx.label + ': ' + ctx.parsed + '枚 (' + pct + '%)';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+            statsChartInstances.push(chartBiMetal);
+
+            // --- Chart 2b: 纪念钞材质（环形图） ---
+            const chaoMetalMap = {};
+            chaoCoins.forEach(c => { chaoMetalMap[c.metal] = (chaoMetalMap[c.metal] || 0) + 1; });
+            const sortedChaoMetal = Object.entries(chaoMetalMap).sort((a, b) => b[1] - a[1]);
+
+            const ctxChaoMetal = document.getElementById('chartChaoMetal').getContext('2d');
+            const chartChaoMetal = new Chart(ctxChaoMetal, {
+                type: 'doughnut',
+                data: {
+                    labels: sortedChaoMetal.map(e => e[0]),
+                    datasets: [{
+                        data: sortedChaoMetal.map(e => e[1]),
+                        backgroundColor: ['#a78bfa','#67e8f9'],
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { position: 'bottom', labels: { font: { size: 11 } } },
+                        tooltip: {
+                            callbacks: {
+                                label: function(ctx) {
+                                    const total = ctx.dataset.data.reduce((a, b) => a + b, 0);
+                                    const pct = ((ctx.parsed / total) * 100).toFixed(1);
+                                    return ctx.label + ': ' + ctx.parsed + '枚 (' + pct + '%)';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+            statsChartInstances.push(chartChaoMetal);
+
+            // --- Chart 3a: 纪念币尺寸（水平条形图） ---
+            const biSizeMap = {};
+            biCoins.forEach(c => { biSizeMap[c.size] = (biSizeMap[c.size] || 0) + 1; });
+            const sortedBiSize = Object.entries(biSizeMap).sort((a, b) => b[1] - a[1]);
+
+            const ctxBiSize = document.getElementById('chartBiSize').getContext('2d');
+            const chartBiSize = new Chart(ctxBiSize, {
+                type: 'bar',
+                data: {
+                    labels: sortedBiSize.map(e => e[0]),
+                    datasets: [{
+                        data: sortedBiSize.map(e => e[1]),
+                        backgroundColor: 'rgba(59, 130, 246, 0.6)',
+                        borderColor: 'rgba(59, 130, 246, 1)',
+                        borderWidth: 1,
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(ctx) { return ctx.parsed.x + '枚'; }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: { ticks: { stepSize: 1 } },
+                        y: { ticks: { font: { size: 11 } } }
+                    }
+                }
+            });
+            statsChartInstances.push(chartBiSize);
+
+            // --- Chart 3b: 纪念钞尺寸（水平条形图） ---
+            const chaoSizeMap = {};
+            chaoCoins.forEach(c => { chaoSizeMap[c.size] = (chaoSizeMap[c.size] || 0) + 1; });
+            const sortedChaoSize = Object.entries(chaoSizeMap).sort((a, b) => b[1] - a[1]);
+
+            const ctxChaoSize = document.getElementById('chartChaoSize').getContext('2d');
+            const chartChaoSize = new Chart(ctxChaoSize, {
+                type: 'bar',
+                data: {
+                    labels: sortedChaoSize.map(e => e[0]),
+                    datasets: [{
+                        data: sortedChaoSize.map(e => e[1]),
+                        backgroundColor: 'rgba(168, 85, 247, 0.6)',
+                        borderColor: 'rgba(168, 85, 247, 1)',
+                        borderWidth: 1,
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(ctx) { return ctx.parsed.x + '枚'; }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: { ticks: { stepSize: 1 } },
+                        y: { ticks: { font: { size: 10 } } }
+                    }
+                }
+            });
+            statsChartInstances.push(chartChaoSize);
+
+            // --- Chart 4a: 纪念币面额（饼图 + 面额合计表） ---
+            const biDenomMap = {};
+            biCoins.forEach(c => {
+                let num = parseFloat(c.denomination.match(/\d+\.?\d*/g)[0]);
+                if (c.denomination.includes('角')) num /= 10;
+                if (!biDenomMap[c.denomination]) biDenomMap[c.denomination] = { count: 0, total: 0 };
+                biDenomMap[c.denomination].count++;
+                biDenomMap[c.denomination].total += num;
+            });
+            const sortedBiDenom = Object.entries(biDenomMap).sort((a, b) => b[1].count - a[1].count);
+
+            const ctxBiDenom = document.getElementById('chartBiDenom').getContext('2d');
+            const chartBiDenom = new Chart(ctxBiDenom, {
+                type: 'pie',
+                data: {
+                    labels: sortedBiDenom.map(e => e[0]),
+                    datasets: [{
+                        data: sortedBiDenom.map(e => e[1].count),
+                        backgroundColor: ['#f59e0b','#3b82f6','#10b981','#ef4444'],
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { position: 'bottom', labels: { font: { size: 11 } } },
+                        tooltip: {
+                            callbacks: {
+                                label: function(ctx) {
+                                    const total = ctx.dataset.data.reduce((a, b) => a + b, 0);
+                                    const pct = ((ctx.parsed / total) * 100).toFixed(1);
+                                    return ctx.label + ': ' + ctx.parsed + '枚 (' + pct + '%)';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+            statsChartInstances.push(chartBiDenom);
+
+            // 纪念币面额合计表
+            const tableBiDenom = document.getElementById('tableBiDenom');
+            let biTotalVal = 0;
+            tableBiDenom.innerHTML = '<table class="w-full text-xs"><thead><tr class="border-b"><th class="text-left py-1">面额</th><th class="text-right">数量</th><th class="text-right">面额合计</th></tr></thead><tbody>' +
+                sortedBiDenom.map(([k, v]) => {
+                    biTotalVal += v.total;
+                    return `<tr class="border-b border-gray-100"><td class="py-1">${k}</td><td class="text-right">${v.count}枚</td><td class="text-right">${v.total.toFixed(1)}元</td></tr>`;
+                }).join('') +
+                `<tr class="font-bold"><td class="py-1">合计</td><td class="text-right">${biTotal}枚</td><td class="text-right">${biTotalVal.toFixed(1)}元</td></tr></tbody></table>`;
+
+            // --- Chart 4b: 纪念钞面额（饼图 + 面额合计表） ---
+            const chaoDenomMap = {};
+            chaoCoins.forEach(c => {
+                let num = parseFloat(c.denomination.match(/\d+\.?\d*/g)[0]);
+                if (c.denomination.includes('角')) num /= 10;
+                if (!chaoDenomMap[c.denomination]) chaoDenomMap[c.denomination] = { count: 0, total: 0 };
+                chaoDenomMap[c.denomination].count++;
+                chaoDenomMap[c.denomination].total += num;
+            });
+            const sortedChaoDenom = Object.entries(chaoDenomMap).sort((a, b) => b[1].count - a[1].count);
+
+            const ctxChaoDenom = document.getElementById('chartChaoDenom').getContext('2d');
+            const chartChaoDenom = new Chart(ctxChaoDenom, {
+                type: 'pie',
+                data: {
+                    labels: sortedChaoDenom.map(e => e[0]),
+                    datasets: [{
+                        data: sortedChaoDenom.map(e => e[1].count),
+                        backgroundColor: ['#a78bfa','#67e8f9','#f472b6','#fb923c'],
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { position: 'bottom', labels: { font: { size: 11 } } },
+                        tooltip: {
+                            callbacks: {
+                                label: function(ctx) {
+                                    const total = ctx.dataset.data.reduce((a, b) => a + b, 0);
+                                    const pct = ((ctx.parsed / total) * 100).toFixed(1);
+                                    return ctx.label + ': ' + ctx.parsed + '枚 (' + pct + '%)';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+            statsChartInstances.push(chartChaoDenom);
+
+            // 纪念钞面额合计表
+            const tableChaoDenom = document.getElementById('tableChaoDenom');
+            let chaoTotalVal = 0;
+            tableChaoDenom.innerHTML = '<table class="w-full text-xs"><thead><tr class="border-b"><th class="text-left py-1">面额</th><th class="text-right">数量</th><th class="text-right">面额合计</th></tr></thead><tbody>' +
+                sortedChaoDenom.map(([k, v]) => {
+                    chaoTotalVal += v.total;
+                    return `<tr class="border-b border-gray-100"><td class="py-1">${k}</td><td class="text-right">${v.count}枚</td><td class="text-right">${v.total.toFixed(1)}元</td></tr>`;
+                }).join('') +
+                `<tr class="font-bold"><td class="py-1">合计</td><td class="text-right">${chaoTotal}枚</td><td class="text-right">${chaoTotalVal.toFixed(1)}元</td></tr></tbody></table>`;
+        }
 
         // ================= 点阵试验场弹窗 =================
 
