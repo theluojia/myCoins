@@ -414,6 +414,26 @@
         #scrollHint.visible {
             transform: translateY(0);
         }
+        .hint-badge {
+            display: inline-block;
+            min-width: 18px;
+            padding: 0 5px;
+            border-radius: 10px;
+            font-size: 11px;
+            font-weight: 600;
+            line-height: 18px;
+            text-align: center;
+            vertical-align: middle;
+            transition: transform 0.15s ease;
+        }
+        .hint-badge.collected {
+            background: rgba(34, 197, 94, 0.25);
+            color: #4ade80;
+        }
+        .hint-badge.wishlist {
+            background: rgba(251, 191, 36, 0.25);
+            color: #fbbf24;
+        }
 
         /* 底部 footer 提示条 */
         #footerHint {
@@ -468,7 +488,7 @@
 <body class="bg-gray-50 text-gray-800 font-sans p-4 sm:p-8">
     <!-- 顶部滚动提示条 -->
     <div id="scrollHint">
-        右上角图标：<b class="text-[#22C55E]">双击</b>已收藏 / <b class="text-[#FBBF24]">单击</b>想收藏
+        右上角图标：<b class="text-[#22C55E]">双击</b>已收藏 <span id="hintCollectedCount" class="hint-badge collected">0</span> / <b class="text-[#FBBF24]">单击</b>想收藏 <span id="hintWishlistCount" class="hint-badge wishlist">0</span>
     </div>
     <div class="max-w-7xl mx-auto py-8">
         <header class="text-center mb-10">
@@ -700,6 +720,7 @@
             <!-- 标题 -->
             <div class="text-center py-4 border-b border-gray-200">
                 <h2 class="text-xl font-bold text-gray-800">发行统计概览</h2>
+                <div id="statsYearRange" class="text-sm text-gray-400 mt-1 font-medium"></div>
             </div>
             <!-- 快速数字卡片 -->
             <div id="statsCards" class="flex flex-wrap justify-center gap-3 p-4 border-b border-gray-200"></div>
@@ -773,17 +794,17 @@
         const exportBtn = document.getElementById('exportBtn'); 
 
         const mintConfig = {
-            "上海": { short: "沪", color: "bg-purple-500/40", fullName: "上海造币有限公司" },
-            "沈阳": { short: "沈", color: "bg-red-500/40", fullName: "沈阳造币有限公司" },
-            "南京": { short: "宁", color: "bg-teal-500/40", fullName: "南京造币有限公司" },
+            "上海": { short: "沪", color: "bg-purple-500", fullName: "上海造币有限公司" },
+            "沈阳": { short: "沈", color: "bg-red-500", fullName: "沈阳造币有限公司" },
+            "南京": { short: "宁", color: "bg-teal-500", fullName: "南京造币有限公司" },
 
-            "成都": { short: "成", color: "bg-orange-500/40", fullName: "成都印钞有限公司" },
-            "北京": { short: "京", color: "bg-indigo-500/40", fullName: "北京印钞有限公司" },
-            "上钞": { short: "沪", color: "bg-fuchsia-500/40", fullName: "上海印钞有限公司" }, // 区别于上海造币
-            "西安": { short: "西", color: "bg-emerald-500/40", fullName: "西安印钞有限公司" },
-            "石家庄": { short: "石", color: "bg-amber-500/40", fullName: "石家庄印钞有限公司" },
-            "南昌": { short: "昌", color: "bg-pink-500/40", fullName: "南昌印钞有限公司" },
-            "广州": { short: "穗", color: "bg-cyan-500/40", fullName: "广州印钞有限公司" }
+            "成都": { short: "成", color: "bg-orange-500", fullName: "成都印钞有限公司" },
+            "北京": { short: "京", color: "bg-indigo-500", fullName: "北京印钞有限公司" },
+            "上钞": { short: "沪", color: "bg-fuchsia-500", fullName: "上海印钞有限公司" }, // 区别于上海造币
+            "西安": { short: "西", color: "bg-emerald-500", fullName: "西安印钞有限公司" },
+            "石家庄": { short: "石", color: "bg-amber-500", fullName: "石家庄印钞有限公司" },
+            "南昌": { short: "昌", color: "bg-pink-500", fullName: "南昌印钞有限公司" },
+            "广州": { short: "穗", color: "bg-cyan-500", fullName: "广州印钞有限公司" }
         };
 
         document.getElementById('current-year').textContent = new Date().getFullYear();
@@ -1313,18 +1334,27 @@
             }, 0);
             const allFaceValue = biFaceValue + chaoFaceValue;
 
+            const biTotalIssuance = biCoins.reduce((sum, c) => sum + (c.issuance || 0), 0);
+            const chaoTotalIssuance = chaoCoins.reduce((sum, c) => sum + (c.issuance || 0), 0);
+
+            const formatIssuance = (v) => v >= 10000 ? (v / 10000).toFixed(2) + '亿' : v.toLocaleString() + '万';
+
             const years = [...new Set(allCoinsData.map(c => c.year))].sort((a, b) => a - b);
             const minYear = years[0];
             const maxYear = years[years.length - 1];
+
+            // --- 年份跨度（标题下方） ---
+            document.getElementById('statsYearRange').textContent = minYear + '年 ~ ' + maxYear + '年';
 
             // --- 快速数字卡片 ---
             const cards = [
                 { num: allCoinsData.length, label: '总币数' },
                 { num: biTotal, label: '纪念币总数' },
                 { num: biFaceValue.toFixed(1) + '元', label: '纪念币面值总额' },
+                { num: formatIssuance(biTotalIssuance), label: '纪念币总发行量' },
                 { num: chaoTotal, label: '纪念钞总数' },
                 { num: chaoFaceValue.toFixed(1) + '元', label: '纪念钞面值总额' },
-                { num: `${minYear}~${maxYear}`, label: '年份跨度' },
+                { num: formatIssuance(chaoTotalIssuance), label: '纪念钞总发行量' },
             ];
             const cardsContainer = document.getElementById('statsCards');
             cardsContainer.innerHTML = cards.map(c =>
@@ -1348,7 +1378,46 @@
                         </div>
                     </div>
                 </div>
-                <!-- Section 2: 材质分布 -->
+                <!-- Section 1.5: 历年发行总量 -->
+                <div class="stats-chart-section">
+                    <h3>历年发行总量</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-gray-50 rounded-lg p-4">
+                            <h3 class="text-sm font-semibold text-gray-700 mb-2">纪念币</h3>
+                            <canvas id="chartYearIssuanceBi" height="200"></canvas>
+                        </div>
+                        <div class="bg-gray-50 rounded-lg p-4">
+                            <h3 class="text-sm font-semibold text-gray-700 mb-2">纪念钞</h3>
+                            <canvas id="chartYearIssuanceChao" height="200"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <!-- Section 2: 面额统计 -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="stats-chart-section bg-gray-50 rounded-lg">
+                        <h3>纪念币面额统计</h3>
+                        <canvas id="chartBiDenom"></canvas>
+                        <div id="tableBiDenom" class="mt-2 text-sm text-gray-600"></div>
+                    </div>
+                    <div class="stats-chart-section bg-gray-50 rounded-lg">
+                        <h3>纪念钞面额统计</h3>
+                        <canvas id="chartChaoDenom"></canvas>
+                        <div id="tableChaoDenom" class="mt-2 text-sm text-gray-600"></div>
+                    </div>
+                </div>
+                <!-- Section 3: 发行量区间分布 -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="stats-chart-section bg-gray-50 rounded-lg">
+                        <h3>纪念币发行量区间</h3>
+                        <div class="stats-sub-label">共 ${biTotal} 枚</div>
+                        <canvas id="chartIssuanceBucketBi"></canvas>
+                    </div>
+                    <div class="stats-chart-section bg-gray-50 rounded-lg">
+                        <h3>纪念钞发行量区间</h3>
+                        <div class="stats-sub-label">共 ${chaoTotal} 枚</div>
+                        <canvas id="chartIssuanceBucketChao"></canvas>
+                    </div>
+                </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div class="stats-chart-section bg-gray-50 rounded-lg">
                         <h3>纪念币材质分布</h3>
@@ -1361,7 +1430,7 @@
                         <canvas id="chartChaoMetal"></canvas>
                     </div>
                 </div>
-                <!-- Section 3: 尺寸分布 -->
+                <!-- Section 4: 尺寸分布 -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div class="stats-chart-section bg-gray-50 rounded-lg">
                         <h3>纪念币尺寸分布</h3>
@@ -1372,19 +1441,6 @@
                         <h3>纪念钞尺寸分布</h3>
                         <div class="stats-sub-label">共 ${chaoTotal} 枚</div>
                         <canvas id="chartChaoSize"></canvas>
-                    </div>
-                </div>
-                <!-- Section 4: 面额统计 -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div class="stats-chart-section bg-gray-50 rounded-lg">
-                        <h3>纪念币面额统计</h3>
-                        <canvas id="chartBiDenom"></canvas>
-                        <div id="tableBiDenom" class="mt-2 text-sm text-gray-600"></div>
-                    </div>
-                    <div class="stats-chart-section bg-gray-50 rounded-lg">
-                        <h3>纪念钞面额统计</h3>
-                        <canvas id="chartChaoDenom"></canvas>
-                        <div id="tableChaoDenom" class="mt-2 text-sm text-gray-600"></div>
                     </div>
                 </div>
             `;
@@ -1422,8 +1478,8 @@
                             label: '面值总和（元）',
                             data: biYearFaceValues,
                             type: 'line',
-                            borderColor: 'rgba(239, 68, 68, 1)',
-                            backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                            borderColor: 'rgba(245, 158, 11, 1)',
+                            backgroundColor: 'rgba(245, 158, 11, 0.1)',
                             pointRadius: 2,
                             pointHoverRadius: 5,
                             tension: 0.3,
@@ -1436,6 +1492,7 @@
                     responsive: true,
                     interaction: { mode: 'index', intersect: false },
                     plugins: {
+                        legend: { display: true, position: 'bottom', labels: { font: { size: 11 } } },
                         tooltip: {
                             callbacks: {
                                 label: function(ctx) {
@@ -1510,8 +1567,8 @@
                             label: '面值总和（元）',
                             data: chaoYearFaceValues,
                             type: 'line',
-                            borderColor: 'rgba(251, 146, 60, 1)',
-                            backgroundColor: 'rgba(251, 146, 60, 0.1)',
+                            borderColor: 'rgba(239, 68, 68, 1)',
+                            backgroundColor: 'rgba(239, 68, 68, 0.1)',
                             pointRadius: 2,
                             pointHoverRadius: 5,
                             tension: 0.3,
@@ -1524,6 +1581,7 @@
                     responsive: true,
                     interaction: { mode: 'index', intersect: false },
                     plugins: {
+                        legend: { display: true, position: 'bottom', labels: { font: { size: 11 } } },
                         tooltip: {
                             callbacks: {
                                 label: function(ctx) {
@@ -1565,7 +1623,277 @@
             });
             statsChartInstances.push(chartYearChao);
 
-            // --- Chart 2a: 纪念币材质（环形图） ---
+            // --- Chart 1.5a: 纪念币历年发行总量 ---
+            const biYearIssuanceData = [];
+            const biYearIssuanceFaceValue = [];
+            years.forEach(y => {
+                const yearCoins = biCoins.filter(c => c.year === y);
+                let iss = 0;
+                let faceVal = 0;
+                yearCoins.forEach(c => {
+                    iss += (c.issuance || 0);
+                    let num = parseFloat(c.denomination.match(/\d+\.?\d*/g)[0]);
+                    if (c.denomination.includes('角')) num /= 10;
+                    faceVal += num * (c.issuance || 0);
+                });
+                biYearIssuanceData.push(iss);
+                biYearIssuanceFaceValue.push(faceVal);
+            });
+
+            const ctxIssuanceBi = document.getElementById('chartYearIssuanceBi').getContext('2d');
+            const chartIssuanceBi = new Chart(ctxIssuanceBi, {
+                type: 'bar',
+                data: {
+                    labels: years.map(y => y + '年'),
+                    datasets: [
+                        {
+                            label: '发行量（万）',
+                            data: biYearIssuanceData,
+                            backgroundColor: 'rgba(16, 185, 129, 0.5)',
+                            borderColor: 'rgba(16, 185, 129, 1)',
+                            borderWidth: 1,
+                            yAxisID: 'y',
+                            order: 2,
+                        },
+                        {
+                            label: '发行总面额（万元）',
+                            data: biYearIssuanceFaceValue,
+                            type: 'line',
+                            borderColor: 'rgba(249, 115, 22, 1)',
+                            backgroundColor: 'rgba(249, 115, 22, 0.1)',
+                            pointRadius: 2,
+                            pointHoverRadius: 5,
+                            tension: 0.3,
+                            yAxisID: 'y1',
+                            order: 1,
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    interaction: { mode: 'index', intersect: false },
+                    plugins: {
+                        legend: { display: true, position: 'bottom', labels: { font: { size: 11 } } },
+                        tooltip: {
+                            callbacks: {
+                                label: function(ctx) {
+                                    const v = ctx.parsed.y;
+                                    if (ctx.dataset.label.includes('发行量')) {
+                                        return ctx.dataset.label + ': ' + (v >= 10000 ? (v / 10000).toFixed(2) + '亿' : v.toLocaleString() + '万');
+                                    }
+                                    return ctx.dataset.label + ': ' + v.toLocaleString() + ' 万元';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            type: 'linear',
+                            display: true,
+                            position: 'left',
+                            title: { display: true, text: '发行量（万）' },
+                            ticks: { stepSize: 1 },
+                            grid: { drawOnChartArea: true },
+                        },
+                        y1: {
+                            type: 'linear',
+                            display: true,
+                            position: 'right',
+                            title: { display: true, text: '发行总面额（万元）' },
+                            grid: { drawOnChartArea: false },
+                        },
+                        x: {
+                            ticks: {
+                                callback: function(val, idx) {
+                                    const yearNum = years[idx];
+                                    return yearNum % 5 === 0 ? yearNum + '年' : '';
+                                },
+                                maxRotation: 45,
+                            }
+                        }
+                    }
+                }
+            });
+            statsChartInstances.push(chartIssuanceBi);
+
+            // --- Chart 1.5b: 纪念钞历年发行总量 ---
+            const chaoYearIssuanceData = [];
+            const chaoYearIssuanceFaceValue = [];
+            years.forEach(y => {
+                const yearChaoCoins = chaoCoins.filter(c => c.year === y);
+                let iss = 0;
+                let faceVal = 0;
+                yearChaoCoins.forEach(c => {
+                    iss += (c.issuance || 0);
+                    let num = parseFloat(c.denomination.match(/\d+\.?\d*/g)[0]);
+                    if (c.denomination.includes('角')) num /= 10;
+                    faceVal += num * (c.issuance || 0);
+                });
+                chaoYearIssuanceData.push(iss);
+                chaoYearIssuanceFaceValue.push(faceVal);
+            });
+
+            const ctxIssuanceChao = document.getElementById('chartYearIssuanceChao').getContext('2d');
+            const chartIssuanceChao = new Chart(ctxIssuanceChao, {
+                type: 'bar',
+                data: {
+                    labels: years.map(y => y + '年'),
+                    datasets: [
+                        {
+                            label: '发行量（万）',
+                            data: chaoYearIssuanceData,
+                            backgroundColor: 'rgba(244, 114, 182, 0.5)',
+                            borderColor: 'rgba(244, 114, 182, 1)',
+                            borderWidth: 1,
+                            yAxisID: 'y',
+                            order: 2,
+                        },
+                        {
+                            label: '发行总面额（万元）',
+                            data: chaoYearIssuanceFaceValue,
+                            type: 'line',
+                            borderColor: 'rgba(99, 102, 241, 1)',
+                            backgroundColor: 'rgba(99, 102, 241, 0.1)',
+                            pointRadius: 2,
+                            pointHoverRadius: 5,
+                            tension: 0.3,
+                            yAxisID: 'y1',
+                            order: 1,
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    interaction: { mode: 'index', intersect: false },
+                    plugins: {
+                        legend: { display: true, position: 'bottom', labels: { font: { size: 11 } } },
+                        tooltip: {
+                            callbacks: {
+                                label: function(ctx) {
+                                    const v = ctx.parsed.y;
+                                    if (ctx.dataset.label.includes('发行量')) {
+                                        return ctx.dataset.label + ': ' + (v >= 10000 ? (v / 10000).toFixed(2) + '亿' : v.toLocaleString() + '万');
+                                    }
+                                    return ctx.dataset.label + ': ' + v.toLocaleString() + ' 万元';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            type: 'linear',
+                            display: true,
+                            position: 'left',
+                            title: { display: true, text: '发行量（万）' },
+                            ticks: { stepSize: 1 },
+                            grid: { drawOnChartArea: true },
+                        },
+                        y1: {
+                            type: 'linear',
+                            display: true,
+                            position: 'right',
+                            title: { display: true, text: '发行总面额（万元）' },
+                            grid: { drawOnChartArea: false },
+                        },
+                        x: {
+                            ticks: {
+                                callback: function(val, idx) {
+                                    const yearNum = years[idx];
+                                    return yearNum % 5 === 0 ? yearNum + '年' : '';
+                                },
+                                maxRotation: 45,
+                            }
+                        }
+                    }
+                }
+            });
+            statsChartInstances.push(chartIssuanceChao);
+
+            // --- Chart 2: 纪念币发行量区间分布 ---
+            const biBucketLabels = ['<500万', '500~1000万', '1000~2000万', '2000~5000万', '5000万~1亿', '≥1亿'];
+            const biBucketRanges = [[0,500],[500,1000],[1000,2000],[2000,5000],[5000,10000],[10000,Infinity]];
+            const biBucketData = biBucketRanges.map(([lo,hi]) => biCoins.filter(c => lo <= (c.issuance||0) && (c.issuance||0) < hi).length);
+
+            const ctxBucketBi = document.getElementById('chartIssuanceBucketBi').getContext('2d');
+            const chartBucketBi = new Chart(ctxBucketBi, {
+                type: 'bar',
+                data: {
+                    labels: biBucketLabels,
+                    datasets: [{
+                        data: biBucketData,
+                        backgroundColor: ['#06b6d4','#10b981','#34d399','#84cc16','#f59e0b','#ef4444'],
+                        borderRadius: 6,
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(ctx) {
+                                    return ctx.parsed.x + ' 枚';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            ticks: { stepSize: 5 },
+                            title: { display: true, text: '数量（枚）' },
+                        },
+                        y: {
+                            ticks: { font: { size: 11 } },
+                        }
+                    }
+                }
+            });
+            statsChartInstances.push(chartBucketBi);
+
+            // --- Chart 2b: 纪念钞发行量区间分布 ---
+            const chaoBucketLabels = ['<5000万', '5000万~1亿', '1~1.5亿', '1.5~2亿', '2~3亿', '≥3亿'];
+            const chaoBucketRanges = [[0,5000],[5000,10000],[10000,15000],[15000,20000],[20000,30000],[30000,Infinity]];
+            const chaoBucketData = chaoBucketRanges.map(([lo,hi]) => chaoCoins.filter(c => lo <= (c.issuance||0) && (c.issuance||0) < hi).length);
+
+            const ctxBucketChao = document.getElementById('chartIssuanceBucketChao').getContext('2d');
+            const chartBucketChao = new Chart(ctxBucketChao, {
+                type: 'bar',
+                data: {
+                    labels: chaoBucketLabels,
+                    datasets: [{
+                        data: chaoBucketData,
+                        backgroundColor: ['#06b6d4','#10b981','#84cc16','#f59e0b','#ef4444','#dc2626'],
+                        borderRadius: 6,
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(ctx) {
+                                    return ctx.parsed.x + ' 枚';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            ticks: { stepSize: 1 },
+                            title: { display: true, text: '数量（枚）' },
+                        },
+                        y: {
+                            ticks: { font: { size: 11 } },
+                        }
+                    }
+                }
+            });
+            statsChartInstances.push(chartBucketChao);
+
+            // --- Chart 3a: 纪念币材质（环形图） ---
             const biMetalMap = {};
             biCoins.forEach(c => { biMetalMap[c.metal] = (biMetalMap[c.metal] || 0) + 1; });
             const sortedBiMetal = Object.entries(biMetalMap).sort((a, b) => b[1] - a[1]);
@@ -2146,23 +2474,20 @@
 
                             let mintBadgesHTML = '';
                             if (coin.mints && Array.isArray(coin.mints) && coin.mints.length > 0) {
-                                    mintBadgesHTML = `<div class="absolute bottom-2 left-2 z-20 flex flex-row gap-1">`;
+                                    mintBadgesHTML = `<div class="mt-1.5 flex flex-wrap justify-center gap-1">`;
 
                                     coin.mints.forEach(mintName => {
                                     const config = mintConfig[mintName] || { short: "厂", color: "bg-gray-400", fullName: mintName };
                                     mintBadgesHTML += `
-                                        <div class="${config.color} w-6 h-6 rounded-full flex items-center justify-center text-white text-[10px] font-bold border border-white/40 backdrop-blur-[2px] shadow-sm">
-                                            ${config.short}
-                                        </div>
+                                        <span class="${config.color} inline-flex items-center px-2 py-0.5 rounded-full text-white text-[9px] sm:text-[10px] font-medium shadow-sm cursor-default" title="${config.fullName}">${config.short}</span>
                                     `;
                                 });
 
                                 mintBadgesHTML += `</div>`;
-                            }                   
+                            }
 
                             coinCard.innerHTML = `
                                 <div class="image-container relative w-full aspect-square cursor-pointer">
-                                    ${mintBadgesHTML}
 
                                     <img
                                         src="${coin.imageUrl}"
@@ -2179,10 +2504,14 @@
 
                                     <!-- 点阵图标（底部右侧） -->
                                     ${matrixDataMap[coin.id] ? `<div class="matrix-icon absolute bottom-2 right-2 z-20 w-7 h-7 bg-white/80 rounded flex items-center justify-center shadow-sm cursor-pointer hover:bg-white transition-colors" title="查看防伪点阵">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-700" viewBox="0 0 24 24" fill="none">
-                                            <rect x="3" y="3" width="4" height="4" fill="currentColor"/><rect x="9" y="3" width="4" height="4" fill="currentColor"/>
-                                            <rect x="3" y="9" width="4" height="4" fill="currentColor"/><rect x="15" y="9" width="4" height="4" fill="currentColor"/>
-                                            <rect x="9" y="15" width="4" height="4" fill="currentColor"/><rect x="15" y="15" width="4" height="4" fill="currentColor"/>
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-700" viewBox="0 0 16 16" fill="currentColor">
+                                            <rect x="1"  y="1"  width="3" height="3" rx="0.5"/>
+                                            <rect x="6.5" y="1"  width="3" height="3" rx="0.5"/>
+                                            <rect x="1"  y="6.5" width="3" height="3" rx="0.5"/>
+                                            <rect x="12" y="6.5" width="3" height="3" rx="0.5"/>
+                                            <rect x="1"  y="12" width="3" height="3" rx="0.5"/>
+                                            <rect x="6.5" y="12" width="3" height="3" rx="0.5"/>
+                                            <rect x="12" y="12" width="3" height="3" rx="0.5"/>
                                         </svg>
                                     </div>` : ''}
 
@@ -2205,9 +2534,10 @@
                                         </svg>
                                     </div>
                                 </div>
-                                <div class="mt-4 text-center">
+                                <div class="mt-3 text-center px-1">
                                     <p class="font-semibold text-sm">${coin.name}</p>
-                                    <p class="text-[12px] text-gray-500">${coin.denomination} • ${coin.size} • ${coin.metal}</p>
+                                    <p class="text-[9px] sm:text-[11px] text-gray-500 mt-1 whitespace-nowrap overflow-hidden">${coin.denomination}&nbsp;&middot;&nbsp;${coin.size}&nbsp;&middot;&nbsp;${coin.metal}&nbsp;&middot;&nbsp;${coin.issuance > 0 ? (coin.issuance >= 10000 ? (coin.issuance / 10000) + '亿' : coin.issuance + '万') : '—'}</p>
+                                    ${mintBadgesHTML}
                                 </div>
                             `;
                             coinGrid.appendChild(coinCard);
@@ -2356,10 +2686,14 @@
             const totalGoalRate = totalCoins > 0 ? ((collectedCoinsCount + wishlistCoinsCount) / totalCoins) * 100 : 0;
             
             document.getElementById('overviewCount').innerHTML = `
-                已收藏 <span style="color: #22C55E;">${collectedCoinsCount}</span> / 
-                想收藏 <span style="color: #FBBF24;">${wishlistCoinsCount}</span> / 
+                已收藏 <span style="color: #22C55E;">${collectedCoinsCount}</span> /
+                想收藏 <span style="color: #FBBF24;">${wishlistCoinsCount}</span> /
                 总数 ${totalCoins} 枚
             `;
+
+            // 更新顶部提示条数字
+            document.getElementById('hintCollectedCount').textContent = collectedCoinsCount;
+            document.getElementById('hintWishlistCount').textContent = wishlistCoinsCount;
 
             // 更新“已收藏”进度条的宽度 (蓝色)
             document.getElementById('collectedProgressBar').style.width = `${collectedRate}%`;
