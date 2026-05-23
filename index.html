@@ -487,7 +487,7 @@
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans p-4 sm:p-8">
     <!-- 顶部滚动提示条 -->
-    <div id="scrollHint">
+    <div id="scrollHint" class="text-center">
         右上角图标：<b class="text-[#22C55E]">双击</b>已收藏 <span id="hintCollectedCount" class="hint-badge collected">0</span> / <b class="text-[#FBBF24]">单击</b>想收藏 <span id="hintWishlistCount" class="hint-badge wishlist">0</span>
     </div>
     <div class="max-w-7xl mx-auto py-8">
@@ -732,18 +732,12 @@
     <footer id="footerHint" class="fixed bottom-0 left-0 right-0 bg-gradient-to-r from-blue-800/80 to-blue-600/80 text-white py-3 px-4 transition-all duration-300 transform translate-y-full">
         <div class="max-w-7xl mx-auto">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-2 items-center">
-                <div class="text-center md:text-left">
+                <div class="text-center">
                     <p class="text-sm md:text-base opacity-90">此网页的所有数据均存储在本地浏览器中
                     </p>
                 </div>
                 <div class="text-center">
                     <p class="text-sm md:text-base font-medium">Copyright © 2025-<span id="current-year"></span> theluojia</p>
-                </div>
-                <div class="text-center">
-                    <p class="text-sm md:text-base flex items-center justify-center gap-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-                        访问 <span id="busuanzi_value_site_pv">--</span> 次
-                    </p>
                 </div>
                 <div class="text-center">
                     <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans"
@@ -763,6 +757,12 @@
                             class="h-6 w-auto" />
                         <span>CC BY-NC-SA 4.0</span>
                     </a>
+                </div>
+                <div class="text-center">
+                    <p class="text-sm md:text-base flex items-center justify-center gap-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                        访问 <span id="busuanzi_value_site_pv">--</span> 次
+                    </p>
                 </div>
             </div>
         </div>
