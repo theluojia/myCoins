@@ -392,6 +392,159 @@
         #zoomModal.active {
             display: flex;
         }
+        .zoom-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            max-width: 90vw;
+            max-height: 95vh;
+        }
+        .zoom-name {
+            margin-bottom: 0.75rem;
+            padding: 0.3rem 1.2rem;
+            max-width: 90vw;
+            text-align: center;
+            color: #fff;
+            font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", "Hiragino Sans GB", "WenQuanYi Micro Hei", sans-serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            line-height: 1.6;
+            background: rgba(255,255,255,0.08);
+            border-radius: 0.4rem;
+        }
+        .zoom-image-wrapper {
+            position: relative;
+            display: inline-block;
+            line-height: 0;
+        }
+        .zoom-image {
+            max-width: 90vw;
+            max-height: 65vh;
+            object-fit: contain;
+            border-radius: 0.5rem;
+            cursor: crosshair;
+        }
+        .zoom-lens {
+            position: absolute;
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            border: 3px solid rgba(255,255,255,0.6);
+            box-shadow: 0 0 20px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.15) inset;
+            background-repeat: no-repeat;
+            pointer-events: none;
+            display: none;
+            z-index: 20;
+        }
+        .zoom-desc {
+            margin-top: 1rem;
+            padding: 0.75rem 1.5rem;
+            max-width: 90vw;
+            text-align: center;
+            color: #e0e0e0;
+            font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", "Hiragino Sans GB", "WenQuanYi Micro Hei", sans-serif;
+            font-size: 1rem;
+            line-height: 1.8;
+            letter-spacing: 0.03em;
+            background: rgba(255,255,255,0.06);
+            border-radius: 0.5rem;
+            min-height: 2.5rem;
+        }
+        .zoom-face-label {
+            margin-top: 0.4rem;
+            font-size: 0.8rem;
+            color: #888;
+            font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+            letter-spacing: 0.05em;
+        }
+        .zoom-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 0.75rem;
+            padding: 0.3rem 0.6rem;
+            background: rgba(255,255,255,0.06);
+            border-radius: 0.4rem;
+        }
+        .zoom-ctrl-btn {
+            width: 1.75rem;
+            height: 1.75rem;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.25);
+            background: rgba(255,255,255,0.1);
+            color: #ccc;
+            font-size: 1rem;
+            line-height: 1;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.15s;
+            outline: none;
+            font-family: inherit;
+        }
+        .zoom-ctrl-btn:hover {
+            background: rgba(255,255,255,0.25);
+            color: #fff;
+            border-color: rgba(255,255,255,0.4);
+        }
+        .zoom-ratio {
+            color: #ccc;
+            font-size: 0.85rem;
+            font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+            min-width: 2.5rem;
+            text-align: center;
+            letter-spacing: 0.03em;
+        }
+        .zoom-hint {
+            color: #666;
+            font-size: 0.75rem;
+            font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+            margin-left: 0.5rem;
+            letter-spacing: 0.03em;
+        }
+        .zoom-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.12);
+            color: #ccc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+            outline: none;
+        }
+        .zoom-arrow:hover {
+            background: rgba(255,255,255,0.25);
+            color: #fff;
+        }
+        .zoom-arrow:active {
+            background: rgba(255,255,255,0.35);
+        }
+        /* 响应式：小屏幕下调整 */
+        @media (max-width: 640px) {
+            .zoom-desc {
+                font-size: 0.875rem;
+                padding: 0.5rem 1rem;
+                line-height: 1.6;
+            }
+            .zoom-image {
+                max-height: 55vh;
+            }
+            .zoom-arrow {
+                width: 2.5rem;
+                height: 2.5rem;
+            }
+        }
 
         /* 顶部滚动提示条 */
         #scrollHint {
@@ -650,8 +803,32 @@
 
         <!-- 图片放大弹窗 -->
         <div id="zoomModal" class="fixed inset-0 z-[100] items-center justify-center bg-black/90 hidden" onclick="closeCoinZoom()">
-            <div class="relative max-w-[90vw] max-h-[90vh]">
-                <img id="zoomModalImg" class="max-w-[90vw] max-h-[85vh] object-contain rounded-lg" src="" alt="">
+            <!-- 左切换按钮 -->
+            <button id="zoomArrowLeft" class="zoom-arrow left-4" onclick="event.stopPropagation();switchZoomFace()" title="切换图片">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+            </button>
+            <!-- 右切换按钮 -->
+            <button id="zoomArrowRight" class="zoom-arrow right-4" onclick="event.stopPropagation();switchZoomFace()" title="切换图片">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+            <!-- 关闭按钮 -->
+            <button class="absolute top-4 right-4 z-10 w-9 h-9 bg-white/20 hover:bg-white/40 rounded-full flex items-center justify-center text-white transition-colors" onclick="event.stopPropagation();closeCoinZoom()" title="关闭">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+            <div class="zoom-content" onclick="event.stopPropagation()">
+                <div id="zoomModalName" class="zoom-name"></div>
+                <div id="zoomImageWrapper" class="zoom-image-wrapper">
+                    <img id="zoomModalImg" class="zoom-image" src="" alt="">
+                    <div id="zoomLens" class="zoom-lens"></div>
+                </div>
+                <div class="zoom-controls">
+                    <button class="zoom-ctrl-btn" onclick="event.stopPropagation();changeZoomFactor(-0.5)" title="缩小">−</button>
+                    <span id="zoomRatio" class="zoom-ratio">2.5×</span>
+                    <button class="zoom-ctrl-btn" onclick="event.stopPropagation();changeZoomFactor(0.5)" title="放大">+</button>
+                    <span class="zoom-hint">点击图片开启/关闭放大镜</span>
+                </div>
+                <div id="zoomModalDesc" class="zoom-desc"></div>
+                <div id="zoomModalFace" class="zoom-face-label"></div>
             </div>
         </div>
 
@@ -949,20 +1126,144 @@
         });
 
         // 4. 图片放大弹窗
+        let zoomState = { coin: null, face: 'front', lensActive: false, zoomFactor: 2.5 };
+
         function openCoinZoom(coin, viewMode) {
-            const zoomModal = document.getElementById('zoomModal');
+            zoomState.coin = coin;
+            // viewMode 'front' = .front-image visible → imageUrl (反面)
+            // viewMode 'back'  = .back-image visible → imageUrl2 (正面)
+            zoomState.face = viewMode === 'front' ? 'back' : 'front';
+            renderZoomView();
+            document.getElementById('zoomModal').classList.add('active');
+        }
+
+        function renderZoomView() {
+            const coin = zoomState.coin;
+            if (!coin) return;
+            const zoomModalName = document.getElementById('zoomModalName');
             const zoomModalImg = document.getElementById('zoomModalImg');
-            const img = viewMode === 'back' ? coin.imageUrl2 : coin.imageUrl;
-            zoomModalImg.src = img;
-            zoomModalImg.alt = coin.name + (viewMode === 'back' ? ' 背面' : ' 正面');
-            zoomModal.classList.add('active');
+            const zoomModalDesc = document.getElementById('zoomModalDesc');
+            const zoomModalFace = document.getElementById('zoomModalFace');
+            const isFront = zoomState.face === 'front';
+            zoomModalName.textContent = coin.name;
+            zoomModalImg.src = isFront ? coin.imageUrl2 : coin.imageUrl;
+            zoomModalImg.alt = coin.name + (isFront ? ' 正面' : ' 反面');
+            zoomModalDesc.textContent = (isFront ? coin.description2 : coin.description) || '暂无描述';
+            zoomModalFace.textContent = isFront ? '【正面】' : '【反面】';
+            // 放大镜在图片加载后初始化（处理缓存情况）
+            if (zoomModalImg.complete) {
+                initZoomLens();
+            } else {
+                zoomModalImg.onload = initZoomLens;
+            }
+        }
+
+        let lensController;
+        let lensUpdateFn;
+
+        function initZoomLens() {
+            // 清理上一次的监听器
+            if (lensController) lensController.abort();
+            lensController = new AbortController();
+            const signal = lensController.signal;
+
+            const img = document.getElementById('zoomModalImg');
+            const lens = document.getElementById('zoomLens');
+            const wrapper = document.getElementById('zoomImageWrapper');
+
+            // 保持放大镜状态不重置（切换正反面时状态保持）
+            lens.style.display = zoomState.lensActive ? 'block' : 'none';
+            updateZoomRatioDisplay();
+
+            lensUpdateFn = function(e) {
+                if (!zoomState.lensActive) return;
+                const rect = img.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                if (x < 0 || y < 0 || x > rect.width || y > rect.height) return;
+                const fracX = x / rect.width;
+                const fracY = y / rect.height;
+                const zf = zoomState.zoomFactor;
+                const bgW = rect.width * zf;
+                const bgH = rect.height * zf;
+                const lensW = lens.offsetWidth;
+                const lensH = lens.offsetHeight;
+
+                lens.style.backgroundImage = `url(${img.src})`;
+                lens.style.backgroundSize = `${bgW}px ${bgH}px`;
+                const bgX = fracX * bgW - lensW / 2;
+                const bgY = fracY * bgH - lensH / 2;
+                lens.style.backgroundPosition = `-${bgX}px -${bgY}px`;
+
+                const lensLeft = x - lensW / 2;
+                const lensTop = y - lensH / 2;
+                lens.style.left = `${lensLeft}px`;
+                lens.style.top = `${lensTop}px`;
+            };
+
+            wrapper.addEventListener('mousemove', lensUpdateFn, { signal });
+            wrapper.addEventListener('mouseleave', function() {
+                lens.style.display = 'none';
+            }, { signal });
+            wrapper.addEventListener('mouseenter', function() {
+                if (zoomState.lensActive) {
+                    lens.style.display = 'block';
+                }
+            }, { signal });
+
+            wrapper.addEventListener('click', function(e) {
+                zoomState.lensActive = !zoomState.lensActive;
+                if (zoomState.lensActive) {
+                    lens.style.display = 'block';
+                    if (lensUpdateFn) lensUpdateFn(e);
+                } else {
+                    lens.style.display = 'none';
+                }
+                updateZoomRatioDisplay();
+            }, { signal });
+        }
+
+        function updateZoomRatioDisplay() {
+            const el = document.getElementById('zoomRatio');
+            if (el) el.textContent = zoomState.zoomFactor.toFixed(1) + '×';
+        }
+
+        function changeZoomFactor(delta) {
+            zoomState.zoomFactor = Math.max(1.5, Math.min(3, +(zoomState.zoomFactor + delta).toFixed(1)));
+            updateZoomRatioDisplay();
+        }
+
+        function switchZoomFace() {
+            zoomState.face = zoomState.face === 'front' ? 'back' : 'front';
+            renderZoomView();
         }
 
         function closeCoinZoom() {
             const zoomModal = document.getElementById('zoomModal');
+            const lens = document.getElementById('zoomLens');
+            lens.style.display = 'none';
+            lens.style.backgroundImage = '';
+            const wrapper = document.getElementById('zoomImageWrapper');
+            wrapper.replaceWith(wrapper.cloneNode(true));
             zoomModal.classList.remove('active');
             document.getElementById('zoomModalImg').src = '';
+            document.getElementById('zoomModalName').textContent = '';
+            document.getElementById('zoomModalDesc').textContent = '';
+            document.getElementById('zoomModalFace').textContent = '';
+            zoomState = { coin: null, face: 'front', lensActive: false, zoomFactor: 2.5 };
         }
+
+        // 键盘事件：左右箭头切换正反面，Esc关闭
+        document.addEventListener('keydown', function(e) {
+            const zoomModal = document.getElementById('zoomModal');
+            if (!zoomModal.classList.contains('active')) return;
+            if (e.key === 'Escape') {
+                closeCoinZoom();
+            } else if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+                e.preventDefault();
+                switchZoomFace();
+            }
+        });
 
         // 点阵弹窗相关
         let matrixDegree = 0;
