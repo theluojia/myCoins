@@ -530,6 +530,15 @@
         .zoom-arrow:active {
             background: rgba(255,255,255,0.35);
         }
+        /* 触屏设备：禁用放大镜功能 */
+        @media (hover: none) and (pointer: coarse) {
+            .zoom-controls {
+                display: none;
+            }
+            .zoom-image {
+                cursor: default;
+            }
+        }
         /* 响应式：小屏幕下调整 */
         @media (max-width: 640px) {
             .zoom-desc {
@@ -1212,6 +1221,7 @@
             }, { signal });
 
             wrapper.addEventListener('click', function(e) {
+                if (window.matchMedia('(hover: none) and (pointer: coarse)').matches) return;
                 zoomState.lensActive = !zoomState.lensActive;
                 if (zoomState.lensActive) {
                     lens.style.display = 'block';
