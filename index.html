@@ -945,28 +945,12 @@
                     </a>
                 </div>
                 <div class="text-center">
-                    <p class="text-sm md:text-base flex items-center justify-center gap-3 flex-wrap">
-                        <!-- 总计 -->
-                        <span class="flex items-center gap-1">
-                            总
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-                            <span id="busuanzi_value_site_pv" data-bsz="busuanzi_site_pv" class="font-bold">--</span>
-                        </span>
-                        <span class="flex items-center gap-1">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-                            <span id="busuanzi_value_site_uv" data-bsz="busuanzi_site_uv" class="font-bold">--</span>
-                        </span>
-                        <span class="opacity-50">|</span>
-                        <!-- 今日 -->
-                        <span class="flex items-center gap-1">
-                            今日
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-                            <span id="busuanzi_value_today_pv" data-bsz="busuanzi_today_pv" class="font-bold">--</span>
-                        </span>
-                        <span class="flex items-center gap-1">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-                            <span id="busuanzi_value_today_uv" data-bsz="busuanzi_today_uv" class="font-bold">--</span>
-                        </span>
+                    <p class="text-sm md:text-base flex items-center justify-center gap-2">
+                        <span class="flex items-center gap-1">总<svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg><span id="busuanzi_site_pv" class="font-bold">--</span></span>
+                        <span class="flex items-center gap-1"><svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg><span id="busuanzi_site_uv" class="font-bold">--</span></span>
+                        <span class="opacity-40">|</span>
+                        <span class="flex items-center gap-1">今<svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg><span id="busuanzi_today_pv" class="font-bold">--</span></span>
+                        <span class="flex items-center gap-1"><svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg><span id="busuanzi_today_uv" class="font-bold">--</span></span>
                     </p>
                 </div>
             </div>
@@ -3295,42 +3279,30 @@
         }, { passive: true });
 
     </script>
-    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
     <script src="//cdn.busuanzi.cc/busuanzi/3.6.9/busuanzi.min.js" defer></script>
     <script>
-    // 数字 >= 10000 时自动转为 K/M 格式（1位小数）
-    // 监听 busuanzi 元素的内容变化，无论 2.3 还是 3.6.9 写入都能格式化
+    // 3.6.9 加载后：非数字值替换为 --，>=10000 转为 K/M 格式
     (function(){
         function formatNum(n){
             var v = parseInt(n, 10);
-            if(isNaN(v) || v < 10000) return n;
+            if(isNaN(v)) return '--';
+            if(v < 10000) return String(v);
             if(v >= 1000000) return (v/1000000).toFixed(1) + 'M';
             return (v/1000).toFixed(1) + 'K';
         }
-        // 3.6.9 的数据同步（不带 value_ 前缀 -> 带 value_ 前缀）
-        function syncFrom369(){
-            document.querySelectorAll('[data-bsz]').forEach(function(el){
-                var src = document.getElementById(el.dataset.bsz);
-                if(src && src.textContent && src.textContent !== '--'){
-                    el.textContent = formatNum(src.textContent);
-                }
+        var ids = ['busuanzi_site_pv','busuanzi_site_uv','busuanzi_today_pv','busuanzi_today_uv'];
+        var timer = setInterval(function(){
+            var allDone = true;
+            ids.forEach(function(id){
+                var el = document.getElementById(id);
+                if(!el) return;
+                var text = el.textContent;
+                if(text === '--' || text === '加载中...') { allDone = false; return; }
+                var formatted = formatNum(text);
+                if(el.textContent !== formatted) el.textContent = formatted;
             });
-        }
-        // 监听 2.3 直接写入的元素
-        var observer = new MutationObserver(function(mutations){
-            mutations.forEach(function(m){
-                var el = m.target;
-                if(el.textContent && el.textContent !== '--' && isNaN(parseInt(el.textContent, 10)) === false){
-                    var formatted = formatNum(el.textContent);
-                    if(formatted !== el.textContent) el.textContent = formatted;
-                }
-            });
-        });
-        document.querySelectorAll('[data-bsz]').forEach(function(el){
-            observer.observe(el, { childList: true, subtree: true, characterData: true });
-        });
-        // 定期同步 3.6.9 的数据
-        var timer = setInterval(function(){ syncFrom369(); }, 500);
+            if(allDone) clearInterval(timer);
+        }, 500);
         setTimeout(function(){ clearInterval(timer); }, 10000);
     })();
     </script>
