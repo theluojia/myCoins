@@ -47,6 +47,85 @@
             animation: fade-in-out 3s ease-in-out;
         }
 
+        /* 飞机横幅动画 */
+        @keyframes fly-across {
+            from { transform: translateX(-120%); }
+            to   { transform: translateX(calc(100vw + 20%)); }
+        }
+        @keyframes banner-sway {
+            0%, 100% { transform: translateY(-1px); }
+            50%      { transform: translateY(2px); }
+        }
+        .plane-banner-group {
+            position: fixed;
+            z-index: 10000;
+            pointer-events: none;
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
+            filter: drop-shadow(0 4px 10px rgba(0,0,0,0.18));
+        }
+        .plane-banner-group.flying {
+            animation: fly-across var(--fly-duration, 6s) linear forwards;
+        }
+        .banner-ribbon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 9px 22px;
+            font-weight: 700;
+            font-size: 15px;
+            line-height: 1.3;
+            position: relative;
+            text-shadow: 0 1px 0 rgba(255,255,255,0.35);
+            clip-path: polygon(3% 0%, 97% 0%, 100% 50%, 97% 100%, 3% 100%, 0% 50%);
+            animation: banner-sway 1.8s ease-in-out infinite;
+        }
+        .banner-ribbon::before,
+        .banner-ribbon::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 0;
+            height: 0;
+        }
+        .banner-ribbon::before {
+            left: 0;
+            transform: translateY(-50%);
+            border-right: 10px solid var(--banner-bg);
+            border-top: 13px solid transparent;
+            border-bottom: 13px solid transparent;
+        }
+        .banner-ribbon::after {
+            right: 0;
+            transform: translateY(-50%);
+            border-left: 10px solid var(--banner-bg);
+            border-top: 13px solid transparent;
+            border-bottom: 13px solid transparent;
+        }
+        .tow-rope {
+            width: 18px;
+            height: 0;
+            border-top: 2px dashed;
+            opacity: 0.55;
+            margin: 0 3px;
+        }
+        .plane-svg {
+            width: 172px;
+            height: 80px;
+            flex-shrink: 0;
+        }
+        @media (max-width: 640px) {
+            .banner-ribbon {
+                font-size: 13px;
+                padding: 7px 16px;
+            }
+            .plane-svg {
+                width: 128px;
+                height: 60px;
+            }
+        }
+
         /* 点阵模态框 */
         #matrixModal {
             display: none;
@@ -1034,6 +1113,96 @@
             "南昌": { short: "昌", color: "bg-pink-500", fullName: "南昌印钞有限公司" },
             "广州": { short: "穗", color: "bg-cyan-500", fullName: "广州印钞有限公司" }
         };
+
+        // ===== 飞机横幅动画 =====
+        const PLANE_THEMES = [
+            { plane: '#E53E3E', banner: '#FED7D7', text: '#742A2A' },  // 红
+            { plane: '#3182CE', banner: '#BEE3F8', text: '#1A365D' },  // 蓝
+            { plane: '#38A169', banner: '#C6F6D5', text: '#22543D' },  // 绿
+            { plane: '#805AD5', banner: '#E9D8FD', text: '#44337A' },  // 紫
+            { plane: '#DD6B20', banner: '#FEEBC8', text: '#7B341E' },  // 橙
+        ];
+
+        let activePlanes = 0;
+        let themeIndex = 0;
+        const MAX_CONCURRENT_PLANES = 5;
+
+        function showFlyBanner(coinName) {
+            if (activePlanes >= MAX_CONCURRENT_PLANES) {
+                const oldest = document.querySelector('.plane-banner-group');
+                if (oldest) { oldest.remove(); activePlanes--; }
+            }
+
+            const theme = PLANE_THEMES[themeIndex % PLANE_THEMES.length];
+            themeIndex++;
+
+            const lane = activePlanes % 3;
+            const topPct = 10 + lane * 10; // 10%, 20%, 30% from top
+
+            const group = document.createElement('div');
+            group.className = 'plane-banner-group flying';
+            group.style.top = topPct + '%';
+            group.style.setProperty('--banner-bg', theme.banner);
+            group.style.setProperty('--fly-duration', '6s');
+
+            const banner = document.createElement('div');
+            banner.className = 'banner-ribbon';
+            banner.style.background = theme.banner;
+            banner.style.color = theme.text;
+            banner.textContent = '🎉 收藏「' + coinName + '」成功！🎉';
+
+            const rope = document.createElement('div');
+            rope.className = 'tow-rope';
+            rope.style.borderColor = theme.plane;
+
+            const svgNS = 'http://www.w3.org/2000/svg';
+            const svg = document.createElementNS(svgNS, 'svg');
+            svg.setAttribute('class', 'plane-svg');
+            svg.setAttribute('viewBox', '0 0 140 54');
+            svg.style.color = theme.plane;
+
+            const parts = [
+                // 主旋翼桨叶
+                { el: 'rect', attrs: { x:'18', y:'3', width:'96', height:'3.5', rx:'1.8', fill:'currentColor', opacity:'0.75' } },
+                // 旋翼桅杆
+                { el: 'rect', attrs: { x:'65', y:'5', width:'3', height:'9', rx:'1.5', fill:'currentColor' } },
+                // 尾梁 — 向左后方延伸
+                { el: 'rect', attrs: { x:'6', y:'24', width:'38', height:'5', rx:'2.5', fill:'currentColor' } },
+                // 垂尾
+                { el: 'polygon', attrs: { points:'10,14 6,24 10,28', fill:'currentColor', opacity:'0.7' } },
+                // 尾桨桅杆
+                { el: 'rect', attrs: { x:'4', y:'14', width:'2', height:'14', rx:'1', fill:'currentColor' } },
+                // 尾桨桨叶
+                { el: 'rect', attrs: { x:'0', y:'13', width:'8', height:'1.8', rx:'0.9', fill:'currentColor', opacity:'0.65' } },
+                { el: 'rect', attrs: { x:'0', y:'27', width:'8', height:'1.8', rx:'0.9', fill:'currentColor', opacity:'0.65' } },
+                // 机身主体
+                { el: 'rect', attrs: { x:'42', y:'18', width:'50', height:'18', rx:'9', fill:'currentColor' } },
+                // 发动机整流罩（机身上方隆起）
+                { el: 'rect', attrs: { x:'54', y:'12', width:'24', height:'8', rx:'4', fill:'currentColor', opacity:'0.55' } },
+                // 驾驶舱风挡（泡型，在右侧 → 机头朝右）
+                { el: 'rect', attrs: { x:'80', y:'15', width:'17', height:'14', rx:'7', fill:'white', opacity:'0.3' } },
+                // 起落架滑橇
+                { el: 'rect', attrs: { x:'52', y:'36', width:'2.5', height:'9', rx:'1.2', fill:'currentColor', opacity:'0.6' } },
+                { el: 'rect', attrs: { x:'78', y:'36', width:'2.5', height:'9', rx:'1.2', fill:'currentColor', opacity:'0.6' } },
+                { el: 'rect', attrs: { x:'46', y:'44', width:'40', height:'3', rx:'1.5', fill:'currentColor', opacity:'0.6' } },
+            ];
+            parts.forEach(p => {
+                const el = document.createElementNS(svgNS, p.el);
+                Object.entries(p.attrs).forEach(([k, v]) => el.setAttribute(k, v));
+                svg.appendChild(el);
+            });
+
+            group.appendChild(banner);
+            group.appendChild(rope);
+            group.appendChild(svg);
+            document.body.appendChild(group);
+            activePlanes++;
+
+            group.addEventListener('animationend', () => {
+                group.remove();
+                activePlanes--;
+            });
+        }
 
         document.getElementById('current-year').textContent = new Date().getFullYear();
 
@@ -2983,6 +3152,7 @@
                                             myWishlist = myWishlist.filter(id => id !== coin.id);
                                         }
                                         myCollection.push(coin.id);
+                                        showFlyBanner(coin.name);
                                     }
                                     saveCollection();
                                     renderUI();
