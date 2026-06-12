@@ -1127,7 +1127,83 @@
         let themeIndex = 0;
         const MAX_CONCURRENT_PLANES = 5;
 
-        function showFlyBanner(coinName) {
+        function escapeHtml(str) {
+            const div = document.createElement('div');
+            div.textContent = str;
+            return div.innerHTML;
+        }
+
+        function getAircraftParts(type) {
+            if (type === 'helicopter' || !type) {
+                return [
+                    { el: 'rect', attrs: { x:'18', y:'3', width:'96', height:'3.5', rx:'1.8', fill:'currentColor', opacity:'0.75' } },
+                    { el: 'rect', attrs: { x:'65', y:'5', width:'3', height:'9', rx:'1.5', fill:'currentColor' } },
+                    { el: 'rect', attrs: { x:'6', y:'24', width:'38', height:'5', rx:'2.5', fill:'currentColor' } },
+                    { el: 'polygon', attrs: { points:'10,14 6,24 10,28', fill:'currentColor', opacity:'0.7' } },
+                    { el: 'rect', attrs: { x:'4', y:'14', width:'2', height:'14', rx:'1', fill:'currentColor' } },
+                    { el: 'rect', attrs: { x:'0', y:'13', width:'8', height:'1.8', rx:'0.9', fill:'currentColor', opacity:'0.65' } },
+                    { el: 'rect', attrs: { x:'0', y:'27', width:'8', height:'1.8', rx:'0.9', fill:'currentColor', opacity:'0.65' } },
+                    { el: 'rect', attrs: { x:'42', y:'18', width:'50', height:'18', rx:'9', fill:'currentColor' } },
+                    { el: 'rect', attrs: { x:'54', y:'12', width:'24', height:'8', rx:'4', fill:'currentColor', opacity:'0.55' } },
+                    { el: 'rect', attrs: { x:'80', y:'15', width:'17', height:'14', rx:'7', fill:'white', opacity:'0.3' } },
+                    { el: 'rect', attrs: { x:'52', y:'36', width:'2.5', height:'9', rx:'1.2', fill:'currentColor', opacity:'0.6' } },
+                    { el: 'rect', attrs: { x:'78', y:'36', width:'2.5', height:'9', rx:'1.2', fill:'currentColor', opacity:'0.6' } },
+                    { el: 'rect', attrs: { x:'46', y:'44', width:'40', height:'3', rx:'1.5', fill:'currentColor', opacity:'0.6' } },
+                ];
+            }
+            if (type === 'fighter') {
+                return [
+                    { el: 'ellipse', attrs: { cx:'12', cy:'25', rx:'8', ry:'3.5', fill:'#FF6B35', opacity:'0.7' } },
+                    { el: 'ellipse', attrs: { cx:'5', cy:'25', rx:'4', ry:'2', fill:'#FFD700', opacity:'0.6' } },
+                    { el: 'rect', attrs: { x:'18', y:'21', width:'8', height:'8', rx:'2', fill:'currentColor', opacity:'0.6' } },
+                    { el: 'rect', attrs: { x:'26', y:'20', width:'66', height:'10', rx:'2.5', fill:'currentColor' } },
+                    { el: 'path', attrs: { d:'M92 20 L118 25 L92 30 Z', fill:'currentColor' } },
+                    { el: 'rect', attrs: { x:'74', y:'19', width:'16', height:'7', rx:'3.5', fill:'white', opacity:'0.3' } },
+                    { el: 'polygon', attrs: { points:'52,26 42,36 82,36', fill:'currentColor', opacity:'0.8' } },
+                    { el: 'polygon', attrs: { points:'34,21 22,3 42,21', fill:'currentColor', opacity:'0.75' } },
+                    { el: 'polygon', attrs: { points:'42,21 34,7 48,21', fill:'currentColor', opacity:'0.6' } },
+                ];
+            }
+            if (type === 'airliner') {
+                return [
+                    { el: 'rect', attrs: { x:'22', y:'21', width:'88', height:'10', rx:'5', fill:'currentColor' } },
+                    { el: 'path', attrs: { d:'M110 21 Q128 23 132 26 Q128 29 110 31 Z', fill:'currentColor' } },
+                    { el: 'path', attrs: { d:'M22 21 L12 23.5 L22 31 Z', fill:'currentColor' } },
+                    { el: 'polygon', attrs: { points:'24,22 16,4 34,22', fill:'currentColor' } },
+                    { el: 'polygon', attrs: { points:'58,28 48,36 86,36', fill:'currentColor', opacity:'0.8' } },
+                    { el: 'polygon', attrs: { points:'32,28 24,35 46,35', fill:'currentColor', opacity:'0.65' } },
+                    { el: 'ellipse', attrs: { cx:'70', cy:'44', rx:'14', ry:'5.5', fill:'currentColor', opacity:'0.5' } },
+                    { el: 'rect', attrs: { x:'98', y:'20', width:'12', height:'7', rx:'3', fill:'white', opacity:'0.3' } },
+                    { el: 'circle', attrs: { cx:'90', cy:'26', r:'1.2', fill:'white', opacity:'0.45' } },
+                    { el: 'circle', attrs: { cx:'84', cy:'26', r:'1.2', fill:'white', opacity:'0.45' } },
+                    { el: 'circle', attrs: { cx:'78', cy:'26', r:'1.2', fill:'white', opacity:'0.45' } },
+                    { el: 'circle', attrs: { cx:'72', cy:'26', r:'1.2', fill:'white', opacity:'0.45' } },
+                    { el: 'circle', attrs: { cx:'66', cy:'26', r:'1.2', fill:'white', opacity:'0.45' } },
+                    { el: 'circle', attrs: { cx:'60', cy:'26', r:'1.2', fill:'white', opacity:'0.45' } },
+                    { el: 'circle', attrs: { cx:'54', cy:'26', r:'1.2', fill:'white', opacity:'0.45' } },
+                ];
+            }
+            if (type === 'rocket') {
+                return [
+                    { el: 'ellipse', attrs: { cx:'12', cy:'25', rx:'10', ry:'4', fill:'#FF6B35', opacity:'0.7' } },
+                    { el: 'ellipse', attrs: { cx:'5', cy:'25', rx:'5.5', ry:'2.5', fill:'#FFD700', opacity:'0.65' } },
+                    { el: 'ellipse', attrs: { cx:'2', cy:'25', rx:'2.5', ry:'1.5', fill:'#FFF', opacity:'0.5' } },
+                    { el: 'rect', attrs: { x:'20', y:'21', width:'10', height:'10', rx:'2', fill:'currentColor', opacity:'0.7' } },
+                    { el: 'rect', attrs: { x:'30', y:'21', width:'52', height:'10', rx:'2', fill:'currentColor' } },
+                    { el: 'path', attrs: { d:'M82 21 Q98 21 102 26 Q98 31 82 31 Z', fill:'currentColor' } },
+                    { el: 'polygon', attrs: { points:'28,21 18,3 38,21', fill:'currentColor', opacity:'0.7' } },
+                    { el: 'polygon', attrs: { points:'28,31 18,49 38,31', fill:'currentColor', opacity:'0.7' } },
+                    { el: 'circle', attrs: { cx:'66', cy:'26', r:'2.5', fill:'white', opacity:'0.3' } },
+                    { el: 'rect', attrs: { x:'48', y:'22', width:'4', height:'8', rx:'1', fill:'currentColor', opacity:'0.35' } },
+                    { el: 'rect', attrs: { x:'56', y:'22', width:'4', height:'8', rx:'1', fill:'currentColor', opacity:'0.35' } },
+                ];
+            }
+            return [];
+        }
+
+        function showFlyBanner(coinName, options = {}) {
+            const { type = 'helicopter', mode = 'collect' } = options;
+
             if (activePlanes >= MAX_CONCURRENT_PLANES) {
                 const oldest = document.querySelector('.plane-banner-group');
                 if (oldest) { oldest.remove(); activePlanes--; }
@@ -1137,7 +1213,7 @@
             themeIndex++;
 
             const lane = activePlanes % 3;
-            const topPct = 10 + lane * 10; // 10%, 20%, 30% from top
+            const topPct = 10 + lane * 10;
 
             const group = document.createElement('div');
             group.className = 'plane-banner-group flying';
@@ -1149,7 +1225,17 @@
             banner.className = 'banner-ribbon';
             banner.style.background = theme.banner;
             banner.style.color = theme.text;
-            banner.textContent = '🎉 收藏「' + coinName + '」成功！🎉';
+
+            const hl = '<span style="font-weight:900;color:' + theme.plane + '">';
+            if (mode === 'collect') {
+                banner.innerHTML = '🎉 收藏「' + hl + escapeHtml(coinName) + '</span>」成功！🎉';
+            } else if (mode === 'year') {
+                banner.innerHTML = '🏆「' + hl + escapeHtml(coinName) + '年</span>」全部集齐！🏆';
+            } else if (mode === 'theme') {
+                banner.innerHTML = '🏆「' + hl + escapeHtml(coinName) + '</span>」主题全部集齐！🏆';
+            } else if (mode === 'fullset') {
+                banner.innerHTML = '🚀 大全套「' + hl + escapeHtml(coinName) + '枚</span>」全部集齐！🚀';
+            }
 
             const rope = document.createElement('div');
             rope.className = 'tow-rope';
@@ -1161,32 +1247,7 @@
             svg.setAttribute('viewBox', '0 0 140 54');
             svg.style.color = theme.plane;
 
-            const parts = [
-                // 主旋翼桨叶
-                { el: 'rect', attrs: { x:'18', y:'3', width:'96', height:'3.5', rx:'1.8', fill:'currentColor', opacity:'0.75' } },
-                // 旋翼桅杆
-                { el: 'rect', attrs: { x:'65', y:'5', width:'3', height:'9', rx:'1.5', fill:'currentColor' } },
-                // 尾梁 — 向左后方延伸
-                { el: 'rect', attrs: { x:'6', y:'24', width:'38', height:'5', rx:'2.5', fill:'currentColor' } },
-                // 垂尾
-                { el: 'polygon', attrs: { points:'10,14 6,24 10,28', fill:'currentColor', opacity:'0.7' } },
-                // 尾桨桅杆
-                { el: 'rect', attrs: { x:'4', y:'14', width:'2', height:'14', rx:'1', fill:'currentColor' } },
-                // 尾桨桨叶
-                { el: 'rect', attrs: { x:'0', y:'13', width:'8', height:'1.8', rx:'0.9', fill:'currentColor', opacity:'0.65' } },
-                { el: 'rect', attrs: { x:'0', y:'27', width:'8', height:'1.8', rx:'0.9', fill:'currentColor', opacity:'0.65' } },
-                // 机身主体
-                { el: 'rect', attrs: { x:'42', y:'18', width:'50', height:'18', rx:'9', fill:'currentColor' } },
-                // 发动机整流罩（机身上方隆起）
-                { el: 'rect', attrs: { x:'54', y:'12', width:'24', height:'8', rx:'4', fill:'currentColor', opacity:'0.55' } },
-                // 驾驶舱风挡（泡型，在右侧 → 机头朝右）
-                { el: 'rect', attrs: { x:'80', y:'15', width:'17', height:'14', rx:'7', fill:'white', opacity:'0.3' } },
-                // 起落架滑橇
-                { el: 'rect', attrs: { x:'52', y:'36', width:'2.5', height:'9', rx:'1.2', fill:'currentColor', opacity:'0.6' } },
-                { el: 'rect', attrs: { x:'78', y:'36', width:'2.5', height:'9', rx:'1.2', fill:'currentColor', opacity:'0.6' } },
-                { el: 'rect', attrs: { x:'46', y:'44', width:'40', height:'3', rx:'1.5', fill:'currentColor', opacity:'0.6' } },
-            ];
-            parts.forEach(p => {
+            getAircraftParts(type).forEach(p => {
                 const el = document.createElementNS(svgNS, p.el);
                 Object.entries(p.attrs).forEach(([k, v]) => el.setAttribute(k, v));
                 svg.appendChild(el);
@@ -1202,6 +1263,24 @@
                 group.remove();
                 activePlanes--;
             });
+        }
+
+        function checkCollectionComplete(coin) {
+            if (coin.theme) {
+                const themeCoins = allCoinsData.filter(c => c.theme === coin.theme);
+                if (themeCoins.every(c => myCollection.includes(c.id))) {
+                    setTimeout(() => showFlyBanner(coin.theme, { type: 'fighter', mode: 'theme' }), 800);
+                }
+            }
+            if (coin.year && coin.year !== '无') {
+                const yearCoins = allCoinsData.filter(c => c.year === coin.year);
+                if (yearCoins.every(c => myCollection.includes(c.id))) {
+                    setTimeout(() => showFlyBanner(coin.year, { type: 'airliner', mode: 'year' }), 1200);
+                }
+            }
+            if (allCoinsData.every(c => myCollection.includes(c.id))) {
+                setTimeout(() => showFlyBanner(String(allCoinsData.length), { type: 'rocket', mode: 'fullset' }), 1800);
+            }
         }
 
         document.getElementById('current-year').textContent = new Date().getFullYear();
@@ -3153,6 +3232,7 @@
                                         }
                                         myCollection.push(coin.id);
                                         showFlyBanner(coin.name);
+                                        checkCollectionComplete(coin);
                                     }
                                     saveCollection();
                                     renderUI();
