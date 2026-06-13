@@ -1133,76 +1133,54 @@
             return div.innerHTML;
         }
 
-        function getAircraftParts(type) {
-            if (type === 'helicopter' || !type) {
-                return [
-                    { el: 'rect', attrs: { x:'18', y:'3', width:'96', height:'3.5', rx:'1.8', fill:'currentColor', opacity:'0.75' } },
-                    { el: 'rect', attrs: { x:'65', y:'5', width:'3', height:'9', rx:'1.5', fill:'currentColor' } },
-                    { el: 'rect', attrs: { x:'6', y:'24', width:'38', height:'5', rx:'2.5', fill:'currentColor' } },
-                    { el: 'polygon', attrs: { points:'10,14 6,24 10,28', fill:'currentColor', opacity:'0.7' } },
-                    { el: 'rect', attrs: { x:'4', y:'14', width:'2', height:'14', rx:'1', fill:'currentColor' } },
-                    { el: 'rect', attrs: { x:'0', y:'13', width:'8', height:'1.8', rx:'0.9', fill:'currentColor', opacity:'0.65' } },
-                    { el: 'rect', attrs: { x:'0', y:'27', width:'8', height:'1.8', rx:'0.9', fill:'currentColor', opacity:'0.65' } },
-                    { el: 'rect', attrs: { x:'42', y:'18', width:'50', height:'18', rx:'9', fill:'currentColor' } },
-                    { el: 'rect', attrs: { x:'54', y:'12', width:'24', height:'8', rx:'4', fill:'currentColor', opacity:'0.55' } },
-                    { el: 'rect', attrs: { x:'80', y:'15', width:'17', height:'14', rx:'7', fill:'white', opacity:'0.3' } },
-                    { el: 'rect', attrs: { x:'52', y:'36', width:'2.5', height:'9', rx:'1.2', fill:'currentColor', opacity:'0.6' } },
-                    { el: 'rect', attrs: { x:'78', y:'36', width:'2.5', height:'9', rx:'1.2', fill:'currentColor', opacity:'0.6' } },
-                    { el: 'rect', attrs: { x:'46', y:'44', width:'40', height:'3', rx:'1.5', fill:'currentColor', opacity:'0.6' } },
-                ];
+        function getAircraftSVG(type) {
+            if (type === 'helicopter') {
+                return '<path d="m18.19 25.78-.19 1.22-10 1-.09-1.19-.83-10.73a1.01 1.01 0 0 1 1-1.08h2.38a1.013 1.013 0 0 1 .84.45z" fill="currentColor"/>' +
+                    '<path d="m27.14 38h1.171a11.863 11.863 0 0 1 5.02 1.11.975.975 0 0 1 0 1.78 11.863 11.863 0 0 1 -5.02 1.11h-7.311z" fill="currentColor" opacity=".7"/>' +
+                    '<path d="m48 26 10.4 3a.86.86 0 0 1 0 1.64l-8.6 2.78a12.161 12.161 0 0 1 -3.69.58h-38.5a8.312 8.312 0 0 1 -3.11-.6l-2.87-1.15a1 1 0 0 1 -.63-.93v-1.64a1 1 0 0 1 .63-.93l3.27-1.31a8.552 8.552 0 0 1 2.28-.56l28.82-2.88z" fill="currentColor" opacity=".85"/>' +
+                    '<path d="m48 26c-9 0-12-2-12-2a7.5 7.5 0 0 1 6-3c5 0 6 5 6 5z" fill="#5fc4c6"/>' +
+                    '<path d="m20.235 30.845-10.164 12.7a.893.893 0 0 0 .7 1.451h4.887a4.22 4.22 0 0 0 2.307-.686l18.477-12.05a1.232 1.232 0 0 0 -.676-2.26h-13.774a2.251 2.251 0 0 0 -1.757.845z" fill="currentColor" opacity=".6"/>';
             }
             if (type === 'fighter') {
-                return [
-                    { el: 'ellipse', attrs: { cx:'12', cy:'25', rx:'8', ry:'3.5', fill:'#FF6B35', opacity:'0.7' } },
-                    { el: 'ellipse', attrs: { cx:'5', cy:'25', rx:'4', ry:'2', fill:'#FFD700', opacity:'0.6' } },
-                    { el: 'rect', attrs: { x:'18', y:'21', width:'8', height:'8', rx:'2', fill:'currentColor', opacity:'0.6' } },
-                    { el: 'rect', attrs: { x:'26', y:'20', width:'66', height:'10', rx:'2.5', fill:'currentColor' } },
-                    { el: 'path', attrs: { d:'M92 20 L118 25 L92 30 Z', fill:'currentColor' } },
-                    { el: 'rect', attrs: { x:'74', y:'19', width:'16', height:'7', rx:'3.5', fill:'white', opacity:'0.3' } },
-                    { el: 'polygon', attrs: { points:'52,26 42,36 82,36', fill:'currentColor', opacity:'0.8' } },
-                    { el: 'polygon', attrs: { points:'34,21 22,3 42,21', fill:'currentColor', opacity:'0.75' } },
-                    { el: 'polygon', attrs: { points:'42,21 34,7 48,21', fill:'currentColor', opacity:'0.6' } },
-                ];
+                return '<path d="m3.16 25.21-.86 4.7a.931.931 0 0 0 .92 1.09h2.37a.921.921 0 0 0 .89-.68l1.28-4.67-.76-.65z" fill="currentColor" opacity=".7"/>' +
+                    '<path d="m8 22v1h-5l-.2-1-1.78-9.82a1 1 0 0 1 .98-1.18h2.24a.994.994 0 0 1 .96.74z" fill="currentColor" opacity=".7"/>' +
+                    '<path d="m36.45 46 1.11-5-3.95-.65-1.26 5.65 1.65 1z" fill="#374156"/>' +
+                    '<path d="m47.65 46-1.12-5.02-2.53-.98-1.56 1 1.11 5 2.45 1z" fill="#374156"/>' +
+                    '<path d="m33 13h6v7h-6z" fill="#b1cbdd"/>' +
+                    '<path d="m54.94 33a9.008 9.008 0 0 1 -8.94 8h-8.85a10 10 0 0 1 -8.14-4.19l-7.01-9.81-19.58-1.86a1.582 1.582 0 0 1 -1.42-1.57 1.566 1.566 0 0 1 1.57-1.57h27.43v-1a2.006 2.006 0 0 1 2-2h9a2.006 2.006 0 0 1 2 2v2z" fill="currentColor"/>' +
+                    '<path d="m48.172 50h-19.172a2 2 0 0 1 0-4h19.172a4.867 4.867 0 0 0 3.414-1.414 2 2 0 0 1 2.828 2.828 8.767 8.767 0 0 1 -6.242 2.586z" fill="#2b313f"/>' +
+                    '<rect fill="#d7e7f7" height="4" rx="2" width="46" x="13" y="10"/>' +
+                    '<path d="m55 32a8.262 8.262 0 0 1 -.06 1h-11.94a4 4 0 0 1 -4-4v-4a2.006 2.006 0 0 1 2-2h5a9 9 0 0 1 9 9z" fill="#6ddbdd"/>';
             }
             if (type === 'airliner') {
-                return [
-                    { el: 'rect', attrs: { x:'22', y:'21', width:'88', height:'10', rx:'5', fill:'currentColor' } },
-                    { el: 'path', attrs: { d:'M110 21 Q128 23 132 26 Q128 29 110 31 Z', fill:'currentColor' } },
-                    { el: 'path', attrs: { d:'M22 21 L12 23.5 L22 31 Z', fill:'currentColor' } },
-                    { el: 'polygon', attrs: { points:'24,22 16,4 34,22', fill:'currentColor' } },
-                    { el: 'polygon', attrs: { points:'58,28 48,36 86,36', fill:'currentColor', opacity:'0.8' } },
-                    { el: 'polygon', attrs: { points:'32,28 24,35 46,35', fill:'currentColor', opacity:'0.65' } },
-                    { el: 'ellipse', attrs: { cx:'70', cy:'44', rx:'14', ry:'5.5', fill:'currentColor', opacity:'0.5' } },
-                    { el: 'rect', attrs: { x:'98', y:'20', width:'12', height:'7', rx:'3', fill:'white', opacity:'0.3' } },
-                    { el: 'circle', attrs: { cx:'90', cy:'26', r:'1.2', fill:'white', opacity:'0.45' } },
-                    { el: 'circle', attrs: { cx:'84', cy:'26', r:'1.2', fill:'white', opacity:'0.45' } },
-                    { el: 'circle', attrs: { cx:'78', cy:'26', r:'1.2', fill:'white', opacity:'0.45' } },
-                    { el: 'circle', attrs: { cx:'72', cy:'26', r:'1.2', fill:'white', opacity:'0.45' } },
-                    { el: 'circle', attrs: { cx:'66', cy:'26', r:'1.2', fill:'white', opacity:'0.45' } },
-                    { el: 'circle', attrs: { cx:'60', cy:'26', r:'1.2', fill:'white', opacity:'0.45' } },
-                    { el: 'circle', attrs: { cx:'54', cy:'26', r:'1.2', fill:'white', opacity:'0.45' } },
-                ];
+                return '<rect fill="#c0daf0" height="18" rx="2" width="4" x="55" y="20"/>' +
+                    '<path d="m54 26h2a3 3 0 0 1 0 6h-2z" fill="currentColor" opacity=".55"/>' +
+                    '<path d="m37 41a3 3 0 0 1 -6 0 2.772 2.772 0 0 1 .18-1l.82-1h4l.82 1a2.772 2.772 0 0 1 .18 1z" fill="#374156"/>' +
+                    '<path d="m50 41a3 3 0 0 1 -6 0 2.772 2.772 0 0 1 .18-1l.82-1h4l.82 1a2.772 2.772 0 0 1 .18 1z" fill="#374156"/>' +
+                    '<path d="m55 26v6l-2.38 2.38a5.54 5.54 0 0 1 -3.92 1.62h-1.7c-24 0-35.45-.58-42.58-1.64a3.985 3.985 0 0 1 -3.42-3.95v-10.87a3.534 3.534 0 0 1 6.85-1.23l2.48 6.69 4.39.98 18.28-4.98 4-.4v3.4a2.006 2.006 0 0 0 2 2z" fill="currentColor"/>' +
+                    '<path d="m47 26h-8a2.006 2.006 0 0 1 -2-2v-3.4l6-.6v1z" fill="#6ddbdd"/>' +
+                    '<g fill="currentColor" opacity=".55"><rect height="4" rx="2" width="20" x="27" y="17"/>' +
+                    '<rect height="4" rx="2" width="9" x="6" y="25"/>' +
+                    '<path d="m31.173 40a.994.994 0 0 1 -.962-1.285 4 4 0 0 1 7.578 0 .994.994 0 0 1 -.962 1.285z"/>' +
+                    '<path d="m44.173 40a.994.994 0 0 1 -.962-1.285 4 4 0 0 1 7.578 0 .994.994 0 0 1 -.962 1.285z"/></g>';
             }
-            if (type === 'rocket') {
-                return [
-                    { el: 'ellipse', attrs: { cx:'12', cy:'25', rx:'10', ry:'4', fill:'#FF6B35', opacity:'0.7' } },
-                    { el: 'ellipse', attrs: { cx:'5', cy:'25', rx:'5.5', ry:'2.5', fill:'#FFD700', opacity:'0.65' } },
-                    { el: 'ellipse', attrs: { cx:'2', cy:'25', rx:'2.5', ry:'1.5', fill:'#FFF', opacity:'0.5' } },
-                    { el: 'rect', attrs: { x:'20', y:'21', width:'10', height:'10', rx:'2', fill:'currentColor', opacity:'0.7' } },
-                    { el: 'rect', attrs: { x:'30', y:'21', width:'52', height:'10', rx:'2', fill:'currentColor' } },
-                    { el: 'path', attrs: { d:'M82 21 Q98 21 102 26 Q98 31 82 31 Z', fill:'currentColor' } },
-                    { el: 'polygon', attrs: { points:'28,21 18,3 38,21', fill:'currentColor', opacity:'0.7' } },
-                    { el: 'polygon', attrs: { points:'28,31 18,49 38,31', fill:'currentColor', opacity:'0.7' } },
-                    { el: 'circle', attrs: { cx:'66', cy:'26', r:'2.5', fill:'white', opacity:'0.3' } },
-                    { el: 'rect', attrs: { x:'48', y:'22', width:'4', height:'8', rx:'1', fill:'currentColor', opacity:'0.35' } },
-                    { el: 'rect', attrs: { x:'56', y:'22', width:'4', height:'8', rx:'1', fill:'currentColor', opacity:'0.35' } },
-                ];
+            if (type === 'ufo') {
+                return '<path d="m30 12a9 9 0 0 1 9 9v4h-18v-4a9 9 0 0 1 9-9z" fill="#6ddbdd"/>' +
+                    '<path d="m21 23h18a2 2 0 0 1 2 2v3h-22v-3a2 2 0 0 1 2-2z" fill="currentColor"/>' +
+                    '<path d="m3 42s2 6 27 6 27-6 27-6v-5a17.226 17.226 0 0 0 -16-10h-22a17.226 17.226 0 0 0 -16 10z" fill="currentColor" opacity=".75"/>' +
+                    '<g fill="currentColor"><rect height="5" rx="2" width="58" x="1" y="37"/>' +
+                    '<path d="m16 33h-2a1 1 0 0 1 0-2h2a1 1 0 0 1 0 2z"/>' +
+                    '<path d="m22 33h-2a1 1 0 0 1 0-2h2a1 1 0 0 1 0 2z"/>' +
+                    '<path d="m28 33h-2a1 1 0 0 1 0-2h2a1 1 0 0 1 0 2z"/>' +
+                    '<path d="m34 33h-2a1 1 0 0 1 0-2h2a1 1 0 0 1 0 2z"/>' +
+                    '<path d="m40 33h-2a1 1 0 0 1 0-2h2a1 1 0 0 1 0 2z"/>' +
+                    '<path d="m46 33h-2a1 1 0 0 1 0-2h2a1 1 0 0 1 0 2z"/></g>';
             }
-            return [];
+            return '';
         }
 
         function showFlyBanner(coinName, options = {}) {
-            const { type = 'helicopter', mode = 'collect' } = options;
+            const { type = 'fighter', mode = 'collect' } = options;
 
             if (activePlanes >= MAX_CONCURRENT_PLANES) {
                 const oldest = document.querySelector('.plane-banner-group');
@@ -1215,11 +1193,13 @@
             const lane = activePlanes % 3;
             const topPct = 10 + lane * 10;
 
+            const dur = type === 'ufo' ? '12s' : (type === 'helicopter' || type === 'airliner') ? '9s' : '6s';
+
             const group = document.createElement('div');
             group.className = 'plane-banner-group flying';
             group.style.top = topPct + '%';
             group.style.setProperty('--banner-bg', theme.banner);
-            group.style.setProperty('--fly-duration', '6s');
+            group.style.setProperty('--fly-duration', dur);
 
             const banner = document.createElement('div');
             banner.className = 'banner-ribbon';
@@ -1244,14 +1224,9 @@
             const svgNS = 'http://www.w3.org/2000/svg';
             const svg = document.createElementNS(svgNS, 'svg');
             svg.setAttribute('class', 'plane-svg');
-            svg.setAttribute('viewBox', '0 0 140 54');
+            svg.setAttribute('viewBox', '0 0 60 60');
             svg.style.color = theme.plane;
-
-            getAircraftParts(type).forEach(p => {
-                const el = document.createElementNS(svgNS, p.el);
-                Object.entries(p.attrs).forEach(([k, v]) => el.setAttribute(k, v));
-                svg.appendChild(el);
-            });
+            svg.innerHTML = getAircraftSVG(type);
 
             group.appendChild(banner);
             group.appendChild(rope);
@@ -1269,7 +1244,7 @@
             if (coin.theme) {
                 const themeCoins = allCoinsData.filter(c => c.theme === coin.theme);
                 if (themeCoins.every(c => myCollection.includes(c.id))) {
-                    setTimeout(() => showFlyBanner(coin.theme, { type: 'fighter', mode: 'theme' }), 800);
+                    setTimeout(() => showFlyBanner(coin.theme, { type: 'helicopter', mode: 'theme' }), 800);
                 }
             }
             if (coin.year && coin.year !== '无') {
@@ -1279,7 +1254,7 @@
                 }
             }
             if (allCoinsData.every(c => myCollection.includes(c.id))) {
-                setTimeout(() => showFlyBanner(String(allCoinsData.length), { type: 'rocket', mode: 'fullset' }), 1800);
+                setTimeout(() => showFlyBanner(String(allCoinsData.length), { type: 'ufo', mode: 'fullset' }), 1800);
             }
         }
 
