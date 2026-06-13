@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>每日一题预览 — 纪念币知识挑战</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(40px) scale(0.95); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20% { transform: translateX(-8px); }
+    40% { transform: translateX(8px); }
+    60% { transform: translateX(-6px); }
+    80% { transform: translateX(6px); }
+  }
+  @keyframes correctPulse {
+    0% { box-shadow: 0 0 0 0 rgba(34,197,94,0.5); }
+    70% { box-shadow: 0 0 0 16px rgba(34,197,94,0); }
+    100% { box-shadow: 0 0 0 0 rgba(34,197,94,0); }
+  }
+  @keyframes confettiFall {
+    0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .animate-slide-up { animation: slideUp 0.4s cubic-bezier(0.34,1.56,0.64,1); }
+  .animate-shake { animation: shake 0.5s ease; }
+  .animate-correct-pulse { animation: correctPulse 0.6s ease 2; }
+  .animate-fade-in { animation: fadeIn 0.3s ease forwards; }
+  .confetti-piece {
+    position: fixed;
+    top: -10px;
+    z-index: 200;
+    pointer-events: none;
+    animation: confettiFall linear forwards;
+  }
+  .option-btn {
+    transition: all 0.15s ease;
+  }
+  .option-btn:hover:not(.answered) {
+    border-color: #3b82f6;
+    background: #eff6ff;
+    transform: translateX(4px);
+  }
+  .option-btn.answered { cursor: default; }
+  .option-btn.correct { background: #dcfce7; border-color: #22c55e; color: #16a34a; }
+  .option-btn.wrong { background: #fee2e2; border-color: #ef4444; color: #dc2626; }
+  .option-btn.revealed-correct { background: #dcfce7; border-color: #22c55e; color: #16a34a; }
+</style>
+</head>
+<body class="bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50 min-h-screen">
+
+  <!-- 顶部说明 -->
+  <header class="max-w-2xl mx-auto pt-8 px-4">
+    <div class="bg-white/80 backdrop-blur rounded-2xl shadow-lg p-6 text-center">
+      <h1 class="text-3xl font-bold bg-gradient-to-r from-amber-500 to-orange-600 bg-clip-text text-transparent">
+        每日一题 — 预览模式
+      </h1>
+      <p class="text-gray-500 mt-2">纪念币知识挑战 · 共 <span id="totalCount" class="font-semibold text-orange-600">100</span> 题</p>
+      <div class="flex flex-wrap gap-2 justify-center mt-4">
+        <button onclick="randomQuestion()" class="px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-full text-sm font-medium hover:from-purple-600 hover:to-pink-600 transition shadow-md">
+          🎲 随机跳题
+        </button>
+        <button onclick="resetQuiz()" class="px-4 py-2 bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-full text-sm font-medium hover:from-amber-600 hover:to-orange-600 transition shadow-md">
+          🔄 重新出题
+        </button>
+        <button onclick="toggleCategoryFilter()" class="px-4 py-2 bg-white border-2 border-orange-300 text-orange-600 rounded-full text-sm font-medium hover:bg-orange-50 transition shadow-sm" id="filterBtn">
+          📂 筛选类别
+        </button>
+      </div>
+      <!-- 类别筛选 -->
+      <div id="categoryFilter" class="hidden mt-3 flex flex-wrap gap-1.5 justify-center">
+      </div>
+    </div>
+  </header>
+
+  <!-- 题目卡片区 -->
+  <main class="max-w-xl mx-auto mt-6 px-4 pb-12">
+    <div id="quizCard" class="bg-white rounded-2xl shadow-xl overflow-hidden animate-slide-up">
+      <!-- 头部 -->
+      <div class="bg-gradient-to-r from-amber-400 to-orange-500 px-6 py-4 flex items-center justify-between">
+        <span class="text-white font-bold text-lg">📋 每日答题</span>
+        <span id="categoryTag" class="bg-white/20 backdrop-blur text-white px-3 py-0.5 rounded-full text-xs font-medium"></span>
+      </div>
+
+      <!-- 题号 + 题目 -->
+      <div class="p-6">
+        <div class="flex items-center gap-3 mb-4">
+          <span id="questionNum" class="bg-amber-100 text-amber-700 w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm shadow-sm shrink-0"></span>
+          <p id="questionText" class="text-gray-800 text-lg font-medium leading-relaxed"></p>
+        </div>
+
+        <!-- 选项 -->
+        <div class="space-y-3 mt-5" id="optionsContainer"></div>
+
+        <!-- 解析 -->
+        <div id="explanationBox" class="hidden mt-5 p-4 rounded-xl animate-fade-in"></div>
+      </div>
+    </div>
+
+    <!-- 导航栏 -->
+    <div class="flex items-center justify-center gap-4 mt-6">
+      <button id="prevBtn" onclick="prevQuestion()" class="w-12 h-12 rounded-full bg-white shadow-lg border-2 border-gray-200 flex items-center justify-center text-gray-600 hover:border-amber-400 hover:text-amber-600 transition disabled:opacity-30 disabled:cursor-not-allowed" title="上一题 (←)">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
+      </button>
+      <div class="bg-white rounded-full shadow-lg px-5 py-2.5 border-2 border-gray-100 text-sm font-medium text-gray-600 flex items-center gap-2">
+        <span class="text-amber-600 font-bold text-lg" id="currentIndex">1</span>
+        <span>/</span>
+        <span id="filteredTotal">100</span>
+      </div>
+      <button id="nextBtn" onclick="nextQuestion()" class="w-12 h-12 rounded-full bg-white shadow-lg border-2 border-gray-200 flex items-center justify-center text-gray-600 hover:border-amber-400 hover:text-amber-600 transition disabled:opacity-30 disabled:cursor-not-allowed" title="下一题 (→)">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+      </button>
+    </div>
+
+    <!-- 键盘提示 -->
+    <p class="text-center text-xs text-gray-400 mt-5">
+      键盘快捷键：<kbd class="bg-gray-100 px-1.5 py-0.5 rounded text-gray-500 font-mono">1-4</kbd> / <kbd class="bg-gray-100 px-1.5 py-0.5 rounded text-gray-500 font-mono">A-D</kbd> 选择答案 &nbsp; <kbd class="bg-gray-100 px-1.5 py-0.5 rounded text-gray-500 font-mono">← →</kbd> 切换题目
+    </p>
+  </main>
+
+<script src="quiz_data.js"></script>
+<script>
+  // ========== 状态 ==========
+  const STORAGE_KEY = 'quizPreview_state';
+  let currentIndex = 0;      // 在过滤后列表中的索引
+  let answered = false;
+  let selectedIndex = -1;
+  let filteredQuestions = [...QUIZ_QUESTIONS]; // 当前过滤后的题目列表
+  let activeCategory = null;
+
+  // ========== DOM 缓存 ==========
+  const $card = document.getElementById('quizCard');
+  const $questionNum = document.getElementById('questionNum');
+  const $questionText = document.getElementById('questionText');
+  const $categoryTag = document.getElementById('categoryTag');
+  const $optionsContainer = document.getElementById('optionsContainer');
+  const $explanationBox = document.getElementById('explanationBox');
+  const $currentIndex = document.getElementById('currentIndex');
+  const $filteredTotal = document.getElementById('filteredTotal');
+  const $prevBtn = document.getElementById('prevBtn');
+  const $nextBtn = document.getElementById('nextBtn');
+
+  const OPTION_LABELS = ['A', 'B', 'C', 'D'];
+
+  // ========== 渲染当前题目 ==========
+  function renderQuestion() {
+    const q = filteredQuestions[currentIndex];
+    if (!q) return;
+
+    answered = false;
+    selectedIndex = -1;
+    $questionNum.textContent = q.id;
+    $questionText.textContent = q.question;
+    $categoryTag.textContent = categoryMap[q.category] || q.category;
+    $currentIndex.textContent = currentIndex + 1;
+    $filteredTotal.textContent = filteredQuestions.length;
+    $explanationBox.classList.add('hidden');
+    $card.classList.remove('animate-shake');
+
+    // 重新触发入场动画
+    $card.classList.remove('animate-slide-up');
+    void $card.offsetWidth;
+    $card.classList.add('animate-slide-up');
+
+    $optionsContainer.innerHTML = q.options.map((opt, i) => `
+      <button class="option-btn w-full text-left px-5 py-3.5 rounded-xl border-2 border-gray-200 bg-gray-50 flex items-center gap-3 group"
+              onclick="selectAnswer(${i})" data-index="${i}">
+        <span class="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold shrink-0
+                     bg-gray-200 text-gray-500 group-hover:bg-blue-100 group-hover:text-blue-600 transition">
+          ${OPTION_LABELS[i]}
+        </span>
+        <span class="text-gray-700 font-medium text-[15px]">${opt}</span>
+      </button>
+    `).join('');
+
+    updateNavButtons();
+  }
+
+  function updateNavButtons() {
+    $prevBtn.disabled = currentIndex === 0;
+    $nextBtn.disabled = currentIndex >= filteredQuestions.length - 1;
+  }
+
+  // ========== 选择答案 ==========
+  function selectAnswer(index) {
+    if (answered) return;
+    answered = true;
+    selectedIndex = index;
+
+    const q = filteredQuestions[currentIndex];
+    const isCorrect = index === q.correctIndex;
+    const buttons = $optionsContainer.querySelectorAll('.option-btn');
+
+    buttons.forEach((btn, i) => {
+      btn.classList.add('answered');
+      if (i === q.correctIndex) {
+        btn.classList.add('correct');
+        btn.querySelector('span:first-child').classList.remove('bg-gray-200', 'text-gray-500');
+        btn.querySelector('span:first-child').classList.add('bg-green-500', 'text-white');
+      } else if (i === index && !isCorrect) {
+        btn.classList.add('wrong');
+        btn.querySelector('span:first-child').classList.remove('bg-gray-200', 'text-gray-500');
+        btn.querySelector('span:first-child').classList.add('bg-red-500', 'text-white');
+      }
+    });
+
+    if (isCorrect) {
+      buttons[index].classList.add('animate-correct-pulse');
+      spawnConfetti();
+      showExplanation(true, q.explanation);
+    } else {
+      $card.classList.add('animate-shake');
+      showExplanation(false, q.explanation);
+    }
+  }
+
+  // ========== 解析区域 ==========
+  function showExplanation(isCorrect, text) {
+    $explanationBox.classList.remove('hidden');
+    if (isCorrect) {
+      $explanationBox.className = 'mt-5 p-4 rounded-xl animate-fade-in bg-green-50 border-2 border-green-200';
+      $explanationBox.innerHTML = `
+        <div class="flex items-center gap-2 mb-1">
+          <span class="text-2xl">🎉</span>
+          <span class="font-bold text-green-700">回答正确！</span>
+        </div>
+        <p class="text-green-700 text-sm leading-relaxed">${text}</p>
+      `;
+    } else {
+      $explanationBox.className = 'mt-5 p-4 rounded-xl animate-fade-in bg-red-50 border-2 border-red-200';
+      $explanationBox.innerHTML = `
+        <div class="flex items-center gap-2 mb-1">
+          <span class="text-2xl">😅</span>
+          <span class="font-bold text-red-700">回答错误</span>
+        </div>
+        <p class="text-red-700 text-sm leading-relaxed">${text}</p>
+      `;
+    }
+  }
+
+  // ========== 撒花效果 ==========
+  function spawnConfetti() {
+    const colors = ['#f59e0b','#ef4444','#22c55e','#3b82f6','#a855f7','#ec4899','#14b8a6','#f97316'];
+    for (let i = 0; i < 60; i++) {
+      const piece = document.createElement('div');
+      piece.className = 'confetti-piece';
+      piece.style.left = Math.random() * 100 + '%';
+      piece.style.width = (Math.random() * 10 + 6) + 'px';
+      piece.style.height = (Math.random() * 10 + 6) + 'px';
+      piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+      piece.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+      piece.style.animationDuration = (Math.random() * 2 + 2) + 's';
+      piece.style.animationDelay = Math.random() * 0.8 + 's';
+      document.body.appendChild(piece);
+      setTimeout(() => piece.remove(), 3500);
+    }
+  }
+
+  // ========== 导航 ==========
+  function nextQuestion() {
+    if (currentIndex < filteredQuestions.length - 1) {
+      currentIndex++;
+      renderQuestion();
+    }
+  }
+
+  function prevQuestion() {
+    if (currentIndex > 0) {
+      currentIndex--;
+      renderQuestion();
+    }
+  }
+
+  function randomQuestion() {
+    currentIndex = Math.floor(Math.random() * filteredQuestions.length);
+    renderQuestion();
+    document.getElementById('quizCard').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  function resetQuiz() {
+    currentIndex = Math.floor(Math.random() * filteredQuestions.length);
+    activeCategory = null;
+    filteredQuestions = [...QUIZ_QUESTIONS];
+    renderCategoryFilter();
+    renderQuestion();
+    document.getElementById('quizCard').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    document.getElementById('filterBtn').textContent = '📂 筛选类别';
+  }
+
+  // ========== 类别映射 ==========
+  const categoryMap = {
+    issuance: '📊 发行量',
+    year: '📅 年份识别',
+    theme: '🎨 主题分类',
+    metal: '🪙 材质判断',
+    mint: '🏭 造币厂',
+    denomination: '💰 面值大小',
+    'name-match': '🏷️ 币名匹配',
+    size: '📏 直径尺寸',
+    knowledge: '📖 背景知识'
+  };
+
+  // ========== 类别筛选 ==========
+  function renderCategoryFilter() {
+    const container = document.getElementById('categoryFilter');
+    const categories = [...new Set(QUIZ_QUESTIONS.map(q => q.category))];
+    container.innerHTML = categories.map(cat => `
+      <button onclick="filterByCategory('${cat}')" data-cat="${cat}"
+              class="px-3 py-1 rounded-full text-xs font-medium transition border
+              ${activeCategory === cat
+                ? 'bg-amber-500 text-white border-amber-500'
+                : 'bg-white text-gray-600 border-gray-200 hover:border-amber-300 hover:text-amber-600'}">
+        ${categoryMap[cat] || cat}
+      </button>
+    `).join('') + `
+      <button onclick="filterByCategory(null)" class="px-3 py-1 rounded-full text-xs font-medium transition border
+        ${activeCategory === null ? 'bg-gray-500 text-white border-gray-500' : 'bg-white text-gray-500 border-gray-200 hover:border-gray-400'}">
+        🔄 全部
+      </button>
+    `;
+  }
+
+  function filterByCategory(cat) {
+    activeCategory = cat;
+    filteredQuestions = cat ? QUIZ_QUESTIONS.filter(q => q.category === cat) : [...QUIZ_QUESTIONS];
+    currentIndex = 0;
+    renderCategoryFilter();
+    renderQuestion();
+    document.getElementById('quizCard').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    const btn = document.getElementById('filterBtn');
+    btn.textContent = cat ? `📂 ${categoryMap[cat] || cat} (${filteredQuestions.length}题)` : '📂 筛选类别';
+  }
+
+  function toggleCategoryFilter() {
+    const el = document.getElementById('categoryFilter');
+    el.classList.toggle('hidden');
+  }
+
+  // ========== 键盘支持 ==========
+  document.addEventListener('keydown', (e) => {
+    // 数字键 1-4 选答案
+    if (!e.metaKey && !e.ctrlKey && !e.altKey) {
+      if (e.key >= '1' && e.key <= '4') {
+        e.preventDefault();
+        selectAnswer(parseInt(e.key) - 1);
+        return;
+      }
+      if (e.key.toLowerCase() >= 'a' && e.key.toLowerCase() <= 'd') {
+        e.preventDefault();
+        selectAnswer(e.key.toLowerCase().charCodeAt(0) - 97);
+        return;
+      }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); prevQuestion(); }
+      if (e.key === 'ArrowRight') { e.preventDefault(); nextQuestion(); }
+    }
+  });
+
+  // ========== 初始化 ==========
+  renderCategoryFilter();
+  randomQuestion();
+</script>
+</body>
+</html>

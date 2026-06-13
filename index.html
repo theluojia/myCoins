@@ -752,6 +752,66 @@
             text-align: center;
             margin-bottom: 8px;
         }
+        /* ===== 每日一题弹窗 ===== */
+        @keyframes quizSlideUp {
+            from { opacity: 0; transform: translateY(40px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        @keyframes quizShake {
+            0%, 100% { transform: translateX(0); }
+            20% { transform: translateX(-8px); }
+            40% { transform: translateX(8px); }
+            60% { transform: translateX(-6px); }
+            80% { transform: translateX(6px); }
+        }
+        @keyframes quizPulse {
+            0% { box-shadow: 0 0 0 0 rgba(34,197,94,0.5); }
+            70% { box-shadow: 0 0 0 16px rgba(34,197,94,0); }
+            100% { box-shadow: 0 0 0 0 rgba(34,197,94,0); }
+        }
+        @keyframes quizConfettiFall {
+            0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+        }
+        @keyframes quizFadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        #quizModal { display: none; }
+        #quizModal.active { display: flex; }
+        #quizModal .quiz-card {
+            animation: quizSlideUp 0.4s cubic-bezier(0.34,1.56,0.64,1);
+        }
+        #quizModal .quiz-card.shake {
+            animation: quizShake 0.5s ease;
+        }
+        #quizModal .quiz-option {
+            transition: all 0.15s ease;
+        }
+        #quizModal .quiz-option:hover:not(.answered) {
+            border-color: #3b82f6;
+            background: #eff6ff;
+            transform: translateX(4px);
+        }
+        #quizModal .quiz-option.answered { cursor: default; }
+        #quizModal .quiz-option.correct { background: #dcfce7; border-color: #22c55e; color: #16a34a; }
+        #quizModal .quiz-option.correct .quiz-opt-letter { background: #22c55e; color: #fff; }
+        #quizModal .quiz-option.wrong { background: #fee2e2; border-color: #ef4444; color: #dc2626; }
+        #quizModal .quiz-option.wrong .quiz-opt-letter { background: #ef4444; color: #fff; }
+        #quizModal .quiz-option.pulse { animation: quizPulse 0.6s ease 2; }
+        #quizModal .quiz-opt-letter {
+            transition: all 0.15s ease;
+        }
+        #quizModal .quiz-fade-in {
+            animation: quizFadeIn 0.3s ease forwards;
+        }
+        .quiz-confetti {
+            position: fixed;
+            top: -10px;
+            z-index: 200;
+            pointer-events: none;
+            animation: quizConfettiFall linear forwards;
+        }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans p-4 sm:p-8">
@@ -1024,6 +1084,24 @@
             <div id="statsCards" class="flex flex-wrap justify-center gap-3 p-4 border-b border-gray-200"></div>
             <!-- 图表区域 -->
             <div id="statsCharts" class="p-4 space-y-4"></div>
+        </div>
+    </div>
+
+    <!-- 每日一题弹窗 -->
+    <div id="quizModal" class="fixed inset-0 z-[110] items-center justify-center bg-black/70 p-4">
+        <div class="quiz-card relative bg-white rounded-2xl shadow-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto">
+            <!-- 关闭按钮 -->
+            <button id="quizCloseBtn" class="absolute top-3 right-3 z-10 w-8 h-8 bg-gray-200 hover:bg-gray-300 rounded-full flex items-center justify-center text-lg font-bold text-gray-500 hover:text-gray-700 transition-colors">&times;</button>
+            <!-- 头部 -->
+            <div class="bg-gradient-to-r from-amber-400 to-orange-500 px-6 py-4 rounded-t-2xl">
+                <span class="text-white font-bold text-lg">📋 每日答题 — 纪念币知识挑战</span>
+            </div>
+            <!-- 题目区 -->
+            <div class="p-6">
+                <p id="quizQuestion" class="text-gray-800 text-lg font-medium leading-relaxed mb-5"></p>
+                <div id="quizOptions" class="space-y-3"></div>
+                <div id="quizExplanation" class="hidden mt-5 p-4 rounded-xl"></div>
+            </div>
         </div>
     </div>
 
@@ -3593,6 +3671,114 @@
             if(allDone) clearInterval(timer);
         }, 500);
         setTimeout(function(){ clearInterval(timer); }, 10000);
+    })();
+    </script>
+
+    <!-- 每日一题题库 -->
+    <script src="quiz_data.js"></script>
+    <script>
+    (function() {
+        const STORAGE_KEY = 'quizDone_' + new Date().toISOString().slice(0, 10);
+        const OPTION_LABELS = ['A', 'B', 'C', 'D'];
+        let answered = false;
+
+        // 检查今天是否已弹过
+        if (localStorage.getItem(STORAGE_KEY)) return;
+
+        // 随机抽题
+        const question = QUIZ_QUESTIONS[Math.floor(Math.random() * QUIZ_QUESTIONS.length)];
+
+        // 500ms 后弹出
+        setTimeout(() => {
+            const modal = document.getElementById('quizModal');
+            const questionEl = document.getElementById('quizQuestion');
+            const optionsEl = document.getElementById('quizOptions');
+            const explanationEl = document.getElementById('quizExplanation');
+            const closeBtn = document.getElementById('quizCloseBtn');
+
+            questionEl.textContent = question.question;
+            optionsEl.innerHTML = question.options.map((opt, i) =>
+                `<button class="quiz-option w-full text-left px-5 py-3.5 rounded-xl border-2 border-gray-200 bg-gray-50 flex items-center gap-3" data-index="${i}">
+                    <span class="quiz-opt-letter w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold shrink-0 bg-gray-200 text-gray-500">${OPTION_LABELS[i]}</span>
+                    <span class="text-gray-700 font-medium text-[15px]">${opt}</span>
+                </button>`
+            ).join('');
+
+            modal.classList.add('active');
+            localStorage.setItem(STORAGE_KEY, 'done');
+
+            // 选项点击
+            optionsEl.querySelectorAll('.quiz-option').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    if (answered) return;
+                    answered = true;
+                    const idx = parseInt(this.dataset.index);
+                    const isCorrect = idx === question.correctIndex;
+
+                    optionsEl.querySelectorAll('.quiz-option').forEach((b, i) => {
+                        b.classList.add('answered');
+                        if (i === question.correctIndex) b.classList.add('correct');
+                        else if (i === idx && !isCorrect) b.classList.add('wrong');
+                    });
+
+                    if (isCorrect) {
+                        this.classList.add('pulse');
+                        spawnConfetti();
+                        explanationEl.className = 'mt-5 p-4 rounded-xl bg-green-50 border-2 border-green-200';
+                        explanationEl.innerHTML = '<div class="flex items-center gap-2 mb-1"><span style="font-size:1.5rem">🎉</span><span class="font-bold text-green-700">回答正确！</span></div><p class="text-green-700 text-sm leading-relaxed">' + question.explanation + '</p>';
+                    } else {
+                        document.querySelector('#quizModal .quiz-card').classList.add('shake');
+                        explanationEl.className = 'mt-5 p-4 rounded-xl bg-red-50 border-2 border-red-200';
+                        explanationEl.innerHTML = '<div class="flex items-center gap-2 mb-1"><span style="font-size:1.5rem">😅</span><span class="font-bold text-red-700">回答错误</span></div><p class="text-red-700 text-sm leading-relaxed">' + question.explanation + '</p>';
+                    }
+                    explanationEl.classList.remove('hidden');
+                    explanationEl.classList.add('quiz-fade-in');
+                });
+            });
+
+            // 关闭
+            function closeQuiz() {
+                modal.classList.remove('active');
+            }
+            closeBtn.addEventListener('click', closeQuiz);
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) closeQuiz();
+            });
+            document.addEventListener('keydown', function escClose(e) {
+                if (e.key === 'Escape') { closeQuiz(); document.removeEventListener('keydown', escClose); }
+            });
+
+            // 键盘答题
+            document.addEventListener('keydown', function keyAnswer(e) {
+                if (answered) return;
+                let idx = -1;
+                if (e.key >= '1' && e.key <= '4') idx = parseInt(e.key) - 1;
+                if (e.key.toLowerCase() >= 'a' && e.key.toLowerCase() <= 'd') idx = e.key.toLowerCase().charCodeAt(0) - 97;
+                if (idx >= 0) {
+                    e.preventDefault();
+                    const btn = optionsEl.querySelector('[data-index="' + idx + '"]');
+                    if (btn) btn.click();
+                }
+            });
+        }, 500);
+
+        // 撒花
+        function spawnConfetti() {
+            const colors = ['#f59e0b','#ef4444','#22c55e','#3b82f6','#a855f7','#ec4899','#14b8a6','#f97316'];
+            for (let i = 0; i < 60; i++) {
+                const piece = document.createElement('div');
+                piece.className = 'quiz-confetti';
+                piece.style.left = Math.random() * 100 + '%';
+                piece.style.width = (Math.random() * 10 + 6) + 'px';
+                piece.style.height = (Math.random() * 10 + 6) + 'px';
+                piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+                piece.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+                piece.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                piece.style.animationDelay = Math.random() * 0.8 + 's';
+                document.body.appendChild(piece);
+                setTimeout(function() { piece.remove(); }, 3500);
+            }
+        }
     })();
     </script>
 </body>
