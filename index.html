@@ -971,6 +971,14 @@
                     </svg>
                 </button>
 
+                <!-- 关于本站按钮（与 + 号平级，常驻显示，不受菜单展开影响） -->
+                <button id="infoBtn" class="mt-3 w-10 h-10 rounded-full bg-blue-600 text-white shadow-lg flex items-center justify-center hover:bg-blue-700 transition-colors" title="关于本站">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor">
+                        <circle cx="12" cy="6" r="2.2"/>
+                        <rect x="10.5" y="10.5" width="3" height="9" rx="1.5"/>
+                    </svg>
+                </button>
+
             </div>
         </header>
 
@@ -1105,16 +1113,34 @@
         </div>
     </div>
 
+    <!-- 关于本站弹窗 -->
+    <div id="infoModal" class="fixed inset-0 z-[110] items-center justify-center bg-black/70 p-4" style="display:none;">
+        <div class="quiz-card relative bg-white rounded-2xl shadow-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto" style="animation: quizSlideUp 0.4s cubic-bezier(0.34,1.56,0.64,1);">
+            <!-- 关闭按钮 -->
+            <button id="infoCloseBtn" class="absolute top-3 right-3 z-10 w-8 h-8 bg-gray-200 hover:bg-gray-300 rounded-full flex items-center justify-center text-lg font-bold text-gray-500 hover:text-gray-700 transition-colors">&times;</button>
+            <!-- 头部 -->
+            <div class="bg-gradient-to-r from-blue-500 to-indigo-500 px-6 py-4 rounded-t-2xl">
+                <span class="text-white font-bold text-lg">ℹ️ 关于本站</span>
+            </div>
+            <!-- 内容区 -->
+            <div class="p-6 space-y-4 text-gray-700 text-[15px] leading-relaxed">
+                <div class="p-4 rounded-xl bg-blue-50 border border-blue-100">
+                    <p>本网站上的所有数据都存在<strong>浏览器本地</strong>，<strong>不会上传</strong>到任何服务器。</p>
+                </div>
+                <div class="p-4 rounded-xl bg-amber-50 border border-amber-100">
+                    <p>如果需要<strong>切换浏览器</strong>又怕丢失数据，可以使用「＋」菜单里的「<strong>导出数据</strong>」与「<strong>导入数据</strong>」功能。</p>
+                </div>
+                <div class="p-4 rounded-xl bg-gray-50 border border-gray-100">
+                    <p>本站纪念币、纪念钞相关历史数据均根据<strong>中国人民银行发行公告</strong>整理；早期纪念币发行数据不透明，相关数据靠书籍、网上能找到的实物图互相佐证得出。</p>
+                    <p class="mt-2">如有谬误，欢迎提交实物证据<strong>勘误</strong>。具体方式可点击「＋」菜单里的<strong>邮件图标</strong>，通过邮件交流。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <footer id="footerHint" class="fixed bottom-0 left-0 right-0 bg-gradient-to-r from-blue-800/80 to-blue-600/80 text-white py-3 px-4 transition-all duration-300 transform translate-y-full">
         <div class="max-w-7xl mx-auto">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-2 items-center">
-                <div class="text-center">
-                    <p class="text-sm md:text-base opacity-90">此网页的所有数据均存储在本地浏览器中
-                    </p>
-                </div>
-                <div class="text-center">
-                    <p class="text-sm md:text-base font-medium">Copyright © 2025-<span id="current-year"></span> theluojia</p>
-                </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-2 items-center">
                 <div class="text-center">
                     <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans"
                     target="_blank"
@@ -1133,6 +1159,9 @@
                             class="h-6 w-auto" />
                         <span>CC BY-NC-SA 4.0</span>
                     </a>
+                </div>
+                <div class="text-center">
+                    <p class="text-sm md:text-base font-medium">Copyright © 2025-<span id="current-year"></span> theluojia</p>
                 </div>
                 <div class="text-center">
                     <p class="text-sm md:text-base flex items-center justify-center gap-2">
@@ -3573,6 +3602,29 @@
                 window.location.href = `mailto:${email}?subject=${subject}`;
             });
         }
+
+        // 关于本站弹窗
+        const infoBtn = document.getElementById('infoBtn');
+        if (infoBtn) {
+            infoBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const infoModal = document.getElementById('infoModal');
+                infoModal.style.display = 'flex';
+            });
+        }
+        (function setupInfoModal() {
+            const infoModal = document.getElementById('infoModal');
+            const closeBtn = document.getElementById('infoCloseBtn');
+            if (!infoModal || !closeBtn) return;
+            function closeInfo() { infoModal.style.display = 'none'; }
+            closeBtn.addEventListener('click', closeInfo);
+            infoModal.addEventListener('click', function(e) {
+                if (e.target === infoModal) closeInfo();
+            });
+            document.addEventListener('keydown', function escClose(e) {
+                if (e.key === 'Escape' && infoModal.style.display !== 'none') { closeInfo(); }
+            });
+        })();
 
         // 填充筛选下拉菜单
         function populateFilters(coins) {
