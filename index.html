@@ -2608,6 +2608,18 @@
             // --- Chart 3a: 纪念币材质（环形图） ---
             const biMetalMap = {};
             biCoins.forEach(c => { biMetalMap[c.metal] = (biMetalMap[c.metal] || 0) + 1; });
+
+            // 合并相近材质
+            const mergeGroups = [
+                { target: '黄铜合金（铜合金、黄色铜合金）', sources: ['黄铜合金', '铜合金', '黄色铜合金'] },
+                { target: '钢芯镀镍（镍包钢）', sources: ['钢芯镀镍', '镍包钢'] },
+            ];
+            mergeGroups.forEach(g => {
+                let count = 0;
+                g.sources.forEach(s => { if (biMetalMap[s]) { count += biMetalMap[s]; delete biMetalMap[s]; } });
+                if (count > 0) biMetalMap[g.target] = count;
+            });
+
             const sortedBiMetal = Object.entries(biMetalMap).sort((a, b) => b[1] - a[1]);
 
             const ctxBiMetal = document.getElementById('chartBiMetal').getContext('2d');
