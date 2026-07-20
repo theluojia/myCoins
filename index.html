@@ -1332,6 +1332,7 @@
             const svg = document.createElementNS(svgNS, 'svg');
             svg.setAttribute('class', 'plane-svg');
             svg.setAttribute('viewBox', '0 0 60 60');
+            svg.setAttribute('preserveAspectRatio', 'xMinYMid meet');
             svg.style.color = theme.plane;
             svg.innerHTML = getAircraftSVG(type);
 
