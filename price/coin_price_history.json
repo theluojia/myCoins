@@ -1,0 +1,5022 @@
+{
+  "meta": {
+    "title": "中国普通纪念币 / 纪念钞 参考价格 · 当前价 + 价格历史",
+    "description": "为纪念币网站提供每枚币的「当前参考价」与「历史参考价」。每次更新追加一条当时最新价。",
+    "schema_version": 3,
+    "baseline_collected_at": "2026-07-30",
+    "updated_at": "2026-07-30",
+    "price_only_note": "本文件只存价格快照，币种基础信息（图片/描述/发行量等）在网站渲染时按 id 从 coin_data.json 关联。",
+    "collection_scheme": {
+      "model": "当前价 + 逐年追加历史",
+      "rule": "baseline 给每枚写【一条】2026 当前价（入 prices 第一条 + current）；以后每年/每几年 add 一条当时最新价，历史自然累积。每次只进一条记录。",
+      "price_format": "区间 [low, high]，单位 CNY。普通币以主源报价为中点取 ±10% 参考区间；纪念钞优先用市场价/征价真实区间。",
+      "split_rule": "整套价→单枚价：按发行量反比权重切分 S×(1/量_i)/Σ(1/量)；结果标记 source_type=split_derived，不替代真实单枚观测。",
+      "sources_2026": [
+        "金投收藏网《流通纪念币最新价格表》2026-07-26（主源，普通币 1984–2023）",
+        "一枚邮币《新中国纪念币、纪念钞最新市场价格一览表》2025-12-15（2023–2026 新发币 + 纪念钞 市场价/征价）",
+        "搜狐《纪念钞大全最新价格公布》2025-02-07 / 2026-06-08 更新（纪念钞现价）"
+      ],
+      "disclaimer": "价格为公开可溯源的参考报价，非连续成交序列，受品相/号码/供求影响大，请勿直接用于交易。当前价为 2026 基线。"
+    }
+  },
+  "coins": [
+    {
+      "id": "JB01-1",
+      "name": "中华人民共和国成立三十五周年－祖国万岁",
+      "issue_year": 1984,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 42.4,
+          "high": 51.8,
+          "mid": 47.1,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "split_derived",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": "整套价按发行量反比切分单枚（权重 0.157）"
+        }
+      ],
+      "current": {
+        "low": 42.4,
+        "high": 51.8,
+        "mid": 47.1,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "split_derived",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB01-2",
+      "name": "中华人民共和国成立三十五周年－民族大团结",
+      "issue_year": 1984,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 43.7,
+          "high": 53.5,
+          "mid": 48.6,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "split_derived",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": "整套价按发行量反比切分单枚（权重 0.162）"
+        }
+      ],
+      "current": {
+        "low": 43.7,
+        "high": 53.5,
+        "mid": 48.6,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "split_derived",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB01-3",
+      "name": "中华人民共和国成立三十五周年－开国大典",
+      "issue_year": 1984,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 183.8,
+          "high": 224.7,
+          "mid": 204.2,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "split_derived",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": "整套价按发行量反比切分单枚（权重 0.681）"
+        }
+      ],
+      "current": {
+        "low": 183.8,
+        "high": 224.7,
+        "mid": 204.2,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "split_derived",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB02",
+      "name": "庆祝西藏自治区成立20周年",
+      "issue_year": 1985,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 180.0,
+          "high": 220.0,
+          "mid": 200.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "market_table",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": ""
+        }
+      ],
+      "current": {
+        "low": 180.0,
+        "high": 220.0,
+        "mid": 200.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB03",
+      "name": "新疆维吾尔自治区成立30周年",
+      "issue_year": 1985,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 63.0,
+          "high": 77.0,
+          "mid": 70.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "market_table",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": ""
+        }
+      ],
+      "current": {
+        "low": 63.0,
+        "high": 77.0,
+        "mid": 70.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB04",
+      "name": "国际和平年",
+      "issue_year": 1986,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 27.0,
+          "high": 33.0,
+          "mid": 30.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "market_table",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": ""
+        }
+      ],
+      "current": {
+        "low": 27.0,
+        "high": 33.0,
+        "mid": 30.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB05",
+      "name": "内蒙古自治区成立四十周年",
+      "issue_year": 1987,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 27.0,
+          "high": 33.0,
+          "mid": 30.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "market_table",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": ""
+        }
+      ],
+      "current": {
+        "low": 27.0,
+        "high": 33.0,
+        "mid": 30.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB06-1",
+      "name": "中华人民共和国第六届运动会－足球",
+      "issue_year": 1987,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 120.0,
+          "high": 146.7,
+          "mid": 133.3,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "split_derived",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": "整套价按发行量反比切分单枚（权重 0.333）"
+        }
+      ],
+      "current": {
+        "low": 120.0,
+        "high": 146.7,
+        "mid": 133.3,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "split_derived",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB06-2",
+      "name": "中华人民共和国第六届运动会－体操",
+      "issue_year": 1987,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 120.0,
+          "high": 146.7,
+          "mid": 133.3,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "split_derived",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": "整套价按发行量反比切分单枚（权重 0.333）"
+        }
+      ],
+      "current": {
+        "low": 120.0,
+        "high": 146.7,
+        "mid": 133.3,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "split_derived",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB06-3",
+      "name": "中华人民共和国第六届运动会－排球",
+      "issue_year": 1987,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 120.0,
+          "high": 146.7,
+          "mid": 133.3,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "split_derived",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": "整套价按发行量反比切分单枚（权重 0.333）"
+        }
+      ],
+      "current": {
+        "low": 120.0,
+        "high": 146.7,
+        "mid": 133.3,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "split_derived",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB07",
+      "name": "宁夏回族自治区成立三十周年",
+      "issue_year": 1988,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 630.0,
+          "high": 770.0,
+          "mid": 700.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "market_table",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": ""
+        }
+      ],
+      "current": {
+        "low": 630.0,
+        "high": 770.0,
+        "mid": 700.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB08",
+      "name": "中国人民银行成立四十周年",
+      "issue_year": 1988,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 1620.0,
+          "high": 1980.0,
+          "mid": 1800.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "market_table",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": ""
+        }
+      ],
+      "current": {
+        "low": 1620.0,
+        "high": 1980.0,
+        "mid": 1800.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB09",
+      "name": "广西壮族自治区成立三十周年",
+      "issue_year": 1988,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 63.0,
+          "high": 77.0,
+          "mid": 70.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "market_table",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": ""
+        }
+      ],
+      "current": {
+        "low": 63.0,
+        "high": 77.0,
+        "mid": 70.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB10",
+      "name": "中华人民共和国成立四十周年",
+      "issue_year": 1989,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 22.5,
+          "high": 27.5,
+          "mid": 25.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "market_table",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": ""
+        }
+      ],
+      "current": {
+        "low": 22.5,
+        "high": 27.5,
+        "mid": 25.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB11-1",
+      "name": "第十一届亚洲运动会－射箭",
+      "issue_year": 1990,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 9.0,
+          "high": 11.0,
+          "mid": 10.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "split_derived",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": "整套价按发行量反比切分单枚（权重 0.500）"
+        }
+      ],
+      "current": {
+        "low": 9.0,
+        "high": 11.0,
+        "mid": 10.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "split_derived",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB11-2",
+      "name": "第十一届亚洲运动会－武术",
+      "issue_year": 1990,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 9.0,
+          "high": 11.0,
+          "mid": 10.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "split_derived",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": "整套价按发行量反比切分单枚（权重 0.500）"
+        }
+      ],
+      "current": {
+        "low": 9.0,
+        "high": 11.0,
+        "mid": 10.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "split_derived",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB12-1",
+      "name": "全民义务植树运动十周年－绶带/铁锹/小树",
+      "issue_year": 1991,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 6.3,
+          "high": 7.7,
+          "mid": 7.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "split_derived",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": "整套价按发行量反比切分单枚（权重 0.333）"
+        }
+      ],
+      "current": {
+        "low": 6.3,
+        "high": 7.7,
+        "mid": 7.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "split_derived",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB12-2",
+      "name": "全民义务植树运动十周年－女青年头像",
+      "issue_year": 1991,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 6.3,
+          "high": 7.7,
+          "mid": 7.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "split_derived",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": "整套价按发行量反比切分单枚（权重 0.333）"
+        }
+      ],
+      "current": {
+        "low": 6.3,
+        "high": 7.7,
+        "mid": 7.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "split_derived",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB12-3",
+      "name": "全民义务植树运动十周年－华表/地球/小鸟",
+      "issue_year": 1991,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 6.3,
+          "high": 7.7,
+          "mid": 7.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "split_derived",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": "整套价按发行量反比切分单枚（权重 0.333）"
+        }
+      ],
+      "current": {
+        "low": 6.3,
+        "high": 7.7,
+        "mid": 7.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "split_derived",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB13-1",
+      "name": "中国共产党成立七十周年－第一次全国代表大会",
+      "issue_year": 1991,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 6.3,
+          "high": 7.7,
+          "mid": 7.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "split_derived",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": "整套价按发行量反比切分单枚（权重 0.333）"
+        }
+      ],
+      "current": {
+        "low": 6.3,
+        "high": 7.7,
+        "mid": 7.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "split_derived",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB13-2",
+      "name": "中国共产党成立七十周年－遵义会议",
+      "issue_year": 1991,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 6.3,
+          "high": 7.7,
+          "mid": 7.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "split_derived",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": "整套价按发行量反比切分单枚（权重 0.333）"
+        }
+      ],
+      "current": {
+        "low": 6.3,
+        "high": 7.7,
+        "mid": 7.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "split_derived",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB13-3",
+      "name": "中国共产党成立七十周年－第十一届三中全会",
+      "issue_year": 1991,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 6.3,
+          "high": 7.7,
+          "mid": 7.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "split_derived",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": "整套价按发行量反比切分单枚（权重 0.333）"
+        }
+      ],
+      "current": {
+        "low": 6.3,
+        "high": 7.7,
+        "mid": 7.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "split_derived",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB14-1",
+      "name": "第一届世界女子足球锦标赛－踢球",
+      "issue_year": 1991,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 3.6,
+          "high": 4.4,
+          "mid": 4.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "split_derived",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": "整套价按发行量反比切分单枚（权重 0.500）"
+        }
+      ],
+      "current": {
+        "low": 3.6,
+        "high": 4.4,
+        "mid": 4.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "split_derived",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB14-2",
+      "name": "第一届世界女子足球锦标赛－扑球",
+      "issue_year": 1991,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 3.6,
+          "high": 4.4,
+          "mid": 4.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "split_derived",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": "整套价按发行量反比切分单枚（权重 0.500）"
+        }
+      ],
+      "current": {
+        "low": 3.6,
+        "high": 4.4,
+        "mid": 4.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "split_derived",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB15",
+      "name": "宪法颁布十周年",
+      "issue_year": 1992,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 7.2,
+          "high": 8.8,
+          "mid": 8.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "market_table",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": ""
+        }
+      ],
+      "current": {
+        "low": 7.2,
+        "high": 8.8,
+        "mid": 8.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB16",
+      "name": "宋庆龄诞辰100周年",
+      "issue_year": 1993,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 18.0,
+          "high": 22.0,
+          "mid": 20.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "market_table",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": ""
+        }
+      ],
+      "current": {
+        "low": 18.0,
+        "high": 22.0,
+        "mid": 20.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB17",
+      "name": "中国珍稀野生动物－大熊猫",
+      "issue_year": 1993,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 63.0,
+          "high": 77.0,
+          "mid": 70.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "market_table",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": ""
+        }
+      ],
+      "current": {
+        "low": 63.0,
+        "high": 77.0,
+        "mid": 70.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB18",
+      "name": "毛泽东诞辰100周年",
+      "issue_year": 1993,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 27.0,
+          "high": 33.0,
+          "mid": 30.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "market_table",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": ""
+        }
+      ],
+      "current": {
+        "low": 27.0,
+        "high": 33.0,
+        "mid": 30.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB19",
+      "name": "希望工程实施5周年",
+      "issue_year": 1994,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 4.5,
+          "high": 5.5,
+          "mid": 5.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "market_table",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": ""
+        }
+      ],
+      "current": {
+        "low": 4.5,
+        "high": 5.5,
+        "mid": 5.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB20",
+      "name": "第43届世界乒乓球锦标赛",
+      "issue_year": 1995,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 7.2,
+          "high": 8.8,
+          "mid": 8.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "market_table",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": ""
+        }
+      ],
+      "current": {
+        "low": 7.2,
+        "high": 8.8,
+        "mid": 8.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB21",
+      "name": "中国抗日战争和世界反法西斯战争胜利50周年",
+      "issue_year": 1995,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 7.2,
+          "high": 8.8,
+          "mid": 8.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "market_table",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": ""
+        }
+      ],
+      "current": {
+        "low": 7.2,
+        "high": 8.8,
+        "mid": 8.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB22",
+      "name": "联合国第四次世界妇女大会",
+      "issue_year": 1995,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 4.5,
+          "high": 5.5,
+          "mid": 5.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "market_table",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": ""
+        }
+      ],
+      "current": {
+        "low": 4.5,
+        "high": 5.5,
+        "mid": 5.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB23",
+      "name": "联合国成立五十周年",
+      "issue_year": 1995,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 4.5,
+          "high": 5.5,
+          "mid": 5.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "market_table",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": ""
+        }
+      ],
+      "current": {
+        "low": 4.5,
+        "high": 5.5,
+        "mid": 5.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB24",
+      "name": "中国珍稀野生动物－金丝猴",
+      "issue_year": 1995,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 27.0,
+          "high": 33.0,
+          "mid": 30.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "market_table",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": ""
+        }
+      ],
+      "current": {
+        "low": 27.0,
+        "high": 33.0,
+        "mid": 30.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB25",
+      "name": "朱德诞辰110周年",
+      "issue_year": 1996,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 27.0,
+          "high": 33.0,
+          "mid": 30.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "market_table",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": ""
+        }
+      ],
+      "current": {
+        "low": 27.0,
+        "high": 33.0,
+        "mid": 30.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB26",
+      "name": "中国珍稀野生动物－白鳍豚",
+      "issue_year": 1996,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 9.0,
+          "high": 11.0,
+          "mid": 10.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "split_derived",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": "整套价按发行量反比切分单枚（权重 0.500）"
+        }
+      ],
+      "current": {
+        "low": 9.0,
+        "high": 11.0,
+        "mid": 10.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "split_derived",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB27",
+      "name": "中国珍稀野生动物－华南虎",
+      "issue_year": 1996,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 9.0,
+          "high": 11.0,
+          "mid": 10.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "split_derived",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": "整套价按发行量反比切分单枚（权重 0.500）"
+        }
+      ],
+      "current": {
+        "low": 9.0,
+        "high": 11.0,
+        "mid": 10.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "split_derived",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB28-1",
+      "name": "庆祝中华人民共和国香港特别行政区成立－基本法",
+      "issue_year": 1997,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 10.0,
+          "high": 11.6,
+          "mid": 10.8,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "split_derived",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": "整套价按发行量反比切分单枚（权重 0.500）"
+        }
+      ],
+      "current": {
+        "low": 10.0,
+        "high": 11.6,
+        "mid": 10.8,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "split_derived",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB28-2",
+      "name": "庆祝中华人民共和国香港特别行政区成立－维多利亚港",
+      "issue_year": 1997,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 10.0,
+          "high": 11.6,
+          "mid": 10.8,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "split_derived",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": "整套价按发行量反比切分单枚（权重 0.500）"
+        }
+      ],
+      "current": {
+        "low": 10.0,
+        "high": 11.6,
+        "mid": 10.8,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "split_derived",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB29",
+      "name": "周恩来诞辰100周年",
+      "issue_year": 1998,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 5.4,
+          "high": 6.6,
+          "mid": 6.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "market_table",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": ""
+        }
+      ],
+      "current": {
+        "low": 5.4,
+        "high": 6.6,
+        "mid": 6.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB30",
+      "name": "中国珍稀野生动物－朱鹮",
+      "issue_year": 1998,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 9.0,
+          "high": 11.0,
+          "mid": 10.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "split_derived",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": "整套价按发行量反比切分单枚（权重 0.500）"
+        }
+      ],
+      "current": {
+        "low": 9.0,
+        "high": 11.0,
+        "mid": 10.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "split_derived",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB31",
+      "name": "中国珍稀野生动物－丹顶鹤",
+      "issue_year": 1998,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 9.0,
+          "high": 11.0,
+          "mid": 10.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "split_derived",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": "整套价按发行量反比切分单枚（权重 0.500）"
+        }
+      ],
+      "current": {
+        "low": 9.0,
+        "high": 11.0,
+        "mid": 10.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "split_derived",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB32",
+      "name": "中国珍稀野生动物－褐马鸡",
+      "issue_year": 1998,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 9.0,
+          "high": 11.0,
+          "mid": 10.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "split_derived",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": "整套价按发行量反比切分单枚（权重 0.500）"
+        }
+      ],
+      "current": {
+        "low": 9.0,
+        "high": 11.0,
+        "mid": 10.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "split_derived",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB33",
+      "name": "中国珍稀野生动物－扬子鳄",
+      "issue_year": 1998,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 9.0,
+          "high": 11.0,
+          "mid": 10.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "split_derived",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": "整套价按发行量反比切分单枚（权重 0.500）"
+        }
+      ],
+      "current": {
+        "low": 9.0,
+        "high": 11.0,
+        "mid": 10.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "split_derived",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB34",
+      "name": "刘少奇诞辰100周年",
+      "issue_year": 1998,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 5.4,
+          "high": 6.6,
+          "mid": 6.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "market_table",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": ""
+        }
+      ],
+      "current": {
+        "low": 5.4,
+        "high": 6.6,
+        "mid": 6.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB35",
+      "name": "中国珍稀野生动物－中华鲟",
+      "issue_year": 1999,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 9.0,
+          "high": 11.0,
+          "mid": 10.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "split_derived",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": "整套价按发行量反比切分单枚（权重 0.500）"
+        }
+      ],
+      "current": {
+        "low": 9.0,
+        "high": 11.0,
+        "mid": 10.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "split_derived",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB36",
+      "name": "中国珍稀野生动物－金斑喙凤蝶",
+      "issue_year": 1999,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 9.0,
+          "high": 11.0,
+          "mid": 10.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "split_derived",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": "整套价按发行量反比切分单枚（权重 0.500）"
+        }
+      ],
+      "current": {
+        "low": 9.0,
+        "high": 11.0,
+        "mid": 10.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "split_derived",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB37",
+      "name": "中国人民政治协商会议成立五十周年",
+      "issue_year": 1999,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 9.0,
+          "high": 11.0,
+          "mid": 10.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "market_table",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": ""
+        }
+      ],
+      "current": {
+        "low": 9.0,
+        "high": 11.0,
+        "mid": 10.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB38",
+      "name": "中华人民共和国成立五十周年",
+      "issue_year": 1999,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 13.5,
+          "high": 16.5,
+          "mid": 15.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "market_table",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": ""
+        }
+      ],
+      "current": {
+        "low": 13.5,
+        "high": 16.5,
+        "mid": 15.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB39-1",
+      "name": "庆祝中华人民共和国澳门特别行政区成立－基本法",
+      "issue_year": 1999,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 10.0,
+          "high": 11.6,
+          "mid": 10.8,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "split_derived",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": "整套价按发行量反比切分单枚（权重 0.500）"
+        }
+      ],
+      "current": {
+        "low": 10.0,
+        "high": 11.6,
+        "mid": 10.8,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "split_derived",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB39-2",
+      "name": "庆祝中华人民共和国澳门特别行政区成立－妈祖阁和帆船",
+      "issue_year": 1999,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 10.0,
+          "high": 11.6,
+          "mid": 10.8,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "split_derived",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": "整套价按发行量反比切分单枚（权重 0.500）"
+        }
+      ],
+      "current": {
+        "low": 10.0,
+        "high": 11.6,
+        "mid": 10.8,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "split_derived",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB40",
+      "name": "敦煌藏经洞发现100周年",
+      "issue_year": 2000,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 7.2,
+          "high": 8.8,
+          "mid": 8.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "market_table",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": ""
+        }
+      ],
+      "current": {
+        "low": 7.2,
+        "high": 8.8,
+        "mid": 8.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB41",
+      "name": "迎接新世纪",
+      "issue_year": 2000,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 13.5,
+          "high": 16.5,
+          "mid": 15.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "market_table",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": ""
+        }
+      ],
+      "current": {
+        "low": 13.5,
+        "high": 16.5,
+        "mid": 15.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB42",
+      "name": "西藏和平解放五十周年",
+      "issue_year": 2001,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 9.0,
+          "high": 11.0,
+          "mid": 10.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "market_table",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": ""
+        }
+      ],
+      "current": {
+        "low": 9.0,
+        "high": 11.0,
+        "mid": 10.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB43",
+      "name": "辛亥革命90周年",
+      "issue_year": 2001,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 9.0,
+          "high": 11.0,
+          "mid": 10.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "market_table",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": ""
+        }
+      ],
+      "current": {
+        "low": 9.0,
+        "high": 11.0,
+        "mid": 10.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB44",
+      "name": "世界文化遗产－万里长城",
+      "issue_year": 2002,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 9.9,
+          "high": 12.1,
+          "mid": 11.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "split_derived",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": "整套价按发行量反比切分单枚（权重 0.500）"
+        }
+      ],
+      "current": {
+        "low": 9.9,
+        "high": 12.1,
+        "mid": 11.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "split_derived",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB45",
+      "name": "世界文化遗产－秦始皇陵及兵马俑坑",
+      "issue_year": 2002,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 9.9,
+          "high": 12.1,
+          "mid": 11.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "split_derived",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": "整套价按发行量反比切分单枚（权重 0.500）"
+        }
+      ],
+      "current": {
+        "low": 9.9,
+        "high": 12.1,
+        "mid": 11.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "split_derived",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB46",
+      "name": "2003年贺岁（癸未）",
+      "issue_year": 2003,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 72.0,
+          "high": 88.0,
+          "mid": 80.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "market_table",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": ""
+        }
+      ],
+      "current": {
+        "low": 72.0,
+        "high": 88.0,
+        "mid": 80.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB47",
+      "name": "中国宝岛台湾－朝天宫",
+      "issue_year": 2003,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 9.0,
+          "high": 11.0,
+          "mid": 10.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "split_derived",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": "整套价按发行量反比切分单枚（权重 0.500）"
+        }
+      ],
+      "current": {
+        "low": 9.0,
+        "high": 11.0,
+        "mid": 10.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "split_derived",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB48",
+      "name": "中国宝岛台湾－赤嵌楼",
+      "issue_year": 2003,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 9.0,
+          "high": 11.0,
+          "mid": 10.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "split_derived",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": "整套价按发行量反比切分单枚（权重 0.500）"
+        }
+      ],
+      "current": {
+        "low": 9.0,
+        "high": 11.0,
+        "mid": 10.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "split_derived",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB49",
+      "name": "世界文化遗产－曲阜孔庙孔林孔府",
+      "issue_year": 2003,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 9.0,
+          "high": 11.0,
+          "mid": 10.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "split_derived",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": "整套价按发行量反比切分单枚（权重 0.500）"
+        }
+      ],
+      "current": {
+        "low": 9.0,
+        "high": 11.0,
+        "mid": 10.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "split_derived",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB50",
+      "name": "世界文化遗产－明清故宫",
+      "issue_year": 2003,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 9.0,
+          "high": 11.0,
+          "mid": 10.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "split_derived",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": "整套价按发行量反比切分单枚（权重 0.500）"
+        }
+      ],
+      "current": {
+        "low": 9.0,
+        "high": 11.0,
+        "mid": 10.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "split_derived",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB51",
+      "name": "2004年贺岁（甲申）",
+      "issue_year": 2004,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 18.0,
+          "high": 22.0,
+          "mid": 20.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "market_table",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": ""
+        }
+      ],
+      "current": {
+        "low": 18.0,
+        "high": 22.0,
+        "mid": 20.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB52",
+      "name": "中国宝岛台湾－鹅銮鼻",
+      "issue_year": 2004,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 8.1,
+          "high": 9.9,
+          "mid": 9.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "split_derived",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": "整套价按发行量反比切分单枚（权重 0.500）"
+        }
+      ],
+      "current": {
+        "low": 8.1,
+        "high": 9.9,
+        "mid": 9.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "split_derived",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB53",
+      "name": "中国宝岛台湾－日月潭",
+      "issue_year": 2004,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 8.1,
+          "high": 9.9,
+          "mid": 9.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "split_derived",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": "整套价按发行量反比切分单枚（权重 0.500）"
+        }
+      ],
+      "current": {
+        "low": 8.1,
+        "high": 9.9,
+        "mid": 9.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "split_derived",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB54",
+      "name": "邓小平诞辰100周年",
+      "issue_year": 2004,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 11.7,
+          "high": 14.3,
+          "mid": 13.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "market_table",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": ""
+        }
+      ],
+      "current": {
+        "low": 11.7,
+        "high": 14.3,
+        "mid": 13.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB55",
+      "name": "人民代表大会成立五十周年",
+      "issue_year": 2004,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 4.5,
+          "high": 5.5,
+          "mid": 5.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "market_table",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": ""
+        }
+      ],
+      "current": {
+        "low": 4.5,
+        "high": 5.5,
+        "mid": 5.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB56",
+      "name": "世界文化遗产－苏州古典园林",
+      "issue_year": 2004,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 31.5,
+          "high": 38.5,
+          "mid": 35.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "split_derived",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": "整套价按发行量反比切分单枚（权重 0.500）"
+        }
+      ],
+      "current": {
+        "low": 31.5,
+        "high": 38.5,
+        "mid": 35.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "split_derived",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB57",
+      "name": "世界文化遗产－周口店\"北京人\"遗址",
+      "issue_year": 2004,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 31.5,
+          "high": 38.5,
+          "mid": 35.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "split_derived",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": "整套价按发行量反比切分单枚（权重 0.500）"
+        }
+      ],
+      "current": {
+        "low": 31.5,
+        "high": 38.5,
+        "mid": 35.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "split_derived",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB58",
+      "name": "2005年贺岁（乙酉）",
+      "issue_year": 2005,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 22.5,
+          "high": 27.5,
+          "mid": 25.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "market_table",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": ""
+        }
+      ],
+      "current": {
+        "low": 22.5,
+        "high": 27.5,
+        "mid": 25.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB59",
+      "name": "世界文化遗产－丽江古城",
+      "issue_year": 2005,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 9.0,
+          "high": 11.0,
+          "mid": 10.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "split_derived",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": "整套价按发行量反比切分单枚（权重 0.500）"
+        }
+      ],
+      "current": {
+        "low": 9.0,
+        "high": 11.0,
+        "mid": 10.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "split_derived",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB60",
+      "name": "世界文化遗产－青城山与都江堰",
+      "issue_year": 2005,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 9.0,
+          "high": 11.0,
+          "mid": 10.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "split_derived",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": "整套价按发行量反比切分单枚（权重 0.500）"
+        }
+      ],
+      "current": {
+        "low": 9.0,
+        "high": 11.0,
+        "mid": 10.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "split_derived",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB61",
+      "name": "陈云诞辰100周年",
+      "issue_year": 2005,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 11.7,
+          "high": 14.3,
+          "mid": 13.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "market_table",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": ""
+        }
+      ],
+      "current": {
+        "low": 11.7,
+        "high": 14.3,
+        "mid": 13.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB62",
+      "name": "中国宝岛台湾－敬字亭",
+      "issue_year": 2005,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 9.0,
+          "high": 11.0,
+          "mid": 10.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "market_table",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": ""
+        }
+      ],
+      "current": {
+        "low": 9.0,
+        "high": 11.0,
+        "mid": 10.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB63",
+      "name": "2006年贺岁（丙戍）",
+      "issue_year": 2006,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 22.5,
+          "high": 27.5,
+          "mid": 25.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "market_table",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": ""
+        }
+      ],
+      "current": {
+        "low": 22.5,
+        "high": 27.5,
+        "mid": 25.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB64",
+      "name": "第 29 届奥林匹克运动会－举重",
+      "issue_year": 2006,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 11.7,
+          "high": 14.3,
+          "mid": 13.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "split_derived",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": "整套价按发行量反比切分单枚（权重 0.500）"
+        }
+      ],
+      "current": {
+        "low": 11.7,
+        "high": 14.3,
+        "mid": 13.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "split_derived",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB65",
+      "name": "第 29 届奥林匹克运动会－游泳",
+      "issue_year": 2006,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 11.7,
+          "high": 14.3,
+          "mid": 13.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "split_derived",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": "整套价按发行量反比切分单枚（权重 0.500）"
+        }
+      ],
+      "current": {
+        "low": 11.7,
+        "high": 14.3,
+        "mid": 13.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "split_derived",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB66",
+      "name": "世界文化遗产－龙门石窟",
+      "issue_year": 2006,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 9.0,
+          "high": 11.0,
+          "mid": 10.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "split_derived",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": "整套价按发行量反比切分单枚（权重 0.500）"
+        }
+      ],
+      "current": {
+        "low": 9.0,
+        "high": 11.0,
+        "mid": 10.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "split_derived",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB67",
+      "name": "世界文化遗产－颐和园",
+      "issue_year": 2006,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 9.0,
+          "high": 11.0,
+          "mid": 10.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "split_derived",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": "整套价按发行量反比切分单枚（权重 0.500）"
+        }
+      ],
+      "current": {
+        "low": 9.0,
+        "high": 11.0,
+        "mid": 10.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "split_derived",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB68",
+      "name": "2007年贺岁（丁亥）",
+      "issue_year": 2006,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 22.5,
+          "high": 27.5,
+          "mid": 25.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "market_table",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": ""
+        }
+      ],
+      "current": {
+        "low": 22.5,
+        "high": 27.5,
+        "mid": 25.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB69",
+      "name": "第 29 届奥林匹克运动会－体操",
+      "issue_year": 2007,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 9.0,
+          "high": 11.0,
+          "mid": 10.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "split_derived",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": "整套价按发行量反比切分单枚（权重 0.500）"
+        }
+      ],
+      "current": {
+        "low": 9.0,
+        "high": 11.0,
+        "mid": 10.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "split_derived",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB70",
+      "name": "第 29 届奥林匹克运动会－射箭",
+      "issue_year": 2007,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 9.0,
+          "high": 11.0,
+          "mid": 10.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "split_derived",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": "整套价按发行量反比切分单枚（权重 0.500）"
+        }
+      ],
+      "current": {
+        "low": 9.0,
+        "high": 11.0,
+        "mid": 10.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "split_derived",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB71",
+      "name": "第 29 届奥林匹克运动会－乒乓球",
+      "issue_year": 2007,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 4.5,
+          "high": 5.5,
+          "mid": 5.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "split_derived",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": "整套价按发行量反比切分单枚（权重 0.250）"
+        }
+      ],
+      "current": {
+        "low": 4.5,
+        "high": 5.5,
+        "mid": 5.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "split_derived",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB73",
+      "name": "第 29 届奥林匹克运动会－足球",
+      "issue_year": 2008,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 4.5,
+          "high": 5.5,
+          "mid": 5.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "split_derived",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": "整套价按发行量反比切分单枚（权重 0.250）"
+        }
+      ],
+      "current": {
+        "low": 4.5,
+        "high": 5.5,
+        "mid": 5.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "split_derived",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB74",
+      "name": "第 29 届奥林匹克运动会－击剑",
+      "issue_year": 2008,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 4.5,
+          "high": 5.5,
+          "mid": 5.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "split_derived",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": "整套价按发行量反比切分单枚（权重 0.250）"
+        }
+      ],
+      "current": {
+        "low": 4.5,
+        "high": 5.5,
+        "mid": 5.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "split_derived",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB75",
+      "name": "第 29 届奥林匹克运动会－现代五项",
+      "issue_year": 2008,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 4.5,
+          "high": 5.5,
+          "mid": 5.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "split_derived",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": "整套价按发行量反比切分单枚（权重 0.250）"
+        }
+      ],
+      "current": {
+        "low": 4.5,
+        "high": 5.5,
+        "mid": 5.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "split_derived",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB72",
+      "name": "2008年贺岁（戊子）",
+      "issue_year": 2008,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 22.5,
+          "high": 27.5,
+          "mid": 25.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "market_table",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": ""
+        }
+      ],
+      "current": {
+        "low": 22.5,
+        "high": 27.5,
+        "mid": 25.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB76",
+      "name": "2009年贺岁（己丑）",
+      "issue_year": 2009,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 7.2,
+          "high": 8.8,
+          "mid": 8.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "market_table",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": ""
+        }
+      ],
+      "current": {
+        "low": 7.2,
+        "high": 8.8,
+        "mid": 8.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB77",
+      "name": "\"和\"字书法－篆书",
+      "issue_year": 2009,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 18.0,
+          "high": 22.0,
+          "mid": 20.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "market_table",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": ""
+        }
+      ],
+      "current": {
+        "low": 18.0,
+        "high": 22.0,
+        "mid": 20.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB78",
+      "name": "环境保护 - 关注",
+      "issue_year": 2009,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 5.4,
+          "high": 6.6,
+          "mid": 6.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "market_table",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": ""
+        }
+      ],
+      "current": {
+        "low": 5.4,
+        "high": 6.6,
+        "mid": 6.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB79",
+      "name": "中国2010年上海世博会",
+      "issue_year": 2010,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 1.4,
+          "high": 1.7,
+          "mid": 1.5,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "market_table",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": ""
+        }
+      ],
+      "current": {
+        "low": 1.4,
+        "high": 1.7,
+        "mid": 1.5,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB80",
+      "name": "2010年贺岁（庚寅）",
+      "issue_year": 2010,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 7.2,
+          "high": 8.8,
+          "mid": 8.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "market_table",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": ""
+        }
+      ],
+      "current": {
+        "low": 7.2,
+        "high": 8.8,
+        "mid": 8.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB81",
+      "name": "\"和\"字书法－隶书",
+      "issue_year": 2010,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 12.6,
+          "high": 15.4,
+          "mid": 14.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "market_table",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": ""
+        }
+      ],
+      "current": {
+        "low": 12.6,
+        "high": 15.4,
+        "mid": 14.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB82",
+      "name": "环境保护 - 参与",
+      "issue_year": 2010,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 4.7,
+          "high": 5.7,
+          "mid": 5.2,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "market_table",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": ""
+        }
+      ],
+      "current": {
+        "low": 4.7,
+        "high": 5.7,
+        "mid": 5.2,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB83",
+      "name": "中国共产党成立90周年",
+      "issue_year": 2011,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 6.3,
+          "high": 7.7,
+          "mid": 7.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "market_table",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": ""
+        }
+      ],
+      "current": {
+        "low": 6.3,
+        "high": 7.7,
+        "mid": 7.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB84",
+      "name": "2011年贺岁（辛卯）",
+      "issue_year": 2011,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 5.4,
+          "high": 6.6,
+          "mid": 6.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "market_table",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": ""
+        }
+      ],
+      "current": {
+        "low": 5.4,
+        "high": 6.6,
+        "mid": 6.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB85",
+      "name": "2012年贺岁（壬辰）",
+      "issue_year": 2012,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 5.4,
+          "high": 6.6,
+          "mid": 6.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "market_table",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": ""
+        }
+      ],
+      "current": {
+        "low": 5.4,
+        "high": 6.6,
+        "mid": 6.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB86",
+      "name": "2013年贺岁（癸巳）",
+      "issue_year": 2013,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 3.6,
+          "high": 4.4,
+          "mid": 4.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "market_table",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": ""
+        }
+      ],
+      "current": {
+        "low": 3.6,
+        "high": 4.4,
+        "mid": 4.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB87",
+      "name": "\"和\"字书法－行书",
+      "issue_year": 2013,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 5.4,
+          "high": 6.6,
+          "mid": 6.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "market_table",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": ""
+        }
+      ],
+      "current": {
+        "low": 5.4,
+        "high": 6.6,
+        "mid": 6.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB88",
+      "name": "2014年贺岁（甲午）",
+      "issue_year": 2013,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 3.6,
+          "high": 4.4,
+          "mid": 4.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "market_table",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": ""
+        }
+      ],
+      "current": {
+        "low": 3.6,
+        "high": 4.4,
+        "mid": 4.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB89",
+      "name": "\"和\"字书法－草书",
+      "issue_year": 2014,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 5.0,
+          "high": 5.5,
+          "mid": 5.2,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "market_table",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": ""
+        }
+      ],
+      "current": {
+        "low": 5.0,
+        "high": 5.5,
+        "mid": 5.2,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB90",
+      "name": "2015年贺岁（乙未）",
+      "issue_year": 2015,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 22.5,
+          "high": 27.5,
+          "mid": 25.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "market_table",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": ""
+        }
+      ],
+      "current": {
+        "low": 22.5,
+        "high": 27.5,
+        "mid": 25.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB91",
+      "name": "中国人民抗日战争暨世界反法西斯战争胜利70周年",
+      "issue_year": 2015,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 1.0,
+          "high": 1.2,
+          "mid": 1.1,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "market_table",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": ""
+        }
+      ],
+      "current": {
+        "low": 1.0,
+        "high": 1.2,
+        "mid": 1.1,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB92",
+      "name": "中国航天",
+      "issue_year": 2015,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 10.0,
+          "high": 11.0,
+          "mid": 10.5,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "market_table",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": ""
+        }
+      ],
+      "current": {
+        "low": 10.0,
+        "high": 11.0,
+        "mid": 10.5,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB93",
+      "name": "2016年贺岁（丙申）",
+      "issue_year": 2016,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 10.0,
+          "high": 11.0,
+          "mid": 10.5,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "market_table",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": ""
+        }
+      ],
+      "current": {
+        "low": 10.0,
+        "high": 11.0,
+        "mid": 10.5,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB94",
+      "name": "孙中山先生诞辰150周年",
+      "issue_year": 2016,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 5.0,
+          "high": 5.5,
+          "mid": 5.2,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "market_table",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": ""
+        }
+      ],
+      "current": {
+        "low": 5.0,
+        "high": 5.5,
+        "mid": 5.2,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB95",
+      "name": "2017年贺岁（丁酉）",
+      "issue_year": 2017,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 10.0,
+          "high": 11.0,
+          "mid": 10.5,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "market_table",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": ""
+        }
+      ],
+      "current": {
+        "low": 10.0,
+        "high": 11.0,
+        "mid": 10.5,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB96",
+      "name": "中国人民解放军建军90周年",
+      "issue_year": 2017,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 10.0,
+          "high": 11.0,
+          "mid": 10.5,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "market_table",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": ""
+        }
+      ],
+      "current": {
+        "low": 10.0,
+        "high": 11.0,
+        "mid": 10.5,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB97",
+      "name": "\"和\"字书法－楷书",
+      "issue_year": 2017,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 5.4,
+          "high": 6.6,
+          "mid": 6.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "market_table",
+          "source": "一枚邮币《新中国纪念币、纪念钞最新市场价格一览表》",
+          "source_url": "https://www.toutiao.com/article/7584043595921998336/",
+          "source_date": "2025-12-15",
+          "note": ""
+        }
+      ],
+      "current": {
+        "low": 5.4,
+        "high": 6.6,
+        "mid": 6.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "一枚邮币《新中国纪念币、纪念钞最新市场价格一览表》",
+        "source_date": "2025-12-15",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB98",
+      "name": "2018年贺岁（戊戍）",
+      "issue_year": 2018,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 10.0,
+          "high": 11.0,
+          "mid": 10.5,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "market_table",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": ""
+        }
+      ],
+      "current": {
+        "low": 10.0,
+        "high": 11.0,
+        "mid": 10.5,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB99",
+      "name": "中国高铁",
+      "issue_year": 2018,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 10.0,
+          "high": 11.0,
+          "mid": 10.5,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "market_table",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": ""
+        }
+      ],
+      "current": {
+        "low": 10.0,
+        "high": 11.0,
+        "mid": 10.5,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB100",
+      "name": "庆祝改革开放40周年",
+      "issue_year": 2018,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 10.0,
+          "high": 11.0,
+          "mid": 10.5,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "market_table",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": ""
+        }
+      ],
+      "current": {
+        "low": 10.0,
+        "high": 11.0,
+        "mid": 10.5,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB101",
+      "name": "2019年贺岁（己亥）",
+      "issue_year": 2019,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 10.0,
+          "high": 11.2,
+          "mid": 10.6,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "market_table",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": ""
+        }
+      ],
+      "current": {
+        "low": 10.0,
+        "high": 11.2,
+        "mid": 10.6,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB102",
+      "name": "中华人民共和国成立70周年",
+      "issue_year": 2019,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 10.0,
+          "high": 11.2,
+          "mid": 10.6,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "market_table",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": ""
+        }
+      ],
+      "current": {
+        "low": 10.0,
+        "high": 11.2,
+        "mid": 10.6,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB103",
+      "name": "世界文化和自然遗产－泰山",
+      "issue_year": 2019,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 5.0,
+          "high": 5.5,
+          "mid": 5.2,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "market_table",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": ""
+        }
+      ],
+      "current": {
+        "low": 5.0,
+        "high": 5.5,
+        "mid": 5.2,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB104",
+      "name": "2020年贺岁（庚子）",
+      "issue_year": 2020,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 10.0,
+          "high": 11.0,
+          "mid": 10.5,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "market_table",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": ""
+        }
+      ],
+      "current": {
+        "low": 10.0,
+        "high": 11.0,
+        "mid": 10.5,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB105",
+      "name": "世界文化和自然遗产－武夷山",
+      "issue_year": 2020,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 5.0,
+          "high": 5.5,
+          "mid": 5.2,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "market_table",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": ""
+        }
+      ],
+      "current": {
+        "low": 5.0,
+        "high": 5.5,
+        "mid": 5.2,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB106",
+      "name": "2021年贺岁（辛丑）",
+      "issue_year": 2021,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 10.0,
+          "high": 11.0,
+          "mid": 10.5,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "market_table",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": ""
+        }
+      ],
+      "current": {
+        "low": 10.0,
+        "high": 11.0,
+        "mid": 10.5,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB107",
+      "name": "中国共产党成立100周年",
+      "issue_year": 2021,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 10.0,
+          "high": 11.6,
+          "mid": 10.8,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "market_table",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": ""
+        }
+      ],
+      "current": {
+        "low": 10.0,
+        "high": 11.6,
+        "mid": 10.8,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB108-1",
+      "name": "第24界冬季奥林匹克运动会－冰上运动项目",
+      "issue_year": 2021,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 5.0,
+          "high": 6.0,
+          "mid": 5.5,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "split_derived",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": "整套价按发行量反比切分单枚（权重 0.500）"
+        }
+      ],
+      "current": {
+        "low": 5.0,
+        "high": 6.0,
+        "mid": 5.5,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "split_derived",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB108-2",
+      "name": "第24界冬季奥林匹克运动会－雪上运动项目",
+      "issue_year": 2021,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 5.0,
+          "high": 6.0,
+          "mid": 5.5,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "split_derived",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": "整套价按发行量反比切分单枚（权重 0.500）"
+        }
+      ],
+      "current": {
+        "low": 5.0,
+        "high": 6.0,
+        "mid": 5.5,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "split_derived",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB109",
+      "name": "2022年贺岁（壬寅）",
+      "issue_year": 2022,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 10.0,
+          "high": 12.1,
+          "mid": 11.1,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "market_table",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": ""
+        }
+      ],
+      "current": {
+        "low": 10.0,
+        "high": 12.1,
+        "mid": 11.1,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB111",
+      "name": "世界文化和自然遗产－黄山",
+      "issue_year": 2023,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 5.0,
+          "high": 5.5,
+          "mid": 5.2,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "market_table",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": ""
+        }
+      ],
+      "current": {
+        "low": 5.0,
+        "high": 5.5,
+        "mid": 5.2,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB112",
+      "name": "世界文化和自然遗产－峨眉山-乐山大佛",
+      "issue_year": 2023,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 5.0,
+          "high": 5.5,
+          "mid": 5.2,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "market_table",
+          "source": "金投收藏网《流通纪念币最新价格表》",
+          "source_url": "https://cang.cngold.org/c/2026-07-26/c10647294.html",
+          "source_date": "2026-07-26",
+          "note": ""
+        }
+      ],
+      "current": {
+        "low": 5.0,
+        "high": 5.5,
+        "mid": 5.2,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "金投收藏网《流通纪念币最新价格表》",
+        "source_date": "2026-07-26",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB110",
+      "name": "2023年贺岁（癸卯）",
+      "issue_year": 2023,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 13.5,
+          "high": 16.5,
+          "mid": 15.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "market_table",
+          "source": "一枚邮币《新中国纪念币、纪念钞最新市场价格一览表》",
+          "source_url": "https://www.toutiao.com/article/7584043595921998336/",
+          "source_date": "2025-12-15",
+          "note": ""
+        }
+      ],
+      "current": {
+        "low": 13.5,
+        "high": 16.5,
+        "mid": 15.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "一枚邮币《新中国纪念币、纪念钞最新市场价格一览表》",
+        "source_date": "2025-12-15",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB113",
+      "name": "三江源国家公园",
+      "issue_year": 2023,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 10.0,
+          "high": 12.1,
+          "mid": 11.1,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "market_table",
+          "source": "一枚邮币《新中国纪念币、纪念钞最新市场价格一览表》",
+          "source_url": "https://www.toutiao.com/article/7584043595921998336/",
+          "source_date": "2025-12-15",
+          "note": ""
+        }
+      ],
+      "current": {
+        "low": 10.0,
+        "high": 12.1,
+        "mid": 11.1,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "一枚邮币《新中国纪念币、纪念钞最新市场价格一览表》",
+        "source_date": "2025-12-15",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB114",
+      "name": "大熊猫国家公园",
+      "issue_year": 2023,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 10.0,
+          "high": 12.1,
+          "mid": 11.1,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "market_table",
+          "source": "一枚邮币《新中国纪念币、纪念钞最新市场价格一览表》",
+          "source_url": "https://www.toutiao.com/article/7584043595921998336/",
+          "source_date": "2025-12-15",
+          "note": ""
+        }
+      ],
+      "current": {
+        "low": 10.0,
+        "high": 12.1,
+        "mid": 11.1,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "一枚邮币《新中国纪念币、纪念钞最新市场价格一览表》",
+        "source_date": "2025-12-15",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB115",
+      "name": "中国京剧艺术－生角",
+      "issue_year": 2023,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 11.7,
+          "high": 14.3,
+          "mid": 13.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "market_table",
+          "source": "一枚邮币《新中国纪念币、纪念钞最新市场价格一览表》",
+          "source_url": "https://www.toutiao.com/article/7584043595921998336/",
+          "source_date": "2025-12-15",
+          "note": ""
+        }
+      ],
+      "current": {
+        "low": 11.7,
+        "high": 14.3,
+        "mid": 13.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "一枚邮币《新中国纪念币、纪念钞最新市场价格一览表》",
+        "source_date": "2025-12-15",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB116",
+      "name": "2024年贺岁（甲辰）",
+      "issue_year": 2024,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 19.8,
+          "high": 24.2,
+          "mid": 22.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "market_table",
+          "source": "一枚邮币《新中国纪念币、纪念钞最新市场价格一览表》",
+          "source_url": "https://www.toutiao.com/article/7584043595921998336/",
+          "source_date": "2025-12-15",
+          "note": ""
+        }
+      ],
+      "current": {
+        "low": 19.8,
+        "high": 24.2,
+        "mid": 22.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "一枚邮币《新中国纪念币、纪念钞最新市场价格一览表》",
+        "source_date": "2025-12-15",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB117",
+      "name": "东北虎豹国家公园",
+      "issue_year": 2024,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 10.0,
+          "high": 12.1,
+          "mid": 11.1,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "market_table",
+          "source": "一枚邮币《新中国纪念币、纪念钞最新市场价格一览表》",
+          "source_url": "https://www.toutiao.com/article/7584043595921998336/",
+          "source_date": "2025-12-15",
+          "note": ""
+        }
+      ],
+      "current": {
+        "low": 10.0,
+        "high": 12.1,
+        "mid": 11.1,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "一枚邮币《新中国纪念币、纪念钞最新市场价格一览表》",
+        "source_date": "2025-12-15",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB118",
+      "name": "中国京剧艺术－旦角",
+      "issue_year": 2024,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 7.2,
+          "high": 8.8,
+          "mid": 8.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "market_table",
+          "source": "一枚邮币《新中国纪念币、纪念钞最新市场价格一览表》",
+          "source_url": "https://www.toutiao.com/article/7584043595921998336/",
+          "source_date": "2025-12-15",
+          "note": ""
+        }
+      ],
+      "current": {
+        "low": 7.2,
+        "high": 8.8,
+        "mid": 8.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "一枚邮币《新中国纪念币、纪念钞最新市场价格一览表》",
+        "source_date": "2025-12-15",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB119",
+      "name": "2025年贺岁（乙巳）",
+      "issue_year": 2025,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 13.5,
+          "high": 16.5,
+          "mid": 15.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "market_table",
+          "source": "一枚邮币《新中国纪念币、纪念钞最新市场价格一览表》",
+          "source_url": "https://www.toutiao.com/article/7584043595921998336/",
+          "source_date": "2025-12-15",
+          "note": ""
+        }
+      ],
+      "current": {
+        "low": 13.5,
+        "high": 16.5,
+        "mid": 15.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "一枚邮币《新中国纪念币、纪念钞最新市场价格一览表》",
+        "source_date": "2025-12-15",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB120",
+      "name": "海南热带雨林国家公园",
+      "issue_year": 2025,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 10.0,
+          "high": 12.1,
+          "mid": 11.1,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "market_table",
+          "source": "一枚邮币《新中国纪念币、纪念钞最新市场价格一览表》",
+          "source_url": "https://www.toutiao.com/article/7584043595921998336/",
+          "source_date": "2025-12-15",
+          "note": ""
+        }
+      ],
+      "current": {
+        "low": 10.0,
+        "high": 12.1,
+        "mid": 11.1,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "一枚邮币《新中国纪念币、纪念钞最新市场价格一览表》",
+        "source_date": "2025-12-15",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB121",
+      "name": "中国人民抗日战争暨世界反法西斯战争胜利80周年",
+      "issue_year": 2025,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 10.8,
+          "high": 13.2,
+          "mid": 12.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "market_table",
+          "source": "一枚邮币《新中国纪念币、纪念钞最新市场价格一览表》",
+          "source_url": "https://www.toutiao.com/article/7584043595921998336/",
+          "source_date": "2025-12-15",
+          "note": ""
+        }
+      ],
+      "current": {
+        "low": 10.8,
+        "high": 13.2,
+        "mid": 12.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "一枚邮币《新中国纪念币、纪念钞最新市场价格一览表》",
+        "source_date": "2025-12-15",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB122",
+      "name": "中国京剧艺术－净角",
+      "issue_year": 2025,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 5.4,
+          "high": 6.6,
+          "mid": 6.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "market_table",
+          "source": "一枚邮币《新中国纪念币、纪念钞最新市场价格一览表》",
+          "source_url": "https://www.toutiao.com/article/7584043595921998336/",
+          "source_date": "2025-12-15",
+          "note": ""
+        }
+      ],
+      "current": {
+        "low": 5.4,
+        "high": 6.6,
+        "mid": 6.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "一枚邮币《新中国纪念币、纪念钞最新市场价格一览表》",
+        "source_date": "2025-12-15",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB123",
+      "name": "2026年贺岁（丙午）",
+      "issue_year": 2026,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 10.0,
+          "high": 11.0,
+          "mid": 10.5,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "market_table",
+          "source": "保守估算（金投/一枚邮币均未覆盖的极新发行）",
+          "source_url": "",
+          "source_date": "2026-07-29",
+          "note": "金投/一枚邮币未覆盖，保守估算"
+        }
+      ],
+      "current": {
+        "low": 10.0,
+        "high": 11.0,
+        "mid": 10.5,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "保守估算（金投/一枚邮币均未覆盖的极新发行）",
+        "source_date": "2026-07-29",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JB124",
+      "name": "武夷山国家公园",
+      "issue_year": 2026,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 10.0,
+          "high": 10.0,
+          "mid": 10.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "market_table",
+          "source": "保守估算（金投/一枚邮币均未覆盖的极新发行）",
+          "source_url": "",
+          "source_date": "2026-07-29",
+          "note": "金投/一枚邮币未覆盖，保守估算"
+        }
+      ],
+      "current": {
+        "low": 10.0,
+        "high": 10.0,
+        "mid": 10.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "保守估算（金投/一枚邮币均未覆盖的极新发行）",
+        "source_date": "2026-07-29",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JC01",
+      "name": "中华人民共和国成立五十周年（纪念钞）",
+      "issue_year": 1999,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 150.0,
+          "high": 190.0,
+          "mid": 170.0,
+          "currency": "CNY",
+          "condition": "单张",
+          "source_type": "market_table",
+          "source": "一枚邮币《新中国纪念币、纪念钞最新市场价格一览表》",
+          "source_url": "https://www.toutiao.com/article/7584043595921998336/",
+          "source_date": "2025-12-15",
+          "note": ""
+        }
+      ],
+      "current": {
+        "low": 150.0,
+        "high": 190.0,
+        "mid": 170.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "一枚邮币《新中国纪念币、纪念钞最新市场价格一览表》",
+        "source_date": "2025-12-15",
+        "condition": "单张",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JC02",
+      "name": "迎接新世纪（纪念钞）",
+      "issue_year": 2000,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 900.0,
+          "high": 1300.0,
+          "mid": 1100.0,
+          "currency": "CNY",
+          "condition": "单张",
+          "source_type": "market_table",
+          "source": "一枚邮币《新中国纪念币、纪念钞最新市场价格一览表》",
+          "source_url": "https://www.toutiao.com/article/7584043595921998336/",
+          "source_date": "2025-12-15",
+          "note": ""
+        }
+      ],
+      "current": {
+        "low": 900.0,
+        "high": 1300.0,
+        "mid": 1100.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "一枚邮币《新中国纪念币、纪念钞最新市场价格一览表》",
+        "source_date": "2025-12-15",
+        "condition": "单张",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JC03",
+      "name": "第 29 届奥林匹克运动会（纪念钞）",
+      "issue_year": 2008,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 1800.0,
+          "high": 2300.0,
+          "mid": 2050.0,
+          "currency": "CNY",
+          "condition": "单张",
+          "source_type": "market_table",
+          "source": "一枚邮币《新中国纪念币、纪念钞最新市场价格一览表》",
+          "source_url": "https://www.toutiao.com/article/7584043595921998336/",
+          "source_date": "2025-12-15",
+          "note": ""
+        }
+      ],
+      "current": {
+        "low": 1800.0,
+        "high": 2300.0,
+        "mid": 2050.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "一枚邮币《新中国纪念币、纪念钞最新市场价格一览表》",
+        "source_date": "2025-12-15",
+        "condition": "单张",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JC04",
+      "name": "中国航天（纪念钞）",
+      "issue_year": 2015,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 100.0,
+          "high": 102.0,
+          "mid": 101.0,
+          "currency": "CNY",
+          "condition": "单张",
+          "source_type": "market_table",
+          "source": "一枚邮币《新中国纪念币、纪念钞最新市场价格一览表》",
+          "source_url": "https://www.toutiao.com/article/7584043595921998336/",
+          "source_date": "2025-12-15",
+          "note": ""
+        }
+      ],
+      "current": {
+        "low": 100.0,
+        "high": 102.0,
+        "mid": 101.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "一枚邮币《新中国纪念币、纪念钞最新市场价格一览表》",
+        "source_date": "2025-12-15",
+        "condition": "单张",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JC05",
+      "name": "人民币发行七十周年（纪念钞）",
+      "issue_year": 2018,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 50.0,
+          "high": 53.0,
+          "mid": 51.5,
+          "currency": "CNY",
+          "condition": "单张",
+          "source_type": "market_table",
+          "source": "一枚邮币《新中国纪念币、纪念钞最新市场价格一览表》",
+          "source_url": "https://www.toutiao.com/article/7584043595921998336/",
+          "source_date": "2025-12-15",
+          "note": ""
+        }
+      ],
+      "current": {
+        "low": 50.0,
+        "high": 53.0,
+        "mid": 51.5,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "一枚邮币《新中国纪念币、纪念钞最新市场价格一览表》",
+        "source_date": "2025-12-15",
+        "condition": "单张",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JC06-1",
+      "name": "第24界冬季奥林匹克运动会（纪念钞）－冰上运动项目",
+      "issue_year": 2021,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 20.0,
+          "high": 22.3,
+          "mid": 21.1,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "split_derived",
+          "source": "搜狐《纪念钞大全最新价格公布》",
+          "source_url": "https://www.sohu.com/a/856573308_121124712",
+          "source_date": "2026-06-08",
+          "note": "整套价按发行量反比切分单枚（权重 0.500）"
+        }
+      ],
+      "current": {
+        "low": 20.0,
+        "high": 22.3,
+        "mid": 21.1,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "split_derived",
+        "source": "搜狐《纪念钞大全最新价格公布》",
+        "source_date": "2026-06-08",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JC06-2",
+      "name": "第24界冬季奥林匹克运动会（纪念钞）－雪上运动项目",
+      "issue_year": 2021,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 20.0,
+          "high": 22.3,
+          "mid": 21.1,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "split_derived",
+          "source": "搜狐《纪念钞大全最新价格公布》",
+          "source_url": "https://www.sohu.com/a/856573308_121124712",
+          "source_date": "2026-06-08",
+          "note": "整套价按发行量反比切分单枚（权重 0.500）"
+        }
+      ],
+      "current": {
+        "low": 20.0,
+        "high": 22.3,
+        "mid": 21.1,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "split_derived",
+        "source": "搜狐《纪念钞大全最新价格公布》",
+        "source_date": "2026-06-08",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JC07",
+      "name": "2024年贺岁（纪念钞）",
+      "issue_year": 2024,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 48.0,
+          "high": 58.0,
+          "mid": 53.0,
+          "currency": "CNY",
+          "condition": "单张",
+          "source_type": "market_table",
+          "source": "搜狐《纪念钞大全最新价格公布》",
+          "source_url": "https://www.sohu.com/a/856573308_121124712",
+          "source_date": "2026-06-08",
+          "note": ""
+        }
+      ],
+      "current": {
+        "low": 48.0,
+        "high": 58.0,
+        "mid": 53.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "搜狐《纪念钞大全最新价格公布》",
+        "source_date": "2026-06-08",
+        "condition": "单张",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JC08",
+      "name": "2025年贺岁（纪念钞）",
+      "issue_year": 2025,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 27.0,
+          "high": 33.0,
+          "mid": 30.0,
+          "currency": "CNY",
+          "condition": "单张",
+          "source_type": "market_table",
+          "source": "搜狐《纪念钞大全最新价格公布》",
+          "source_url": "https://www.sohu.com/a/856573308_121124712",
+          "source_date": "2026-06-08",
+          "note": ""
+        }
+      ],
+      "current": {
+        "low": 27.0,
+        "high": 33.0,
+        "mid": 30.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "搜狐《纪念钞大全最新价格公布》",
+        "source_date": "2026-06-08",
+        "condition": "单张",
+        "type": "baseline"
+      }
+    },
+    {
+      "id": "JC09",
+      "name": "2026年贺岁（纪念钞）",
+      "issue_year": 2026,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 20.0,
+          "high": 20.0,
+          "mid": 20.0,
+          "currency": "CNY",
+          "condition": "单张",
+          "source_type": "market_table",
+          "source": "保守估算（金投/一枚邮币均未覆盖的极新发行）",
+          "source_url": "",
+          "source_date": "2026-07-29",
+          "note": "金投/一枚邮币未覆盖，保守估算"
+        }
+      ],
+      "current": {
+        "low": 20.0,
+        "high": 20.0,
+        "mid": 20.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "保守估算（金投/一枚邮币均未覆盖的极新发行）",
+        "source_date": "2026-07-29",
+        "condition": "单张",
+        "type": "baseline"
+      }
+    }
+  ]
+}
