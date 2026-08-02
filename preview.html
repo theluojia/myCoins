@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>纪念币卡片 · 价格票根设计预览</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  body {
+    background: #e5e7eb;
+    font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  }
+  .cards-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+  }
+
+  /* ===== 票根整体 ===== */
+  .ticket-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,.1));
+  }
+
+  /* ===== 卡片本体 ===== */
+  .ticket-card {
+    background: #fff;
+    border-radius: 10px 10px 0 0;
+    padding: 0.75rem 0.75rem 0.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .ticket-card img {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: contain;
+    border-radius: 6px;
+    background: #f9fafb;
+  }
+  .ticket-card .coin-name {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-align: center;
+    line-height: 1.3;
+    margin-top: 0.5rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    min-height: 2.6em;
+    color: #1f2937;
+  }
+  .ticket-card .coin-meta {
+    font-size: 0.65rem;
+    color: #9ca3af;
+    margin-top: 0.15rem;
+    text-align: center;
+  }
+
+  /* ===== SVG 虚线分隔 ===== */
+  .tear-svg {
+    display: block;
+    width: 100%;
+    height: 10px;
+    background: #fff;
+  }
+  .tear-svg line {
+    stroke: #b0b0b0;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+  }
+
+  /* ===== 票根 ===== */
+  .ticket-stub {
+    background: #fafaf5;
+    border-radius: 0 0 10px 10px;
+    padding: 0.55rem 0.7rem 0.6rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  /* 第一行: 参考价居中 */
+  .stub-price {
+    text-align: center;
+    font-size: 0.65rem;
+    color: #6b7280;
+  }
+  .stub-price .price-num {
+    font-weight: 600;
+    color: #1f2937;
+  }
+
+  /* 第二行: 两个进度条并排 */
+  .stub-bars {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+  }
+  .bar-col {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+  }
+  .bar-wrap {
+    width: 100%;
+    height: 5px;
+    background: #e5e7eb;
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .bar-fill {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 0.5s;
+  }
+  .bar-fill.mult {
+    background: linear-gradient(90deg, #f59e0b, #ef4444);
+  }
+  .bar-fill.iss {
+    background: linear-gradient(90deg, #3b82f6, #6366f1);
+  }
+
+  /* 第三行: 进度条下方标注 */
+  .stub-labels {
+    display: flex;
+    gap: 0.5rem;
+  }
+  .stub-label-col {
+    flex: 1;
+    min-width: 0;
+    text-align: center;
+    font-size: 0.6rem;
+    color: #9ca3af;
+  }
+
+  /* 数据摘要 */
+  .stats-banner {
+    background: #fff;
+    border-radius: 12px;
+    padding: 1rem 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,.08);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    align-items: center;
+    font-size: 0.85rem;
+  }
+  .stat-item { display: flex; align-items: center; gap: 0.4rem; }
+  .stat-label { color: #6b7280; }
+  .stat-value { font-weight: 700; color: #1f2937; }
+</style>
+</head>
+<body class="p-6">
+
+<div class="max-w-7xl mx-auto">
+  <h1 class="text-2xl font-bold text-gray-800 mb-1">纪念币卡片 · 价格票根设计预览</h1>
+  <p class="text-sm text-gray-500 mb-4">
+    虚线：SVG stroke-dasharray="10 7"（10px横线 / 7px间隔）。
+    进度条：对数归一化后开方（power 0.4），最小值保证 10% 可见，低端充分展开。
+    升值倍数 1× – 1800×，发行量 156万 – 50000万。
+  </p>
+
+  <div class="stats-banner">
+    <span class="text-sm font-semibold text-gray-700 mr-2">进度条公式</span>
+    <span class="text-xs text-gray-500">t = ln(v/min) / ln(max/min) &nbsp;→&nbsp; pct = 10 + 90 × t<sup>0.4</sup> &nbsp;&nbsp;（最小值 → 10%，最大值 → 100%，低端充分拉伸）</span>
+  </div>
+
+  <h2 class="text-lg font-semibold text-gray-700 mb-3 mt-6">全量样本（12枚，覆盖 1.0× – 1800×）</h2>
+  <div class="cards-row" id="allCards"></div>
+</div>
+
+<script>
+const GLOBAL_MAX_MULT = 1800;
+const GLOBAL_MIN_ISS = 156;
+const GLOBAL_MAX_ISS = 50000;
+
+// 进度条百分比: log归一化 + power曲线拉伸低端 + 10%地板
+function barPct(val, min, max) {
+  if (max <= min) return 10;
+  const t = Math.log(val / min) / Math.log(max / min); // [0, 1]
+  const stretched = Math.pow(Math.max(0, t), 0.4);       // power 0.4 放大低区
+  return 10 + 90 * stretched;                            // [10, 100]
+}
+
+function fmtIss(iss) {
+  if (iss >= 10000) return (iss / 10000).toFixed(1).replace(/\.0$/, '') + '亿';
+  return iss.toFixed(1).replace(/\.0$/, '') + '万';
+}
+
+function fmtPrice(v) {
+  if (v >= 100) return Math.round(v).toString();
+  return v.toFixed(1);
+}
+
+function renderCard(s) {
+  const multPct = barPct(s.mult, 1, GLOBAL_MAX_MULT);
+  const issPct = barPct(s.iss, GLOBAL_MIN_ISS, GLOBAL_MAX_ISS);
+  return `
+    <div class="ticket-wrapper">
+      <div class="ticket-card">
+        <img src="${s.img}" alt="${s.name}"
+             onerror="this.src='https://placehold.co/300x300/e5e7eb/9ca3af?text=币图'">
+        <div class="coin-name">${s.name}</div>
+        <div class="coin-meta">${s.face} · ${s.size} · ${s.metal}</div>
+      </div>
+      <svg class="tear-svg"><line x1="0" y1="5" x2="100%" y2="5" stroke-dasharray="10 7"/></svg>
+      <div class="ticket-stub">
+        <div class="stub-price">
+          参考价 <span class="price-num">¥${fmtPrice(s.low)} – ¥${fmtPrice(s.high)}</span>
+        </div>
+        <div class="stub-bars">
+          <div class="bar-col">
+            <div class="bar-wrap"><div class="bar-fill mult" style="width:${multPct}%"></div></div>
+          </div>
+          <div class="bar-col">
+            <div class="bar-wrap"><div class="bar-fill iss" style="width:${issPct}%"></div></div>
+          </div>
+        </div>
+        <div class="stub-labels">
+          <div class="stub-label-col">升值&nbsp;${s.mult.toFixed(1)}×</div>
+          <div class="stub-label-col">发行量&nbsp;${fmtIss(s.iss)}</div>
+        </div>
+      </div>
+    </div>`;
+}
+
+const samples = [
+  { id:"JC09", name:"2026年贺岁（纪念钞）", year:2026, face:"20元", fv:20, low:20, high:20, mid:20, mult:1.0, iss:10000, img:"https://www.cbpm.cn/cn/rmbpic/rmbpic7/202512/P020251229358498784787.png", size:"145mm×70mm", metal:"塑料钞" },
+  { id:"JB124",name:"武夷山国家公园", year:2026, face:"10元", fv:10, low:10, high:10, mid:10, mult:1.0, iss:5000, img:"https://www.cbpm.cn/cn/rmbpic/rmbpic6/202607/P020260701407978520395.png", size:"27mm", metal:"双色铜合金" },
+  { id:"JB91", name:"抗日战争暨世界反法西斯战争胜利70周年", year:2015, face:"1元", fv:1, low:1, high:1.2, mid:1.1, mult:1.1, iss:50000, img:"https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113539380286012.jpg", size:"25mm", metal:"镍包钢" },
+  { id:"JB31", name:"中国珍稀野生动物－丹顶鹤", year:1998, face:"5元", fv:5, low:9, high:11, mid:10, mult:2.0, iss:600, img:"https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113584694226267.jpg", size:"32mm", metal:"紫铜合金" },
+  { id:"JB116",name:"2024年贺岁（甲辰）", year:2024, face:"10元", fv:10, low:19.8, high:24.2, mid:22, mult:2.2, iss:12000, img:"https://www.cbpm.cn/cn/rmbpic/rmbpic6/202312/P020231218346762752972.png", size:"27mm", metal:"双色铜合金" },
+  { id:"JB34", name:"刘少奇诞辰100周年", year:1998, face:"1元", fv:1, low:5.4, high:6.6, mid:6, mult:6.0, iss:2000, img:"https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113584244885828.jpg", size:"25mm", metal:"钢芯镀镍" },
+  { id:"JB70", name:"第29届奥林匹克运动会－射箭", year:2007, face:"1元", fv:1, low:9, high:11, mid:10, mult:10.0, iss:1000, img:"https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113589991882092.jpg", size:"25mm", metal:"黄铜合金" },
+  { id:"JB01-1",name:"中华人民共和国成立三十五周年－祖国万岁", year:1984, face:"1元", fv:1, low:42.4, high:51.8, mid:47.1, mult:47.1, iss:906.8, img:"https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191218606812793604.png", size:"30mm", metal:"铜镍合金" },
+  { id:"JB44", name:"世界文化遗产－万里长城", year:2002, face:"5元", fv:5, low:9.9, high:12.1, mid:11, mult:2.2, iss:1000, img:"https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113608840519251.jpg", size:"30mm", metal:"黄铜合金" },
+  { id:"JC03", name:"第29届奥林匹克运动会（纪念钞）", year:2008, face:"10元", fv:10, low:1800, high:2300, mid:2050, mult:205, iss:600, img:"https://www.cbpm.cn/cn/rmbpic/rmbpic7/201910/P020191031554770972379.jpg", size:"148.5mm×72mm", metal:"纸钞" },
+  { id:"JB07", name:"宁夏回族自治区成立三十周年", year:1988, face:"1元", fv:1, low:630, high:770, mid:700, mult:700, iss:156, img:"https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191104394866078309.jpg", size:"30mm", metal:"铜镍合金" },
+  { id:"JB08", name:"中国人民银行成立四十周年", year:1988, face:"1元", fv:1, low:1620, high:1980, mid:1800, mult:1800, iss:206.8, img:"https://www.cbpm.cn/cn/rmbpic/rmbpic6/201911/P020191113607944869626.jpg", size:"30mm", metal:"铜镍合金" },
+];
+
+document.getElementById('allCards').innerHTML = samples.map(renderCard).join('');
+</script>
+
+</body>
+</html>

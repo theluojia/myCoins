@@ -812,7 +812,84 @@
             pointer-events: none;
             animation: quizConfettiFall linear forwards;
         }
-    </style>
+    /* ===== 价格票根样式 ===== */
+    .coin-card-ticket {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .coin-card-ticket .card-body {
+        width: 100%;
+    }
+    .coin-card-ticket .tear-svg {
+        display: block;
+        width: 100%;
+        height: 10px;
+    }
+    .coin-card-ticket .tear-svg line {
+        stroke: #9ca3af;
+        stroke-width: 1.5;
+        stroke-linecap: round;
+    }
+    .coin-card-ticket .card-stub {
+        border-radius: 0 0 0.75rem 0.75rem;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 0.35rem;
+        padding: 0.5rem 0.75rem 0.55rem;
+    }
+    .stub-price {
+        text-align: center;
+        font-size: 0.65rem;
+        color: #6b7280;
+    }
+    .stub-price .price-num {
+        font-weight: 600;
+        color: #374151;
+    }
+    .stub-bars {
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+    }
+    .stub-bars .bar-col {
+        flex: 1;
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2px;
+    }
+    .stub-bars .bar-wrap {
+        width: 100%;
+        height: 4px;
+        background: #d1d5db;
+        border-radius: 2px;
+        overflow: hidden;
+    }
+    .stub-bars .bar-fill {
+        height: 100%;
+        border-radius: 2px;
+    }
+    .stub-bars .bar-fill.mult-bar {
+        background: linear-gradient(90deg, #f59e0b, #ef4444);
+    }
+    .stub-bars .bar-fill.iss-bar {
+        background: linear-gradient(90deg, #3b82f6, #6366f1);
+    }
+    .stub-labels {
+        display: flex;
+        gap: 0.5rem;
+    }
+    .stub-labels .stub-label-col {
+        flex: 1;
+        min-width: 0;
+        text-align: center;
+        font-size: 0.6rem;
+        color: #9ca3af;
+    }
+</style>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans p-4 sm:p-8">
     <!-- 顶部滚动提示条 -->
@@ -1134,6 +1211,9 @@
                     <p>本站纪念币、纪念钞相关历史数据均根据<strong>中国人民银行发行公告</strong>整理；早期纪念币发行数据不透明，相关数据靠书籍、网上能找到的实物图互相佐证得出。</p>
                     <p class="mt-2">如有谬误，欢迎提交实物证据<strong>勘误</strong>。具体方式可点击「＋」菜单里的<strong>邮件图标</strong>，通过邮件交流。</p>
                 </div>
+                <div class="p-4 rounded-xl bg-rose-50 border border-rose-100">
+                    <p>各纪念币/纪念钞卡片下方的<strong>参考价格</strong>为互联网公开信息搜索整理而来，市场价格瞬息万变，<strong>仅作参考</strong>，请勿直接用于交易决策。</p>
+                </div>
             </div>
         </div>
     </div>
@@ -1179,6 +1259,34 @@
     <script>
         let allCoinsData = [];
         let matrixDataMap = {}; // coinCode -> matrix data object
+        let priceDataMap = {}; // coinId -> { low, high, mid, mult, ... }
+        let globalMaxMult = 1800;
+        let globalMinIss = 156;
+        let globalMaxIss = 50000;
+
+        // 进度条百分比: log归一化 + power曲线拉伸低端 + 10%地板
+        function barPct(val, min, max) {
+            if (max <= min) return 10;
+            const t = Math.log(val / min) / Math.log(max / min);
+            const stretched = Math.pow(Math.max(0, t), 0.4);
+            return 10 + 90 * stretched;
+        }
+
+        // 解析面值为元（角→除以10）
+        function parseFaceYuan(denomination) {
+            const raw = (denomination || '').replace(/[元圆角].*$/, '');
+            const num = parseFloat(raw);
+            if (isNaN(num)) return null;
+            return /角/.test(denomination || '') ? num / 10 : num;
+        }
+
+        // 格式化面值显示: "1角"→"0.1", "5元"→"5"
+        function fmtFaceDisplay(denomination) {
+            const raw = (denomination || '').replace(/[元圆角].*$/, '');
+            const num = parseFloat(raw);
+            if (isNaN(num)) return raw;
+            return /角/.test(denomination || '') ? (num / 10).toString() : raw;
+        }
 
         let myCollection = []; // 存储已收藏的纪念币ID
         let myWishlist = []; // 存储想收藏的纪念币ID
@@ -3194,7 +3302,7 @@
                             const frontImageClass = cardViewMode === 'back' ? 'hidden' : '';
                             const backImageClass = cardViewMode === 'front' ? 'hidden' : '';
 
-                            coinCard.className = `coin-card flex flex-col items-center p-4 bg-gray-100 rounded-xl shadow-lg transform transition-transform duration-300 hover:scale-105 cursor-pointer relative ${cardStateClass}`;
+                            coinCard.className = `coin-card coin-card-ticket shadow-lg transform transition-transform duration-300 hover:scale-105 cursor-pointer ${cardStateClass}`;
                             coinCard.setAttribute('data-coin-id', coin.id);
 
                             let mintBadgesHTML = '';
@@ -3211,7 +3319,32 @@
                                 mintBadgesHTML += `</div>`;
                             }
 
+                            const faceNum = fmtFaceDisplay(coin.denomination);
+                            const priceData = priceDataMap[coin.id];
+                            let stubHTML = '';
+                            if (priceData) {
+                                const multPct = barPct(priceData.mult, 1, globalMaxMult);
+                                const issPct = barPct(coin.issuance, globalMinIss, globalMaxIss);
+                                const lowDisp = priceData.low >= 100 ? Math.round(priceData.low) : priceData.low.toFixed(1);
+                                const highDisp = priceData.high >= 100 ? Math.round(priceData.high) : priceData.high.toFixed(1);
+                                const issDisp = coin.issuance >= 10000 ? (coin.issuance / 10000).toFixed(1).replace(/\.0$/, '') + '亿' : coin.issuance.toFixed(1).replace(/\.0$/, '') + '万';
+                                stubHTML = `
+                                <svg class="tear-svg"><line x1="0" y1="5" x2="100%" y2="5" stroke-dasharray="10 7"/></svg>
+                                <div class="card-stub bg-gray-100">
+                                    <div class="stub-price">参考价 <span class="price-num">¥${lowDisp} – ¥${highDisp}</span></div>
+                                    <div class="stub-bars">
+                                        <div class="bar-col"><div class="bar-wrap"><div class="bar-fill mult-bar" style="width:${multPct}%"></div></div></div>
+                                        <div class="bar-col"><div class="bar-wrap"><div class="bar-fill iss-bar" style="width:${issPct}%"></div></div></div>
+                                    </div>
+                                    <div class="stub-labels">
+                                        <div class="stub-label-col">升值&nbsp;${priceData.mult.toFixed(1)}×</div>
+                                        <div class="stub-label-col">发行量&nbsp;${issDisp}</div>
+                                    </div>
+                                </div>`;
+                            }
+
                             coinCard.innerHTML = `
+                                <div class="card-body flex flex-col items-center p-4 bg-gray-100 relative${priceData ? ' rounded-t-xl' : ' rounded-xl'}">
                                 <div class="image-container relative w-full aspect-square cursor-pointer">
 
                                     <img
@@ -3263,9 +3396,11 @@
                                     <p class="font-semibold text-sm leading-5 line-clamp-2 px-1 text-center">${coin.name}</p>
                                 </div>
                                 <div class="text-center px-1">
-                                    <p class="text-[9px] sm:text-[11px] text-gray-500 mt-1 whitespace-nowrap overflow-hidden">${coin.denomination}&nbsp;&middot;&nbsp;${coin.size}&nbsp;&middot;&nbsp;${coin.metal}&nbsp;&middot;&nbsp;${coin.issuance > 0 ? (coin.issuance >= 10000 ? (coin.issuance / 10000) + '亿' : coin.issuance + '万') : '—'}</p>
+                                    <p class="text-[9px] sm:text-[11px] text-gray-500 mt-1 whitespace-nowrap overflow-hidden">¥${faceNum}&nbsp;&middot;&nbsp;${coin.size}&nbsp;&middot;&nbsp;${coin.metal}</p>
                                     ${mintBadgesHTML}
                                 </div>
+                                </div>
+                                ${stubHTML}
                             `;
                             coinGrid.appendChild(coinCard);
 
@@ -3567,13 +3702,40 @@
         window.onload = () => {
             Promise.all([
                 loadData('coin_data.json'),
-                loadData('matrix.json').catch(() => ({ coins: [] }))
-            ]).then(([coinsData, matrixData]) => {
+                loadData('matrix.json').catch(() => ({ coins: [] })),
+                loadData('price/coin_price_history.json').catch(() => ({ coins: [] }))
+            ]).then(([coinsData, matrixData, priceData]) => {
                     allCoinsData = coinsData;
                     // 构建点阵数据映射：用 coin code 作为 key
                     matrixData.coins.forEach(entry => {
                         matrixDataMap[entry.code] = entry;
                     });
+                    // 构建价格数据映射
+                    if (priceData.coins) {
+                        let allMults = [], allIss = [];
+                        priceData.coins.forEach(p => {
+                            const coin = coinsData.find(c => c.id === p.id);
+                            const fv = coin ? parseFaceYuan(coin.denomination) : null;
+                            if (p.current && fv && fv > 0 && coin && coin.issuance > 0) {
+                                const mult = p.current.mid / fv;
+                                priceDataMap[p.id] = {
+                                    low: p.current.low,
+                                    high: p.current.high,
+                                    mid: p.current.mid,
+                                    mult: mult
+                                };
+                                allMults.push(mult);
+                                allIss.push(coin.issuance);
+                            }
+                        });
+                        if (allMults.length > 0) {
+                            globalMaxMult = Math.max(...allMults);
+                        }
+                        if (allIss.length > 0) {
+                            globalMinIss = Math.min(...allIss);
+                            globalMaxIss = Math.max(...allIss);
+                        }
+                    }
                     loadCollection();
                     populateFilters(allCoinsData);
                     renderUI();
