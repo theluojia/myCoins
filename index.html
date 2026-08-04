@@ -4,7 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>我的纪念币收藏</title>
-    <!-- 引入 Tailwind CSS CDN -->
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+    <link rel="manifest" href="favicon/site.webmanifest">
+<!-- 引入 Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
@@ -3997,7 +4001,7 @@
     </script>
     <script src="//cdn.busuanzi.cc/busuanzi/3.6.9/busuanzi.min.js" defer></script>
     <script>
-    // 3.6.9 加载后：非数字值替换为 --，>=10000 转为 K/M 格式
+    // busuanzi 计数器：只显示数字，非数字替换为 --，>=10000 转 K/M
     (function(){
         function formatNum(n){
             var v = parseInt(n, 10);
@@ -4006,20 +4010,21 @@
             if(v >= 1000000) return (v/1000000).toFixed(1) + 'M';
             return (v/1000).toFixed(1) + 'K';
         }
+        function isValidNum(text) { return /^\d+$/.test(text); }
         var ids = ['busuanzi_site_pv','busuanzi_site_uv','busuanzi_today_pv','busuanzi_today_uv'];
-        var timer = setInterval(function(){
-            var allDone = true;
+        setInterval(function(){
             ids.forEach(function(id){
                 var el = document.getElementById(id);
                 if(!el) return;
-                var text = el.textContent;
-                if(text === '--' || text === '加载中...') { allDone = false; return; }
-                var formatted = formatNum(text);
-                if(el.textContent !== formatted) el.textContent = formatted;
+                var text = el.textContent.trim();
+                if (isValidNum(text)) {
+                    var formatted = formatNum(text);
+                    if(el.textContent !== formatted) el.textContent = formatted;
+                } else if (text !== '--') {
+                    el.textContent = '--';
+                }
             });
-            if(allDone) clearInterval(timer);
-        }, 500);
-        setTimeout(function(){ clearInterval(timer); }, 10000);
+        }, 1000);
     })();
     </script>
 
