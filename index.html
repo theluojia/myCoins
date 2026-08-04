@@ -817,6 +817,8 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        overflow: hidden;
+        border-radius: 0.75rem;
     }
     .coin-card-ticket .card-body {
         width: 100%;
@@ -825,6 +827,7 @@
         display: block;
         width: 100%;
         height: 10px;
+        background: #f3f4f6;
     }
     .coin-card-ticket .tear-svg line {
         stroke: #9ca3af;
@@ -1264,12 +1267,24 @@
         let globalMinIss = 156;
         let globalMaxIss = 50000;
 
-        // 进度条百分比: log归一化 + power曲线拉伸低端 + 10%地板
+        // 进度条百分比: log归一化 + power曲线拉伸低端 + 3%地板
         function barPct(val, min, max) {
-            if (max <= min) return 10;
+            if (max <= min) return 3;
             const t = Math.log(val / min) / Math.log(max / min);
             const stretched = Math.pow(Math.max(0, t), 0.4);
-            return 10 + 90 * stretched;
+            return 3 + 97 * stretched;
+        }
+
+        // 方案C: 分段混合刻度 — 低区(≤50×)用log₂拉开, 高区(>50×)线性压缩
+        function multBarPct(mult, max) {
+            if (max <= 1) return 3;
+            if (mult <= 50) {
+                const t = Math.log2(Math.max(1, mult)) / Math.log2(50);
+                return 3 + 72 * Math.pow(t, 0.6);
+            } else {
+                const t = (mult - 50) / (max - 50);
+                return 75 + 25 * t;
+            }
         }
 
         // 解析面值为元（角→除以10）
@@ -3323,7 +3338,7 @@
                             const priceData = priceDataMap[coin.id];
                             let stubHTML = '';
                             if (priceData) {
-                                const multPct = barPct(priceData.mult, 1, globalMaxMult);
+                                const multPct = multBarPct(priceData.mult, globalMaxMult);
                                 const issPct = barPct(coin.issuance, globalMinIss, globalMaxIss);
                                 const lowDisp = priceData.low >= 100 ? Math.round(priceData.low) : priceData.low.toFixed(1);
                                 const highDisp = priceData.high >= 100 ? Math.round(priceData.high) : priceData.high.toFixed(1);
