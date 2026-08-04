@@ -1275,16 +1275,48 @@
             return 3 + 97 * stretched;
         }
 
-        // 方案C: 分段混合刻度 — 低区(≤50×)用log₂拉开, 高区(>50×)线性压缩
+        // 锚点插值: 在log₂空间线性插值，1×→3%, 5×→25%, 20×→50%, 100×→75%, max→100%
         function multBarPct(mult, max) {
-            if (max <= 1) return 3;
-            if (mult <= 50) {
-                const t = Math.log2(Math.max(1, mult)) / Math.log2(50);
-                return 3 + 72 * Math.pow(t, 0.6);
-            } else {
-                const t = (mult - 50) / (max - 50);
-                return 75 + 25 * t;
+            if (mult <= 1) return 3;
+            var anchors = [
+                { v: 1,   p: 3  },
+                { v: 5,   p: 25 },
+                { v: 20,  p: 50 },
+                { v: 100, p: 75 },
+                { v: max, p: 100 }
+            ];
+            var logV = Math.log2(mult);
+            for (var i = 0; i < anchors.length - 1; i++) {
+                var logA = Math.log2(Math.max(1, anchors[i].v));
+                var logB = Math.log2(Math.max(1, anchors[i + 1].v));
+                if (logV >= logA && logV <= logB) {
+                    var t = (logV - logA) / (logB - logA);
+                    return anchors[i].p + t * (anchors[i + 1].p - anchors[i].p);
+                }
             }
+            return 100;
+        }
+
+        // 发行量锚点插值: min→3%, 500万→25%, 1000万→50%, 5000万→75%, max→100%
+        function issBarPct(iss, min, max) {
+            if (iss <= min) return 3;
+            var anchors = [
+                { v: min,  p: 3   },
+                { v: 500,  p: 25  },
+                { v: 1000, p: 50  },
+                { v: 5000, p: 75  },
+                { v: max,  p: 100 }
+            ];
+            var logV = Math.log2(iss);
+            for (var i = 0; i < anchors.length - 1; i++) {
+                var logA = Math.log2(Math.max(1, anchors[i].v));
+                var logB = Math.log2(Math.max(1, anchors[i + 1].v));
+                if (logV >= logA && logV <= logB) {
+                    var t = (logV - logA) / (logB - logA);
+                    return anchors[i].p + t * (anchors[i + 1].p - anchors[i].p);
+                }
+            }
+            return 100;
         }
 
         // 解析面值为元（角→除以10）
@@ -3339,7 +3371,7 @@
                             let stubHTML = '';
                             if (priceData) {
                                 const multPct = multBarPct(priceData.mult, globalMaxMult);
-                                const issPct = barPct(coin.issuance, globalMinIss, globalMaxIss);
+                                const issPct = issBarPct(coin.issuance, globalMinIss, globalMaxIss);
                                 const lowDisp = priceData.low >= 100 ? Math.round(priceData.low) : priceData.low.toFixed(1);
                                 const highDisp = priceData.high >= 100 ? Math.round(priceData.high) : priceData.high.toFixed(1);
                                 const issDisp = coin.issuance >= 10000 ? (coin.issuance / 10000).toFixed(1).replace(/\.0$/, '') + '亿' : coin.issuance.toFixed(1).replace(/\.0$/, '') + '万';
