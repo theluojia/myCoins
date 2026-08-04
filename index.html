@@ -3389,7 +3389,7 @@
                                 const issDisp = coin.issuance >= 10000 ? (coin.issuance / 10000).toFixed(1).replace(/\.0$/, '') + '亿' : coin.issuance.toFixed(1).replace(/\.0$/, '') + '万';
                                 stubHTML = `
                                 <svg class="tear-svg"><line x1="0" y1="2.5" x2="100%" y2="2.5" stroke-dasharray="10 7"/></svg>
-                                <div class="card-stub bg-gray-100 text-[9px] sm:text-[11px]">
+                                <div class="card-stub bg-gray-100 text-[10px] sm:text-[12px]">
                                     <div class="stub-price">参考价 <span class="price-num">¥${lowDisp} – ¥${highDisp}</span></div>
                                     <div class="stub-bars">
                                         <div class="bar-col"><div class="bar-wrap"><div class="bar-fill mult-bar" style="width:${multPct}%"></div></div></div>
@@ -3455,7 +3455,7 @@
                                     <p class="font-semibold text-sm leading-5 line-clamp-2 px-1 text-center">${coin.name}</p>
                                 </div>
                                 <div class="text-center px-1">
-                                    <p class="text-[9px] sm:text-[11px] text-gray-500 mt-1 whitespace-nowrap overflow-hidden">¥${faceNum}&nbsp;&middot;&nbsp;${coin.size}&nbsp;&middot;&nbsp;${coin.metal}</p>
+                                    <p class="text-[10px] sm:text-[12px] text-gray-500 mt-1 whitespace-nowrap overflow-hidden">¥${faceNum}&nbsp;&middot;&nbsp;${coin.size}&nbsp;&middot;&nbsp;${coin.metal}</p>
                                     ${mintBadgesHTML}
                                 </div>
                                 </div>
