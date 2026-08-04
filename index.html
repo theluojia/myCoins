@@ -1195,27 +1195,36 @@
 
     <!-- 关于本站弹窗 -->
     <div id="infoModal" class="fixed inset-0 z-[110] items-center justify-center bg-black/70 p-4" style="display:none;">
-        <div class="quiz-card relative bg-white rounded-2xl shadow-2xl max-w-lg w-full max-h-[90vh] overflow-y-auto" style="animation: quizSlideUp 0.4s cubic-bezier(0.34,1.56,0.64,1);">
+        <div class="quiz-card relative bg-white rounded-2xl shadow-2xl max-w-lg w-full max-h-[90vh] flex flex-col overflow-hidden" style="animation: quizSlideUp 0.4s cubic-bezier(0.34,1.56,0.64,1);">
             <!-- 关闭按钮 -->
-            <button id="infoCloseBtn" class="absolute top-3 right-3 z-10 w-8 h-8 bg-gray-200 hover:bg-gray-300 rounded-full flex items-center justify-center text-lg font-bold text-gray-500 hover:text-gray-700 transition-colors">&times;</button>
-            <!-- 头部 -->
-            <div class="bg-gradient-to-r from-blue-500 to-indigo-500 px-6 py-4 rounded-t-2xl">
-                <span class="text-white font-bold text-lg">ℹ️ 关于本站</span>
+            <button id="infoCloseBtn" class="absolute top-3 right-3 z-10 w-8 h-8 bg-white/30 hover:bg-white/50 rounded-full flex items-center justify-center text-lg font-bold text-white hover:text-gray-200 transition-colors">&times;</button>
+            <!-- 头部 Tab 栏 -->
+            <div class="bg-gradient-to-r from-blue-500 to-indigo-500 px-6 pt-4 pb-0 rounded-t-2xl">
+                <div class="flex gap-1">
+                    <button class="info-tab active text-white font-bold text-sm px-4 py-2 rounded-t-lg bg-white/20" data-tab="about">关于本站</button>
+                    <button class="info-tab text-white/70 font-bold text-sm px-4 py-2 rounded-t-lg hover:text-white hover:bg-white/10 transition-colors" data-tab="changelog">变更记录</button>
+                </div>
             </div>
-            <!-- 内容区 -->
-            <div class="p-6 space-y-4 text-gray-700 text-[15px] leading-relaxed">
-                <div class="p-4 rounded-xl bg-blue-50 border border-blue-100">
-                    <p>本网站上的所有数据都存在<strong>浏览器本地</strong>，<strong>不会上传</strong>到任何服务器。</p>
+            <!-- 内容区（高度由JS根据关于本站内容锁定） -->
+            <div class="overflow-y-auto" id="infoContentArea">
+                <div class="info-tab-content p-6 space-y-4 text-gray-700 text-[15px] leading-relaxed" id="tab-about">
+                    <div class="p-4 rounded-xl bg-blue-50 border border-blue-100">
+                        <p>本网站上的所有数据都存在<strong>浏览器本地</strong>，<strong>不会上传</strong>到任何服务器。</p>
+                    </div>
+                    <div class="p-4 rounded-xl bg-amber-50 border border-amber-100">
+                        <p>如果需要<strong>切换浏览器</strong>又怕丢失数据，可以使用「＋」菜单里的「<strong>导出数据</strong>」与「<strong>导入数据</strong>」功能。</p>
+                    </div>
+                    <div class="p-4 rounded-xl bg-gray-50 border border-gray-100">
+                        <p>本站纪念币、纪念钞相关历史数据均根据<strong>中国人民银行发行公告</strong>整理；早期纪念币发行数据不透明，相关数据靠书籍、网上能找到的实物图互相佐证得出。</p>
+                        <p class="mt-2">如有谬误，欢迎提交实物证据<strong>勘误</strong>。具体方式可点击「＋」菜单里的<strong>邮件图标</strong>，通过邮件交流。</p>
+                    </div>
+                    <div class="p-4 rounded-xl bg-rose-50 border border-rose-100">
+                        <p>各纪念币/纪念钞卡片下方的<strong>参考价格</strong>为互联网公开信息搜索整理而来，市场价格瞬息万变，<strong>仅作参考</strong>，请勿直接用于交易决策。</p>
+                    </div>
                 </div>
-                <div class="p-4 rounded-xl bg-amber-50 border border-amber-100">
-                    <p>如果需要<strong>切换浏览器</strong>又怕丢失数据，可以使用「＋」菜单里的「<strong>导出数据</strong>」与「<strong>导入数据</strong>」功能。</p>
-                </div>
-                <div class="p-4 rounded-xl bg-gray-50 border border-gray-100">
-                    <p>本站纪念币、纪念钞相关历史数据均根据<strong>中国人民银行发行公告</strong>整理；早期纪念币发行数据不透明，相关数据靠书籍、网上能找到的实物图互相佐证得出。</p>
-                    <p class="mt-2">如有谬误，欢迎提交实物证据<strong>勘误</strong>。具体方式可点击「＋」菜单里的<strong>邮件图标</strong>，通过邮件交流。</p>
-                </div>
-                <div class="p-4 rounded-xl bg-rose-50 border border-rose-100">
-                    <p>各纪念币/纪念钞卡片下方的<strong>参考价格</strong>为互联网公开信息搜索整理而来，市场价格瞬息万变，<strong>仅作参考</strong>，请勿直接用于交易决策。</p>
+                <div class="info-tab-content p-6 text-gray-700 text-[15px] leading-relaxed" id="tab-changelog" style="display:none;">
+                    <div class="space-y-3">
+                    </div>
                 </div>
             </div>
         </div>
@@ -3837,6 +3846,7 @@
         (function setupInfoModal() {
             const infoModal = document.getElementById('infoModal');
             const closeBtn = document.getElementById('infoCloseBtn');
+            const contentArea = document.getElementById('infoContentArea');
             if (!infoModal || !closeBtn) return;
             function closeInfo() { infoModal.style.display = 'none'; }
             closeBtn.addEventListener('click', closeInfo);
@@ -3846,6 +3856,71 @@
             document.addEventListener('keydown', function escClose(e) {
                 if (e.key === 'Escape' && infoModal.style.display !== 'none') { closeInfo(); }
             });
+
+            var aboutHeight = 0;
+            function getAboutHeight() {
+                if (aboutHeight) return aboutHeight;
+                var aboutTab = document.getElementById('tab-about');
+                var prevDisplay = aboutTab.style.display;
+                aboutTab.style.display = '';
+                aboutHeight = aboutTab.offsetHeight;
+                aboutTab.style.display = prevDisplay;
+                return aboutHeight;
+            }
+
+            var changelogRendered = false;
+            function renderChangelog() {
+                if (changelogRendered) return;
+                changelogRendered = true;
+                var container = document.querySelector('#tab-changelog .space-y-3');
+                if (!container || typeof CHANGELOG === 'undefined') return;
+                var html = '';
+                for (var i = 0; i < CHANGELOG.length; i++) {
+                    html += '<div class="flex gap-3 py-2 border-b border-gray-100 last:border-0">' +
+                        '<span class="text-gray-400 text-xs whitespace-nowrap pt-0.5">' + CHANGELOG[i].date + '</span>' +
+                        '<span class="text-gray-700">' + CHANGELOG[i].text + '</span>' +
+                        '</div>';
+                }
+                container.innerHTML = html;
+            }
+
+            // Tab 切换
+            var tabs = infoModal.querySelectorAll('.info-tab');
+            var contents = infoModal.querySelectorAll('.info-tab-content');
+            function switchTab(target) {
+                if (target === 'changelog') {
+                    renderChangelog();
+                    contentArea.style.height = getAboutHeight() + 'px';
+                    contentArea.style.overflowY = 'auto';
+                } else {
+                    contentArea.style.height = '';
+                    contentArea.style.overflowY = '';
+                }
+                for (var j = 0; j < tabs.length; j++) {
+                    var isActive = tabs[j].getAttribute('data-tab') === target;
+                    tabs[j].classList.toggle('active', isActive);
+                    tabs[j].classList.toggle('text-white', isActive);
+                    tabs[j].classList.toggle('text-white/70', !isActive);
+                    tabs[j].classList.toggle('bg-white/20', isActive);
+                    tabs[j].classList.toggle('bg-transparent', !isActive);
+                }
+                for (var k = 0; k < contents.length; k++) {
+                    contents[k].style.display = (contents[k].id === 'tab-' + target) ? '' : 'none';
+                }
+            }
+            for (var t = 0; t < tabs.length; t++) {
+                tabs[t].addEventListener('click', function() {
+                    switchTab(this.getAttribute('data-tab'));
+                });
+            }
+
+            // 每次打开弹窗重置到关于本站
+            var infoBtn = document.getElementById('infoBtn');
+            if (infoBtn) {
+                infoBtn.addEventListener('click', function() {
+                    setTimeout(function() { switchTab('about'); }, 50);
+                });
+            }
         })();
 
         // 填充筛选下拉菜单
@@ -3950,6 +4025,7 @@
 
     <!-- 每日一题题库 -->
     <script src="quiz_data.js"></script>
+    <script src="changelog.js"></script>
     <script>
     (function() {
         const STORAGE_KEY = 'quizDone_' + new Date().toISOString().slice(0, 10);
