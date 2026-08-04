@@ -826,11 +826,12 @@
     }
     .coin-card-ticket .card-body {
         width: 100%;
+        padding-bottom: 0.5rem;
     }
     .coin-card-ticket .tear-svg {
         display: block;
         width: 100%;
-        height: 10px;
+        height: 5px;
         background: #f3f4f6;
     }
     .coin-card-ticket .tear-svg line {
@@ -843,12 +844,11 @@
         width: 100%;
         display: flex;
         flex-direction: column;
-        gap: 0.35rem;
-        padding: 0.5rem 0.75rem 0.55rem;
+        gap: 0.3rem;
+        padding: 0.25rem 0.75rem 0.5rem;
     }
     .stub-price {
         text-align: center;
-        font-size: 0.65rem;
         color: #6b7280;
     }
     .stub-price .price-num {
@@ -893,7 +893,6 @@
         flex: 1;
         min-width: 0;
         text-align: center;
-        font-size: 0.6rem;
         color: #9ca3af;
     }
 </style>
@@ -3389,8 +3388,8 @@
                                 const highDisp = priceData.high >= 100 ? Math.round(priceData.high) : priceData.high.toFixed(1);
                                 const issDisp = coin.issuance >= 10000 ? (coin.issuance / 10000).toFixed(1).replace(/\.0$/, '') + '亿' : coin.issuance.toFixed(1).replace(/\.0$/, '') + '万';
                                 stubHTML = `
-                                <svg class="tear-svg"><line x1="0" y1="5" x2="100%" y2="5" stroke-dasharray="10 7"/></svg>
-                                <div class="card-stub bg-gray-100">
+                                <svg class="tear-svg"><line x1="0" y1="2.5" x2="100%" y2="2.5" stroke-dasharray="10 7"/></svg>
+                                <div class="card-stub bg-gray-100 text-[9px] sm:text-[11px]">
                                     <div class="stub-price">参考价 <span class="price-num">¥${lowDisp} – ¥${highDisp}</span></div>
                                     <div class="stub-bars">
                                         <div class="bar-col"><div class="bar-wrap"><div class="bar-fill mult-bar" style="width:${multPct}%"></div></div></div>
