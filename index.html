@@ -1698,22 +1698,30 @@
             const zoomModalFace = document.getElementById('zoomModalFace');
             const zoomLoading = document.getElementById('zoomLoading');
             const isFront = zoomState.face === 'front';
-            const src = isFront ? coin.imageUrl2 : coin.imageUrl;
+            const localSrc = 'coins/img/' + coin.id + (isFront ? '_b' : '_f') + '.webp';
+            const fallbackSrc = isFront ? coin.imageUrl2 : coin.imageUrl;
 
             zoomModalName.textContent = coin.name;
             zoomModalImg.alt = coin.name + (isFront ? ' 正面' : ' 反面');
             zoomModalDesc.textContent = (isFront ? coin.description2 : coin.description) || '暂无描述';
             zoomModalFace.textContent = isFront ? '【正面】' : '【反面】';
 
+            // 优先本地图，失败回退外链
+            zoomModalImg.onerror = function() {
+                if (!this._fb) { this._fb = 1; this.src = fallbackSrc; return; }
+                this.onerror = null;
+            };
+            zoomModalImg._fb = 0;
+
             // 先检查目标图片是否在缓存中
             var cacheImg = new Image();
-            cacheImg.src = src;
+            cacheImg.src = localSrc;
 
             if (cacheImg.complete) {
                 // 缓存命中：直接显示，不闪 loading
                 zoomLoading.style.display = 'none';
                 zoomModalImg.style.opacity = '1';
-                zoomModalImg.src = src;
+                zoomModalImg.src = localSrc;
                 initZoomLens();
             } else {
                 // 缓存未命中：立即隐藏旧图，显示 loading
@@ -1724,7 +1732,7 @@
                     zoomModalImg.style.opacity = '1';
                     initZoomLens();
                 };
-                zoomModalImg.src = src;
+                zoomModalImg.src = localSrc;
             }
         }
 
@@ -3409,22 +3417,37 @@
                                 </div>`;
                             }
 
+                            // 本地抠图路径 & 尺寸缩放
+                            var localFront = 'coins/img/' + coin.id + '_f.webp';
+                            var localBack = 'coins/img/' + coin.id + '_b.webp';
+                            var coinSize = parseInt(coin.size) || 30;
+                            var isHeritage = ['JB103','JB105','JB111','JB112'].includes(coin.id);
+                            var imgScale;
+                            if (coin.id.startsWith('JC')) { imgScale = 100; }
+                            else if (isHeritage) { imgScale = 92; }
+                            else if (coinSize >= 32) { imgScale = 100; }
+                            else if (coinSize >= 30) { imgScale = 95; }
+                            else if (coinSize >= 27) { imgScale = 90; }
+                            else if (coinSize >= 25) { imgScale = 85; }
+                            else { imgScale = 80; }
+                            var imgStyle = imgScale < 100 ? 'style="width:'+imgScale+'%;height:'+imgScale+'%;top:'+((100-imgScale)/2)+'%;left:'+((100-imgScale)/2)+'%"' : '';
+
                             coinCard.innerHTML = `
-                                <div class="card-body flex flex-col items-center p-4 bg-gray-100 relative${priceData ? ' rounded-t-xl' : ' rounded-xl'}">
+                                <div class="card-body flex flex-col items-center p-3 bg-gray-100 relative${priceData ? ' rounded-t-xl' : ' rounded-xl'}">
                                 <div class="image-container relative w-full aspect-square cursor-pointer">
 
                                     <img
-                                        src="${coin.imageUrl}"
+                                        src="${localFront}"
                                         alt="${coin.name}正面"
                                         class="front-image absolute top-0 left-0 w-full h-full object-contain rounded-lg ${imgClass} transition-all duration-500 ease-in-out ${frontImageClass}"
-                                        loading="lazy"
-                                        onerror="this.onerror=null;this.src='https://placehold.co/300x300/F0F0F0/888888?text=图片未找到'">
+                                        loading="lazy" ${imgStyle}
+                                        onerror="if(!this._fb){this._fb=1;this.src='${coin.imageUrl}';}else{this.onerror=null;this.src='https://placehold.co/300x300/F0F0F0/888888?text=图片未找到';}">
                                     <img
-                                        src="${coin.imageUrl2}"
+                                        src="${localBack}"
                                         alt="${coin.name}背面"
                                         class="back-image absolute top-0 left-0 w-full h-full object-contain rounded-lg ${imgClass} transition-all duration-500 ease-in-out ${backImageClass}"
-                                        loading="lazy"
-                                        onerror="this.onerror=null;this.src='https://placehold.co/300x300/F0F0F0/888888?text=图片未找到'">
+                                        loading="lazy" ${imgStyle}
+                                        onerror="if(!this._fb){this._fb=1;this.src='${coin.imageUrl2}';}else{this.onerror=null;this.src='https://placehold.co/300x300/F0F0F0/888888?text=图片未找到';}">
 
                                     <!-- 点阵图标（底部右侧） -->
                                     ${matrixDataMap[coin.id] ? `<div class="matrix-icon absolute bottom-2 right-2 z-20 w-7 h-7 bg-white/80 rounded flex items-center justify-center shadow-sm cursor-pointer hover:bg-white transition-colors" title="查看防伪点阵">
