@@ -871,7 +871,7 @@
         padding: 0.4rem 0.65rem 0.45rem;
     }
     .stub-price-col {
-        width: 90px;
+        width: 75px;
         flex-shrink: 0;
         display: flex;
         flex-direction: column;
@@ -880,15 +880,19 @@
         white-space: nowrap;
     }
     .stub-price-label { color: #9ca3af; line-height: 1.3; }
-    .stub-price-num { font-weight: 700; color: #1f2937; line-height: 1.3; overflow: hidden; text-overflow: ellipsis; }
+    .stub-price-num { font-weight: 700; color: #1f2937; line-height: 1.3; }
     .stub-bars-col { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; }
-    .stub-bar-row { display: flex; align-items: center; gap: 4px; }
+    .stub-bar-row { display: flex; align-items: center; gap: 3px; }
     .stub-bar-label { color: #6b7280; flex-shrink: 0; white-space: nowrap; }
-    .stub-bar-wrap { flex: 1; height: 4px; background: #d1d5db; border-radius: 2px; overflow: hidden; }
+    .stub-bar-wrap { flex: 1; height: 4px; background: #d1d5db; border-radius: 2px; overflow: hidden; min-width: 6px; }
     .stub-bar-fill { height: 100%; border-radius: 2px; }
     .stub-bar-fill.mult-bar { background: linear-gradient(90deg, #f59e0b, #ef4444); }
     .stub-bar-fill.iss-bar { background: linear-gradient(90deg, #60a5fa, #4f46e5); }
-    .stub-bar-val { white-space: nowrap; flex-shrink: 0; text-align: right; color: #9ca3af; width: 42px; }
+    .stub-bar-val { white-space: nowrap; flex-shrink: 0; text-align: right; color: #9ca3af; width: 38px; }
+    @media (max-width: 640px) {
+        .stub-price-col { width: 60px; }
+        .stub-bar-val { width: 32px; }
+    }
 </style>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans p-4 sm:p-8">
