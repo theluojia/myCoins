@@ -675,9 +675,6 @@
             z-index: 90;
             transform: translateY(-100%);
             transition: transform 0.3s ease-in-out;
-            background: linear-gradient(to right, rgba(30, 64, 175, 0.8), rgba(37, 99, 235, 0.8));
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
             color: white;
             text-align: center;
             padding: 8px 16px;
@@ -694,9 +691,9 @@
             border-radius: 10px;
             font-size: 11px;
             font-weight: 600;
-            line-height: 18px;
+            line-height: 1.4;
             text-align: center;
-            vertical-align: middle;
+            vertical-align: baseline;
             transition: transform 0.15s ease;
         }
         .hint-badge.collected {
@@ -706,6 +703,33 @@
         .hint-badge.wishlist {
             background: rgba(251, 191, 36, 0.25);
             color: #fbbf24;
+        }
+        .hint-price {
+            font-size: 11px;
+            font-weight: 500;
+            margin-left: 2px;
+            opacity: 0.8;
+            display: inline-block;
+            vertical-align: baseline;
+        }
+        .hint-price.collected-val { color: #4ade80; }
+        .hint-price.wishlist-val { color: #fbbf24; }
+
+        @keyframes hintPulseUp {
+            0%   { transform: scale(1); }
+            40%  { transform: scale(1.35); }
+            100% { transform: scale(1); }
+        }
+        @keyframes hintPulseDown {
+            0%   { transform: scale(1); }
+            40%  { transform: scale(0.75); }
+            100% { transform: scale(1); }
+        }
+        .hint-pop-up {
+            animation: hintPulseUp 0.35s ease-out;
+        }
+        .hint-pop-down {
+            animation: hintPulseDown 0.35s ease-out;
         }
 
         /* 底部 footer 提示条 */
@@ -843,64 +867,34 @@
         border-radius: 0 0 0.75rem 0.75rem;
         width: 100%;
         display: flex;
-        flex-direction: column;
-        gap: 0.3rem;
-        padding: 0.25rem 0.75rem 0.5rem;
+        gap: 0.4rem;
+        padding: 0.4rem 0.65rem 0.45rem;
     }
-    .stub-price {
-        text-align: center;
-        color: #6b7280;
-    }
-    .stub-price .price-num {
-        font-weight: 600;
-        color: #374151;
-    }
-    .stub-bars {
-        display: flex;
-        gap: 0.5rem;
-        align-items: center;
-    }
-    .stub-bars .bar-col {
-        flex: 1;
-        min-width: 0;
+    .stub-price-col {
+        width: 90px;
+        flex-shrink: 0;
         display: flex;
         flex-direction: column;
+        justify-content: center;
         align-items: center;
-        gap: 2px;
+        white-space: nowrap;
     }
-    .stub-bars .bar-wrap {
-        width: 100%;
-        height: 4px;
-        background: #d1d5db;
-        border-radius: 2px;
-        overflow: hidden;
-    }
-    .stub-bars .bar-fill {
-        height: 100%;
-        border-radius: 2px;
-    }
-    .stub-bars .bar-fill.mult-bar {
-        background: linear-gradient(90deg, #f59e0b, #ef4444);
-    }
-    .stub-bars .bar-fill.iss-bar {
-        background: linear-gradient(90deg, #3b82f6, #6366f1);
-    }
-    .stub-labels {
-        display: flex;
-        gap: 0.5rem;
-    }
-    .stub-labels .stub-label-col {
-        flex: 1;
-        min-width: 0;
-        text-align: center;
-        color: #9ca3af;
-    }
+    .stub-price-label { color: #9ca3af; line-height: 1.3; }
+    .stub-price-num { font-weight: 700; color: #1f2937; line-height: 1.3; overflow: hidden; text-overflow: ellipsis; }
+    .stub-bars-col { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; }
+    .stub-bar-row { display: flex; align-items: center; gap: 4px; }
+    .stub-bar-label { color: #6b7280; flex-shrink: 0; white-space: nowrap; }
+    .stub-bar-wrap { flex: 1; height: 4px; background: #d1d5db; border-radius: 2px; overflow: hidden; }
+    .stub-bar-fill { height: 100%; border-radius: 2px; }
+    .stub-bar-fill.mult-bar { background: linear-gradient(90deg, #f59e0b, #ef4444); }
+    .stub-bar-fill.iss-bar { background: linear-gradient(90deg, #60a5fa, #4f46e5); }
+    .stub-bar-val { white-space: nowrap; flex-shrink: 0; text-align: right; color: #9ca3af; width: 42px; }
 </style>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans p-4 sm:p-8">
     <!-- 顶部滚动提示条 -->
-    <div id="scrollHint" class="text-center">
-        右上角图标：<b class="text-[#22C55E]">双击</b>已收藏 <span id="hintCollectedCount" class="hint-badge collected">0</span> / <b class="text-[#FBBF24]">单击</b>想收藏 <span id="hintWishlistCount" class="hint-badge wishlist">0</span>
+    <div id="scrollHint" class="text-center bg-gradient-to-r from-blue-800/80 to-blue-600/80">
+        右上角图标：<b class="text-[#22C55E]">双击</b>已收藏 <span id="hintCollectedCount" class="hint-badge collected">0</span><span id="hintCollectedValue"></span> / <b class="text-[#FBBF24]">单击</b>想收藏 <span id="hintWishlistCount" class="hint-badge wishlist">0</span><span id="hintWishlistBudget"></span>
     </div>
     <div class="max-w-7xl mx-auto pt-2 pb-6">
         <header class="text-center mb-8">
@@ -1375,17 +1369,17 @@
         const exportBtn = document.getElementById('exportBtn'); 
 
         const mintConfig = {
-            "上海": { short: "沪", color: "bg-purple-500", fullName: "上海造币有限公司" },
-            "沈阳": { short: "沈", color: "bg-red-500", fullName: "沈阳造币有限公司" },
-            "南京": { short: "宁", color: "bg-teal-500", fullName: "南京造币有限公司" },
+            "上海": { short: "沪", color: "#a855f7", fullName: "上海造币有限公司" },
+            "沈阳": { short: "沈", color: "#ef4444", fullName: "沈阳造币有限公司" },
+            "南京": { short: "宁", color: "#14b8a6", fullName: "南京造币有限公司" },
 
-            "成都": { short: "成", color: "bg-orange-500", fullName: "成都印钞有限公司" },
-            "北京": { short: "京", color: "bg-indigo-500", fullName: "北京印钞有限公司" },
-            "上钞": { short: "沪", color: "bg-fuchsia-500", fullName: "上海印钞有限公司" }, // 区别于上海造币
-            "西安": { short: "西", color: "bg-emerald-500", fullName: "西安印钞有限公司" },
-            "石家庄": { short: "石", color: "bg-amber-500", fullName: "石家庄印钞有限公司" },
-            "南昌": { short: "昌", color: "bg-pink-500", fullName: "南昌印钞有限公司" },
-            "广州": { short: "穗", color: "bg-cyan-500", fullName: "广州印钞有限公司" }
+            "成都": { short: "成", color: "#f97316", fullName: "成都印钞有限公司" },
+            "北京": { short: "京", color: "#6366f1", fullName: "北京印钞有限公司" },
+            "上钞": { short: "沪", color: "#d946ef", fullName: "上海印钞有限公司" }, // 区别于上海造币
+            "西安": { short: "西", color: "#10b981", fullName: "西安印钞有限公司" },
+            "石家庄": { short: "石", color: "#f59e0b", fullName: "石家庄印钞有限公司" },
+            "南昌": { short: "昌", color: "#ec4899", fullName: "南昌印钞有限公司" },
+            "广州": { short: "穗", color: "#06b6d4", fullName: "广州印钞有限公司" }
         };
 
         // ===== 飞机横幅动画 =====
@@ -3366,12 +3360,14 @@
 
                             let mintBadgesHTML = '';
                             if (coin.mints && Array.isArray(coin.mints) && coin.mints.length > 0) {
-                                    mintBadgesHTML = `<div class="mt-1.5 flex flex-wrap justify-center gap-1">`;
+                                    mintBadgesHTML = `<div class="absolute bottom-2 left-2 z-20 flex flex-wrap gap-1" style="max-width:calc(100% - 40px);">`;
 
                                     coin.mints.forEach(mintName => {
-                                    const config = mintConfig[mintName] || { short: "厂", color: "bg-gray-400", fullName: mintName };
+                                    const config = mintConfig[mintName] || { short: "厂", color: "#9ca3af", fullName: mintName };
                                     mintBadgesHTML += `
-                                        <span class="${config.color} inline-flex items-center px-2 py-0.5 rounded-full text-white text-[9px] sm:text-[10px] font-medium shadow-sm cursor-default" title="${config.fullName}">${config.short}</span>
+                                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-white text-[10px] sm:text-[11px] font-bold cursor-default select-none"
+                                              style="background:linear-gradient(135deg,${config.color}cc,${config.color}99);"
+                                              title="${config.fullName}">${config.short}</span>
                                     `;
                                 });
 
@@ -3390,14 +3386,21 @@
                                 stubHTML = `
                                 <svg class="tear-svg"><line x1="0" y1="2.5" x2="100%" y2="2.5" stroke-dasharray="10 7"/></svg>
                                 <div class="card-stub bg-gray-100 text-[10px] sm:text-[12px]">
-                                    <div class="stub-price">参考价 <span class="price-num">¥${lowDisp} – ¥${highDisp}</span></div>
-                                    <div class="stub-bars">
-                                        <div class="bar-col"><div class="bar-wrap"><div class="bar-fill mult-bar" style="width:${multPct}%"></div></div></div>
-                                        <div class="bar-col"><div class="bar-wrap"><div class="bar-fill iss-bar" style="width:${issPct}%"></div></div></div>
+                                    <div class="stub-price-col">
+                                        <span class="stub-price-label">参考价</span>
+                                        <span class="stub-price-num">¥${lowDisp} – ¥${highDisp}</span>
                                     </div>
-                                    <div class="stub-labels">
-                                        <div class="stub-label-col">升值&nbsp;${priceData.mult.toFixed(1)}×</div>
-                                        <div class="stub-label-col">发行量&nbsp;${issDisp}</div>
+                                    <div class="stub-bars-col">
+                                        <div class="stub-bar-row">
+                                            <span class="stub-bar-label">升值</span>
+                                            <div class="stub-bar-wrap"><div class="stub-bar-fill mult-bar" style="width:${multPct}%"></div></div>
+                                            <span class="stub-bar-val">${priceData.mult.toFixed(1)}×</span>
+                                        </div>
+                                        <div class="stub-bar-row">
+                                            <span class="stub-bar-label">发行</span>
+                                            <div class="stub-bar-wrap"><div class="stub-bar-fill iss-bar" style="width:${issPct}%"></div></div>
+                                            <span class="stub-bar-val">${issDisp}</span>
+                                        </div>
                                     </div>
                                 </div>`;
                             }
@@ -3450,13 +3453,13 @@
                                             <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
                                         </svg>
                                     </div>
+                                    ${mintBadgesHTML}
                                 </div>
                                 <div class="h-[2.5rem] flex items-center justify-center mt-3">
                                     <p class="font-semibold text-sm leading-5 line-clamp-2 px-1 text-center">${coin.name}</p>
                                 </div>
                                 <div class="text-center px-1">
                                     <p class="text-[10px] sm:text-[12px] text-gray-500 mt-1 whitespace-nowrap overflow-hidden">¥${faceNum}&nbsp;&middot;&nbsp;${coin.size}&nbsp;&middot;&nbsp;${coin.metal}</p>
-                                    ${mintBadgesHTML}
                                 </div>
                                 </div>
                                 ${stubHTML}
@@ -3614,9 +3617,55 @@
                 总数 ${totalCoins} 枚
             `;
 
-            // 更新顶部提示条数字
-            document.getElementById('hintCollectedCount').textContent = collectedCoinsCount;
-            document.getElementById('hintWishlistCount').textContent = wishlistCoinsCount;
+            // 更新顶部提示条数字（带变动动画）
+            function updateHintNum(elId, newVal, prevVal) {
+                var el = document.getElementById(elId);
+                if (!el) return;
+                var changed = (prevVal !== null && newVal !== prevVal);
+                el.textContent = newVal;
+                if (changed) {
+                    el.classList.remove('hint-pop-up', 'hint-pop-down');
+                    void el.offsetWidth; // force reflow
+                    el.classList.add(newVal > prevVal ? 'hint-pop-up' : 'hint-pop-down');
+                }
+            }
+            updateHintNum('hintCollectedCount', collectedCoinsCount, updateCollectionOverview._prevCollected);
+            updateHintNum('hintWishlistCount', wishlistCoinsCount, updateCollectionOverview._prevWishlist);
+            updateCollectionOverview._prevCollected = collectedCoinsCount;
+            updateCollectionOverview._prevWishlist = wishlistCoinsCount;
+
+            // 计算已收藏总市值 & 想收藏所需预算
+            var collectedTotal = 0, wishlistTotal = 0;
+            myCollection.forEach(function(cid) {
+                var pd = priceDataMap[cid];
+                if (pd && pd.mid) collectedTotal += pd.mid;
+            });
+            myWishlist.forEach(function(cid) {
+                var pd = priceDataMap[cid];
+                if (pd && pd.mid) wishlistTotal += pd.mid;
+            });
+            function fmtMoney(v) {
+                if (v <= 0) return '';
+                if (v >= 10000) return ' ≈¥' + (v / 10000).toFixed(1).replace(/\.0$/, '') + '万';
+                return ' ≈¥' + Math.round(v);
+            }
+            var collValHTML = '<span class="hint-price collected-val">' + fmtMoney(collectedTotal) + '</span>';
+            var wishValHTML = '<span class="hint-price wishlist-val">' + fmtMoney(wishlistTotal) + '</span>';
+            function updateHintVal(elId, html, newNum, prevNum) {
+                var el = document.getElementById(elId);
+                if (!el) return;
+                var changed = (prevNum !== null && newNum !== prevNum);
+                el.innerHTML = html;
+                if (changed && newNum > 0 && el.firstChild) {
+                    el.firstChild.classList.remove('hint-pop-up', 'hint-pop-down');
+                    void el.firstChild.offsetWidth;
+                    el.firstChild.classList.add(newNum > prevNum ? 'hint-pop-up' : 'hint-pop-down');
+                }
+            }
+            updateHintVal('hintCollectedValue', collValHTML, collectedTotal, updateCollectionOverview._prevCollNum);
+            updateHintVal('hintWishlistBudget', wishValHTML, wishlistTotal, updateCollectionOverview._prevWishNum);
+            updateCollectionOverview._prevCollNum = collectedTotal;
+            updateCollectionOverview._prevWishNum = wishlistTotal;
 
             // 更新“已收藏”进度条的宽度 (蓝色)
             document.getElementById('collectedProgressBar').style.width = `${collectedRate}%`;
@@ -4030,6 +4079,12 @@
     <!-- 每日一题题库 -->
     <script src="quiz_data.js"></script>
     <script src="changelog.js"></script>
+    <script>
+    // 注册图片缓存 Service Worker
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/sw.js').catch(function(){});
+    }
+    </script>
     <script>
     (function() {
         const STORAGE_KEY = 'quizDone_' + new Date().toISOString().slice(0, 10);
