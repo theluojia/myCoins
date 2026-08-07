@@ -830,6 +830,19 @@
             pointer-events: none;
             animation: quizConfettiFall linear forwards;
         }
+    /* 触摸设备禁用卡片hover放大 */
+    @media (hover: none) {
+        .coin-card-ticket:hover { transform: none !important; }
+    }
+
+    /* 币图弹跳动画 */
+    @keyframes coin-pop {
+        0%   { transform: scale(1); }
+        35%  { transform: scale(1.08); }
+        100% { transform: scale(1); }
+    }
+    .coin-pop { animation: coin-pop 0.35s ease-out; }
+
     /* ===== 价格票根样式 ===== */
     .coin-card-ticket {
         display: flex;
@@ -3350,7 +3363,7 @@
                             const frontImageClass = cardViewMode === 'back' ? 'hidden' : '';
                             const backImageClass = cardViewMode === 'front' ? 'hidden' : '';
 
-                            coinCard.className = `coin-card coin-card-ticket shadow-lg transform transition-transform duration-300 hover:scale-105 cursor-pointer ${cardStateClass}`;
+                            coinCard.className = `coin-card coin-card-ticket shadow-lg transition-shadow duration-300 hover:shadow-xl hover:ring-2 hover:ring-blue-300 cursor-pointer ${cardStateClass}`;
                             coinCard.setAttribute('data-coin-id', coin.id);
 
                             let mintBadgesHTML = '';
@@ -3510,7 +3523,7 @@
                                         // 单击：想收藏切换
                                         const nowCollected = myCollection.includes(coin.id);
                                         const nowWishlisted = myWishlist.includes(coin.id);
-                                        if (nowCollected) return;
+                                        if (nowCollected) { statusClickCount = 0; return; }
                                         if (nowWishlisted) {
                                             myWishlist = myWishlist.filter(id => id !== coin.id);
                                         } else {
@@ -3523,6 +3536,9 @@
                                     }, 300);
                                 } else if (statusClickCount === 2) {
                                     clearTimeout(statusClickTimer);
+                                    // 币图弹跳
+                                    var fi = coinCard.querySelector('.front-image');
+                                    if (fi) { fi.classList.remove('coin-pop'); void fi.offsetWidth; fi.classList.add('coin-pop'); }
                                     // 双击：已收藏切换
                                     const nowCollected = myCollection.includes(coin.id);
                                     const nowWishlisted = myWishlist.includes(coin.id);
