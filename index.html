@@ -40,16 +40,6 @@
         .coin-card.wishlist .coin-default-icon {
             opacity: 0;
         }        
-        /* 动画效果 */
-        @keyframes fade-in-out {
-            0% { opacity: 0; transform: translateX(-50%) translateY(10px); }
-            10% { opacity: 1; transform: translateX(-50%) translateY(0); }
-            90% { opacity: 1; transform: translateX(-50%) translateY(0); }
-            100% { opacity: 0; transform: translateX(-50%) translateY(10px); }
-        }
-        #save-status {
-            animation: fade-in-out 3s ease-in-out;
-        }
 
         /* 飞机横幅动画 */
         @keyframes fly-across {
@@ -979,8 +969,6 @@
             </div>
 
 
-            <p id="save-status" class="text-sm text-green-600 fixed bottom-8 left-1/2 -translate-x-1/2 bg-white/90 px-3 py-1 rounded-full shadow opacity-0">已更新</p>
-
             <!-- 悬浮圆形按钮 & 菜单 -->
             <div id="fabContainer" class="fixed bottom-1/4 right-2 z-50">
 
@@ -1364,7 +1352,6 @@
         const statusFilter = document.getElementById('statusFilter');
         const clearFiltersBtn = document.getElementById('clearFiltersBtn'); 
         const sortOrderToggle = document.getElementById('sortOrderToggle');
-        const saveStatus = document.getElementById('save-status');
         const searchInput = document.getElementById('searchInput');
 
         const fabButton = document.getElementById('fabButton');
@@ -1603,10 +1590,6 @@
             try {
                 localStorage.setItem(storageKey, JSON.stringify(myCollection));
                 localStorage.setItem(wishlistStorageKey, JSON.stringify(myWishlist));
-                saveStatus.style.opacity = '1';
-                setTimeout(() => {
-                    saveStatus.style.opacity = '0';
-                }, 2000);
             } catch (e) {
                 console.error("保存本地收藏数据失败:", e);
             }
