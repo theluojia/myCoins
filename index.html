@@ -3363,7 +3363,7 @@
                             const frontImageClass = cardViewMode === 'back' ? 'hidden' : '';
                             const backImageClass = cardViewMode === 'front' ? 'hidden' : '';
 
-                            coinCard.className = `coin-card coin-card-ticket shadow-lg transition-shadow duration-300 hover:shadow-xl hover:ring-2 hover:ring-blue-300 cursor-pointer ${cardStateClass}`;
+                            coinCard.className = `coin-card coin-card-ticket shadow-lg transform transition-all duration-300 hover:shadow-2xl hover:-translate-y-0.5 cursor-pointer ${cardStateClass}`;
                             coinCard.setAttribute('data-coin-id', coin.id);
 
                             let mintBadgesHTML = '';
