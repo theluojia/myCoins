@@ -896,9 +896,94 @@
         .stub-price-col { width: 60px; }
         .stub-bar-val { width: 32px; }
     }
+
+    /* ========== 背景样式切换 ========== */
+    /* 1: 宣纸质感 */
+    .bg-rice-paper {
+        background-color: #faf6f0;
+        background-image:
+            repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(139,119,90,0.03) 3px, rgba(139,119,90,0.03) 4px),
+            repeating-linear-gradient(90deg, transparent, transparent 5px, rgba(139,119,90,0.02) 5px, rgba(139,119,90,0.02) 6px);
+    }
+    /* 2: 几何暗纹 */
+    .bg-geometric {
+        background-color: #f8fafc;
+        background-image:
+            radial-gradient(circle at 25% 25%, rgba(59,130,246,0.04) 0%, transparent 50%),
+            radial-gradient(circle at 75% 75%, rgba(59,130,246,0.04) 0%, transparent 50%),
+            radial-gradient(circle at 20% 80%, rgba(99,102,241,0.03) 0%, transparent 40%),
+            radial-gradient(circle at 80% 20%, rgba(99,102,241,0.03) 0%, transparent 40%);
+        background-size: 80px 80px, 80px 80px, 120px 120px, 120px 120px;
+    }
+    /* 3: 金斑洒落 */
+    .bg-gold-dust {
+        background-color: #fafaf7;
+        background-image:
+            radial-gradient(circle at 12% 18%, rgba(180,140,60,0.08) 0.8px, transparent 0.8px),
+            radial-gradient(circle at 33% 42%, rgba(180,140,60,0.06) 0.6px, transparent 0.6px),
+            radial-gradient(circle at 55% 15%, rgba(180,140,60,0.07) 0.7px, transparent 0.7px),
+            radial-gradient(circle at 70% 55%, rgba(180,140,60,0.05) 0.5px, transparent 0.5px),
+            radial-gradient(circle at 85% 30%, rgba(180,140,60,0.08) 0.9px, transparent 0.9px),
+            radial-gradient(circle at 20% 70%, rgba(180,140,60,0.06) 0.6px, transparent 0.6px),
+            radial-gradient(circle at 48% 80%, rgba(180,140,60,0.07) 0.8px, transparent 0.8px),
+            radial-gradient(circle at 90% 78%, rgba(180,140,60,0.05) 0.5px, transparent 0.5px);
+        background-size: 120px 120px;
+    }
+    /* 4: 点阵暗纹 */
+    .bg-dot-matrix {
+        background-color: #fafafa;
+        background-image: radial-gradient(circle, rgba(0,0,0,0.06) 1px, transparent 1px);
+        background-size: 18px 18px;
+    }
+    /* 5: 网格线稿 */
+    .bg-grid {
+        background-color: #fcfcfc;
+        background-image:
+            linear-gradient(rgba(0,0,0,0.025) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(0,0,0,0.025) 1px, transparent 1px);
+        background-size: 28px 28px;
+    }
+    /* 6: 青铜锈痕 */
+    .bg-patina {
+        background-color: #faf9f7;
+        background-image:
+            linear-gradient(175deg, rgba(72,153,134,0.04) 0%, transparent 20%),
+            linear-gradient(195deg, transparent 60%, rgba(72,153,134,0.03) 85%, rgba(121,164,152,0.04) 100%),
+            linear-gradient(160deg, transparent 30%, rgba(136,168,148,0.025) 55%, transparent 75%),
+            repeating-linear-gradient(-3deg, transparent, transparent 60px, rgba(98,142,128,0.015) 60px, rgba(98,142,128,0.015) 61px);
+        background-size: 100% 100%, 100% 100%, 100% 100%, 200px 200px;
+    }
+    /* 7: 书页泛黄 */
+    .bg-aged-book {
+        background:
+            radial-gradient(ellipse at 50% 0%, rgba(227,207,158,0.18) 0%, transparent 55%),
+            radial-gradient(ellipse at 85% 100%, rgba(210,190,140,0.12) 0%, transparent 45%),
+            radial-gradient(ellipse at 15% 100%, rgba(225,205,145,0.10) 0%, transparent 40%),
+            linear-gradient(180deg, #fefdfa 0%, #fdfaf3 30%, #faf7ee 60%, #f8f4e8 100%);
+        background-size: 100% 100%;
+    }
+    /* 8: 布纹织理 */
+    .bg-linen {
+        background-color: #faf9f6;
+        background-image:
+            repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(0,0,0,0.012) 2px, rgba(0,0,0,0.012) 3px),
+            repeating-linear-gradient(-45deg, transparent, transparent 2px, rgba(0,0,0,0.012) 2px, rgba(0,0,0,0.012) 3px),
+            repeating-linear-gradient(0deg, transparent, transparent 8px, rgba(0,0,0,0.008) 8px, rgba(0,0,0,0.008) 9px);
+    }
+    /* 9: 水墨晕染 */
+    .bg-ink-wash {
+        background-color: #fcfbf9;
+        background-image:
+            radial-gradient(ellipse at 25% 30%, rgba(80,80,80,0.025) 0%, transparent 50%),
+            radial-gradient(ellipse at 75% 55%, rgba(80,80,80,0.02) 0%, transparent 45%),
+            radial-gradient(ellipse at 50% 85%, rgba(60,60,60,0.028) 0%, transparent 40%),
+            radial-gradient(ellipse at 10% 75%, rgba(80,80,80,0.018) 0%, transparent 35%),
+            radial-gradient(ellipse at 90% 15%, rgba(70,70,70,0.022) 0%, transparent 38%);
+        background-size: 100% 100%;
+    }
 </style>
 </head>
-<body class="bg-gray-50 text-gray-800 font-sans p-4 sm:p-8">
+<body id="bodyEl" class="bg-rice-paper text-gray-800 font-sans p-4 sm:p-8">
     <!-- 顶部滚动提示条 -->
     <div id="scrollHint" class="text-center bg-gradient-to-r from-blue-800/80 to-blue-600/80">
         右上角图标：<b class="text-[#22C55E]">双击</b>已收藏 <span id="hintCollectedCount" class="hint-badge collected">0</span><span id="hintCollectedValue"></span> / <b class="text-[#FBBF24]">单击</b>想收藏 <span id="hintWishlistCount" class="hint-badge wishlist">0</span><span id="hintWishlistBudget"></span>
@@ -997,23 +1082,6 @@
                             <path d="M15 21h2v-2h-2v2zm4-12h2V7h-2v2zM3 5v14c0 1.1.9 2 2 2h4v-2H5V5h4V3H5c-1.1 0-2 .9-2 2zm16-2v2h2c0-1.1-.9-2-2-2zm-8 20h2V1h-2v22zm8-6h2v-2h-2v2zM15 5h2V3h-2v2zm4 8h2v-2h-2v2zm0 8c1.1 0 2-.9 2-2h-2v2z"/>
                         </svg>
                     </button>
-                    <button id="exportBtn" class="w-10 h-10 rounded-full bg-blue-400 text-white shadow-lg flex items-center justify-center hover:bg-blue-500 transition-colors" title="导出收藏记录">
-                        <svg class="icon icon-tabler icon-tabler-database-export" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M0 0h24v24H0z" fill="none" stroke="none"/>
-                            <ellipse cx="12" cy="6" rx="8" ry="3"/>
-                            <path d="M4 6v6c0 1.657 3.582 3 8 3a19.84 19.84 0 0 0 3.302 -.267m4.698 -2.733v-6"/>
-                            <path d="M4 12v6c0 1.599 3.335 2.905 7.538 2.995m8.462 -6.995v-2m-6 7h7m-3 -3l3 3l-3 3"/>
-                        </svg>
-                    </button>
-                    <label for="importFile" class="w-10 h-10 rounded-full bg-blue-400 text-white shadow-lg flex items-center justify-center hover:bg-blue-500 transition-colors cursor-pointer" title="导入收藏记录">
-                        <svg class="icon icon-tabler icon-tabler-database-import" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M0 0h24v24H0z" fill="none" stroke="none"/>
-                            <ellipse cx="12" cy="6" rx="8" ry="3"/>
-                            <path d="M4 6v8m5.009 .783c.924 .14 1.933 .217 2.991 .217c4.418 0 8 -1.343 8 -3v-6"/>
-                            <path d="M11.252 20.987c.246 .009 .496 .013 .748 .013c4.418 0 8 -1.343 8 -3v-6m-18 7h7m-3 -3l3 3l-3 3"/>
-                        </svg>
-                    </label>
-                    <input type="file" id="importFile" accept=".json" class="hidden">
                     <button onclick="openMatrixLab()" class="w-10 h-10 rounded-full bg-blue-400 text-white shadow-lg flex items-center justify-center hover:bg-blue-500 transition-colors" title="点阵试验场">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
                             <rect x="1"  y="1"  width="3" height="3" rx="0.5"/>
@@ -1038,12 +1106,28 @@
                         </svg>
                     </button>
 
-                    <button id="sendEmailBtn" class="w-10 h-10 rounded-full bg-blue-400 text-white shadow-lg flex items-center justify-center hover:bg-blue-500 transition-colors" title="联系作者">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                            <polyline points="22,6 12,13 2,6"></polyline>
+                    <button id="switchBgBtn" class="w-10 h-10 rounded-full bg-blue-400 text-white shadow-lg flex items-center justify-center hover:bg-blue-500 transition-colors" title="切换背景">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <rect x="1" y="8" width="2" height="13" rx="0.5"/><rect x="1" y="6" width="7" height="1" rx="0.2"/><rect x="1" y="7" width="9" height="1" rx="0.2"/><rect x="1" y="21" width="17" height="1" rx="0.2"/><rect x="2" y="22" width="16" height="1" rx="0.2"/><rect x="6" y="9" width="2" height="2" rx="0.5"/><rect x="6" y="13" width="2" height="1" rx="0.2"/><rect x="6" y="5" width="3" height="1" rx="0.2"/><rect x="6" y="8" width="3" height="1" rx="0.2"/><rect x="6" y="12" width="3" height="1" rx="0.2"/><rect x="6" y="4" width="4" height="1" rx="0.2"/><rect x="6" y="11" width="4" height="1" rx="0.2"/><rect x="6" y="15" width="4" height="1" rx="0.2"/><rect x="6" y="3" width="5" height="1" rx="0.2"/><rect x="6" y="14" width="5" height="1" rx="0.2"/><rect x="6" y="1" width="16" height="1" rx="0.2"/><rect x="6" y="2" width="17" height="1" rx="0.2"/><rect x="6" y="16" width="17" height="2" rx="0.5"/><rect x="9" y="6" width="2" height="1" rx="0.2"/><rect x="9" y="10" width="2" height="1" rx="0.2"/><rect x="9" y="9" width="3" height="1" rx="0.2"/><rect x="9" y="13" width="3" height="1" rx="0.2"/><rect x="10" y="5" width="2" height="1" rx="0.2"/><rect x="10" y="8" width="3" height="1" rx="0.2"/><rect x="10" y="12" width="3" height="1" rx="0.2"/><rect x="11" y="4" width="2" height="1" rx="0.2"/><rect x="11" y="15" width="2" height="1" rx="0.2"/><rect x="11" y="7" width="3" height="1" rx="0.2"/><rect x="11" y="11" width="3" height="1" rx="0.2"/><rect x="12" y="3" width="2" height="1" rx="0.2"/><rect x="12" y="6" width="3" height="1" rx="0.2"/><rect x="12" y="10" width="3" height="1" rx="0.2"/><rect x="12" y="14" width="3" height="1" rx="0.2"/><rect x="13" y="5" width="3" height="1" rx="0.2"/><rect x="13" y="9" width="3" height="1" rx="0.2"/><rect x="13" y="13" width="3" height="1" rx="0.2"/><rect x="14" y="4" width="3" height="1" rx="0.2"/><rect x="14" y="8" width="3" height="1" rx="0.2"/><rect x="14" y="12" width="3" height="1" rx="0.2"/><rect x="15" y="15" width="2" height="1" rx="0.2"/><rect x="15" y="3" width="3" height="1" rx="0.2"/><rect x="15" y="7" width="3" height="1" rx="0.2"/><rect x="15" y="11" width="3" height="1" rx="0.2"/><rect x="16" y="14" width="2" height="1" rx="0.2"/><rect x="16" y="18" width="2" height="3" rx="0.5"/><rect x="16" y="6" width="3" height="1" rx="0.2"/><rect x="16" y="10" width="3" height="1" rx="0.2"/><rect x="17" y="13" width="2" height="1" rx="0.2"/><rect x="17" y="5" width="3" height="1" rx="0.2"/><rect x="17" y="9" width="3" height="1" rx="0.2"/><rect x="18" y="12" width="2" height="1" rx="0.2"/><rect x="18" y="4" width="5" height="1" rx="0.2"/><rect x="18" y="8" width="5" height="1" rx="0.2"/><rect x="18" y="15" width="5" height="1" rx="0.2"/><rect x="19" y="3" width="4" height="1" rx="0.2"/><rect x="19" y="7" width="4" height="1" rx="0.2"/><rect x="19" y="11" width="4" height="1" rx="0.2"/><rect x="19" y="14" width="4" height="1" rx="0.2"/><rect x="20" y="6" width="3" height="1" rx="0.2"/><rect x="20" y="10" width="3" height="1" rx="0.2"/><rect x="20" y="13" width="3" height="1" rx="0.2"/><rect x="21" y="5" width="2" height="1" rx="0.2"/><rect x="21" y="9" width="2" height="1" rx="0.2"/><rect x="21" y="12" width="2" height="1" rx="0.2"/>
                         </svg>
                     </button>
+                    <button id="exportBtn" class="w-10 h-10 rounded-full bg-blue-400 text-white shadow-lg flex items-center justify-center hover:bg-blue-500 transition-colors" title="导出收藏记录">
+                        <svg class="icon icon-tabler icon-tabler-database-export" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M0 0h24v24H0z" fill="none" stroke="none"/>
+                            <ellipse cx="12" cy="6" rx="8" ry="3"/>
+                            <path d="M4 6v6c0 1.657 3.582 3 8 3a19.84 19.84 0 0 0 3.302 -.267m4.698 -2.733v-6"/>
+                            <path d="M4 12v6c0 1.599 3.335 2.905 7.538 2.995m8.462 -6.995v-2m-6 7h7m-3 -3l3 3l-3 3"/>
+                        </svg>
+                    </button>
+                    <label for="importFile" class="w-10 h-10 rounded-full bg-blue-400 text-white shadow-lg flex items-center justify-center hover:bg-blue-500 transition-colors cursor-pointer" title="导入收藏记录">
+                        <svg class="icon icon-tabler icon-tabler-database-import" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M0 0h24v24H0z" fill="none" stroke="none"/>
+                            <ellipse cx="12" cy="6" rx="8" ry="3"/>
+                            <path d="M4 6v8m5.009 .783c.924 .14 1.933 .217 2.991 .217c4.418 0 8 -1.343 8 -3v-6"/>
+                            <path d="M11.252 20.987c.246 .009 .496 .013 .748 .013c4.418 0 8 -1.343 8 -3v-6m-18 7h7m-3 -3l3 3l-3 3"/>
+                        </svg>
+                    </label>
+                    <input type="file" id="importFile" accept=".json" class="hidden">
                 </div>
 
                 <!-- 主按钮 -->
@@ -1218,7 +1302,7 @@
                     </div>
                     <div class="p-4 rounded-xl bg-gray-50 border border-gray-100">
                         <p>本站纪念币、纪念钞相关历史数据均根据<strong>中国人民银行发行公告</strong>整理；早期纪念币发行数据不透明，相关数据靠书籍、网上能找到的实物图互相佐证得出。</p>
-                        <p class="mt-2">如有谬误，欢迎提交实物证据<strong>勘误</strong>。具体方式可点击「＋」菜单里的<strong>邮件图标</strong>，通过邮件交流。</p>
+                        <p class="mt-2">如有谬误，欢迎提交实物证据<strong>勘误</strong>，可发送邮件至 <a href="mailto:theluojia@qq.com?subject=我的纪念币收藏网站-交流" class="text-blue-600 underline hover:text-blue-800">theluojia@qq.com</a> 交流。</p>
                     </div>
                     <div class="p-4 rounded-xl bg-rose-50 border border-rose-100">
                         <p>各纪念币/纪念钞卡片下方的<strong>参考价格</strong>为互联网公开信息搜索整理而来，市场价格瞬息万变，<strong>仅作参考</strong>，请勿直接用于交易决策。</p>
@@ -1575,6 +1659,57 @@
             }
         }
         document.addEventListener('click', handleDocumentClick);
+
+        // ========== 背景切换 ==========
+        const bgStyles = [
+            'bg-rice-paper',
+            'bg-geometric',
+            'bg-gold-dust',
+            'bg-dot-matrix',
+            'bg-grid',
+            'bg-patina',
+            'bg-aged-book',
+            'bg-linen',
+            'bg-ink-wash'
+        ];
+        const bodyEl = document.getElementById('bodyEl');
+        const bgStorageKey = 'myCoinBgStyleId';
+
+        function applyBg(id) {
+            // 移除所有背景类
+            bodyEl.classList.remove(...bgStyles);
+            // 添加目标背景类，找不到则回退到第1个
+            var idx = bgStyles.indexOf(id) >= 0 ? bgStyles.indexOf(id) : 0;
+            bodyEl.classList.add(bgStyles[idx]);
+            return idx;
+        }
+
+        function switchBg() {
+            var cur = bodyEl.classList.contains('bg-rice-paper') ? 'bg-rice-paper' :
+                       bodyEl.classList.contains('bg-geometric') ? 'bg-geometric' :
+                       bodyEl.classList.contains('bg-gold-dust') ? 'bg-gold-dust' :
+                       bodyEl.classList.contains('bg-dot-matrix') ? 'bg-dot-matrix' :
+                       bodyEl.classList.contains('bg-grid') ? 'bg-grid' :
+                       bodyEl.classList.contains('bg-patina') ? 'bg-patina' :
+                       bodyEl.classList.contains('bg-aged-book') ? 'bg-aged-book' :
+                       bodyEl.classList.contains('bg-linen') ? 'bg-linen' :
+                       bodyEl.classList.contains('bg-ink-wash') ? 'bg-ink-wash' :
+                       'bg-rice-paper';
+            var curIdx = bgStyles.indexOf(cur);
+            var nextIdx = (curIdx + 1) % bgStyles.length;
+            var nextId = bgStyles[nextIdx];
+            bodyEl.classList.remove(...bgStyles);
+            bodyEl.classList.add(nextId);
+            localStorage.setItem(bgStorageKey, nextId);
+        }
+
+        // 页面加载时恢复背景
+        (function initBg() {
+            var saved = localStorage.getItem(bgStorageKey);
+            applyBg(saved || 'bg-rice-paper');
+        })();
+
+        document.getElementById('switchBgBtn').addEventListener('click', switchBg);
 
         // 1. 加载本地收藏数据
         function loadCollection() {
@@ -3899,18 +4034,6 @@
                     console.error('无法初始化应用，因为数据加载失败。');
                 });
         };
-
-        // 发送邮件功能
-        const sendEmailBtn = document.getElementById('sendEmailBtn');
-        if (sendEmailBtn) {
-            sendEmailBtn.addEventListener('click', (e) => {
-                e.stopPropagation(); // 阻止冒泡防止菜单意外关闭
-                const email = "theluojia@qq.com";
-                const subject = encodeURIComponent("我的纪念币收藏网站-交流");
-                // 使用 mailto 协议唤起系统默认邮件客户端
-                window.location.href = `mailto:${email}?subject=${subject}`;
-            });
-        }
 
         // 关于本站弹窗
         const infoBtn = document.getElementById('infoBtn');
