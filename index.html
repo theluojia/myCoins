@@ -4156,6 +4156,13 @@
             }
 
             var donateRendered = false;
+            function maskName(name) {
+                if (/^[一-鿿]+$/.test(name)) {
+                    if (name.length === 2) return name[0] + '*';
+                    if (name.length >= 3) return name[0] + '*'.repeat(name.length - 2) + name[name.length - 1];
+                }
+                return name;
+            }
             function renderDonate() {
                 if (donateRendered) return;
                 donateRendered = true;
@@ -4165,7 +4172,7 @@
                 for (var i = DONATE_LIST.length - 1; i >= 0; i--) {
                     html += '<div class="flex justify-between items-center py-2 border-b border-gray-100 last:border-0">' +
                         '<span class="text-gray-400 text-xs">' + DONATE_LIST[i].date + '</span>' +
-                        '<span class="text-gray-700 font-medium">' + DONATE_LIST[i].name + '</span>' +
+                        '<span class="text-gray-700 font-medium">' + maskName(DONATE_LIST[i].name) + '</span>' +
                         '<span class="text-pink-500 font-semibold">￥' + DONATE_LIST[i].amount + '</span>' +
                         '</div>';
                 }
