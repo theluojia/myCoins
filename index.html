@@ -1308,9 +1308,10 @@
             <!-- 头部 Tab 栏 -->
             <div class="bg-gradient-to-r from-blue-500 to-indigo-500 px-6 pt-4 pb-0 rounded-t-2xl">
                 <div class="flex gap-1">
-                    <button class="info-tab active text-white font-bold text-sm px-4 py-2 rounded-t-lg bg-white/20" data-tab="about">关于本站</button>
-                    <button class="info-tab text-white/70 font-bold text-sm px-4 py-2 rounded-t-lg hover:text-white hover:bg-white/10 transition-colors" data-tab="changelog">变更记录</button>
-                    <button class="info-tab text-white/70 font-bold text-sm px-4 py-2 rounded-t-lg hover:text-white hover:bg-white/10 transition-colors" data-tab="donate">打赏本站</button>
+                    <button class="info-tab active text-white font-bold text-sm px-4 py-2 rounded-t-lg bg-white/20" data-tab="about">关于</button>
+                    <button class="info-tab text-white/70 font-bold text-sm px-4 py-2 rounded-t-lg hover:text-white hover:bg-white/10 transition-colors" data-tab="changelog">变更</button>
+                    <button class="info-tab text-white/70 font-bold text-sm px-4 py-2 rounded-t-lg hover:text-white hover:bg-white/10 transition-colors" data-tab="donate">打赏</button>
+                    <button class="info-tab text-white/70 font-bold text-sm px-4 py-2 rounded-t-lg hover:text-white hover:bg-white/10 transition-colors" data-tab="comment">留言</button>
                 </div>
             </div>
             <!-- 内容区（高度由JS根据关于本站内容锁定） -->
@@ -1341,6 +1342,12 @@
                         <img src="donate.png" alt="打赏二维码" class="w-72 h-72 rounded-lg shadow-md mb-4" />
                         <div class="w-full space-y-2" id="donateList"></div>
                     </div>
+                </div>
+                <div class="info-tab-content p-6 text-gray-700 text-[15px] leading-relaxed" id="tab-comment" style="display:none;">
+                    <div class="flex justify-center mb-4">
+                        <img src="comment/comment.png" alt="留言二维码" class="w-32 h-32 rounded-lg shadow-md" />
+                    </div>
+                    <div class="space-y-3" id="commentList"></div>
                 </div>
             </div>
         </div>
@@ -4179,13 +4186,57 @@
                 container.innerHTML = html;
             }
 
+            var commentRendered = false;
+            function renderComment() {
+                if (commentRendered) return;
+                commentRendered = true;
+                var container = document.getElementById('commentList');
+                if (!container || typeof XLSX === 'undefined') return;
+                fetch('comment/comment.xlsx')
+                    .then(function(r) { return r.arrayBuffer(); })
+                    .then(function(data) {
+                        var wb = XLSX.read(new Uint8Array(data), { type: 'array' });
+                        var sheet = wb.Sheets[wb.SheetNames[0]];
+                        var rows = XLSX.utils.sheet_to_json(sheet, { defval: '' });
+                        var html = '';
+                        for (var i = rows.length - 1; i >= 0; i--) {
+                            var row = rows[i];
+                            if (row['选用'] !== 'yes') continue;
+                            var time = row['填表时间'] ? row['填表时间'].toString().split(' ')[0] : '';
+                            var name = row['姓名'] || '';
+                            var coin84 = row['纪念币（1984~2004）'] || '';
+                            var coin05 = row['纪念币（2005~现在）'] || '';
+                            var coin = coin84 || coin05 || '';
+                            var comment = row['留言评论'] || '';
+                            var email = row['电子邮箱'] || '';
+                            var reply = row['回复'] || '';
+                            html += '<div class="p-3 rounded-lg bg-gray-50 border border-gray-100">';
+                            html += '<div class="mb-1">';
+                            html += '<span class="text-gray-400 text-xs">' + time + '</span>';
+                            html += '<span class="text-gray-800 font-semibold text-sm ml-2">' + maskName(name) + '</span>';
+                            if (coin) html += '<span class="text-blue-500 text-xs ml-1">· ' + coin + '</span>';
+                            html += '</div>';
+                            html += '<p class="text-gray-700 text-sm mb-1">' + comment + '</p>';
+                            if (email) html += '<p class="text-xs text-gray-400">' + email + '</p>';
+                            if (reply) html += '<p class="text-xs text-green-500 font-medium">回复：' + reply + '</p>';
+                            html += '</div>';
+                        }
+                        if (!html) html = '<p class="text-gray-400 text-center text-sm">暂无留言</p>';
+                        container.innerHTML = html;
+                    })
+                    .catch(function() {
+                        container.innerHTML = '<p class="text-gray-400 text-center text-sm">留言加载失败</p>';
+                    });
+            }
+
             // Tab 切换
             var tabs = infoModal.querySelectorAll('.info-tab');
             var contents = infoModal.querySelectorAll('.info-tab-content');
             function switchTab(target) {
-                if (target === 'changelog' || target === 'donate') {
+                if (target === 'changelog' || target === 'donate' || target === 'comment') {
                     if (target === 'changelog') renderChangelog();
                     if (target === 'donate') renderDonate();
+                    if (target === 'comment') renderComment();
                     contentArea.style.height = getAboutHeight() + 'px';
                     contentArea.style.overflowY = 'auto';
                 } else {
@@ -4324,6 +4375,7 @@
     <script src="quiz_data.js"></script>
     <script src="changelog.js"></script>
     <script src="donate.js"></script>
+    <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
     <script>
     // 注册图片缓存 Service Worker
     if ('serviceWorker' in navigator) {
