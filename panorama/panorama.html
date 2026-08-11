@@ -130,7 +130,7 @@ page.addEventListener('click', () => {
 });
 
 // ======== Load & render ========
-fetch('coin_data.json')
+fetch('../coin_data.json')
   .then(r => r.json())
   .then(coins => {
     coins.sort((a, b) => a.year !== b.year ? a.year - b.year : a.id.localeCompare(b.id));
@@ -178,7 +178,7 @@ fetch('coin_data.json')
 
       html +=
         `<div class="coin-item${collected}" title="${coin.name}&#10;${coin.size} · ${coin.denomination}">` +
-        `<img class="coin-img" src="coins/img/${coin.id}_f.webp" ` +
+        `<img class="coin-img" src="../coins/img/${coin.id}_f.webp" ` +
         `width="${iw}" height="${ih}" style="width:${dw}px;height:${dh}px" ` +
         `loading="lazy" alt="${sname}" onerror="this.style.display='none'">` +
         `<div class="coin-name">${sname}</div>` +

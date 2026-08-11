@@ -276,39 +276,39 @@
         #matrixLabModal .lab-header-form {
             text-align: center;
             border-bottom: 2px solid #000;
-            padding: 8px 0;
-            font-size: 20px;
+            padding: 6px 0;
+            font-size: 16px;
             font-weight: bold;
         }
 
         #matrixLabModal .lab-input {
-            padding: 12px;
+            padding: 8px;
         }
 
         #matrixLabModal .lab-input label {
             display: block;
-            margin-top: 10px;
-            font-size: 14px;
+            margin-top: 4px;
+            font-size: 13px;
         }
 
         #matrixLabModal .lab-input input,
         #matrixLabModal .lab-input textarea {
             width: 100%;
             box-sizing: border-box;
-            margin-top: 4px;
-            padding: 6px;
+            margin-top: 2px;
+            padding: 4px;
             font-family: monospace;
-            font-size: 14px;
+            font-size: 13px;
         }
 
         #matrixLabModal .lab-input textarea {
-            height: 110px;
+            height: 38px;
         }
 
         #matrixLabModal .lab-version-block {
             border: 1px dashed #aaa;
-            padding: 8px;
-            margin-top: 12px;
+            padding: 5px;
+            margin-top: 6px;
         }
 
         #matrixLabModal .lab-actions {
@@ -1073,46 +1073,29 @@
 
                 <!-- 弹出菜单 -->
                 <div id="fabMenu" class="hidden flex-col items-end space-y-3 mb-4 transition-all duration-300">
-                    <button id="sortOrderToggle" class="w-10 h-10 rounded-full bg-blue-400 text-white shadow-lg flex items-center justify-center hover:bg-blue-500 transition-colors" title="排列正序逆序">
+                    <button id="sortOrderToggle" class="w-10 h-10 rounded-full bg-blue-400/85 text-white shadow-lg flex items-center justify-center hover:bg-blue-500/85 transition-colors" title="排列正序逆序">
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 15 15" fill="none">
                             <path d="M11.5 0.5H12C12 0.223858 11.7761 0 11.5 0V0.5ZM4.5 0.5L4.85355 0.146447C4.65829 -0.0488155 4.34171 -0.0488155 4.14645 0.146447L4.5 0.5ZM10 1H11.5V0H10V1ZM11 0.5V6.5H12V0.5H11ZM10 7H13V6H10V7ZM11.578 8H11V9H11.578V8ZM12.9743 11.6581L13.3665 10.4815L12.4179 10.1653L12.0257 11.3419L12.9743 11.6581ZM11 12H12.5V11H11V12ZM11.9743 14.6581L12.9743 11.6581L12.0257 11.3419L11.0257 14.3419L11.9743 14.6581ZM9 10C9 11.1046 9.89543 12 11 12V11C10.4477 11 10 10.5523 10 10H9ZM11 8C9.89543 8 9 8.89543 9 10H10C10 9.44772 10.4477 9 11 9V8ZM11.578 9C12.1823 9 12.609 9.59201 12.4179 10.1653L13.3665 10.4815C13.7735 9.26071 12.8648 8 11.578 8V9ZM4.14645 0.146447L1.14645 3.14645L1.85355 3.85355L4.85355 0.853553L4.14645 0.146447ZM4.14645 0.853553L7.14645 3.85355L7.85355 3.14645L4.85355 0.146447L4.14645 0.853553ZM4 0.5V15H5V0.5H4Z" fill="currentColor"/>
                         </svg>
-                    </button>                    
-                    <button id="toggleImageView" class="w-10 h-10 rounded-full bg-blue-400 text-white shadow-lg flex items-center justify-center hover:bg-blue-500 transition-colors" title="切换正面反面">
+                    </button>
+                    <button id="toggleImageView" class="w-10 h-10 rounded-full bg-blue-400/85 text-white shadow-lg flex items-center justify-center hover:bg-blue-500/85 transition-colors" title="切换正面反面">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M15 21h2v-2h-2v2zm4-12h2V7h-2v2zM3 5v14c0 1.1.9 2 2 2h4v-2H5V5h4V3H5c-1.1 0-2 .9-2 2zm16-2v2h2c0-1.1-.9-2-2-2zm-8 20h2V1h-2v22zm8-6h2v-2h-2v2zM15 5h2V3h-2v2zm4 8h2v-2h-2v2zm0 8c1.1 0 2-.9 2-2h-2v2z"/>
                         </svg>
                     </button>
-                    <button onclick="openMatrixLab()" class="w-10 h-10 rounded-full bg-blue-400 text-white shadow-lg flex items-center justify-center hover:bg-blue-500 transition-colors" title="点阵试验场">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-                            <rect x="1"  y="1"  width="3" height="3" rx="0.5"/>
-                            <rect x="6.5" y="1"  width="3" height="3" rx="0.5"/>
-                            <!-- <rect x="12" y="1"  width="3" height="3" rx="0.5"/> -->
-
-                            <rect x="1"  y="6.5" width="3" height="3" rx="0.5"/>
-                            <!-- <rect x="6.5" y="6.5" width="3" height="3" rx="0.5"/> -->
-                            <rect x="12" y="6.5" width="3" height="3" rx="0.5"/>
-
-                            <rect x="1"  y="12" width="3" height="3" rx="0.5"/>
-                            <rect x="6.5" y="12" width="3" height="3" rx="0.5"/>
-                            <rect x="12" y="12" width="3" height="3" rx="0.5"/>
+                    <button id="switchBgBtn" class="w-10 h-10 rounded-full bg-blue-400/85 text-white shadow-lg flex items-center justify-center hover:bg-blue-500/85 transition-colors" title="切换背景">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <rect x="1" y="8" width="2" height="13" rx="0.5"/><rect x="1" y="6" width="7" height="1" rx="0.2"/><rect x="1" y="7" width="9" height="1" rx="0.2"/><rect x="1" y="21" width="17" height="1" rx="0.2"/><rect x="2" y="22" width="16" height="1" rx="0.2"/><rect x="6" y="9" width="2" height="2" rx="0.5"/><rect x="6" y="13" width="2" height="1" rx="0.2"/><rect x="6" y="5" width="3" height="1" rx="0.2"/><rect x="6" y="8" width="3" height="1" rx="0.2"/><rect x="6" y="12" width="3" height="1" rx="0.2"/><rect x="6" y="4" width="4" height="1" rx="0.2"/><rect x="6" y="11" width="4" height="1" rx="0.2"/><rect x="6" y="15" width="4" height="1" rx="0.2"/><rect x="6" y="3" width="5" height="1" rx="0.2"/><rect x="6" y="14" width="5" height="1" rx="0.2"/><rect x="6" y="1" width="16" height="1" rx="0.2"/><rect x="6" y="2" width="17" height="1" rx="0.2"/><rect x="6" y="16" width="17" height="2" rx="0.5"/><rect x="9" y="6" width="2" height="1" rx="0.2"/><rect x="9" y="10" width="2" height="1" rx="0.2"/><rect x="9" y="9" width="3" height="1" rx="0.2"/><rect x="9" y="13" width="3" height="1" rx="0.2"/><rect x="10" y="5" width="2" height="1" rx="0.2"/><rect x="10" y="8" width="3" height="1" rx="0.2"/><rect x="10" y="12" width="3" height="1" rx="0.2"/><rect x="11" y="4" width="2" height="1" rx="0.2"/><rect x="11" y="15" width="2" height="1" rx="0.2"/><rect x="11" y="7" width="3" height="1" rx="0.2"/><rect x="11" y="11" width="3" height="1" rx="0.2"/><rect x="12" y="3" width="2" height="1" rx="0.2"/><rect x="12" y="6" width="3" height="1" rx="0.2"/><rect x="12" y="10" width="3" height="1" rx="0.2"/><rect x="12" y="14" width="3" height="1" rx="0.2"/><rect x="13" y="5" width="3" height="1" rx="0.2"/><rect x="13" y="9" width="3" height="1" rx="0.2"/><rect x="13" y="13" width="3" height="1" rx="0.2"/><rect x="14" y="4" width="3" height="1" rx="0.2"/><rect x="14" y="8" width="3" height="1" rx="0.2"/><rect x="14" y="12" width="3" height="1" rx="0.2"/><rect x="15" y="15" width="2" height="1" rx="0.2"/><rect x="15" y="3" width="3" height="1" rx="0.2"/><rect x="15" y="7" width="3" height="1" rx="0.2"/><rect x="15" y="11" width="3" height="1" rx="0.2"/><rect x="16" y="14" width="2" height="1" rx="0.2"/><rect x="16" y="18" width="2" height="3" rx="0.5"/><rect x="16" y="6" width="3" height="1" rx="0.2"/><rect x="16" y="10" width="3" height="1" rx="0.2"/><rect x="17" y="13" width="2" height="1" rx="0.2"/><rect x="17" y="5" width="3" height="1" rx="0.2"/><rect x="17" y="9" width="3" height="1" rx="0.2"/><rect x="18" y="12" width="2" height="1" rx="0.2"/><rect x="18" y="4" width="5" height="1" rx="0.2"/><rect x="18" y="8" width="5" height="1" rx="0.2"/><rect x="18" y="15" width="5" height="1" rx="0.2"/><rect x="19" y="3" width="4" height="1" rx="0.2"/><rect x="19" y="7" width="4" height="1" rx="0.2"/><rect x="19" y="11" width="4" height="1" rx="0.2"/><rect x="19" y="14" width="4" height="1" rx="0.2"/><rect x="20" y="6" width="3" height="1" rx="0.2"/><rect x="20" y="10" width="3" height="1" rx="0.2"/><rect x="20" y="13" width="3" height="1" rx="0.2"/><rect x="21" y="5" width="2" height="1" rx="0.2"/><rect x="21" y="9" width="2" height="1" rx="0.2"/><rect x="21" y="12" width="2" height="1" rx="0.2"/>
                         </svg>
                     </button>
-
-                    <button id="openStatsBtn" class="w-10 h-10 rounded-full bg-blue-400 text-white shadow-lg flex items-center justify-center hover:bg-blue-500 transition-colors" title="统计概览">
+                    <button id="openStatsBtn" class="w-10 h-10 rounded-full bg-blue-400/85 text-white shadow-lg flex items-center justify-center hover:bg-blue-500/85 transition-colors" title="统计概览">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <line x1="18" y1="20" x2="18" y2="10"></line>
                             <line x1="12" y1="20" x2="12" y2="4"></line>
                             <line x1="6" y1="20" x2="6" y2="14"></line>
                         </svg>
                     </button>
-
-                    <button id="switchBgBtn" class="w-10 h-10 rounded-full bg-blue-400 text-white shadow-lg flex items-center justify-center hover:bg-blue-500 transition-colors" title="切换背景">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                            <rect x="1" y="8" width="2" height="13" rx="0.5"/><rect x="1" y="6" width="7" height="1" rx="0.2"/><rect x="1" y="7" width="9" height="1" rx="0.2"/><rect x="1" y="21" width="17" height="1" rx="0.2"/><rect x="2" y="22" width="16" height="1" rx="0.2"/><rect x="6" y="9" width="2" height="2" rx="0.5"/><rect x="6" y="13" width="2" height="1" rx="0.2"/><rect x="6" y="5" width="3" height="1" rx="0.2"/><rect x="6" y="8" width="3" height="1" rx="0.2"/><rect x="6" y="12" width="3" height="1" rx="0.2"/><rect x="6" y="4" width="4" height="1" rx="0.2"/><rect x="6" y="11" width="4" height="1" rx="0.2"/><rect x="6" y="15" width="4" height="1" rx="0.2"/><rect x="6" y="3" width="5" height="1" rx="0.2"/><rect x="6" y="14" width="5" height="1" rx="0.2"/><rect x="6" y="1" width="16" height="1" rx="0.2"/><rect x="6" y="2" width="17" height="1" rx="0.2"/><rect x="6" y="16" width="17" height="2" rx="0.5"/><rect x="9" y="6" width="2" height="1" rx="0.2"/><rect x="9" y="10" width="2" height="1" rx="0.2"/><rect x="9" y="9" width="3" height="1" rx="0.2"/><rect x="9" y="13" width="3" height="1" rx="0.2"/><rect x="10" y="5" width="2" height="1" rx="0.2"/><rect x="10" y="8" width="3" height="1" rx="0.2"/><rect x="10" y="12" width="3" height="1" rx="0.2"/><rect x="11" y="4" width="2" height="1" rx="0.2"/><rect x="11" y="15" width="2" height="1" rx="0.2"/><rect x="11" y="7" width="3" height="1" rx="0.2"/><rect x="11" y="11" width="3" height="1" rx="0.2"/><rect x="12" y="3" width="2" height="1" rx="0.2"/><rect x="12" y="6" width="3" height="1" rx="0.2"/><rect x="12" y="10" width="3" height="1" rx="0.2"/><rect x="12" y="14" width="3" height="1" rx="0.2"/><rect x="13" y="5" width="3" height="1" rx="0.2"/><rect x="13" y="9" width="3" height="1" rx="0.2"/><rect x="13" y="13" width="3" height="1" rx="0.2"/><rect x="14" y="4" width="3" height="1" rx="0.2"/><rect x="14" y="8" width="3" height="1" rx="0.2"/><rect x="14" y="12" width="3" height="1" rx="0.2"/><rect x="15" y="15" width="2" height="1" rx="0.2"/><rect x="15" y="3" width="3" height="1" rx="0.2"/><rect x="15" y="7" width="3" height="1" rx="0.2"/><rect x="15" y="11" width="3" height="1" rx="0.2"/><rect x="16" y="14" width="2" height="1" rx="0.2"/><rect x="16" y="18" width="2" height="3" rx="0.5"/><rect x="16" y="6" width="3" height="1" rx="0.2"/><rect x="16" y="10" width="3" height="1" rx="0.2"/><rect x="17" y="13" width="2" height="1" rx="0.2"/><rect x="17" y="5" width="3" height="1" rx="0.2"/><rect x="17" y="9" width="3" height="1" rx="0.2"/><rect x="18" y="12" width="2" height="1" rx="0.2"/><rect x="18" y="4" width="5" height="1" rx="0.2"/><rect x="18" y="8" width="5" height="1" rx="0.2"/><rect x="18" y="15" width="5" height="1" rx="0.2"/><rect x="19" y="3" width="4" height="1" rx="0.2"/><rect x="19" y="7" width="4" height="1" rx="0.2"/><rect x="19" y="11" width="4" height="1" rx="0.2"/><rect x="19" y="14" width="4" height="1" rx="0.2"/><rect x="20" y="6" width="3" height="1" rx="0.2"/><rect x="20" y="10" width="3" height="1" rx="0.2"/><rect x="20" y="13" width="3" height="1" rx="0.2"/><rect x="21" y="5" width="2" height="1" rx="0.2"/><rect x="21" y="9" width="2" height="1" rx="0.2"/><rect x="21" y="12" width="2" height="1" rx="0.2"/>
-                        </svg>
-                    </button>
-                    <button id="exportBtn" class="w-10 h-10 rounded-full bg-blue-400 text-white shadow-lg flex items-center justify-center hover:bg-blue-500 transition-colors" title="导出收藏记录">
+                    <button id="exportBtn" class="w-10 h-10 rounded-full bg-blue-400/85 text-white shadow-lg flex items-center justify-center hover:bg-blue-500/85 transition-colors" title="导出收藏记录">
                         <svg class="icon icon-tabler icon-tabler-database-export" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
                             <path d="M0 0h24v24H0z" fill="none" stroke="none"/>
                             <ellipse cx="12" cy="6" rx="8" ry="3"/>
@@ -1120,7 +1103,7 @@
                             <path d="M4 12v6c0 1.599 3.335 2.905 7.538 2.995m8.462 -6.995v-2m-6 7h7m-3 -3l3 3l-3 3"/>
                         </svg>
                     </button>
-                    <label for="importFile" class="w-10 h-10 rounded-full bg-blue-400 text-white shadow-lg flex items-center justify-center hover:bg-blue-500 transition-colors cursor-pointer" title="导入收藏记录">
+                    <label for="importFile" class="w-10 h-10 rounded-full bg-blue-400/85 text-white shadow-lg flex items-center justify-center hover:bg-blue-500/85 transition-colors cursor-pointer" title="导入收藏记录">
                         <svg class="icon icon-tabler icon-tabler-database-import" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
                             <path d="M0 0h24v24H0z" fill="none" stroke="none"/>
                             <ellipse cx="12" cy="6" rx="8" ry="3"/>
@@ -1129,17 +1112,28 @@
                         </svg>
                     </label>
                     <input type="file" id="importFile" accept=".json" class="hidden">
+                    <button id="infoBtn" class="w-10 h-10 rounded-full bg-blue-400/85 text-white shadow-lg flex items-center justify-center hover:bg-blue-500/85 transition-colors" title="关于本站">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor">
+                            <circle cx="12" cy="6" r="2.2"/>
+                            <rect x="10.5" y="10.5" width="3" height="9" rx="1.5"/>
+                        </svg>
+                    </button>
+                    <button id="commentFabBtn" class="w-10 h-10 rounded-full bg-blue-400/85 text-white shadow-lg flex items-center justify-center hover:bg-blue-500/85 transition-colors" title="留言">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                        </svg>
+                    </button>
                 </div>
 
                 <!-- 主按钮 -->
-                <button id="fabButton" class="w-10 h-10 rounded-full bg-blue-600 text-white shadow-lg flex items-center justify-center hover:bg-blue-700 transition-colors" title="展开/收起菜单">
+                <button id="fabButton" class="w-10 h-10 rounded-full bg-blue-600/85 text-white shadow-lg flex items-center justify-center hover:bg-blue-700/85 transition-colors" title="展开/收起菜单">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path id="fab-icon-path" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
                     </svg>
                 </button>
 
                 <!-- 全景图按钮 -->
-                <button id="panoramaBtn" class="mt-3 w-10 h-10 rounded-full bg-blue-600 text-white shadow-lg flex items-center justify-center hover:bg-blue-700 transition-colors" title="全景图">
+                <button id="panoramaBtn" class="mt-3 w-10 h-10 rounded-full bg-blue-600/85 text-white shadow-lg flex items-center justify-center hover:bg-blue-700/85 transition-colors" title="全景图">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor">
                         <rect x="3" y="3" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
                         <circle cx="7" cy="8" r="1.4"/>
@@ -1151,16 +1145,8 @@
                     </svg>
                 </button>
 
-                <!-- 关于本站按钮（与 + 号平级，常驻显示，不受菜单展开影响） -->
-                <button id="infoBtn" class="mt-3 w-10 h-10 rounded-full bg-blue-600 text-white shadow-lg flex items-center justify-center hover:bg-blue-700 transition-colors" title="关于本站">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor">
-                        <circle cx="12" cy="6" r="2.2"/>
-                        <rect x="10.5" y="10.5" width="3" height="9" rx="1.5"/>
-                    </svg>
-                </button>
-
                 <!-- 打赏本站按钮 -->
-                <button id="donateBtn" class="mt-3 w-10 h-10 rounded-full bg-blue-600 text-white shadow-lg flex items-center justify-center hover:bg-blue-700 transition-colors" title="打赏本站">
+                <button id="donateBtn" class="mt-3 w-10 h-10 rounded-full bg-blue-600/85 text-white shadow-lg flex items-center justify-center hover:bg-blue-700/85 transition-colors" title="赠人玫瑰，手有余香">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="#ef4444">
                         <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
                     </svg>
@@ -1246,6 +1232,18 @@
                         </svg>
                         保存图片
                     </button>
+                    <button id="matrixLabBtn" class="px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg text-sm font-medium transition-colors flex items-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 16 16" fill="currentColor">
+                            <rect x="1"  y="1"  width="3" height="3" rx="0.5"/>
+                            <rect x="6.5" y="1"  width="3" height="3" rx="0.5"/>
+                            <rect x="1"  y="6.5" width="3" height="3" rx="0.5"/>
+                            <rect x="12" y="6.5" width="3" height="3" rx="0.5"/>
+                            <rect x="1"  y="12" width="3" height="3" rx="0.5"/>
+                            <rect x="6.5" y="12" width="3" height="3" rx="0.5"/>
+                            <rect x="12" y="12" width="3" height="3" rx="0.5"/>
+                        </svg>
+                        点阵试验场
+                    </button>
                 </div>
             </div>
         </div>
@@ -1324,7 +1322,7 @@
                         <p>如果需要<strong>切换浏览器</strong>又怕丢失数据，可以使用「＋」菜单里的「<strong>导出数据</strong>」与「<strong>导入数据</strong>」功能。</p>
                     </div>
                     <div class="p-4 rounded-xl bg-gray-50 border border-gray-100">
-                        <p>本站纪念币、纪念钞相关历史数据均根据<strong>中国人民银行发行公告</strong>整理；早期纪念币发行数据不透明，相关数据靠书籍、网上能找到的实物图互相佐证得出。如有谬误，欢迎提交实物证据<strong>勘误</strong>，可发送邮件至 <a href="mailto:theluojia@qq.com?subject=我的纪念币收藏网站-交流" class="text-blue-600 underline hover:text-blue-800">theluojia@qq.com</a> 交流。</p>
+                        <p>本站纪念币、纪念钞相关历史数据均根据<strong>中国人民银行发行公告</strong>整理；早期纪念币发行数据不透明，相关数据靠书籍、网上能找到的实物图互相佐证得出。如有谬误，欢迎提交实物证据<strong>勘误</strong>，可发送邮件至 <a href="mailto:theluojia@qq.com?subject=我的纪念币收藏网站-交流" class="text-blue-600 underline hover:text-blue-800">theluojia@qq.com</a> 交流或直接<a href="javascript:void(0)" onclick="document.querySelector('.info-tab[data-tab=comment]').click()" class="text-blue-600 underline hover:text-blue-800">扫码留言</a>。</p>
                     </div>
                     <div class="p-4 rounded-xl bg-rose-50 border border-rose-100">
                         <p>各纪念币/纪念钞卡片下方的<strong>参考价格</strong>为互联网公开信息搜索整理而来，市场价格瞬息万变，<strong>仅作参考</strong>，请勿直接用于交易决策。</p>
@@ -1339,13 +1337,13 @@
                 </div>
                 <div class="info-tab-content p-6 text-gray-700 text-[15px] leading-relaxed" id="tab-donate" style="display:none;">
                     <div class="flex flex-col items-center">
-                        <img src="donate.png" alt="打赏二维码" class="w-72 h-72 rounded-lg shadow-md mb-4" />
+                        <img src="donate/donate.png" alt="打赏二维码" class="w-72 h-72 rounded-lg shadow-md mb-4" />
                         <div class="w-full space-y-2" id="donateList"></div>
                     </div>
                 </div>
                 <div class="info-tab-content p-6 text-gray-700 text-[15px] leading-relaxed" id="tab-comment" style="display:none;">
                     <div class="flex justify-center mb-4">
-                        <img src="comment/comment.png" alt="留言二维码" class="w-32 h-32 rounded-lg shadow-md" />
+                        <img src="comment/comment.png" alt="留言二维码" class="w-40 rounded-lg shadow-md" />
                     </div>
                     <div class="space-y-3" id="commentList"></div>
                 </div>
@@ -1355,8 +1353,8 @@
 
     <!-- 全景图弹窗 -->
     <div id="panoramaModal" class="fixed inset-0 z-[120] items-center justify-center bg-black/80 p-2" style="display:none;" onclick="if(event.target===this)document.getElementById('panoramaModal').style.display='none'">
-        <button id="panoramaCloseBtn" class="absolute top-3 right-3 z-10 w-8 h-8 bg-white/30 hover:bg-white/50 rounded-full flex items-center justify-center text-lg font-bold text-white hover:text-gray-200 transition-colors" onclick="document.getElementById('panoramaModal').style.display='none'">&times;</button>
-        <iframe id="panoramaFrame" src="panorama.html" class="w-full h-full max-w-[810px] max-h-[1100px] rounded-lg shadow-2xl" style="border:none;background:#d1d5db;"></iframe>
+        <button id="panoramaCloseBtn" class="absolute top-3 right-3 z-10 w-8 h-8 bg-white/30 hover:bg-white/50 rounded-full flex items-center justify-center text-lg font-bold text-white hover:text-gray-200 transition-colors shadow-lg shadow-black/50 border border-white/30" onclick="document.getElementById('panoramaModal').style.display='none'">&times;</button>
+        <iframe id="panoramaFrame" src="panorama/panorama.html" class="w-full h-full max-w-[810px] max-h-[1100px] rounded-lg shadow-2xl" style="border:none;background:#d1d5db;"></iframe>
     </div>
 
     <footer id="footerHint" class="fixed bottom-0 left-0 right-0 bg-gradient-to-r from-blue-800/80 to-blue-600/80 text-white py-3 px-4 transition-all duration-300 transform translate-y-full">
@@ -2196,6 +2194,15 @@
             });
         });
 
+        // 点阵试验场按钮（在点阵弹窗内）
+        const matrixLabBtn = document.getElementById('matrixLabBtn');
+        if (matrixLabBtn) {
+            matrixLabBtn.addEventListener('click', () => {
+                document.getElementById('matrixModal').classList.remove('active');
+                openMatrixLab();
+            });
+        }
+
         // 用 Canvas API 直接绘制点阵图（毫秒级，跳过 html2canvas）
         function drawMatrixToCanvas(data, title, subtitle, deg, analysisActive, callback) {
             const mints = data.mints;
@@ -2369,7 +2376,7 @@
         });
 
         function isChao(coin) {
-            return coin.name.includes('纪念钞');
+            return coin.name.includes('纪念钞') || coin.name.includes('（钞）');
         }
 
         function renderStatsModal() {
@@ -4014,7 +4021,7 @@
         window.onload = () => {
             Promise.all([
                 loadData('coin_data.json'),
-                loadData('matrix.json').catch(() => ({ coins: [] })),
+                loadData('matrix/matrix.json').catch(() => ({ coins: [] })),
                 loadData('price/coin_price_history.json').catch(() => ({ coins: [] }))
             ]).then(([coinsData, matrixData, priceData]) => {
                     allCoinsData = coinsData;
@@ -4097,6 +4104,20 @@
                 infoModal.style.display = 'flex';
                 setTimeout(function() {
                     var btn = document.querySelector('.info-tab[data-tab=donate]');
+                    if (btn) btn.click();
+                }, 50);
+            });
+        }
+
+        // 留言FAB按钮
+        const commentFabBtn = document.getElementById('commentFabBtn');
+        if (commentFabBtn) {
+            commentFabBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const infoModal = document.getElementById('infoModal');
+                infoModal.style.display = 'flex';
+                setTimeout(function() {
+                    var btn = document.querySelector('.info-tab[data-tab=comment]');
                     if (btn) btn.click();
                 }, 50);
             });
@@ -4211,13 +4232,13 @@
                             var email = row['电子邮箱'] || '';
                             var reply = row['回复'] || '';
                             html += '<div class="p-3 rounded-lg bg-gray-50 border border-gray-100">';
-                            html += '<div class="mb-1">';
-                            html += '<span class="text-gray-400 text-xs">' + time + '</span>';
-                            html += '<span class="text-gray-800 font-semibold text-sm ml-2">' + maskName(name) + '</span>';
-                            if (coin) html += '<span class="text-blue-500 text-xs ml-1">· ' + coin + '</span>';
+                            html += '<div class="text-sm text-gray-800 font-semibold">';
+                            html += '<span>' + maskName(name) + '</span>';
+                            if (email) html += '<span class="text-gray-400 font-normal"> · ' + email + '</span>';
+                            html += '<span class="text-gray-400 font-normal"> · ' + time + '</span>';
                             html += '</div>';
-                            html += '<p class="text-gray-700 text-sm mb-1">' + comment + '</p>';
-                            if (email) html += '<p class="text-xs text-gray-400">' + email + '</p>';
+                            if (coin) html += '<div class="text-sm text-blue-500">' + coin + '</div>';
+                            html += '<p class="text-gray-700 text-sm py-1">' + comment + '</p>';
                             if (reply) html += '<p class="text-xs text-green-500 font-medium">回复：' + reply + '</p>';
                             html += '</div>';
                         }
@@ -4372,9 +4393,9 @@
     </script>
 
     <!-- 每日一题题库 -->
-    <script src="quiz_data.js"></script>
+    <script src="quiz/quiz_data.js"></script>
     <script src="changelog.js"></script>
-    <script src="donate.js"></script>
+    <script src="donate/donate.js"></script>
     <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
     <script>
     // 注册图片缓存 Service Worker
