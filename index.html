@@ -4210,9 +4210,13 @@
             var commentRendered = false;
             function renderComment() {
                 if (commentRendered) return;
-                commentRendered = true;
                 var container = document.getElementById('commentList');
-                if (!container || typeof XLSX === 'undefined') return;
+                if (!container) return;
+                if (typeof XLSX === 'undefined') {
+                    setTimeout(function() { commentRendered = false; renderComment(); }, 500);
+                    return;
+                }
+                commentRendered = true;
                 fetch('comment/comment.xlsx')
                     .then(function(r) { return r.arrayBuffer(); })
                     .then(function(data) {
