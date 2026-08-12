@@ -137,8 +137,6 @@ page.addEventListener('click', () => {
 fetch('../coin_data.json')
   .then(r => r.json())
   .then(coins => {
-    coins.sort((a, b) => a.year !== b.year ? a.year - b.year : a.id.localeCompare(b.id));
-
     const collectedSet = getCollectedSet();
 
     const years = [...new Set(coins.map(c => c.year))].sort((a, b) => a - b);

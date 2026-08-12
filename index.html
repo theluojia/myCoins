@@ -3931,10 +3931,13 @@
             document.getElementById('wishlistProgressBar').style.width = `${totalGoalRate}%`;
 
             const themesData = {};
+            const themeFirstYear = {};
             allCoinsData.forEach(coin => {
                 if (!themesData[coin.theme]) {
                     themesData[coin.theme] = { total: 0, collected: 0, wishlisted: 0 };
+                    themeFirstYear[coin.theme] = coin.year;
                 }
+                if (coin.year < themeFirstYear[coin.theme]) themeFirstYear[coin.theme] = coin.year;
                 themesData[coin.theme].total++;
                 if (myCollection.includes(coin.id)) {
                     themesData[coin.theme].collected++;
@@ -3948,7 +3951,7 @@
             themeStatsContainer.innerHTML = '';
             
             Object.entries(themesData)
-                .sort((a, b) => b[1].collected / b[1].total - a[1].collected / a[1].total)
+                .sort((a, b) => themeFirstYear[b[0]] - themeFirstYear[a[0]])
                 .forEach(([theme, stats]) => {
                     const collectedRate = (stats.collected / stats.total) * 100;
                     const totalGoalRate = ((stats.collected + stats.wishlisted) / stats.total) * 100;
