@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>纪念币全景图</title>
 <style>
-  @page { size: A4; margin: 6mm; }
+  @page { size: A4; margin: 0; }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -19,7 +19,7 @@
 
   .page {
     width: 794px;
-    min-height: 1072px;
+    min-height: 1112px;
     background-color: #faf6f0;
     background-image:
       repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(139,119,90,0.025) 3px, rgba(139,119,90,0.025) 4px),
@@ -104,7 +104,7 @@ const VERTICAL_NOTES = new Set(['JC06-1','JC06-2','JC07','JC08','JC09']);
 
 // ======== Sizing ========
 const BASE_MM = 32;
-const BASE_PX = 67;
+const BASE_PX = 63;
 const MAX_DIM = BASE_PX;
 
 function coinPx(mm) {
