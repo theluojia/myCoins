@@ -318,13 +318,14 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 2px;
+            gap: 0.5rem;
             box-sizing: border-box;
-            padding: 0 16px 16px;
+            padding: 0 1rem 1rem;
         }
 
         #matrixLabModal .lab-actions button {
-            font-size: 14px;
+            width: 6rem;
+            font-size: 12px;
             cursor: pointer;
             border: none;
             border-radius: 0.5rem;
@@ -332,10 +333,32 @@
             color: #374151;
             flex: 0 0 auto;
             font-weight: 500;
-            padding: 0.5rem;
+            padding: 0.375rem;
             display: flex;
             align-items: center;
+            gap: 0.25rem;
             transition: background 0.15s;
+        }
+        #matrixLabModal .lab-actions button span {
+            flex: 1;
+            text-align: center;
+        }
+        #matrixLabModal .lab-actions button svg {
+            width: 14px;
+            height: 14px;
+            flex-shrink: 0;
+        }
+        @media (min-width: 640px) {
+            #matrixLabModal .lab-actions button {
+                width: 7rem;
+                font-size: 14px;
+                padding: 0.5rem;
+                gap: 0.375rem;
+            }
+            #matrixLabModal .lab-actions button svg {
+                width: 16px;
+                height: 16px;
+            }
         }
 
         #matrixLabModal .lab-actions button:hover {
@@ -1214,31 +1237,31 @@
                 <!-- 点阵展示区 -->
                 <div id="matrixModalContent" class="p-4 flex items-stretch"></div>
                 <!-- 底部操作按钮 -->
-                <div class="flex items-center justify-center gap-1 sm:gap-4 pb-4 px-4">
-                    <button id="matrixRotateBtn" class="p-2 sm:px-4 sm:py-2 bg-gray-100 hover:bg-gray-200 rounded-lg text-sm font-medium transition-colors flex items-center sm:gap-2" title="旋转">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 sm:w-4 sm:h-4" viewBox="0 0 1024 1024" fill="currentColor">
+                <div class="flex items-center justify-center gap-1.5 sm:gap-2 flex-wrap pb-4 px-2 sm:px-4">
+                    <button id="matrixRotateBtn" class="w-24 sm:w-28 px-1.5 py-1.5 sm:px-2 sm:py-2 bg-gray-100 hover:bg-gray-200 rounded-lg text-xs sm:text-sm font-medium transition-colors flex items-center gap-1 sm:gap-1.5">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" viewBox="0 0 1024 1024" fill="currentColor">
                             <path d="M480.5 251.2c13-1.6 25.9-2.4 38.8-2.5v63.9c0 6.5 7.5 10.1 12.6 6.1L660 217.6c4-3.2 4-9.2 0-12.3l-128-101c-5.1-4-12.6-0.4-12.6 6.1l-0.2 64c-118.6 0.5-235.8 53.4-314.6 154.2-69.6 89.2-95.7 198.6-81.1 302.4h74.9c-0.9-5.3-1.7-10.7-2.4-16.1-5.1-42.1-2.1-84.1 8.9-124.8 11.4-42.2 31-81.1 58.1-115.8 27.2-34.7 60.3-63.2 98.4-84.3 37-20.6 76.9-33.6 119.1-38.8z"/>
                             <path d="M880 418H352c-17.7 0-32 14.3-32 32v414c0 17.7 14.3 32 32 32h528c17.7 0 32-14.3 32-32V450c0-17.7-14.3-32-32-32z m-44 402H396V494h440v326z"/>
                         </svg>
-                        <span class="hidden sm:inline">旋转</span>
+                        <span class="flex-1 text-center">旋转</span>
                     </button>
-                    <button id="matrixAnalysisBtn" class="p-2 sm:px-4 sm:py-2 bg-gray-100 hover:bg-gray-200 rounded-lg text-sm font-medium transition-colors flex items-center sm:gap-2" title="差异分析">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 362.5 442" fill="currentColor">
+                    <button id="matrixAnalysisBtn" class="w-24 sm:w-28 px-1.5 py-1.5 sm:px-2 sm:py-2 bg-gray-100 hover:bg-gray-200 rounded-lg text-xs sm:text-sm font-medium transition-colors flex items-center gap-1 sm:gap-1.5">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" viewBox="0 0 362.5 442" fill="currentColor">
                             <path d="M134.4,214.6c-16.6-5.5-30-17.2-37.8-32.8c-16.1-32.3-3-71.6,29.2-87.8l-13.2-26.4C65.7,91,46.7,148.2,70.1,195c16.6,33.2,50.2,52.4,85.1,52.4c14.3,0,28.7-3.2,42.3-10L184.3,211C168.7,218.8,150.9,220.1,134.4,214.6z"/>
                             <path d="M353.9,363.1l-80.3-120c9.5-12.7,17.2-27.2,22.5-43.1C322.6,120.5,279.5,34.3,200,7.8C120.5-18.7,34.3,24.5,7.8,104c-26.5,79.5,16.7,165.7,96.2,192.2c15.9,5.3,32,7.8,47.9,7.8c12.7,0,25.2-1.6,37.3-4.7l80.4,120.3c9.8,14.6,25.9,22.5,42.3,22.5c9.7,0,19.5-2.8,28.1-8.5C363.2,417.9,369.5,386.4,353.9,363.1z M113.3,268.1c-64.1-21.3-98.8-90.8-77.5-154.9c17.1-51.3,65-83.8,116.3-83.8c12.8,0,25.8,2,38.6,6.3c64.1,21.3,98.8,90.8,77.5,154.9C246.8,254.7,177.3,289.5,113.3,268.1z M332.5,395.4c-1.1,5.6-4.3,10.4-9,13.5c-9.7,6.5-22.9,3.9-29.4-5.8l-76.4-114.2c12.8-6.1,24.7-14,35.4-23.5l76.3,114.1C332.5,384.2,333.6,389.9,332.5,395.4z"/>
                         </svg>
-                        <span class="hidden sm:inline">差异分析</span>
+                        <span class="flex-1 text-center">差异分析</span>
                     </button>
-                    <button id="matrixSaveBtn" class="p-2 sm:px-4 sm:py-2 bg-gray-100 hover:bg-gray-200 rounded-lg text-sm font-medium transition-colors flex items-center sm:gap-2" title="保存图片">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <button id="matrixSaveBtn" class="w-24 sm:w-28 px-1.5 py-1.5 sm:px-2 sm:py-2 bg-gray-100 hover:bg-gray-200 rounded-lg text-xs sm:text-sm font-medium transition-colors flex items-center gap-1 sm:gap-1.5">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
                             <polyline points="7 10 12 15 17 10"/>
                             <line x1="12" y1="15" x2="12" y2="3"/>
                         </svg>
-                        <span class="hidden sm:inline">保存图片</span>
+                        <span class="flex-1 text-center">保存图片</span>
                     </button>
-                    <button id="matrixLabBtn" class="p-2 sm:px-4 sm:py-2 bg-gray-100 hover:bg-gray-200 rounded-lg text-sm font-medium transition-colors flex items-center sm:gap-2" title="点阵试验场">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 16 16" fill="currentColor">
+                    <button id="matrixLabBtn" class="w-24 sm:w-28 px-1.5 py-1.5 sm:px-2 sm:py-2 bg-gray-100 hover:bg-gray-200 rounded-lg text-xs sm:text-sm font-medium transition-colors flex items-center gap-1 sm:gap-1.5">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" viewBox="0 0 16 16" fill="currentColor">
                             <rect x="1"  y="1"  width="3" height="3" rx="0.5"/>
                             <rect x="6.5" y="1"  width="3" height="3" rx="0.5"/>
                             <rect x="1"  y="6.5" width="3" height="3" rx="0.5"/>
@@ -1247,7 +1270,7 @@
                             <rect x="6.5" y="12" width="3" height="3" rx="0.5"/>
                             <rect x="12" y="12" width="3" height="3" rx="0.5"/>
                         </svg>
-                        <span class="hidden sm:inline">点阵试验场</span>
+                        <span class="flex-1 text-center">点阵试验场</span>
                     </button>
                 </div>
             </div>
@@ -2160,11 +2183,6 @@
 
         // 点阵保存为图片
         document.getElementById('matrixSaveBtn').addEventListener('click', () => {
-            const btn = document.getElementById('matrixSaveBtn');
-            if (btn.disabled) return;
-            btn.disabled = true;
-            btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> 保存中...`;
-
             const title = document.querySelector('#matrixModalTitle h2')?.textContent || '点阵';
             const subtitle = document.querySelector('#matrixModalTitle p')?.textContent || '';
 
@@ -2174,7 +2192,6 @@
             if (matrixAnalysisActive) suffixes.push('_showdiff');
             const filename = title + suffixes.join('') + '.png';
 
-            // 获取当前点阵数据
             let currentMatrixData = null;
             for (const [code, data] of Object.entries(matrixDataMap)) {
                 if (data.name === title || data.code === subtitle) {
@@ -2182,11 +2199,7 @@
                     break;
                 }
             }
-            if (!currentMatrixData) {
-                btn.disabled = false;
-                btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> 保存图片`;
-                return;
-            }
+            if (!currentMatrixData) return;
 
             drawMatrixToCanvas(currentMatrixData, title, subtitle, deg, matrixAnalysisActive, (blob) => {
                 const a = document.createElement('a');
@@ -2194,8 +2207,6 @@
                 a.href = URL.createObjectURL(blob);
                 a.click();
                 URL.revokeObjectURL(a.href);
-                btn.disabled = false;
-                btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> 保存图片`;
             });
         });
 
@@ -3273,8 +3284,8 @@
                     </div>
                 </div>
                 <div class="lab-actions">
-                    <button onclick="generateLab()" class="sm:gap-2" title="生成点阵">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 16 16" fill="currentColor">
+                    <button onclick="generateLab()">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 shrink-0" viewBox="0 0 16 16" fill="currentColor">
                             <rect x="1"  y="1"  width="3" height="3" rx="0.5"/>
                             <rect x="6.5" y="1"  width="3" height="3" rx="0.5"/>
                             <rect x="1"  y="6.5" width="3" height="3" rx="0.5"/>
@@ -3283,29 +3294,29 @@
                             <rect x="6.5" y="12" width="3" height="3" rx="0.5"/>
                             <rect x="12" y="12" width="3" height="3" rx="0.5"/>
                         </svg>
-                        <span class="hidden sm:inline">生成点阵</span>
+                        <span>生成点阵</span>
                     </button>
-                    <button id="labRotateBtnInline" class="sm:gap-2" title="顺时针旋转90度">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 1024 1024" fill="currentColor">
+                    <button id="labRotateBtnInline">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 shrink-0" viewBox="0 0 1024 1024" fill="currentColor">
                             <path d="M480.5 251.2c13-1.6 25.9-2.4 38.8-2.5v63.9c0 6.5 7.5 10.1 12.6 6.1L660 217.6c4-3.2 4-9.2 0-12.3l-128-101c-5.1-4-12.6-0.4-12.6 6.1l-0.2 64c-118.6 0.5-235.8 53.4-314.6 154.2-69.6 89.2-95.7 198.6-81.1 302.4h74.9c-0.9-5.3-1.7-10.7-2.4-16.1-5.1-42.1-2.1-84.1 8.9-124.8 11.4-42.2 31-81.1 58.1-115.8 27.2-34.7 60.3-63.2 98.4-84.3 37-20.6 76.9-33.6 119.1-38.8z"/>
                             <path d="M880 418H352c-17.7 0-32 14.3-32 32v414c0 17.7 14.3 32 32 32h528c17.7 0 32-14.3 32-32V450c0-17.7-14.3-32-32-32z m-44 402H396V494h440v326z"/>
                         </svg>
-                        <span class="hidden sm:inline">旋转</span>
+                        <span>旋转</span>
                     </button>
-                    <button id="labAnalysisBtnInline" class="sm:gap-2" title="差异颜色分析">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 362.5 442" fill="currentColor">
+                    <button id="labAnalysisBtnInline">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 shrink-0" viewBox="0 0 362.5 442" fill="currentColor">
                             <path d="M134.4,214.6c-16.6-5.5-30-17.2-37.8-32.8c-16.1-32.3-3-71.6,29.2-87.8l-13.2-26.4C65.7,91,46.7,148.2,70.1,195c16.6,33.2,50.2,52.4,85.1,52.4c14.3,0,28.7-3.2,42.3-10L184.3,211C168.7,218.8,150.9,220.1,134.4,214.6z"/>
                             <path d="M353.9,363.1l-80.3-120c9.5-12.7,17.2-27.2,22.5-43.1C322.6,120.5,279.5,34.3,200,7.8C120.5-18.7,34.3,24.5,7.8,104c-26.5,79.5,16.7,165.7,96.2,192.2c15.9,5.3,32,7.8,47.9,7.8c12.7,0,25.2-1.6,37.3-4.7l80.4,120.3c9.8,14.6,25.9,22.5,42.3,22.5c9.7,0,19.5-2.8,28.1-8.5C363.2,417.9,369.5,386.4,353.9,363.1z M113.3,268.1c-64.1-21.3-98.8-90.8-77.5-154.9c17.1-51.3,65-83.8,116.3-83.8c12.8,0,25.8,2,38.6,6.3c64.1,21.3,98.8,90.8,77.5,154.9C246.8,254.7,177.3,289.5,113.3,268.1z M332.5,395.4c-1.1,5.6-4.3,10.4-9,13.5c-9.7,6.5-22.9,3.9-29.4-5.8l-76.4-114.2c12.8-6.1,24.7-14,35.4-23.5l76.3,114.1C332.5,384.2,333.6,389.9,332.5,395.4z"/>
                         </svg>
-                        <span class="hidden sm:inline">差异分析</span>
+                        <span>差异分析</span>
                     </button>
-                    <button onclick="exportLabPreview()" class="sm:gap-2" title="保存成图片">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <button onclick="exportLabPreview()">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
                             <polyline points="7 10 12 15 17 10"/>
                             <line x1="12" y1="15" x2="12" y2="3"/>
                         </svg>
-                        <span class="hidden sm:inline">保存成图片</span>
+                        <span>保存成图片</span>
                     </button>
                 </div>
                 <div id="lab-generated"></div>
