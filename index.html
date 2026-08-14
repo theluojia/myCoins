@@ -3660,6 +3660,28 @@
                             else { imgScale = 80; }
                             var imgStyle = imgScale < 100 ? 'style="width:'+imgScale+'%;height:'+imgScale+'%;top:'+((100-imgScale)/2)+'%;left:'+((100-imgScale)/2)+'%"' : '';
 
+                            // 右下角插槽：纪念币显示防伪点阵图标，纪念钞显示冠字号胶囊
+                            let cornerHTML = '';
+                            if (matrixDataMap[coin.id]) {
+                                cornerHTML = `<div class="matrix-icon absolute bottom-2 right-2 z-20 w-7 h-7 bg-white/80 rounded flex items-center justify-center shadow-sm cursor-pointer hover:bg-white transition-colors" title="查看防伪点阵">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-700" viewBox="0 0 16 16" fill="currentColor">
+                                            <rect x="1"  y="1"  width="3" height="3" rx="0.5"/>
+                                            <rect x="6.5" y="1"  width="3" height="3" rx="0.5"/>
+                                            <rect x="1"  y="6.5" width="3" height="3" rx="0.5"/>
+                                            <rect x="12" y="6.5" width="3" height="3" rx="0.5"/>
+                                            <rect x="1"  y="12" width="3" height="3" rx="0.5"/>
+                                            <rect x="6.5" y="12" width="3" height="3" rx="0.5"/>
+                                            <rect x="12" y="12" width="3" height="3" rx="0.5"/>
+                                        </svg>
+                                    </div>`;
+                            } else if (coin.prefixes && coin.prefixes.length) {
+                                cornerHTML = `<div class="absolute bottom-2 right-2 z-20 h-8 flex items-end gap-1" title="冠字号：${coin.prefixes.join('、')}">` +
+                                    coin.prefixes.map(p =>
+                                        `<span class="px-3 h-8 rounded-full bg-white/80 text-lg font-normal text-gray-700 flex items-center justify-center shadow-sm cursor-default select-none">${p}</span>`
+                                    ).join('') +
+                                    `</div>`;
+                            }
+
                             coinCard.innerHTML = `
                                 <div class="card-body flex flex-col items-center p-3 bg-gray-100 relative${priceData ? ' rounded-t-xl' : ' rounded-xl'}">
                                 <div class="image-container relative w-full aspect-square cursor-pointer">
@@ -3677,18 +3699,8 @@
                                         loading="lazy" ${imgStyle}
                                         onerror="if(!this._fb){this._fb=1;this.src='${coin.imageUrl2}';}else{this.onerror=null;this.src='https://placehold.co/300x300/F0F0F0/888888?text=图片未找到';}">
 
-                                    <!-- 点阵图标（底部右侧） -->
-                                    ${matrixDataMap[coin.id] ? `<div class="matrix-icon absolute bottom-2 right-2 z-20 w-7 h-7 bg-white/80 rounded flex items-center justify-center shadow-sm cursor-pointer hover:bg-white transition-colors" title="查看防伪点阵">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-700" viewBox="0 0 16 16" fill="currentColor">
-                                            <rect x="1"  y="1"  width="3" height="3" rx="0.5"/>
-                                            <rect x="6.5" y="1"  width="3" height="3" rx="0.5"/>
-                                            <rect x="1"  y="6.5" width="3" height="3" rx="0.5"/>
-                                            <rect x="12" y="6.5" width="3" height="3" rx="0.5"/>
-                                            <rect x="1"  y="12" width="3" height="3" rx="0.5"/>
-                                            <rect x="6.5" y="12" width="3" height="3" rx="0.5"/>
-                                            <rect x="12" y="12" width="3" height="3" rx="0.5"/>
-                                        </svg>
-                                    </div>` : ''}
+                                    <!-- 右下角插槽：防伪点阵 / 冠字号 -->
+                                    ${cornerHTML}
 
                                     <!-- 默认圆形轮廓图标（未收藏状态） -->
                                     <div class="coin-default-icon status-toggle absolute top-2 right-2 bg-white/70 text-gray-400 w-8 h-8 rounded-full flex items-center justify-center text-xl backdrop-blur-[2px] shadow-sm">

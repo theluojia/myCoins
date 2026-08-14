@@ -897,6 +897,9 @@
     "mints": [
       "上钞"
     ],
+    "prefixes": [
+      "J"
+    ],
     "imageUrl": "https://www.cbpm.cn/cn/rmbpic/rmbpic7/201910/P020250109386550623406.png",
     "imageUrl2": "https://www.cbpm.cn/cn/rmbpic/rmbpic7/201910/P020250109386550632341.png",
     "description2": "地球、和平鸽、铜狮、华表等组合图景，左上方为中华人民共和国国徽图案，右上方为“中国人民银行”汉语拼音字母和蒙、藏、维、壮4种少数民族文字的“中国人民银行”字样和面额。正下方为印制纪年“1999年”。右下方为官印“行长之章”。",
@@ -986,6 +989,10 @@
     "metal": "塑料钞",
     "mints": [
       "北京"
+    ],
+    "prefixes": [
+      "I",
+      "J"
     ],
     "imageUrl": "https://www.cbpm.cn/cn/rmbpic/rmbpic7/201910/P020250109387549060556.png",
     "imageUrl2": "https://www.cbpm.cn/cn/rmbpic/rmbpic7/201910/P020250109387549080679.png",
@@ -1617,6 +1624,9 @@
     "mints": [
       "北京"
     ],
+    "prefixes": [
+      "J"
+    ],
     "imageUrl": "https://www.cbpm.cn/cn/rmbpic/rmbpic7/201910/P020191031554770972379.jpg",
     "imageUrl2": "https://www.cbpm.cn/cn/rmbpic/rmbpic7/201910/P020191031554770943619.jpg",
     "description2": "古希腊雕塑“掷铁饼者”、运动员群像图案及“2008”字样。主景图案下方为年号“2008”及行长印章。票面左侧为“第29届奥林匹克运动会纪念”、面额数字“10”、汉语拼音“YUAN”字样及光变全息开窗安全线；票面右上方为“中国人民银行”的汉语拼音及蒙、藏、维、壮四种民族文字的“中国人民银行”字样和面额",
@@ -1940,7 +1950,11 @@
     "size": "155mm×77mm",
     "metal": "纸钞",
     "mints": [
-      "北京"
+      "北京",
+      "上钞"
+    ],
+    "prefixes": [
+      "J"
     ],
     "imageUrl": "https://www.cbpm.cn/cn/rmbpic/rmbpic7/201910/P020191107548483163131.png",
     "imageUrl2": "https://www.cbpm.cn/cn/rmbpic/rmbpic7/201910/P020191107566108196980.png",
@@ -2110,7 +2124,11 @@
     "size": "150mm×70mm",
     "metal": "纸钞",
     "mints": [
-      "北京"
+      "北京",
+      "南昌"
+    ],
+    "prefixes": [
+      "J"
     ],
     "imageUrl": "https://www.cbpm.cn/cn/rmbpic/rmbpic7/201910/P020191112544869888951.png",
     "imageUrl2": "https://www.cbpm.cn/cn/rmbpic/rmbpic7/201910/P020191112544869866138.png",
@@ -2301,6 +2319,9 @@
     "mints": [
       "北京"
     ],
+    "prefixes": [
+      "J"
+    ],
     "imageUrl": "https://www.cbpm.cn/cn/rmbpic/rmbpic7/202112/P020220119410413596837.jpg",
     "imageUrl2": "https://www.cbpm.cn/cn/rmbpic/rmbpic7/202112/P020220119410413596837.jpg",
     "description2": "第24届冬季奥林匹克运动会竞赛场馆“冰立方”图案，上方为“中国人民银行”汉语拼音，蒙、藏、维、壮4种民族文字的“中国人民银行”字样及面额，“第24届冬季奥林匹克运动会纪念”和面额数字“20”，右侧为面额数字“20”、汉语拼音字母“YUAN”，下方为年号“2022年”和行长章",
@@ -2318,6 +2339,9 @@
     "metal": "纸钞",
     "mints": [
       "上钞"
+    ],
+    "prefixes": [
+      "J"
     ],
     "imageUrl": "https://www.cbpm.cn/cn/rmbpic/rmbpic7/202112/P020220119410413602020.jpg",
     "imageUrl2": "https://www.cbpm.cn/cn/rmbpic/rmbpic7/202112/P020220119410413602020.jpg",
@@ -2490,6 +2514,9 @@
     "mints": [
       "北京"
     ],
+    "prefixes": [
+      "J"
+    ],
     "imageUrl": "https://www.cbpm.cn/cn/rmbpic/rmbpic7/202312/P020231225531470816809.jpg",
     "imageUrl2": "https://www.cbpm.cn/cn/rmbpic/rmbpic7/202312/P020231225531470846792.jpg",
     "description2": "儿童舞龙灯图案，辅以北京四合院民居装饰图案，上方为面额数字“20”、汉语拼音字母“YUAN”，下方为花卉与动感全息图案、年号“2024年”、行长章、面额数字“20”、“中国人民银行”汉语拼音和蒙、藏、维、壮四种民族文字的“中国人民银行 贰拾圆”字样",
@@ -2562,6 +2589,9 @@
     "metal": "塑料钞",
     "mints": [
       "广州"
+    ],
+    "prefixes": [
+      "J"
     ],
     "imageUrl": "https://www.cbpm.cn/cn/rmbpic/rmbpic7/202412/P020250109363432190336.png",
     "imageUrl2": "https://www.cbpm.cn/cn/rmbpic/rmbpic7/202412/P020250109363432265331.png",
@@ -2657,6 +2687,9 @@
     "metal": "塑料钞",
     "mints": [
       "广州"
+    ],
+    "prefixes": [
+      "J"
     ],
     "imageUrl": "https://www.cbpm.cn/cn/rmbpic/rmbpic7/202512/P020251229358498784787.png",
     "imageUrl2": "https://www.cbpm.cn/cn/rmbpic/rmbpic7/202512/P020251229358499199988.png",
