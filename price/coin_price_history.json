@@ -4679,6 +4679,40 @@
       }
     },
     {
+      "id": "JB125",
+      "name": "江泽民诞辰100周年",
+      "issue_year": 2026,
+      "prices": [
+        {
+          "snapshot_date": "2026-07-30",
+          "year": 2026,
+          "type": "baseline",
+          "low": 1.0,
+          "high": 1.0,
+          "mid": 1.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "market_table",
+          "source": "保守估算（金投/一枚邮币均未覆盖的极新发行）",
+          "source_url": "",
+          "source_date": "2026-07-29",
+          "note": "金投/一枚邮币未覆盖，保守估算"
+        }
+      ],
+      "current": {
+        "low": 1.0,
+        "high": 1.0,
+        "mid": 1.0,
+        "snapshot_date": "2026-07-30",
+        "year": 2026,
+        "source_type": "market_table",
+        "source": "保守估算（金投/一枚邮币均未覆盖的极新发行）",
+        "source_date": "2026-07-29",
+        "condition": "普制",
+        "type": "baseline"
+      }
+    },
+    {
       "id": "JC01",
       "name": "中华人民共和国成立五十周年（纪念钞）",
       "issue_year": 1999,

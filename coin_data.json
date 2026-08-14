@@ -2714,5 +2714,21 @@
     "description2": "国徽，国名，年号",
     "description": "九曲溪、阔叶林、茶园等，辅以玉女峰、远山、金斑喙凤蝶、茶叶等，并刊“武夷山国家公园”字样及面额“10元”字样",
     "shortName": "武夷园"
+  },
+  {
+    "id": "JB125",
+    "name": "江泽民诞辰100周年",
+    "year": 2026,
+    "theme": "伟人诞辰",
+    "issuance": 1000,
+    "denomination": "1元",
+    "size": "25mm",
+    "metal": "钢芯镀镍",
+    "mints": [],
+    "imageUrl": "",
+    "imageUrl2": "",
+    "description2": "中华人民共和国国徽，并刊国名、年号",
+    "description": "江泽民同志头像，并刊“江泽民诞辰100周年”“1926-2026”字样及面额",
+    "shortName": "江泽民"
   }
 ]
