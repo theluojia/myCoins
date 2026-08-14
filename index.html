@@ -3675,9 +3675,9 @@
                                         </svg>
                                     </div>`;
                             } else if (coin.prefixes && coin.prefixes.length) {
-                                cornerHTML = `<div class="absolute bottom-2 right-2 z-20 h-8 flex items-end gap-1" title="冠字号：${coin.prefixes.join('、')}">` +
+                                cornerHTML = `<div class="absolute bottom-2 right-2 z-20 h-7 flex items-end gap-1" title="冠字号：${coin.prefixes.join('、')}">` +
                                     coin.prefixes.map(p =>
-                                        `<span class="px-3 h-8 rounded-full bg-white/80 text-lg font-normal text-gray-700 flex items-center justify-center shadow-sm cursor-default select-none">${p}</span>`
+                                        `<span class="w-7 h-7 rounded-full bg-white/80 text-lg font-normal text-gray-700 flex items-center justify-center shadow-sm cursor-default select-none">${p}</span>`
                                     ).join('') +
                                     `</div>`;
                             }
