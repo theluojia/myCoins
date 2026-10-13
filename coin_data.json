@@ -2724,7 +2724,9 @@
     "denomination": "1元",
     "size": "25mm",
     "metal": "钢芯镀镍",
-    "mints": [],
+    "mints": [
+      "上海"
+    ],
     "imageUrl": "",
     "imageUrl2": "",
     "description2": "中华人民共和国国徽，并刊国名、年号",
