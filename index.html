@@ -1413,11 +1413,8 @@
                 </div>
                 <div class="text-center">
                     <p class="text-sm md:text-base flex items-center justify-center gap-2">
-                        <span class="flex items-center gap-1">总<svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg><span id="busuanzi_site_pv" class="font-bold">--</span></span>
-                        <span class="flex items-center gap-1"><svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg><span id="busuanzi_site_uv" class="font-bold">--</span></span>
-                        <span class="opacity-40">|</span>
-                        <span class="flex items-center gap-1">今<svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg><span id="busuanzi_today_pv" class="font-bold">--</span></span>
-                        <span class="flex items-center gap-1"><svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg><span id="busuanzi_today_uv" class="font-bold">--</span></span>
+                        <span class="flex items-center gap-1">总<svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg><span id="busuanzi_value_site_pv" class="font-bold">--</span></span>
+                        <span class="flex items-center gap-1"><svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg><span id="busuanzi_value_site_uv" class="font-bold">--</span></span>
                     </p>
                 </div>
             </div>
@@ -4429,9 +4426,9 @@
         }, { passive: true });
 
     </script>
-    <script src="//cdn.busuanzi.cc/busuanzi/3.6.9/busuanzi.min.js" defer></script>
+    <script defer src="https://events.vercount.one/js"></script>
     <script>
-    // busuanzi 计数器：只显示数字，非数字替换为 --，>=10000 转 K/M
+    // 访问统计（Vercount 兼容不蒜子标签）：只显示数字，非数字替换为 --，>=10000 转 K/M
     (function(){
         function formatNum(n){
             var v = parseInt(n, 10);
@@ -4441,15 +4438,18 @@
             return (v/1000).toFixed(1) + 'K';
         }
         function isValidNum(text) { return /^\d+$/.test(text); }
-        var ids = ['busuanzi_site_pv','busuanzi_site_uv','busuanzi_today_pv','busuanzi_today_uv'];
+        var ids = ['busuanzi_value_site_pv','busuanzi_value_site_uv'];
         setInterval(function(){
             ids.forEach(function(id){
                 var el = document.getElementById(id);
                 if(!el) return;
                 var text = el.textContent.trim();
                 if (isValidNum(text)) {
+                    // 原始数字 → 格式化为 K/M
                     var formatted = formatNum(text);
                     if(el.textContent !== formatted) el.textContent = formatted;
+                } else if (/^[\d.]+[KM]$/.test(text)) {
+                    // 已是 K/M 缩写（Vercount 刷新覆盖后保持），不动
                 } else if (text !== '--') {
                     el.textContent = '--';
                 }
