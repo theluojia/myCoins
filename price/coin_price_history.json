@@ -4,7 +4,7 @@
     "description": "为纪念币网站提供每枚币的「当前参考价」与「历史参考价」。每次更新追加一条当时最新价。",
     "schema_version": 3,
     "baseline_collected_at": "2026-07-30",
-    "updated_at": "2026-07-30",
+    "updated_at": "2026-10-28",
     "price_only_note": "本文件只存价格快照，币种基础信息（图片/描述/发行量等）在网站渲染时按 id 从 coin_data.json 关联。",
     "collection_scheme": {
       "model": "当前价 + 逐年追加历史",
@@ -14,7 +14,8 @@
       "sources_2026": [
         "金投收藏网《流通纪念币最新价格表》2026-07-26（主源，普通币 1984–2023）",
         "一枚邮币《新中国纪念币、纪念钞最新市场价格一览表》2025-12-15（2023–2026 新发币 + 纪念钞 市场价/征价）",
-        "搜狐《纪念钞大全最新价格公布》2025-02-07 / 2026-06-08 更新（纪念钞现价）"
+        "搜狐《纪念钞大全最新价格公布》2025-02-07 / 2026-06-08 更新（纪念钞现价）",
+        "中国人民银行公告〔2026〕第28号（京剧艺术丑角币尚未发行，暂按面额展示）"
       ],
       "disclaimer": "价格为公开可溯源的参考报价，非连续成交序列，受品相/号码/供求影响大，请勿直接用于交易。当前价为 2026 基线。"
     }
@@ -4710,6 +4711,40 @@
         "source_date": "2026-07-29",
         "condition": "普制",
         "type": "baseline"
+      }
+    },
+    {
+      "id": "JB126",
+      "name": "中国京剧艺术－丑角",
+      "issue_year": 2026,
+      "prices": [
+        {
+          "snapshot_date": "2026-10-28",
+          "year": 2026,
+          "type": "provisional",
+          "low": 5.0,
+          "high": 5.0,
+          "mid": 5.0,
+          "currency": "CNY",
+          "condition": "普制",
+          "source_type": "official_face_value",
+          "source": "中国人民银行公告〔2026〕第28号",
+          "source_url": "https://www.pbc.gov.cn/huobijinyinju/147948/147964/2026102718181999359/index.html",
+          "source_date": "2026-10-22",
+          "note": "尚未发行、暂无公开市场报价，暂按面额展示"
+        }
+      ],
+      "current": {
+        "low": 5.0,
+        "high": 5.0,
+        "mid": 5.0,
+        "snapshot_date": "2026-10-28",
+        "year": 2026,
+        "source_type": "official_face_value",
+        "source": "中国人民银行公告〔2026〕第28号",
+        "source_date": "2026-10-22",
+        "condition": "普制",
+        "type": "provisional"
       }
     },
     {

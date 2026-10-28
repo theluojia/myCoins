@@ -657,7 +657,7 @@ const QUIZ_QUESTIONS = [
     question: "中国普通纪念币中最常见的直径是多少？",
     options: ["20mm", "25mm", "30mm", "32mm"],
     correctIndex: 1,
-    explanation: "25mm直径的纪念币有50枚，是最常见的规格。30mm有44枚、27mm有24枚。"
+    explanation: "25mm直径的纪念币有51枚，是最常见的规格。30mm有45枚、27mm有24枚。"
   },
   {
     id: 93, category: "size",
@@ -706,7 +706,7 @@ const QUIZ_QUESTIONS = [
     question: "以下哪种直径的普通纪念币数量最多？",
     options: ["25mm", "27mm", "30mm", "32mm"],
     correctIndex: 0,
-    explanation: "25mm直径的纪念币有50枚，是最常见的规格，主要包括1元面值的纪念币。30mm（44枚）是第二常见的直径。"
+    explanation: "25mm直径的纪念币有51枚，是最常见的规格，主要包括1元面值的纪念币。30mm（45枚）是第二常见的直径。"
   },
 
   // ===== 背景知识 (1题) =====
@@ -716,6 +716,13 @@ const QUIZ_QUESTIONS = [
     options: ["联合国", "世界银行", "国际奥委会", "世界卫生组织"],
     correctIndex: 0,
     explanation: "1986年被联合国定为'国际和平年'，中国为此发行了国际和平年纪念币，背面图案包含'和平'雕像、地球和鸽子。"
+  },
+  {
+    id: 101, category: "knowledge",
+    question: "2026年发行的中国京剧艺术普通纪念币，表现的是哪个行当？",
+    options: ["生角", "旦角", "净角", "丑角"],
+    correctIndex: 3,
+    explanation: "中国人民银行于2026年11月24日发行中国京剧艺术普通纪念币一枚，背面主图案为丑角形象，面额5元。"
   }
 ];
 

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """读取 coin_price_history.json（精简版：只含价格快照）+ coin_data.json（展示信息，按 id 关联），
-生成展示页 coin_price_history.html（全量 147 枚版）。
+生成展示页 coin_price_history.html（全量版）。
 主模板用普通字符串 + .replace() 注入，避免 JS 的 ${} 与 Python f-string 冲突。
 """
 import json
@@ -65,7 +65,7 @@ for c in coins:
 def display(c):
     m = META_BY_ID.get(c["id"], {})
     return {
-        "img": m.get("imageUrl"),
+        "img": m.get("imageUrl") or ("../coins/img/" + m.get("id", "") + "_f.webp"),
         "issuance": m.get("issuance"),
         "face": face_of(m),
         "mints": "、".join(m.get("mints") or []),
@@ -280,7 +280,7 @@ TEMPLATE = r"""<!DOCTYPE html>
   </div>
 
 </div>
-<footer>中国普通纪念币 / 纪念钞参考价格 · 当前价 + 逐年历史快照库 · 全量 147 枚基线</footer>
+<footer>中国普通纪念币 / 纪念钞参考价格 · 当前价 + 逐年历史快照库 · 全量 __NTOTAL__ 枚</footer>
 
 <script>
 const DATA = __DATA__;
