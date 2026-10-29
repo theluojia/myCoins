@@ -1,0 +1,101 @@
+{
+  "id": "JB12-3",
+  "version": 1,
+  "faces": {
+    "f": {
+      "image": "coins/img/JB12-3_f.webp",
+      "items": [
+        {
+          "quote": "华表",
+          "label": "中央华表",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.42,
+              "y": 0.1604,
+              "width": 0.16,
+              "height": 0.4075
+            }
+          ]
+        },
+        {
+          "quote": "地球",
+          "label": "地球图案",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.4976,
+              "cy": 0.5111,
+              "rx": 0.24,
+              "ry": 0.2
+            }
+          ]
+        },
+        {
+          "quote": "小鸟",
+          "label": "飞翔的小鸟",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.32,
+              "cy": 0.3551,
+              "rx": 0.13,
+              "ry": 0.08
+            },
+            {
+              "type": "ellipse",
+              "cx": 0.6909,
+              "cy": 0.3576,
+              "rx": 0.13,
+              "ry": 0.08
+            }
+          ]
+        }
+      ]
+    },
+    "b": {
+      "image": "coins/img/JB12-3_b.webp",
+      "items": [
+        {
+          "quote": "植树节节徽",
+          "label": "植树节节徽",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.5,
+              "cy": 0.5144,
+              "rx": 0.307,
+              "ry": 0.3025
+            }
+          ]
+        },
+        {
+          "quote": "中华人民共和国",
+          "label": "中华人民共和国国名",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0786,
+              "y": 0.0583,
+              "width": 0.8784,
+              "height": 0.451
+            }
+          ]
+        },
+        {
+          "quote": "壹元",
+          "label": "面值“壹元”",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3329,
+              "y": 0.801,
+              "width": 0.32,
+              "height": 0.13
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

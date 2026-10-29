@@ -1,0 +1,81 @@
+{
+  "id": "JB09",
+  "version": 1,
+  "faces": {
+    "f": {
+      "image": "coins/img/JB09_f.webp",
+      "items": [
+        {
+          "quote": "壮、瑶、苗等民族歌手载歌载舞的场面",
+          "label": "各民族歌手载歌载舞",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.5,
+              "cy": 0.49,
+              "rx": 0.36,
+              "ry": 0.32
+            }
+          ]
+        }
+      ]
+    },
+    "b": {
+      "image": "coins/img/JB09_b.webp",
+      "items": [
+        {
+          "quote": "国名",
+          "label": "中华人民共和国国名",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0834,
+              "y": 0.0602,
+              "width": 0.8565,
+              "height": 0.3721
+            }
+          ]
+        },
+        {
+          "quote": "年号",
+          "label": "年号“1988”",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3678,
+              "y": 0.8595,
+              "width": 0.2722,
+              "height": 0.0605
+            }
+          ]
+        },
+        {
+          "quote": "象鼻山",
+          "label": "象鼻山",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.566,
+              "cy": 0.5931,
+              "rx": 0.154,
+              "ry": 0.1469
+            }
+          ]
+        },
+        {
+          "quote": "桂林山水",
+          "label": "桂林山水主景",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.09,
+              "y": 0.25,
+              "width": 0.82,
+              "height": 0.5
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

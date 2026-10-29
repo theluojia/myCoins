@@ -1,0 +1,101 @@
+{
+  "id": "JB17",
+  "version": 1,
+  "faces": {
+    "f": {
+      "image": "coins/img/JB17_f.webp",
+      "items": [
+        {
+          "quote": "两只形态活泼的熊猫在食竹嬉戏",
+          "label": "两只食竹嬉戏的大熊猫",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.484,
+              "cy": 0.4711,
+              "rx": 0.33,
+              "ry": 0.28
+            }
+          ]
+        },
+        {
+          "quote": "币名",
+          "label": "珍稀野生动物币名",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.4309,
+              "y": 0.0621,
+              "width": 0.5616,
+              "height": 0.5781
+            }
+          ]
+        },
+        {
+          "quote": "面值",
+          "label": "面值",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3943,
+              "y": 0.7652,
+              "width": 0.24,
+              "height": 0.2
+            }
+          ]
+        }
+      ]
+    },
+    "b": {
+      "image": "coins/img/JB17_b.webp",
+      "items": [
+        {
+          "quote": "国徽",
+          "label": "中华人民共和国国徽",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.5001,
+              "cy": 0.4144,
+              "rx": 0.2594,
+              "ry": 0.2759
+            }
+          ]
+        },
+        {
+          "quote": "国名",
+          "label": "中英文国名",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0506,
+              "y": 0.05,
+              "width": 0.9064,
+              "height": 0.6334
+            },
+            {
+              "type": "rect",
+              "x": 0.1716,
+              "y": 0.6922,
+              "width": 0.6654,
+              "height": 0.1304
+            }
+          ]
+        },
+        {
+          "quote": "年号",
+          "label": "发行年号",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3543,
+              "y": 0.8236,
+              "width": 0.28,
+              "height": 0.1
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

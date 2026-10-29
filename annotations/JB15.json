@@ -1,0 +1,133 @@
+{
+  "id": "JB15",
+  "version": 1,
+  "faces": {
+    "f": {
+      "image": "coins/img/JB15_f.webp",
+      "items": [
+        {
+          "quote": "中华人民共和国宪法",
+          "label": "《中华人民共和国宪法》单行本",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.2833,
+              "y": 0.24,
+              "width": 0.4288,
+              "height": 0.5389
+            }
+          ]
+        },
+        {
+          "quote": "鲜花",
+          "label": "托衬宪法的鲜花",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.27,
+              "cy": 0.67,
+              "rx": 0.21,
+              "ry": 0.15
+            }
+          ]
+        },
+        {
+          "quote": "宪法颁布十周年",
+          "label": "宪法颁布十周年文字",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0635,
+              "y": 0.0732,
+              "width": 0.8838,
+              "height": 0.3574
+            }
+          ]
+        },
+        {
+          "quote": "1982-1992",
+          "label": "纪念年份“1982-1992”",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.4187,
+              "y": 0.7861,
+              "width": 0.34,
+              "height": 0.1
+            }
+          ]
+        },
+        {
+          "quote": "面值",
+          "label": "面值“1元”",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.7169,
+              "y": 0.5244,
+              "width": 0.18,
+              "height": 0.2
+            }
+          ]
+        }
+      ]
+    },
+    "b": {
+      "image": "coins/img/JB15_b.webp",
+      "items": [
+        {
+          "quote": "国徽",
+          "label": "中华人民共和国国徽",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.4891,
+              "cy": 0.378,
+              "rx": 0.2683,
+              "ry": 0.2878
+            }
+          ]
+        },
+        {
+          "quote": "国名",
+          "label": "中华人民共和国国名",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.1543,
+              "y": 0.6401,
+              "width": 0.6838,
+              "height": 0.1208
+            }
+          ]
+        },
+        {
+          "quote": "年号",
+          "label": "发行年号",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3703,
+              "y": 0.7809,
+              "width": 0.28,
+              "height": 0.1
+            }
+          ]
+        },
+        {
+          "quote": "56个民族",
+          "label": "象征56个民族的装饰圆点",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.8296,
+              "cy": 0.2453,
+              "rx": 0.133,
+              "ry": 0.1557
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

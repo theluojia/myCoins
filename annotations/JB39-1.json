@@ -1,0 +1,107 @@
+{
+  "id": "JB39-1",
+  "version": 1,
+  "faces": {
+    "f": {
+      "image": "coins/img/JB39-1_f.webp",
+      "items": [
+        {
+          "quote": "基本法",
+          "label": "澳门特别行政区基本法",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3249,
+              "y": 0.2228,
+              "width": 0.3407,
+              "height": 0.4132
+            }
+          ]
+        },
+        {
+          "quote": "澳门海景",
+          "label": "澳门海景",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.1762,
+              "y": 0.3975,
+              "width": 0.6609,
+              "height": 0.4046
+            }
+          ]
+        },
+        {
+          "quote": "庆祝中华人民共和国澳门特别行政区成立",
+          "label": "澳门回归纪念文字",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.04,
+              "y": 0.05,
+              "width": 0.9105,
+              "height": 0.5884
+            }
+          ]
+        },
+        {
+          "quote": "面值",
+          "label": "面值“10元”",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3268,
+              "y": 0.8301,
+              "width": 0.3559,
+              "height": 0.13
+            }
+          ]
+        }
+      ]
+    },
+    "b": {
+      "image": "coins/img/JB39-1_b.webp",
+      "items": [
+        {
+          "quote": "五星荷花",
+          "label": "五星荷花区旗图案",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.5006,
+              "cy": 0.5044,
+              "rx": 0.3394,
+              "ry": 0.337
+            }
+          ]
+        },
+        {
+          "quote": "国名",
+          "label": "中华人民共和国国名",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.042,
+              "y": 0.0547,
+              "width": 0.9173,
+              "height": 0.4572
+            }
+          ]
+        },
+        {
+          "quote": "年号",
+          "label": "年号“1999”",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3116,
+              "y": 0.8188,
+              "width": 0.3803,
+              "height": 0.1338
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

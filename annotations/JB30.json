@@ -1,0 +1,114 @@
+{
+  "id": "JB30",
+  "version": 1,
+  "faces": {
+    "f": {
+      "image": "coins/img/JB30_f.webp",
+      "items": [
+        {
+          "quote": "一只朱鹮站在树枝上",
+          "label": "站在树枝上的朱鹮",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.53,
+              "cy": 0.47,
+              "rx": 0.28,
+              "ry": 0.32
+            }
+          ]
+        },
+        {
+          "quote": "币名",
+          "label": "珍稀野生动物币名",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3366,
+              "y": 0.0492,
+              "width": 0.5985,
+              "height": 0.3995
+            }
+          ]
+        },
+        {
+          "quote": "面值",
+          "label": "面值",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0624,
+              "y": 0.3849,
+              "width": 0.252,
+              "height": 0.2092
+            }
+          ]
+        },
+        {
+          "quote": "树枝",
+          "label": "朱鹮脚下树枝",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.2,
+              "y": 0.66,
+              "width": 0.7173,
+              "height": 0.2318
+            }
+          ]
+        }
+      ]
+    },
+    "b": {
+      "image": "coins/img/JB30_b.webp",
+      "items": [
+        {
+          "quote": "国徽",
+          "label": "中华人民共和国国徽",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.4985,
+              "cy": 0.4212,
+              "rx": 0.2662,
+              "ry": 0.2786
+            }
+          ]
+        },
+        {
+          "quote": "国名",
+          "label": "中英文国名",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0551,
+              "y": 0.0681,
+              "width": 0.8828,
+              "height": 0.6143
+            },
+            {
+              "type": "rect",
+              "x": 0.1811,
+              "y": 0.6942,
+              "width": 0.6368,
+              "height": 0.1339
+            }
+          ]
+        },
+        {
+          "quote": "年号",
+          "label": "发行年号",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3779,
+              "y": 0.84,
+              "width": 0.2302,
+              "height": 0.0848
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

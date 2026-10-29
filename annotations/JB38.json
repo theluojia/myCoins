@@ -1,0 +1,133 @@
+{
+  "id": "JB38",
+  "version": 1,
+  "faces": {
+    "f": {
+      "image": "coins/img/JB38_f.webp",
+      "items": [
+        {
+          "quote": "中华人民共和国成立五十周年",
+          "label": "建国五十周年主题文字",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0529,
+              "y": 0.0477,
+              "width": 0.8942,
+              "height": 0.4346
+            }
+          ]
+        },
+        {
+          "quote": "和平鸽",
+          "label": "和平鸽",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.5234,
+              "cy": 0.3013,
+              "rx": 0.291,
+              "ry": 0.1213
+            }
+          ]
+        },
+        {
+          "quote": "长城",
+          "label": "长城图案",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.2827,
+              "y": 0.3722,
+              "width": 0.4809,
+              "height": 0.2347
+            }
+          ]
+        },
+        {
+          "quote": "50",
+          "label": "和平鸽与长城构成的“50”",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.2229,
+              "y": 0.199,
+              "width": 0.5678,
+              "height": 0.4772
+            }
+          ]
+        },
+        {
+          "quote": "面值",
+          "label": "面值“10元”",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3883,
+              "y": 0.8449,
+              "width": 0.2763,
+              "height": 0.1175
+            }
+          ]
+        }
+      ]
+    },
+    "b": {
+      "image": "coins/img/JB38_b.webp",
+      "items": [
+        {
+          "quote": "国名",
+          "label": "中华人民共和国国名",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0642,
+              "y": 0.0511,
+              "width": 0.9066,
+              "height": 0.4733
+            }
+          ]
+        },
+        {
+          "quote": "年号",
+          "label": "年号“1999”",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3577,
+              "y": 0.8552,
+              "width": 0.28,
+              "height": 0.09
+            }
+          ]
+        },
+        {
+          "quote": "天安门",
+          "label": "天安门城楼",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.1654,
+              "y": 0.4933,
+              "width": 0.6884,
+              "height": 0.2816
+            }
+          ]
+        },
+        {
+          "quote": "礼花",
+          "label": "节日礼花",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.5058,
+              "cy": 0.339,
+              "rx": 0.279,
+              "ry": 0.168
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

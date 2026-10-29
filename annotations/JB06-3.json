@@ -1,0 +1,81 @@
+{
+  "id": "JB06-3",
+  "version": 1,
+  "faces": {
+    "f": {
+      "image": "coins/img/JB06-3_f.webp",
+      "items": [
+        {
+          "quote": "排球运动员形象",
+          "label": "排球运动员",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.386,
+              "cy": 0.4825,
+              "rx": 0.277,
+              "ry": 0.3619
+            }
+          ]
+        },
+        {
+          "quote": "年号",
+          "label": "年号“1987”",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3696,
+              "y": 0.8381,
+              "width": 0.28,
+              "height": 0.1
+            }
+          ]
+        },
+        {
+          "quote": "面值",
+          "label": "面值“1角”",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.6274,
+              "y": 0.4676,
+              "width": 0.2729,
+              "height": 0.2916
+            }
+          ]
+        }
+      ]
+    },
+    "b": {
+      "image": "coins/img/JB06-3_b.webp",
+      "items": [
+        {
+          "quote": "第六届全运会会徽",
+          "label": "第六届全运会会徽",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.5044,
+              "cy": 0.5126,
+              "rx": 0.298,
+              "ry": 0.3052
+            }
+          ]
+        },
+        {
+          "quote": "中华人民共和国第六届运动会",
+          "label": "运动会主题文字",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.1691,
+              "y": 0.685,
+              "width": 0.6717,
+              "height": 0.2446
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

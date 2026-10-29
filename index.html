@@ -539,7 +539,45 @@
             max-height: 65vh;
             object-fit: contain;
             border-radius: 0.5rem;
-            cursor: crosshair;
+            cursor: default;
+        }
+        .coin-annotation-overlay {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+            overflow: visible;
+            z-index: 15;
+        }
+        .coin-annotation-overlay.active {
+            display: block;
+        }
+        .annotation-hotspot {
+            fill: rgba(251, 191, 36, 0.025);
+            stroke: rgba(251, 191, 36, 0.32);
+            stroke-width: 1.5;
+            vector-effect: non-scaling-stroke;
+            cursor: pointer;
+            pointer-events: all;
+            transition: fill 0.18s, stroke 0.18s;
+        }
+        .annotation-hotspot:hover {
+            fill: rgba(251, 191, 36, 0.18);
+            stroke: rgba(253, 230, 138, 0.95);
+        }
+        .annotation-active-outline {
+            fill: rgba(251, 191, 36, 0.14);
+            stroke: #fbbf24;
+            stroke-width: 3;
+            vector-effect: non-scaling-stroke;
+            pointer-events: none;
+            filter: drop-shadow(0 0 5px rgba(251, 191, 36, 0.9));
+            animation: annotationPulse 1.5s ease-in-out infinite;
+        }
+        @keyframes annotationPulse {
+            0%, 100% { stroke-opacity: 0.75; fill-opacity: 0.55; }
+            50% { stroke-opacity: 1; fill-opacity: 1; }
         }
         .zoom-lens {
             position: absolute;
@@ -590,8 +628,13 @@
             font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif;
             letter-spacing: 0.05em;
         }
+        /*
+         * 放大镜暂时屏蔽：它只适用于桌面鼠标，点击图片开关放大镜的行为
+         * 会与图文导览热点的点击/触摸交互冲突。保留原样式和脚本，便于将来
+         * 改成独立模式开关后恢复。
+         */
         .zoom-controls {
-            display: flex;
+            display: none;
             align-items: center;
             gap: 0.5rem;
             margin-top: 0.75rem;
@@ -635,6 +678,75 @@
             font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif;
             margin-left: 0.5rem;
             letter-spacing: 0.03em;
+        }
+        .zoom-desc.has-annotations {
+            text-align: left;
+        }
+        .annotation-token {
+            display: inline;
+            padding: 0.08rem 0.18rem;
+            margin: 0 0.03rem;
+            border: 0;
+            border-bottom: 1px dashed rgba(251, 191, 36, 0.75);
+            border-radius: 0.25rem;
+            background: rgba(251, 191, 36, 0.08);
+            color: #fde68a;
+            font: inherit;
+            line-height: inherit;
+            letter-spacing: inherit;
+            cursor: pointer;
+            transition: color 0.18s, background 0.18s, box-shadow 0.18s;
+        }
+        .annotation-token:hover,
+        .annotation-token:focus-visible {
+            color: #fff7d6;
+            background: rgba(251, 191, 36, 0.2);
+            outline: none;
+        }
+        .annotation-token.active {
+            color: #241700;
+            background: #fbbf24;
+            border-bottom-color: transparent;
+            box-shadow: 0 0 0 2px rgba(251, 191, 36, 0.25);
+        }
+        .annotation-nav {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 0.55rem;
+            max-width: 90vw;
+            color: #d1d5db;
+            font-size: 0.8rem;
+        }
+        .annotation-nav.active {
+            display: flex;
+        }
+        .annotation-nav-btn {
+            min-width: 2.1rem;
+            height: 1.9rem;
+            padding: 0 0.65rem;
+            border: 1px solid rgba(255,255,255,0.24);
+            border-radius: 999px;
+            background: rgba(255,255,255,0.08);
+            color: #e5e7eb;
+            cursor: pointer;
+            transition: background 0.18s, border-color 0.18s;
+        }
+        .annotation-nav-btn:hover,
+        .annotation-nav-btn:focus-visible {
+            background: rgba(251, 191, 36, 0.18);
+            border-color: rgba(251, 191, 36, 0.65);
+            outline: none;
+        }
+        .annotation-status {
+            min-width: 8rem;
+            max-width: 50vw;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            text-align: center;
+            color: #fde68a;
         }
         .zoom-arrow {
             position: absolute;
@@ -683,6 +795,17 @@
             .zoom-arrow {
                 width: 2.5rem;
                 height: 2.5rem;
+            }
+            .annotation-nav {
+                gap: 0.3rem;
+                font-size: 0.75rem;
+            }
+            .annotation-nav-btn {
+                padding: 0 0.5rem;
+            }
+            .annotation-status {
+                min-width: 6rem;
+                max-width: 34vw;
             }
         }
 
@@ -1206,11 +1329,16 @@
                     <div id="zoomModalName" class="zoom-name"></div>
                     <div id="zoomImageWrapper" class="zoom-image-wrapper">
                         <img id="zoomModalImg" class="zoom-image" src="" alt="">
+                        <svg id="coinAnnotationOverlay" class="coin-annotation-overlay" viewBox="0 0 1000 1000" preserveAspectRatio="none" aria-hidden="true"></svg>
                         <div id="zoomLens" class="zoom-lens"></div>
                         <div id="zoomLoading" class="zoom-loading" style="display:none"></div>
                     </div>
                 </div>
                 <div class="zoom-bottom-flex">
+                    <!--
+                      放大镜暂时屏蔽：桌面专属的图片点击操作会与图文导览热点冲突。
+                      控件和脚本保留，待将来增加独立模式开关后可恢复。
+                    -->
                     <div class="zoom-controls">
                         <button class="zoom-ctrl-btn" onclick="event.stopPropagation();changeZoomFactor(-0.5)" title="缩小">−</button>
                         <span id="zoomRatio" class="zoom-ratio">2.5×</span>
@@ -1218,6 +1346,12 @@
                         <span class="zoom-hint">点击图片开启/关闭放大镜</span>
                     </div>
                     <div id="zoomModalDesc" class="zoom-desc"></div>
+                    <div id="coinAnnotationNav" class="annotation-nav" aria-label="图文导览控制">
+                        <button type="button" class="annotation-nav-btn" onclick="event.stopPropagation();stepCoinAnnotation(-1)" title="上一处">←</button>
+                        <button type="button" class="annotation-nav-btn" onclick="event.stopPropagation();clearCoinAnnotation()" title="恢复默认大图">还原</button>
+                        <span id="coinAnnotationStatus" class="annotation-status" aria-live="polite"></span>
+                        <button type="button" class="annotation-nav-btn" onclick="event.stopPropagation();stepCoinAnnotation(1)" title="下一处">→</button>
+                    </div>
                     <div id="zoomModalFace" class="zoom-face-label"></div>
                 </div>
             </div>
@@ -1867,6 +2001,227 @@
         // 4. 图片放大弹窗
         let zoomState = { coin: null, face: 'front', lensActive: false, zoomFactor: 2.5 };
         var zoomPreloadImgs = []; // 打开弹窗时预加载当前币另一面
+        // 2000 年以前的币种已全部生成标注；集合中保留之后制作的原型币种。
+        const coinAnnotationIds = new Set(['JB105', 'JC05']);
+        const coinAnnotationCache = new Map();
+        let coinAnnotationRequestSeq = 0;
+        let coinAnnotationState = {
+            coinId: null,
+            fileFace: null,
+            description: '',
+            items: [],
+            activeIndex: -1
+        };
+
+        function getCoinAnnotationElements() {
+            return {
+                desc: document.getElementById('zoomModalDesc'),
+                overlay: document.getElementById('coinAnnotationOverlay'),
+                nav: document.getElementById('coinAnnotationNav'),
+                status: document.getElementById('coinAnnotationStatus')
+            };
+        }
+
+        function resetCoinAnnotationGuide(description) {
+            const els = getCoinAnnotationElements();
+            coinAnnotationState = {
+                coinId: null,
+                fileFace: null,
+                description: description || '',
+                items: [],
+                activeIndex: -1
+            };
+            els.desc.classList.remove('has-annotations');
+            els.desc.textContent = description || '';
+            els.overlay.classList.remove('active');
+            els.overlay.replaceChildren();
+            els.nav.classList.remove('active');
+            els.status.textContent = '';
+        }
+
+        function loadCoinAnnotationFile(coin) {
+            const coinId = coin.id;
+            if (Number(coin.year) >= 2000 && !coinAnnotationIds.has(coinId)) return Promise.resolve(null);
+            if (coinAnnotationCache.has(coinId)) {
+                return coinAnnotationCache.get(coinId);
+            }
+            const request = fetch('annotations/' + encodeURIComponent(coinId) + '.json')
+                .then(response => response.ok ? response.json() : null)
+                .catch(() => null);
+            coinAnnotationCache.set(coinId, request);
+            return request;
+        }
+
+        async function prepareCoinAnnotationGuide(coin, fileFace, description) {
+            const requestId = ++coinAnnotationRequestSeq;
+            resetCoinAnnotationGuide(description);
+
+            const data = await loadCoinAnnotationFile(coin);
+            if (requestId !== coinAnnotationRequestSeq || !zoomState.coin || zoomState.coin.id !== coin.id) return;
+
+            const face = data && data.faces ? data.faces[fileFace] : null;
+            if (!face || !Array.isArray(face.items) || !face.items.length) return;
+
+            coinAnnotationState = {
+                coinId: coin.id,
+                fileFace: fileFace,
+                description: description || '',
+                items: face.items,
+                activeIndex: -1
+            };
+            renderCoinAnnotationDescription();
+            getCoinAnnotationElements().nav.classList.add('active');
+            updateCoinAnnotationControls();
+            renderCoinAnnotationOverlay();
+        }
+
+        function renderCoinAnnotationDescription() {
+            const els = getCoinAnnotationElements();
+            const description = coinAnnotationState.description;
+            const items = coinAnnotationState.items;
+            const matches = [];
+
+            items.forEach((item, index) => {
+                const start = description.indexOf(item.quote);
+                if (start >= 0) {
+                    matches.push({ start, end: start + item.quote.length, item, index });
+                }
+            });
+            matches.sort((a, b) => a.start - b.start || b.end - a.end);
+
+            const fragment = document.createDocumentFragment();
+            let cursor = 0;
+            matches.forEach(match => {
+                if (match.start < cursor) return;
+                if (match.start > cursor) {
+                    fragment.appendChild(document.createTextNode(description.slice(cursor, match.start)));
+                }
+                const token = document.createElement('button');
+                token.type = 'button';
+                token.className = 'annotation-token';
+                token.dataset.annotationIndex = String(match.index);
+                token.textContent = description.slice(match.start, match.end);
+                token.title = '查看图中位置：' + (match.item.label || match.item.quote);
+                token.setAttribute('aria-label', token.title);
+                token.addEventListener('click', event => {
+                    event.stopPropagation();
+                    selectCoinAnnotation(match.index);
+                });
+                fragment.appendChild(token);
+                cursor = match.end;
+            });
+            if (cursor < description.length) {
+                fragment.appendChild(document.createTextNode(description.slice(cursor)));
+            }
+
+            els.desc.replaceChildren(fragment);
+            els.desc.classList.add('has-annotations');
+        }
+
+        function createCoinAnnotationShape(region, className) {
+            const svgNS = 'http://www.w3.org/2000/svg';
+            let shape;
+            if (region.type === 'ellipse') {
+                shape = document.createElementNS(svgNS, 'ellipse');
+                shape.setAttribute('cx', region.cx * 1000);
+                shape.setAttribute('cy', region.cy * 1000);
+                shape.setAttribute('rx', region.rx * 1000);
+                shape.setAttribute('ry', region.ry * 1000);
+            } else if (region.type === 'polygon') {
+                shape = document.createElementNS(svgNS, 'polygon');
+                shape.setAttribute('points', region.points.map(point => (point[0] * 1000) + ',' + (point[1] * 1000)).join(' '));
+            } else {
+                shape = document.createElementNS(svgNS, 'rect');
+                shape.setAttribute('x', region.x * 1000);
+                shape.setAttribute('y', region.y * 1000);
+                shape.setAttribute('width', region.width * 1000);
+                shape.setAttribute('height', region.height * 1000);
+                shape.setAttribute('rx', '14');
+                shape.setAttribute('ry', '14');
+            }
+            if (className) shape.setAttribute('class', className);
+            return shape;
+        }
+
+        function renderCoinAnnotationOverlay() {
+            const els = getCoinAnnotationElements();
+            const items = coinAnnotationState.items;
+            const activeIndex = coinAnnotationState.activeIndex;
+            const svgNS = 'http://www.w3.org/2000/svg';
+            els.overlay.replaceChildren();
+
+            if (!items.length || activeIndex < 0 || !items[activeIndex]) {
+                els.overlay.classList.remove('active');
+                return;
+            }
+            els.overlay.classList.add('active');
+
+            const defs = document.createElementNS(svgNS, 'defs');
+            const mask = document.createElementNS(svgNS, 'mask');
+            mask.setAttribute('id', 'coinAnnotationSpotlightMask');
+            const maskBase = document.createElementNS(svgNS, 'rect');
+            maskBase.setAttribute('width', '1000');
+            maskBase.setAttribute('height', '1000');
+            maskBase.setAttribute('fill', 'white');
+            mask.appendChild(maskBase);
+            items[activeIndex].regions.forEach(region => {
+                const hole = createCoinAnnotationShape(region);
+                hole.setAttribute('fill', 'black');
+                mask.appendChild(hole);
+            });
+            defs.appendChild(mask);
+            els.overlay.appendChild(defs);
+
+            const shade = document.createElementNS(svgNS, 'rect');
+            shade.setAttribute('width', '1000');
+            shade.setAttribute('height', '1000');
+            shade.setAttribute('fill', 'rgba(0,0,0,0.58)');
+            shade.setAttribute('mask', 'url(#coinAnnotationSpotlightMask)');
+            shade.setAttribute('pointer-events', 'none');
+            els.overlay.appendChild(shade);
+
+            items[activeIndex].regions.forEach(region => {
+                els.overlay.appendChild(createCoinAnnotationShape(region, 'annotation-active-outline'));
+            });
+        }
+
+        function updateCoinAnnotationControls() {
+            const els = getCoinAnnotationElements();
+            const index = coinAnnotationState.activeIndex;
+            const items = coinAnnotationState.items;
+            els.desc.querySelectorAll('.annotation-token').forEach(token => {
+                token.classList.toggle('active', Number(token.dataset.annotationIndex) === index);
+            });
+            if (index >= 0 && items[index]) {
+                els.status.textContent = (index + 1) + ' / ' + items.length + ' · ' + (items[index].label || items[index].quote);
+            } else {
+                els.status.textContent = '点击黄色文字查看图中位置';
+            }
+        }
+
+        function selectCoinAnnotation(index) {
+            if (!coinAnnotationState.items[index]) return;
+            coinAnnotationState.activeIndex = index;
+            updateCoinAnnotationControls();
+            renderCoinAnnotationOverlay();
+        }
+
+        function clearCoinAnnotation() {
+            if (!coinAnnotationState.items.length) return;
+            coinAnnotationState.activeIndex = -1;
+            updateCoinAnnotationControls();
+            renderCoinAnnotationOverlay();
+        }
+
+        function stepCoinAnnotation(direction) {
+            const length = coinAnnotationState.items.length;
+            if (!length) return;
+            const current = coinAnnotationState.activeIndex;
+            const next = current < 0
+                ? (direction > 0 ? 0 : length - 1)
+                : (current + direction + length) % length;
+            selectCoinAnnotation(next);
+        }
 
         function openCoinZoom(coin, viewMode) {
             zoomState.coin = coin;
@@ -1896,13 +2251,16 @@
             const zoomModalFace = document.getElementById('zoomModalFace');
             const zoomLoading = document.getElementById('zoomLoading');
             const isFront = zoomState.face === 'front';
-            const localSrc = 'coins/img/' + coin.id + (isFront ? '_b' : '_f') + '.webp';
+            const fileFace = isFront ? 'b' : 'f';
+            const localSrc = 'coins/img/' + coin.id + '_' + fileFace + '.webp';
             const fallbackSrc = isFront ? coin.imageUrl2 : coin.imageUrl;
+            const description = (isFront ? coin.description2 : coin.description) || '暂无描述';
 
             zoomModalName.textContent = coin.name;
             zoomModalImg.alt = coin.name + (isFront ? ' 正面' : ' 反面');
-            zoomModalDesc.textContent = (isFront ? coin.description2 : coin.description) || '暂无描述';
+            zoomModalDesc.textContent = description;
             zoomModalFace.textContent = isFront ? '【正面】' : '【反面】';
+            prepareCoinAnnotationGuide(coin, fileFace, description);
 
             // 优先本地图，失败回退外链
             zoomModalImg.onerror = function() {
@@ -1920,7 +2278,8 @@
                 zoomLoading.style.display = 'none';
                 zoomModalImg.style.opacity = '1';
                 zoomModalImg.src = localSrc;
-                initZoomLens();
+                // 放大镜暂时不初始化：桌面图片点击会与图文导览热点冲突。
+                // 恢复时重新调用 initZoomLens()，并同步恢复 .zoom-controls。
             } else {
                 // 缓存未命中：立即隐藏旧图，显示 loading
                 zoomModalImg.style.opacity = '0';
@@ -1928,7 +2287,7 @@
                 zoomModalImg.onload = function() {
                     zoomLoading.style.display = 'none';
                     zoomModalImg.style.opacity = '1';
-                    initZoomLens();
+                    // 放大镜暂时不初始化，原因见上方缓存命中分支的注释。
                 };
                 zoomModalImg.src = localSrc;
             }
@@ -2018,6 +2377,7 @@
         function closeCoinZoom() {
             const zoomModal = document.getElementById('zoomModal');
             const lens = document.getElementById('zoomLens');
+            coinAnnotationRequestSeq++;
             lens.style.display = 'none';
             lens.style.backgroundImage = '';
             const wrapper = document.getElementById('zoomImageWrapper');
@@ -2027,6 +2387,7 @@
             document.getElementById('zoomModalName').textContent = '';
             document.getElementById('zoomModalDesc').textContent = '';
             document.getElementById('zoomModalFace').textContent = '';
+            resetCoinAnnotationGuide('');
             zoomState = { coin: null, face: 'front', lensActive: false, zoomFactor: 2.5 };
         }
 

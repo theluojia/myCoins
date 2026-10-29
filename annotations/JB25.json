@@ -1,0 +1,94 @@
+{
+  "id": "JB25",
+  "version": 1,
+  "faces": {
+    "f": {
+      "image": "coins/img/JB25_f.webp",
+      "items": [
+        {
+          "quote": "朱德的素描头像",
+          "label": "朱德素描头像",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.52,
+              "cy": 0.48,
+              "rx": 0.3,
+              "ry": 0.37
+            }
+          ]
+        },
+        {
+          "quote": "朱德诞辰110周年1886-1996",
+          "label": "诞辰纪念文字",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0276,
+              "y": 0.05,
+              "width": 0.9202,
+              "height": 0.4591
+            }
+          ]
+        }
+      ]
+    },
+    "b": {
+      "image": "coins/img/JB25_b.webp",
+      "items": [
+        {
+          "quote": "国名",
+          "label": "中华人民共和国国名",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0845,
+              "y": 0.0595,
+              "width": 0.8267,
+              "height": 0.3539
+            }
+          ]
+        },
+        {
+          "quote": "四川仪陇朱德故居",
+          "label": "四川仪陇朱德故居",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0974,
+              "y": 0.3031,
+              "width": 0.8032,
+              "height": 0.4365
+            }
+          ]
+        },
+        {
+          "quote": "面值",
+          "label": "面值“壹圆”",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3369,
+              "y": 0.7807,
+              "width": 0.3303,
+              "height": 0.1122
+            }
+          ]
+        },
+        {
+          "quote": "年号",
+          "label": "年号“1996”",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3899,
+              "y": 0.8793,
+              "width": 0.2172,
+              "height": 0.0827
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

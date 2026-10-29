@@ -1,0 +1,127 @@
+{
+  "id": "JB28-1",
+  "version": 1,
+  "faces": {
+    "f": {
+      "image": "coins/img/JB28-1_f.webp",
+      "items": [
+        {
+          "quote": "基本法",
+          "label": "香港特别行政区基本法",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3,
+              "y": 0.22,
+              "width": 0.4,
+              "height": 0.42
+            }
+          ]
+        },
+        {
+          "quote": "牡丹",
+          "label": "牡丹花",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.5023,
+              "cy": 0.7153,
+              "rx": 0.23,
+              "ry": 0.12
+            }
+          ]
+        },
+        {
+          "quote": "庆祝中华人民共和国香港特别行政区成立",
+          "label": "香港回归纪念文字",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0412,
+              "y": 0.0524,
+              "width": 0.9073,
+              "height": 0.5903
+            }
+          ]
+        },
+        {
+          "quote": "面值",
+          "label": "面值“10元”",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3531,
+              "y": 0.8172,
+              "width": 0.3308,
+              "height": 0.1336
+            }
+          ]
+        },
+        {
+          "quote": "五角星",
+          "label": "五角星",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.2037,
+              "cy": 0.7674,
+              "rx": 0.064,
+              "ry": 0.0559
+            },
+            {
+              "type": "ellipse",
+              "cx": 0.8089,
+              "cy": 0.7638,
+              "rx": 0.0662,
+              "ry": 0.0594
+            }
+          ]
+        }
+      ]
+    },
+    "b": {
+      "image": "coins/img/JB28-1_b.webp",
+      "items": [
+        {
+          "quote": "五星花蕊的紫荆花",
+          "label": "五星花蕊紫荆花",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.5006,
+              "cy": 0.5027,
+              "rx": 0.331,
+              "ry": 0.331
+            }
+          ]
+        },
+        {
+          "quote": "国名",
+          "label": "中华人民共和国国名",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0572,
+              "y": 0.0488,
+              "width": 0.9012,
+              "height": 0.4494
+            }
+          ]
+        },
+        {
+          "quote": "年号",
+          "label": "年号“1997”",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3012,
+              "y": 0.8078,
+              "width": 0.4047,
+              "height": 0.1342
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

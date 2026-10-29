@@ -1,0 +1,107 @@
+{
+  "id": "JB11-1",
+  "version": 1,
+  "faces": {
+    "f": {
+      "image": "coins/img/JB11-1_f.webp",
+      "items": [
+        {
+          "quote": "女子射箭运动员形象",
+          "label": "女子射箭运动员",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.47,
+              "cy": 0.44,
+              "rx": 0.32,
+              "ry": 0.34
+            }
+          ]
+        },
+        {
+          "quote": "面值",
+          "label": "面值“1元”",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.466,
+              "y": 0.0931,
+              "width": 0.25,
+              "height": 0.25
+            }
+          ]
+        }
+      ]
+    },
+    "b": {
+      "image": "coins/img/JB11-1_b.webp",
+      "items": [
+        {
+          "quote": "国名",
+          "label": "中华人民共和国国名",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.1,
+              "y": 0.04,
+              "width": 0.8178,
+              "height": 0.3646
+            }
+          ]
+        },
+        {
+          "quote": "会标",
+          "label": "亚运会会标",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.4911,
+              "cy": 0.3431,
+              "rx": 0.1772,
+              "ry": 0.176
+            }
+          ]
+        },
+        {
+          "quote": "工人体育场",
+          "label": "工人体育场",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0876,
+              "y": 0.4534,
+              "width": 0.835,
+              "height": 0.286
+            }
+          ]
+        },
+        {
+          "quote": "第十一届亚洲运动会",
+          "label": "运动会主题文字",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.2028,
+              "y": 0.7604,
+              "width": 0.6,
+              "height": 0.1
+            }
+          ]
+        },
+        {
+          "quote": "年号",
+          "label": "年号“1990”",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3791,
+              "y": 0.8751,
+              "width": 0.24,
+              "height": 0.08
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

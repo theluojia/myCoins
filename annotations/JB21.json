@@ -1,0 +1,94 @@
+{
+  "id": "JB21",
+  "version": 1,
+  "faces": {
+    "f": {
+      "image": "coins/img/JB21_f.webp",
+      "items": [
+        {
+          "quote": "紧握钢枪的战士",
+          "label": "紧握钢枪的战士",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.4763,
+              "cy": 0.5816,
+              "rx": 0.3417,
+              "ry": 0.2031
+            }
+          ]
+        },
+        {
+          "quote": "手举大刀的百姓",
+          "label": "手举大刀的百姓",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.6047,
+              "cy": 0.4608,
+              "rx": 0.2652,
+              "ry": 0.3159
+            }
+          ]
+        },
+        {
+          "quote": "奋力杀敌",
+          "label": "军民奋力杀敌场景",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.105,
+              "y": 0.2097,
+              "width": 0.78,
+              "height": 0.57
+            }
+          ]
+        }
+      ]
+    },
+    "b": {
+      "image": "coins/img/JB21_b.webp",
+      "items": [
+        {
+          "quote": "长城",
+          "label": "巍然屹立的长城",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.08,
+              "y": 0.2354,
+              "width": 0.8222,
+              "height": 0.5246
+            }
+          ]
+        },
+        {
+          "quote": "国名",
+          "label": "中华人民共和国国名",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.08,
+              "y": 0.05,
+              "width": 0.8421,
+              "height": 0.3065
+            }
+          ]
+        },
+        {
+          "quote": "年号",
+          "label": "年号“1995”",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3685,
+              "y": 0.8491,
+              "width": 0.24,
+              "height": 0.09
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

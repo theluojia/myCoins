@@ -1,0 +1,94 @@
+{
+  "id": "JB02",
+  "version": 1,
+  "faces": {
+    "f": {
+      "image": "coins/img/JB02_f.webp",
+      "items": [
+        {
+          "quote": "布达拉宫",
+          "label": "布达拉宫建筑群",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0857,
+              "y": 0.2087,
+              "width": 0.7243,
+              "height": 0.4713
+            }
+          ]
+        },
+        {
+          "quote": "面值",
+          "label": "面值“1元”",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.6383,
+              "y": 0.1227,
+              "width": 0.18,
+              "height": 0.2
+            }
+          ]
+        },
+        {
+          "quote": "庆祝西藏自治区成立20周年",
+          "label": "纪念主题文字",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.207,
+              "y": 0.7164,
+              "width": 0.5861,
+              "height": 0.2244
+            }
+          ]
+        }
+      ]
+    },
+    "b": {
+      "image": "coins/img/JB02_b.webp",
+      "items": [
+        {
+          "quote": "国徽",
+          "label": "中华人民共和国国徽",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.4968,
+              "cy": 0.5346,
+              "rx": 0.3098,
+              "ry": 0.3319
+            }
+          ]
+        },
+        {
+          "quote": "国名",
+          "label": "中华人民共和国国名",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0603,
+              "y": 0.05,
+              "width": 0.8994,
+              "height": 0.4545
+            }
+          ]
+        },
+        {
+          "quote": "年号",
+          "label": "发行年号",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3653,
+              "y": 0.8517,
+              "width": 0.28,
+              "height": 0.1
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

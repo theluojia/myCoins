@@ -1,0 +1,94 @@
+{
+  "id": "JB13-1",
+  "version": 1,
+  "faces": {
+    "f": {
+      "image": "coins/img/JB13-1_f.webp",
+      "items": [
+        {
+          "quote": "第一次全国代表大会会址",
+          "label": "中共一大会址",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.1684,
+              "y": 0.3122,
+              "width": 0.6633,
+              "height": 0.3344
+            }
+          ]
+        },
+        {
+          "quote": "中国共产党成立七十周年",
+          "label": "建党七十周年主题文字",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0859,
+              "y": 0.0429,
+              "width": 0.8375,
+              "height": 0.3657
+            }
+          ]
+        },
+        {
+          "quote": "面值",
+          "label": "面值“壹圆”",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3377,
+              "y": 0.7587,
+              "width": 0.3223,
+              "height": 0.1791
+            }
+          ]
+        }
+      ]
+    },
+    "b": {
+      "image": "coins/img/JB13-1_b.webp",
+      "items": [
+        {
+          "quote": "国徽",
+          "label": "中华人民共和国国徽",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.5024,
+              "cy": 0.3495,
+              "rx": 0.2513,
+              "ry": 0.2592
+            }
+          ]
+        },
+        {
+          "quote": "国名",
+          "label": "中华人民共和国国名",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.1745,
+              "y": 0.6151,
+              "width": 0.6669,
+              "height": 0.14
+            }
+          ]
+        },
+        {
+          "quote": "年号",
+          "label": "发行年号",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3685,
+              "y": 0.7777,
+              "width": 0.28,
+              "height": 0.1
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,161 @@
+{
+  "id": "JB01-1",
+  "version": 1,
+  "faces": {
+    "b": {
+      "image": "coins/img/JB01-1_b.webp",
+      "items": [
+        {
+          "quote": "国徽",
+          "label": "中华人民共和国国徽",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.5054,
+              "cy": 0.3268,
+              "rx": 0.2796,
+              "ry": 0.2798
+            }
+          ]
+        },
+        {
+          "quote": "天安门广场",
+          "label": "天安门广场建筑群",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.07,
+              "y": 0.59,
+              "width": 0.86,
+              "height": 0.17
+            }
+          ]
+        },
+        {
+          "quote": "礼花",
+          "label": "两侧礼花",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.1465,
+              "cy": 0.3711,
+              "rx": 0.1025,
+              "ry": 0.1618
+            },
+            {
+              "type": "ellipse",
+              "cx": 0.867,
+              "cy": 0.372,
+              "rx": 0.1034,
+              "ry": 0.152
+            }
+          ]
+        },
+        {
+          "quote": "中华人民共和国成立三十五周年1949-1984",
+          "label": "纪念主题与年号",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.1918,
+              "y": 0.7395,
+              "width": 0.6434,
+              "height": 0.2202
+            }
+          ]
+        }
+      ]
+    },
+    "f": {
+      "image": "coins/img/JB01-1_f.webp",
+      "items": [
+        {
+          "quote": "华表",
+          "label": "中央华表",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.4,
+              "y": 0.28,
+              "width": 0.195,
+              "height": 0.6322
+            }
+          ]
+        },
+        {
+          "quote": "松树",
+          "label": "华表右侧松树",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.5954,
+              "cy": 0.815,
+              "rx": 0.1794,
+              "ry": 0.1474
+            }
+          ]
+        },
+        {
+          "quote": "仙鹤",
+          "label": "四只飞翔的仙鹤",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.24,
+              "cy": 0.31,
+              "rx": 0.2,
+              "ry": 0.17
+            },
+            {
+              "type": "ellipse",
+              "cx": 0.3583,
+              "cy": 0.1735,
+              "rx": 0.21,
+              "ry": 0.1
+            },
+            {
+              "type": "ellipse",
+              "cx": 0.72,
+              "cy": 0.23,
+              "rx": 0.22,
+              "ry": 0.17
+            },
+            {
+              "type": "ellipse",
+              "cx": 0.83,
+              "cy": 0.43,
+              "rx": 0.17,
+              "ry": 0.19
+            }
+          ]
+        },
+        {
+          "quote": "长城",
+          "label": "下方蜿蜒的长城",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.655,
+              "y": 0.6402,
+              "width": 0.3288,
+              "height": 0.1964
+            }
+          ]
+        },
+        {
+          "quote": "面值",
+          "label": "面值“壹圆”",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0934,
+              "y": 0.5725,
+              "width": 0.31,
+              "height": 0.14
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

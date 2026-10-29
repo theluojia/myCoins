@@ -1,0 +1,94 @@
+{
+  "id": "JB18",
+  "version": 1,
+  "faces": {
+    "f": {
+      "image": "coins/img/JB18_f.webp",
+      "items": [
+        {
+          "quote": "毛泽东侧面头像",
+          "label": "毛泽东侧面头像",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.52,
+              "cy": 0.48,
+              "rx": 0.3,
+              "ry": 0.37
+            }
+          ]
+        },
+        {
+          "quote": "毛泽东诞辰100周年1893-1993",
+          "label": "诞辰纪念文字",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0402,
+              "y": 0.05,
+              "width": 0.9088,
+              "height": 0.4636
+            }
+          ]
+        }
+      ]
+    },
+    "b": {
+      "image": "coins/img/JB18_b.webp",
+      "items": [
+        {
+          "quote": "国名",
+          "label": "中华人民共和国国名",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0776,
+              "y": 0.0511,
+              "width": 0.857,
+              "height": 0.3464
+            }
+          ]
+        },
+        {
+          "quote": "湖南韶山毛泽东故居",
+          "label": "韶山毛泽东故居",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0964,
+              "y": 0.3068,
+              "width": 0.824,
+              "height": 0.4052
+            }
+          ]
+        },
+        {
+          "quote": "面值",
+          "label": "面值“壹圆”",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.2796,
+              "y": 0.7,
+              "width": 0.4397,
+              "height": 0.1696
+            }
+          ]
+        },
+        {
+          "quote": "年号",
+          "label": "年号“1993”",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3611,
+              "y": 0.8684,
+              "width": 0.28,
+              "height": 0.09
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

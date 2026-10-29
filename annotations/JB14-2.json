@@ -1,0 +1,94 @@
+{
+  "id": "JB14-2",
+  "version": 1,
+  "faces": {
+    "f": {
+      "image": "coins/img/JB14-2_f.webp",
+      "items": [
+        {
+          "quote": "女子足球守门员跃起扑球造型",
+          "label": "女子足球守门员扑球",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.5228,
+              "cy": 0.4052,
+              "rx": 0.4042,
+              "ry": 0.2862
+            }
+          ]
+        },
+        {
+          "quote": "第一届世界女子足球锦标赛",
+          "label": "赛事主题文字",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0288,
+              "y": 0.4039,
+              "width": 0.6212,
+              "height": 0.5489
+            }
+          ]
+        },
+        {
+          "quote": "年号",
+          "label": "年号“1991”",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.6285,
+              "y": 0.3335,
+              "width": 0.2,
+              "height": 0.11
+            }
+          ]
+        }
+      ]
+    },
+    "b": {
+      "image": "coins/img/JB14-2_b.webp",
+      "items": [
+        {
+          "quote": "第一届世界女子足球锦标赛会徽",
+          "label": "女足锦标赛会徽",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.5076,
+              "cy": 0.5211,
+              "rx": 0.3376,
+              "ry": 0.2869
+            }
+          ]
+        },
+        {
+          "quote": "中华人民共和国",
+          "label": "中华人民共和国国名",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.1024,
+              "y": 0.0815,
+              "width": 0.8082,
+              "height": 0.3766
+            }
+          ]
+        },
+        {
+          "quote": "壹元",
+          "label": "面值“壹元”",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3365,
+              "y": 0.7555,
+              "width": 0.32,
+              "height": 0.13
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

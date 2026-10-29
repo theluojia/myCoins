@@ -1,0 +1,107 @@
+{
+  "id": "JB23",
+  "version": 1,
+  "faces": {
+    "f": {
+      "image": "coins/img/JB23_f.webp",
+      "items": [
+        {
+          "quote": "联合国会徽",
+          "label": "联合国会徽",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.3971,
+              "cy": 0.6287,
+              "rx": 0.18,
+              "ry": 0.18
+            }
+          ]
+        },
+        {
+          "quote": "50",
+          "label": "联合国成立五十周年“50”",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.4296,
+              "y": 0.23,
+              "width": 0.3804,
+              "height": 0.5776
+            }
+          ]
+        },
+        {
+          "quote": "年号",
+          "label": "年号“1995”",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.5955,
+              "y": 0.7255,
+              "width": 0.22,
+              "height": 0.1
+            }
+          ]
+        }
+      ]
+    },
+    "b": {
+      "image": "coins/img/JB23_b.webp",
+      "items": [
+        {
+          "quote": "国徽",
+          "label": "中华人民共和国国徽",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.5026,
+              "cy": 0.3474,
+              "rx": 0.177,
+              "ry": 0.1876
+            }
+          ]
+        },
+        {
+          "quote": "长城",
+          "label": "长城图案",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0978,
+              "y": 0.5007,
+              "width": 0.8,
+              "height": 0.29
+            }
+          ]
+        },
+        {
+          "quote": "国名",
+          "label": "中华人民共和国国名",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.08,
+              "y": 0.05,
+              "width": 0.8665,
+              "height": 0.3356
+            }
+          ]
+        },
+        {
+          "quote": "面额",
+          "label": "面额“1元”",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3511,
+              "y": 0.802,
+              "width": 0.3,
+              "height": 0.15
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

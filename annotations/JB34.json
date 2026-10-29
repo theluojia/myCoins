@@ -1,0 +1,94 @@
+{
+  "id": "JB34",
+  "version": 1,
+  "faces": {
+    "f": {
+      "image": "coins/img/JB34_f.webp",
+      "items": [
+        {
+          "quote": "刘少奇头像",
+          "label": "刘少奇头像",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.52,
+              "cy": 0.48,
+              "rx": 0.3,
+              "ry": 0.37
+            }
+          ]
+        },
+        {
+          "quote": "刘少奇诞辰100周年1898-1998",
+          "label": "诞辰纪念文字",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0464,
+              "y": 0.05,
+              "width": 0.9113,
+              "height": 0.42
+            }
+          ]
+        }
+      ]
+    },
+    "b": {
+      "image": "coins/img/JB34_b.webp",
+      "items": [
+        {
+          "quote": "国名",
+          "label": "中华人民共和国国名",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.1,
+              "y": 0.05,
+              "width": 0.8042,
+              "height": 0.3449
+            }
+          ]
+        },
+        {
+          "quote": "湖南花明楼刘少奇故居",
+          "label": "湖南花明楼刘少奇故居",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.068,
+              "y": 0.3207,
+              "width": 0.8725,
+              "height": 0.3502
+            }
+          ]
+        },
+        {
+          "quote": "面值",
+          "label": "面值“壹圆”",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.2763,
+              "y": 0.7,
+              "width": 0.4325,
+              "height": 0.1463
+            }
+          ]
+        },
+        {
+          "quote": "年号",
+          "label": "年号“1998”",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3759,
+              "y": 0.8398,
+              "width": 0.246,
+              "height": 0.1009
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

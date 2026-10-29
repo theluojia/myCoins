@@ -1,0 +1,101 @@
+{
+  "id": "JB08",
+  "version": 1,
+  "faces": {
+    "f": {
+      "image": "coins/img/JB08_f.webp",
+      "items": [
+        {
+          "quote": "中国人民银行行徽",
+          "label": "中国人民银行行徽",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.5005,
+              "cy": 0.124,
+              "rx": 0.0909,
+              "ry": 0.0885
+            }
+          ]
+        },
+        {
+          "quote": "金融中心大楼",
+          "label": "金融中心大楼",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.17,
+              "y": 0.2282,
+              "width": 0.6632,
+              "height": 0.5042
+            }
+          ]
+        }
+      ]
+    },
+    "b": {
+      "image": "coins/img/JB08_b.webp",
+      "items": [
+        {
+          "quote": "国徽",
+          "label": "中华人民共和国国徽",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.5028,
+              "cy": 0.5059,
+              "rx": 0.2778,
+              "ry": 0.2883
+            }
+          ]
+        },
+        {
+          "quote": "国名",
+          "label": "中华人民共和国国名",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0592,
+              "y": 0.0331,
+              "width": 0.886,
+              "height": 0.483
+            }
+          ]
+        },
+        {
+          "quote": "年号",
+          "label": "年号“1988”",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3633,
+              "y": 0.8031,
+              "width": 0.28,
+              "height": 0.1
+            }
+          ]
+        },
+        {
+          "quote": "花纹",
+          "label": "吉祥花纹",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.7899,
+              "cy": 0.7085,
+              "rx": 0.1668,
+              "ry": 0.1632
+            },
+            {
+              "type": "ellipse",
+              "cx": 0.2196,
+              "cy": 0.722,
+              "rx": 0.1673,
+              "ry": 0.1643
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "id": "JB16",
+  "version": 1,
+  "faces": {
+    "f": {
+      "image": "coins/img/JB16_f.webp",
+      "items": [
+        {
+          "quote": "宋庆龄头像",
+          "label": "宋庆龄头像",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.5088,
+              "cy": 0.508,
+              "rx": 0.3,
+              "ry": 0.37
+            }
+          ]
+        },
+        {
+          "quote": "宋庆龄诞辰100周年1893-1993",
+          "label": "诞辰纪念文字",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0505,
+              "y": 0.05,
+              "width": 0.9408,
+              "height": 0.4686
+            }
+          ]
+        }
+      ]
+    },
+    "b": {
+      "image": "coins/img/JB16_b.webp",
+      "items": [
+        {
+          "quote": "国名",
+          "label": "中华人民共和国国名",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0551,
+              "y": 0.0427,
+              "width": 0.8837,
+              "height": 0.3319
+            }
+          ]
+        },
+        {
+          "quote": "上海宋庆龄故居",
+          "label": "上海宋庆龄故居",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0553,
+              "y": 0.2437,
+              "width": 0.924,
+              "height": 0.3965
+            }
+          ]
+        },
+        {
+          "quote": "面值",
+          "label": "面值“壹圆”",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.2828,
+              "y": 0.7104,
+              "width": 0.4333,
+              "height": 0.1758
+            }
+          ]
+        },
+        {
+          "quote": "年号",
+          "label": "年号“1993”",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3651,
+              "y": 0.8675,
+              "width": 0.28,
+              "height": 0.09
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

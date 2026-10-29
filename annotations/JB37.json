@@ -1,0 +1,107 @@
+{
+  "id": "JB37",
+  "version": 1,
+  "faces": {
+    "f": {
+      "image": "coins/img/JB37_f.webp",
+      "items": [
+        {
+          "quote": "会徽",
+          "label": "中国人民政治协商会议会徽",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.5005,
+              "cy": 0.3663,
+              "rx": 0.2958,
+              "ry": 0.3117
+            }
+          ]
+        },
+        {
+          "quote": "中国人民政治协商会议成立五十周年",
+          "label": "政协成立五十周年文字",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.1279,
+              "y": 0.6744,
+              "width": 0.7369,
+              "height": 0.1575
+            }
+          ]
+        },
+        {
+          "quote": "1949-1999",
+          "label": "纪念年份“1949-1999”",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3103,
+              "y": 0.8475,
+              "width": 0.3668,
+              "height": 0.0808
+            }
+          ]
+        }
+      ]
+    },
+    "b": {
+      "image": "coins/img/JB37_b.webp",
+      "items": [
+        {
+          "quote": "国名",
+          "label": "中华人民共和国国名",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.08,
+              "y": 0.05,
+              "width": 0.8379,
+              "height": 0.3912
+            }
+          ]
+        },
+        {
+          "quote": "中南海新华门",
+          "label": "中南海新华门",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.1165,
+              "y": 0.3141,
+              "width": 0.7754,
+              "height": 0.4008
+            }
+          ]
+        },
+        {
+          "quote": "面值",
+          "label": "面值“壹圆”",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3107,
+              "y": 0.7043,
+              "width": 0.3859,
+              "height": 0.1289
+            }
+          ]
+        },
+        {
+          "quote": "年号",
+          "label": "年号“1999”",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3862,
+              "y": 0.8354,
+              "width": 0.234,
+              "height": 0.077
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

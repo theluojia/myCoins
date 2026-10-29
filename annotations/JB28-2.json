@@ -1,0 +1,107 @@
+{
+  "id": "JB28-2",
+  "version": 1,
+  "faces": {
+    "f": {
+      "image": "coins/img/JB28-2_f.webp",
+      "items": [
+        {
+          "quote": "香港风景",
+          "label": "维多利亚港城市风景",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.1647,
+              "y": 0.2288,
+              "width": 0.6683,
+              "height": 0.4875
+            }
+          ]
+        },
+        {
+          "quote": "面值",
+          "label": "面值“10元”",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.5012,
+              "y": 0.2549,
+              "width": 0.2506,
+              "height": 0.1557
+            }
+          ]
+        },
+        {
+          "quote": "庆祝中华人民共和国香港特别行政区成立",
+          "label": "香港回归纪念文字",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.04,
+              "y": 0.05,
+              "width": 0.92,
+              "height": 0.5711
+            }
+          ]
+        },
+        {
+          "quote": "花纹装饰",
+          "label": "下方花纹装饰",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.15,
+              "y": 0.7446,
+              "width": 0.6921,
+              "height": 0.1966
+            }
+          ]
+        }
+      ]
+    },
+    "b": {
+      "image": "coins/img/JB28-2_b.webp",
+      "items": [
+        {
+          "quote": "五星花蕊的紫荆花",
+          "label": "五星花蕊紫荆花",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.5057,
+              "cy": 0.4959,
+              "rx": 0.3307,
+              "ry": 0.3388
+            }
+          ]
+        },
+        {
+          "quote": "国名",
+          "label": "中华人民共和国国名",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0708,
+              "y": 0.05,
+              "width": 0.8792,
+              "height": 0.4669
+            }
+          ]
+        },
+        {
+          "quote": "年号",
+          "label": "年号“1997”",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3104,
+              "y": 0.8117,
+              "width": 0.3907,
+              "height": 0.1282
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

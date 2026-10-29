@@ -1,0 +1,81 @@
+{
+  "id": "JB12-2",
+  "version": 1,
+  "faces": {
+    "f": {
+      "image": "coins/img/JB12-2_f.webp",
+      "items": [
+        {
+          "quote": "女青年头像",
+          "label": "女青年侧面头像",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.559,
+              "cy": 0.4002,
+              "rx": 0.219,
+              "ry": 0.2814
+            }
+          ]
+        },
+        {
+          "quote": "花卉",
+          "label": "头像周围的花卉装饰",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.1721,
+              "y": 0.1328,
+              "width": 0.33,
+              "height": 0.6772
+            }
+          ]
+        }
+      ]
+    },
+    "b": {
+      "image": "coins/img/JB12-2_b.webp",
+      "items": [
+        {
+          "quote": "植树节节徽",
+          "label": "植树节节徽",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.5001,
+              "cy": 0.5067,
+              "rx": 0.3059,
+              "ry": 0.2971
+            }
+          ]
+        },
+        {
+          "quote": "中华人民共和国",
+          "label": "中华人民共和国国名",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0739,
+              "y": 0.0583,
+              "width": 0.8665,
+              "height": 0.4474
+            }
+          ]
+        },
+        {
+          "quote": "壹元",
+          "label": "面值“壹元”",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.34,
+              "y": 0.8022,
+              "width": 0.32,
+              "height": 0.13
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

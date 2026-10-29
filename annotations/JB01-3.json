@@ -1,0 +1,127 @@
+{
+  "id": "JB01-3",
+  "version": 1,
+  "faces": {
+    "f": {
+      "image": "coins/img/JB01-3_f.webp",
+      "items": [
+        {
+          "quote": "毛泽东等领导同志",
+          "label": "天安门城楼上的领导同志",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.065,
+              "y": 0.262,
+              "width": 0.5021,
+              "height": 0.3818
+            }
+          ]
+        },
+        {
+          "quote": "天安门城楼",
+          "label": "天安门城楼",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.5344,
+              "y": 0.4768,
+              "width": 0.4,
+              "height": 0.25
+            }
+          ]
+        },
+        {
+          "quote": "开国大典",
+          "label": "开国大典场景",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.07,
+              "y": 0.2,
+              "width": 0.87,
+              "height": 0.52
+            }
+          ]
+        },
+        {
+          "quote": "面值",
+          "label": "面值“壹圆”",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3454,
+              "y": 0.7893,
+              "width": 0.3326,
+              "height": 0.129
+            }
+          ]
+        }
+      ]
+    },
+    "b": {
+      "image": "coins/img/JB01-3_b.webp",
+      "items": [
+        {
+          "quote": "国徽",
+          "label": "中华人民共和国国徽",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.5081,
+              "cy": 0.3207,
+              "rx": 0.2679,
+              "ry": 0.2718
+            }
+          ]
+        },
+        {
+          "quote": "天安门广场",
+          "label": "天安门广场建筑群",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.07,
+              "y": 0.59,
+              "width": 0.86,
+              "height": 0.17
+            }
+          ]
+        },
+        {
+          "quote": "礼花",
+          "label": "两侧礼花",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.151,
+              "cy": 0.3774,
+              "rx": 0.0908,
+              "ry": 0.1574
+            },
+            {
+              "type": "ellipse",
+              "cx": 0.8742,
+              "cy": 0.3594,
+              "rx": 0.0998,
+              "ry": 0.1394
+            }
+          ]
+        },
+        {
+          "quote": "中华人民共和国成立三十五周年1949-1984",
+          "label": "纪念主题与年号",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.2008,
+              "y": 0.7431,
+              "width": 0.6074,
+              "height": 0.2202
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

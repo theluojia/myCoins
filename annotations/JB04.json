@@ -1,0 +1,101 @@
+{
+  "id": "JB04",
+  "version": 1,
+  "faces": {
+    "f": {
+      "image": "coins/img/JB04_f.webp",
+      "items": [
+        {
+          "quote": "和平",
+          "label": "和平雕像",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.4529,
+              "cy": 0.4478,
+              "rx": 0.3611,
+              "ry": 0.371
+            }
+          ]
+        },
+        {
+          "quote": "国际和平年",
+          "label": "“国际和平年”主题文字",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.2977,
+              "y": 0.8362,
+              "width": 0.4111,
+              "height": 0.0923
+            }
+          ]
+        },
+        {
+          "quote": "壹圆",
+          "label": "面值“壹圆”",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.6221,
+              "y": 0.5931,
+              "width": 0.2362,
+              "height": 0.1733
+            }
+          ]
+        }
+      ]
+    },
+    "b": {
+      "image": "coins/img/JB04_b.webp",
+      "items": [
+        {
+          "quote": "国徽",
+          "label": "中华人民共和国国徽",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.5022,
+              "cy": 0.5339,
+              "rx": 0.3346,
+              "ry": 0.3439
+            }
+          ]
+        },
+        {
+          "quote": "国名",
+          "label": "中华人民共和国国名",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0577,
+              "y": 0.0601,
+              "width": 0.8895,
+              "height": 0.4405
+            },
+            {
+              "type": "rect",
+              "x": 0.18,
+              "y": 0.69,
+              "width": 0.64,
+              "height": 0.13
+            }
+          ]
+        },
+        {
+          "quote": "年号",
+          "label": "发行年号",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3678,
+              "y": 0.8568,
+              "width": 0.28,
+              "height": 0.1
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

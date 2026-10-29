@@ -1,0 +1,121 @@
+{
+  "id": "JB20",
+  "version": 1,
+  "faces": {
+    "f": {
+      "image": "coins/img/JB20_f.webp",
+      "items": [
+        {
+          "quote": "直握球拍女运动员击球形象",
+          "label": "女乒乓球运动员击球",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.52,
+              "cy": 0.46,
+              "rx": 0.31,
+              "ry": 0.29
+            }
+          ]
+        },
+        {
+          "quote": "第43届世界乒乓球锦标赛",
+          "label": "世乒赛中英文主题文字",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0462,
+              "y": 0.0641,
+              "width": 0.9044,
+              "height": 0.5258
+            },
+            {
+              "type": "rect",
+              "x": 0.1589,
+              "y": 0.7027,
+              "width": 0.68,
+              "height": 0.15
+            }
+          ]
+        },
+        {
+          "quote": "面值",
+          "label": "面值“1元”",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.2257,
+              "y": 0.5421,
+              "width": 0.2,
+              "height": 0.18
+            }
+          ]
+        }
+      ]
+    },
+    "b": {
+      "image": "coins/img/JB20_b.webp",
+      "items": [
+        {
+          "quote": "世乒赛会徽",
+          "label": "世乒赛会徽",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.5096,
+              "cy": 0.3331,
+              "rx": 0.1605,
+              "ry": 0.1583
+            }
+          ]
+        },
+        {
+          "quote": "主赛馆",
+          "label": "世乒赛主赛馆",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.1432,
+              "y": 0.4555,
+              "width": 0.7306,
+              "height": 0.2182
+            }
+          ]
+        },
+        {
+          "quote": "中英文国名",
+          "label": "中英文国名",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.07,
+              "y": 0.05,
+              "width": 0.9069,
+              "height": 0.3815
+            },
+            {
+              "type": "rect",
+              "x": 0.05,
+              "y": 0.82,
+              "width": 0.9,
+              "height": 0.08
+            }
+          ]
+        },
+        {
+          "quote": "年号",
+          "label": "年号“1995”",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3947,
+              "y": 0.7124,
+              "width": 0.2447,
+              "height": 0.0985
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

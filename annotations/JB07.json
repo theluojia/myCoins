@@ -1,0 +1,120 @@
+{
+  "id": "JB07",
+  "version": 1,
+  "faces": {
+    "f": {
+      "image": "coins/img/JB07_f.webp",
+      "items": [
+        {
+          "quote": "两名回族女青年采摘枸杞子",
+          "label": "两名回族女青年采摘枸杞",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.4617,
+              "cy": 0.5285,
+              "rx": 0.2717,
+              "ry": 0.2815
+            }
+          ]
+        },
+        {
+          "quote": "贺兰山图景",
+          "label": "背景中的贺兰山图景",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.415,
+              "y": 0.16,
+              "width": 0.3367,
+              "height": 0.1185
+            }
+          ]
+        },
+        {
+          "quote": "宁夏回族自治区成立三十周年",
+          "label": "纪念主题文字",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.05,
+              "y": 0.03,
+              "width": 0.9117,
+              "height": 0.5046
+            }
+          ]
+        },
+        {
+          "quote": "1958-1988",
+          "label": "纪念年份“1958-1988”",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.1933,
+              "y": 0.7882,
+              "width": 0.625,
+              "height": 0.1605
+            }
+          ]
+        },
+        {
+          "quote": "1元",
+          "label": "面值“1元”",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.68,
+              "y": 0.27,
+              "width": 0.1683,
+              "height": 0.2144
+            }
+          ]
+        }
+      ]
+    },
+    "b": {
+      "image": "coins/img/JB07_b.webp",
+      "items": [
+        {
+          "quote": "银川南关清真寺建筑",
+          "label": "银川南关清真寺建筑",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.13,
+              "y": 0.1842,
+              "width": 0.74,
+              "height": 0.5558
+            }
+          ]
+        },
+        {
+          "quote": "中华人民共和国",
+          "label": "中华人民共和国国名",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.085,
+              "y": 0.0716,
+              "width": 0.8559,
+              "height": 0.377
+            }
+          ]
+        },
+        {
+          "quote": "1988",
+          "label": "发行年号“1988”",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.35,
+              "y": 0.8278,
+              "width": 0.2801,
+              "height": 0.0922
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

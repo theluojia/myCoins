@@ -1,0 +1,133 @@
+{
+  "id": "JB39-2",
+  "version": 1,
+  "faces": {
+    "f": {
+      "image": "coins/img/JB39-2_f.webp",
+      "items": [
+        {
+          "quote": "长城",
+          "label": "抽象化长城",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.2823,
+              "y": 0.2624,
+              "width": 0.5343,
+              "height": 0.1675
+            }
+          ]
+        },
+        {
+          "quote": "三只和平鸽",
+          "label": "三只和平鸽",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.5648,
+              "cy": 0.2399,
+              "rx": 0.1411,
+              "ry": 0.0775
+            }
+          ]
+        },
+        {
+          "quote": "妈祖阁",
+          "label": "妈祖阁",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.1417,
+              "y": 0.395,
+              "width": 0.3474,
+              "height": 0.3663
+            }
+          ]
+        },
+        {
+          "quote": "帆船",
+          "label": "帆船",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.4355,
+              "y": 0.4563,
+              "width": 0.3765,
+              "height": 0.3113
+            }
+          ]
+        },
+        {
+          "quote": "庆祝中华人民共和国澳门特别行政区成立",
+          "label": "澳门回归纪念文字",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.04,
+              "y": 0.05,
+              "width": 0.9151,
+              "height": 0.5865
+            }
+          ]
+        },
+        {
+          "quote": "面值",
+          "label": "面值“10元”",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3328,
+              "y": 0.82,
+              "width": 0.3429,
+              "height": 0.135
+            }
+          ]
+        }
+      ]
+    },
+    "b": {
+      "image": "coins/img/JB39-2_b.webp",
+      "items": [
+        {
+          "quote": "五星荷花",
+          "label": "五星荷花区旗图案",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.5016,
+              "cy": 0.5083,
+              "rx": 0.3312,
+              "ry": 0.3267
+            }
+          ]
+        },
+        {
+          "quote": "国名",
+          "label": "中华人民共和国国名",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0406,
+              "y": 0.0489,
+              "width": 0.9167,
+              "height": 0.4602
+            }
+          ]
+        },
+        {
+          "quote": "年号",
+          "label": "年号“1999”",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3161,
+              "y": 0.8166,
+              "width": 0.3735,
+              "height": 0.1355
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

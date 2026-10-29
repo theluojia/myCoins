@@ -1,0 +1,174 @@
+{
+  "id": "JB10",
+  "version": 1,
+  "faces": {
+    "f": {
+      "image": "coins/img/JB10_f.webp",
+      "items": [
+        {
+          "quote": "40",
+          "label": "艺术字“40”",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.13,
+              "y": 0.1696,
+              "width": 0.7009,
+              "height": 0.4804
+            }
+          ]
+        },
+        {
+          "quote": "五角星",
+          "label": "五角星",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.4102,
+              "cy": 0.3533,
+              "rx": 0.09,
+              "ry": 0.09
+            }
+          ]
+        },
+        {
+          "quote": "和平鸽",
+          "label": "和平鸽",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.5669,
+              "cy": 0.2332,
+              "rx": 0.0873,
+              "ry": 0.0799
+            },
+            {
+              "type": "ellipse",
+              "cx": 0.5365,
+              "cy": 0.6332,
+              "rx": 0.0998,
+              "ry": 0.0692
+            },
+            {
+              "type": "ellipse",
+              "cx": 0.261,
+              "cy": 0.6649,
+              "rx": 0.0927,
+              "ry": 0.0664
+            },
+            {
+              "type": "ellipse",
+              "cx": 0.8642,
+              "cy": 0.607,
+              "rx": 0.079,
+              "ry": 0.0664
+            }
+          ]
+        },
+        {
+          "quote": "乐谱",
+          "label": "国歌前奏乐谱",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.1357,
+              "y": 0.6567,
+              "width": 0.7384,
+              "height": 0.1601
+            }
+          ]
+        },
+        {
+          "quote": "1949-1989",
+          "label": "纪念年份",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.31,
+              "y": 0.84,
+              "width": 0.38,
+              "height": 0.08
+            }
+          ]
+        }
+      ]
+    },
+    "b": {
+      "image": "coins/img/JB10_b.webp",
+      "items": [
+        {
+          "quote": "国徽",
+          "label": "中华人民共和国国徽",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.4867,
+              "cy": 0.2949,
+              "rx": 0.2379,
+              "ry": 0.2491
+            }
+          ]
+        },
+        {
+          "quote": "人民大会堂东门",
+          "label": "人民大会堂东门外景",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.101,
+              "y": 0.5387,
+              "width": 0.8002,
+              "height": 0.1855
+            }
+          ]
+        },
+        {
+          "quote": "节日礼花",
+          "label": "两侧节日礼花",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.16,
+              "cy": 0.37,
+              "rx": 0.1,
+              "ry": 0.13
+            },
+            {
+              "type": "ellipse",
+              "cx": 0.84,
+              "cy": 0.37,
+              "rx": 0.1,
+              "ry": 0.13
+            }
+          ]
+        },
+        {
+          "quote": "1989",
+          "label": "年号“1989”",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.4033,
+              "y": 0.8611,
+              "width": 0.2,
+              "height": 0.08
+            }
+          ]
+        },
+        {
+          "quote": "壹圆",
+          "label": "面值“壹圆”",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.2844,
+              "y": 0.7175,
+              "width": 0.4435,
+              "height": 0.1472
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

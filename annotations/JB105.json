@@ -1,0 +1,108 @@
+{
+  "id": "JB105",
+  "version": 1,
+  "faces": {
+    "b": {
+      "image": "coins/img/JB105_b.webp",
+      "items": [
+        {
+          "quote": "国徽",
+          "label": "中华人民共和国国徽",
+          "regions": [
+            { "type": "ellipse", "cx": 0.5, "cy": 0.43, "rx": 0.25, "ry": 0.27 }
+          ]
+        },
+        {
+          "quote": "国名",
+          "label": "中华人民共和国国名",
+          "regions": [
+            { "type": "rect", "x": 0.12, "y": 0.06, "width": 0.76, "height": 0.25 }
+          ]
+        },
+        {
+          "quote": "装饰风格的武夷山图案",
+          "label": "装饰风格的武夷山图案",
+          "regions": [
+            { "type": "rect", "x": 0.06, "y": 0.69, "width": 0.88, "height": 0.19 }
+          ]
+        },
+        {
+          "quote": "年号",
+          "label": "年号“2020”",
+          "regions": [
+            { "type": "rect", "x": 0.41, "y": 0.82, "width": 0.2, "height": 0.09 }
+          ]
+        }
+      ]
+    },
+    "f": {
+      "image": "coins/img/JB105_f.webp",
+      "items": [
+        {
+          "quote": "玉女峰",
+          "label": "画面中央的玉女峰",
+          "regions": [
+            { "type": "ellipse", "cx": 0.36, "cy": 0.36, "rx": 0.18, "ry": 0.3 }
+          ]
+        },
+        {
+          "quote": "九曲溪",
+          "label": "穿行山间的九曲溪",
+          "regions": [
+            { "type": "polygon", "points": [[0.5, 0.24], [0.83, 0.23], [0.78, 0.43], [0.7, 0.59], [0.65, 0.71], [0.56, 0.6], [0.62, 0.43]] }
+          ]
+        },
+        {
+          "quote": "金斑喙凤蝶",
+          "label": "峰顶附近的金斑喙凤蝶",
+          "regions": [
+            { "type": "ellipse", "cx": 0.18, "cy": 0.19, "rx": 0.05, "ry": 0.035 },
+            { "type": "ellipse", "cx": 0.51, "cy": 0.12, "rx": 0.08, "ry": 0.05 }
+          ]
+        },
+        {
+          "quote": "茶叶",
+          "label": "右下方茶叶",
+          "regions": [
+            { "type": "ellipse", "cx": 0.79, "cy": 0.68, "rx": 0.18, "ry": 0.2 }
+          ]
+        },
+        {
+          "quote": "竹排",
+          "label": "九曲溪上的竹排",
+          "regions": [
+            { "type": "ellipse", "cx": 0.55, "cy": 0.79, "rx": 0.13, "ry": 0.08 }
+          ]
+        },
+        {
+          "quote": "武夷精舍",
+          "label": "山间的武夷精舍",
+          "regions": [
+            { "type": "rect", "x": 0.12, "y": 0.3, "width": 0.18, "height": 0.11 }
+          ]
+        },
+        {
+          "quote": "石刻",
+          "label": "左侧摩崖石刻",
+          "regions": [
+            { "type": "rect", "x": 0.06, "y": 0.41, "width": 0.16, "height": 0.15 }
+          ]
+        },
+        {
+          "quote": "世界文化和自然遗产——武夷山",
+          "label": "主题文字",
+          "regions": [
+            { "type": "rect", "x": 0.18, "y": 0.87, "width": 0.64, "height": 0.08 }
+          ]
+        },
+        {
+          "quote": "面额",
+          "label": "面额“5元”",
+          "regions": [
+            { "type": "rect", "x": 0.65, "y": 0.08, "width": 0.25, "height": 0.15 }
+          ]
+        }
+      ]
+    }
+  }
+}

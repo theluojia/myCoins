@@ -1,0 +1,94 @@
+{
+  "id": "JB29",
+  "version": 1,
+  "faces": {
+    "f": {
+      "image": "coins/img/JB29_f.webp",
+      "items": [
+        {
+          "quote": "周恩来的素描头像",
+          "label": "周恩来素描头像",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.52,
+              "cy": 0.48,
+              "rx": 0.3,
+              "ry": 0.37
+            }
+          ]
+        },
+        {
+          "quote": "周恩来诞辰100周年1898-1998",
+          "label": "诞辰纪念文字",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0444,
+              "y": 0.0531,
+              "width": 0.8992,
+              "height": 0.5333
+            }
+          ]
+        }
+      ]
+    },
+    "b": {
+      "image": "coins/img/JB29_b.webp",
+      "items": [
+        {
+          "quote": "国名",
+          "label": "中华人民共和国国名",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0754,
+              "y": 0.0531,
+              "width": 0.8707,
+              "height": 0.3722
+            }
+          ]
+        },
+        {
+          "quote": "江苏淮安周恩来故居",
+          "label": "江苏淮安周恩来故居",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0555,
+              "y": 0.3776,
+              "width": 0.8962,
+              "height": 0.3352
+            }
+          ]
+        },
+        {
+          "quote": "面值",
+          "label": "面值“壹圆”",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3411,
+              "y": 0.7714,
+              "width": 0.3272,
+              "height": 0.1217
+            }
+          ]
+        },
+        {
+          "quote": "年号",
+          "label": "年号“1998”",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.4225,
+              "y": 0.8797,
+              "width": 0.1714,
+              "height": 0.061
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "id": "JB05",
+  "version": 1,
+  "faces": {
+    "f": {
+      "image": "coins/img/JB05_f.webp",
+      "items": [
+        {
+          "quote": "放牧图",
+          "label": "牧民与牲畜放牧图",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.08,
+              "y": 0.0957,
+              "width": 0.8347,
+              "height": 0.6743
+            }
+          ]
+        },
+        {
+          "quote": "蒙古文字",
+          "label": "蒙古文纪念主题",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.2703,
+              "y": 0.8282,
+              "width": 0.4753,
+              "height": 0.1288
+            }
+          ]
+        },
+        {
+          "quote": "面值",
+          "label": "面值“1元”",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.1033,
+              "y": 0.2405,
+              "width": 0.1606,
+              "height": 0.145
+            }
+          ]
+        }
+      ]
+    },
+    "b": {
+      "image": "coins/img/JB05_b.webp",
+      "items": [
+        {
+          "quote": "内蒙古自治区人大常委会办公楼",
+          "label": "办公楼建筑",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.12,
+              "y": 0.25,
+              "width": 0.76,
+              "height": 0.44
+            }
+          ]
+        },
+        {
+          "quote": "国名",
+          "label": "中华人民共和国国名",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0804,
+              "y": 0.0568,
+              "width": 0.8481,
+              "height": 0.3502
+            }
+          ]
+        },
+        {
+          "quote": "年号",
+          "label": "年号“1987”",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.372,
+              "y": 0.856,
+              "width": 0.2603,
+              "height": 0.0843
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

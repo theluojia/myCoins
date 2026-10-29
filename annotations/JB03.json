@@ -1,0 +1,81 @@
+{
+  "id": "JB03",
+  "version": 1,
+  "faces": {
+    "f": {
+      "image": "coins/img/JB03_f.webp",
+      "items": [
+        {
+          "quote": "丰收图",
+          "label": "新疆丰收人物与瓜果",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.2508,
+              "y": 0.1781,
+              "width": 0.4247,
+              "height": 0.4142
+            }
+          ]
+        },
+        {
+          "quote": "欣欣向荣",
+          "label": "欣欣向荣的丰收场景",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.15,
+              "y": 0.2,
+              "width": 0.7,
+              "height": 0.6
+            }
+          ]
+        }
+      ]
+    },
+    "b": {
+      "image": "coins/img/JB03_b.webp",
+      "items": [
+        {
+          "quote": "国名",
+          "label": "中华人民共和国国名",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.1165,
+              "y": 0.05,
+              "width": 0.7811,
+              "height": 0.331
+            }
+          ]
+        },
+        {
+          "quote": "新疆人民会堂",
+          "label": "新疆人民会堂",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.15,
+              "y": 0.2884,
+              "width": 0.7211,
+              "height": 0.4088
+            }
+          ]
+        },
+        {
+          "quote": "年号",
+          "label": "年号“1985”",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3623,
+              "y": 0.7212,
+              "width": 0.28,
+              "height": 0.1
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

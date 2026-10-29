@@ -1,0 +1,114 @@
+{
+  "id": "JB19",
+  "version": 1,
+  "faces": {
+    "f": {
+      "image": "coins/img/JB19_f.webp",
+      "items": [
+        {
+          "quote": "一男一女两名儿童头像",
+          "label": "希望工程儿童头像",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.5138,
+              "cy": 0.5007,
+              "rx": 0.33,
+              "ry": 0.31
+            }
+          ]
+        },
+        {
+          "quote": "希望工程",
+          "label": "“希望工程”题词",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.2428,
+              "cy": 0.2611,
+              "rx": 0.2236,
+              "ry": 0.2371
+            }
+          ]
+        },
+        {
+          "quote": "PROJECT HOPE",
+          "label": "“PROJECT HOPE”英文",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.5315,
+              "y": 0.0615,
+              "width": 0.4236,
+              "height": 0.3842
+            }
+          ]
+        },
+        {
+          "quote": "面值",
+          "label": "面值“1元”",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.16,
+              "y": 0.6291,
+              "width": 0.2636,
+              "height": 0.2309
+            }
+          ]
+        }
+      ]
+    },
+    "b": {
+      "image": "coins/img/JB19_b.webp",
+      "items": [
+        {
+          "quote": "国徽",
+          "label": "中华人民共和国国徽",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.5011,
+              "cy": 0.4723,
+              "rx": 0.2726,
+              "ry": 0.3052
+            }
+          ]
+        },
+        {
+          "quote": "中英文国名",
+          "label": "中英文国名",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.06,
+              "y": 0.05,
+              "width": 0.8947,
+              "height": 0.4763
+            },
+            {
+              "type": "rect",
+              "x": 0.0624,
+              "y": 0.5581,
+              "width": 0.9026,
+              "height": 0.3969
+            }
+          ]
+        },
+        {
+          "quote": "年号",
+          "label": "年号“1994”",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3632,
+              "y": 0.7474,
+              "width": 0.28,
+              "height": 0.1
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
