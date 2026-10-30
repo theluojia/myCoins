@@ -1,0 +1,140 @@
+{
+  "id": "JB108-1",
+  "version": 1,
+  "faces": {
+    "f": {
+      "image": "coins/img/JB108-1_f.webp",
+      "items": [
+        {
+          "quote": "短道速滑运动员形象",
+          "label": "短道速滑运动员形象",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.4318,
+              "cy": 0.4519,
+              "rx": 0.3622,
+              "ry": 0.4349
+            }
+          ]
+        },
+        {
+          "quote": "“第24届冬季奥林匹克运动会”字样",
+          "label": "“第24届冬季奥林匹克运动会”字样",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.7425,
+              "y": 0.1612,
+              "width": 0.2198,
+              "height": 0.6309
+            }
+          ]
+        },
+        {
+          "quote": "面额",
+          "label": "面额",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.64,
+              "y": 0.545,
+              "width": 0.2113,
+              "height": 0.1366
+            }
+          ]
+        }
+      ]
+    },
+    "b": {
+      "image": "coins/img/JB108-1_b.webp",
+      "items": [
+        {
+          "quote": "第24届冬奥会会徽",
+          "label": "第24届冬奥会会徽",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.4931,
+              "cy": 0.4666,
+              "rx": 0.2526,
+              "ry": 0.2644
+            }
+          ]
+        },
+        {
+          "quote": "图案化的冬奥会比赛场馆",
+          "label": "图案化的冬奥会比赛场馆",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.4903,
+              "cy": 0.771,
+              "rx": 0.3831,
+              "ry": 0.0842
+            }
+          ]
+        },
+        {
+          "quote": "长城",
+          "label": "长城",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0461,
+              "y": 0.5356,
+              "width": 0.1756,
+              "height": 0.1724
+            },
+            {
+              "type": "rect",
+              "x": 0.7691,
+              "y": 0.5871,
+              "width": 0.1852,
+              "height": 0.1398
+            }
+          ]
+        },
+        {
+          "quote": "雪山",
+          "label": "雪山",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.8005,
+              "y": 0.5172,
+              "width": 0.1505,
+              "height": 0.0751
+            }
+          ]
+        },
+        {
+          "quote": "国名",
+          "label": "国名",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0932,
+              "y": 0.0516,
+              "width": 0.8474,
+              "height": 0.3253
+            }
+          ]
+        },
+        {
+          "quote": "年号",
+          "label": "年号",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3535,
+              "y": 0.8416,
+              "width": 0.28,
+              "height": 0.11
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

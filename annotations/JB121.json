@@ -1,0 +1,94 @@
+{
+  "id": "JB121",
+  "version": 1,
+  "faces": {
+    "f": {
+      "image": "coins/img/JB121_f.webp",
+      "items": [
+        {
+          "quote": "中国人民抗日战争暨世界反法西斯战争胜利80周年纪念活动标识",
+          "label": "中国人民抗日战争暨世界反法西斯战争胜利80周年纪念活动标识",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.4996,
+              "cy": 0.5003,
+              "rx": 0.3269,
+              "ry": 0.3293
+            }
+          ]
+        },
+        {
+          "quote": "字样",
+          "label": "字样",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0532,
+              "y": 0.0604,
+              "width": 0.8998,
+              "height": 0.5817
+            }
+          ]
+        },
+        {
+          "quote": "面额",
+          "label": "面额",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.4113,
+              "y": 0.8421,
+              "width": 0.1879,
+              "height": 0.1079
+            }
+          ]
+        }
+      ]
+    },
+    "b": {
+      "image": "coins/img/JB121_b.webp",
+      "items": [
+        {
+          "quote": "国徽",
+          "label": "国徽",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.4965,
+              "cy": 0.5009,
+              "rx": 0.3289,
+              "ry": 0.3448
+            }
+          ]
+        },
+        {
+          "quote": "国名",
+          "label": "国名",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.059,
+              "y": 0.0405,
+              "width": 0.8926,
+              "height": 0.4138
+            }
+          ]
+        },
+        {
+          "quote": "年号",
+          "label": "年号",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3627,
+              "y": 0.8357,
+              "width": 0.28,
+              "height": 0.11
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

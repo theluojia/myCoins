@@ -1,0 +1,127 @@
+{
+  "id": "JB50",
+  "version": 1,
+  "faces": {
+    "f": {
+      "image": "coins/img/JB50_f.webp",
+      "items": [
+        {
+          "quote": "故宫太和门",
+          "label": "故宫太和门",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.2105,
+              "y": 0.4062,
+              "width": 0.5799,
+              "height": 0.2033
+            }
+          ]
+        },
+        {
+          "quote": "金水桥",
+          "label": "金水桥",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.1963,
+              "y": 0.6302,
+              "width": 0.6173,
+              "height": 0.1655
+            }
+          ]
+        },
+        {
+          "quote": "三大殿",
+          "label": "三大殿",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.2086,
+              "y": 0.2139,
+              "width": 0.6031,
+              "height": 0.1964
+            }
+          ]
+        },
+        {
+          "quote": "故宫门",
+          "label": "故宫门",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0223,
+              "y": 0.1544,
+              "width": 0.202,
+              "height": 0.6586
+            },
+            {
+              "type": "rect",
+              "x": 0.7732,
+              "y": 0.1604,
+              "width": 0.2002,
+              "height": 0.6586
+            }
+          ]
+        },
+        {
+          "quote": "面额",
+          "label": "面额",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3481,
+              "y": 0.0705,
+              "width": 0.2239,
+              "height": 0.1518
+            }
+          ]
+        }
+      ]
+    },
+    "b": {
+      "image": "coins/img/JB50_b.webp",
+      "items": [
+        {
+          "quote": "国徽",
+          "label": "国徽",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.4945,
+              "cy": 0.3871,
+              "rx": 0.3264,
+              "ry": 0.3305
+            }
+          ]
+        },
+        {
+          "quote": "国名",
+          "label": "国名",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.174,
+              "y": 0.6907,
+              "width": 0.6551,
+              "height": 0.1094
+            }
+          ]
+        },
+        {
+          "quote": "年号",
+          "label": "年号",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.369,
+              "y": 0.81,
+              "width": 0.271,
+              "height": 0.1038
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

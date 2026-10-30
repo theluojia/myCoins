@@ -1,0 +1,94 @@
+{
+  "id": "JB125",
+  "version": 1,
+  "faces": {
+    "f": {
+      "image": "coins/img/JB125_f.webp",
+      "items": [
+        {
+          "quote": "江泽民同志头像",
+          "label": "江泽民同志头像",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.2219,
+              "y": 0.1356,
+              "width": 0.5627,
+              "height": 0.6742
+            }
+          ]
+        },
+        {
+          "quote": "“江泽民诞辰100周年”“1926-2026”字样",
+          "label": "“江泽民诞辰100周年”“1926-2026”字样",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0663,
+              "y": 0.0557,
+              "width": 0.8601,
+              "height": 0.3737
+            }
+          ]
+        },
+        {
+          "quote": "面额",
+          "label": "面额",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.4333,
+              "y": 0.8789,
+              "width": 0.1233,
+              "height": 0.0996
+            }
+          ]
+        }
+      ]
+    },
+    "b": {
+      "image": "coins/img/JB125_b.webp",
+      "items": [
+        {
+          "quote": "中华人民共和国国徽",
+          "label": "中华人民共和国国徽",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.4975,
+              "cy": 0.5333,
+              "rx": 0.3349,
+              "ry": 0.3548
+            }
+          ]
+        },
+        {
+          "quote": "并刊国名",
+          "label": "国名",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0623,
+              "y": 0.0555,
+              "width": 0.8812,
+              "height": 0.4102
+            }
+          ]
+        },
+        {
+          "quote": "年号",
+          "label": "年号",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3629,
+              "y": 0.8571,
+              "width": 0.28,
+              "height": 0.11
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

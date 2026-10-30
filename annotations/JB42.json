@@ -1,0 +1,120 @@
+{
+  "id": "JB42",
+  "version": 1,
+  "faces": {
+    "f": {
+      "image": "coins/img/JB42_f.webp",
+      "items": [
+        {
+          "quote": "\"西藏和平解放五十周年\"汉、藏字样",
+          "label": "\"西藏和平解放五十周年\"汉藏字样",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0456,
+              "y": 0.041,
+              "width": 0.5215,
+              "height": 0.6896
+            }
+          ]
+        },
+        {
+          "quote": "布达拉宫",
+          "label": "布达拉宫",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.1884,
+              "y": 0.2121,
+              "width": 0.6712,
+              "height": 0.2563
+            }
+          ]
+        },
+        {
+          "quote": "藏族男女舞蹈场景",
+          "label": "藏族男女舞蹈场景",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3008,
+              "y": 0.4377,
+              "width": 0.4895,
+              "height": 0.3911
+            }
+          ]
+        },
+        {
+          "quote": "面值",
+          "label": "面值",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.2012,
+              "y": 0.4709,
+              "width": 0.2384,
+              "height": 0.173
+            }
+          ]
+        }
+      ]
+    },
+    "b": {
+      "image": "coins/img/JB42_b.webp",
+      "items": [
+        {
+          "quote": "国名",
+          "label": "国名",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.074,
+              "y": 0.0527,
+              "width": 0.8448,
+              "height": 0.3659
+            }
+          ]
+        },
+        {
+          "quote": "国徽",
+          "label": "国徽",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.4938,
+              "cy": 0.4465,
+              "rx": 0.2488,
+              "ry": 0.2595
+            }
+          ]
+        },
+        {
+          "quote": "牡丹",
+          "label": "牡丹",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.1591,
+              "y": 0.5104,
+              "width": 0.6854,
+              "height": 0.3388
+            }
+          ]
+        },
+        {
+          "quote": "年号",
+          "label": "年号",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3518,
+              "y": 0.8348,
+              "width": 0.3045,
+              "height": 0.111
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

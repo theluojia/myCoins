@@ -1,0 +1,94 @@
+{
+  "id": "JB54",
+  "version": 1,
+  "faces": {
+    "f": {
+      "image": "coins/img/JB54_f.webp",
+      "items": [
+        {
+          "quote": "邓小平侧面头像",
+          "label": "邓小平侧面头像",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.2053,
+              "y": 0.1402,
+              "width": 0.5948,
+              "height": 0.733
+            }
+          ]
+        },
+        {
+          "quote": "\"邓小平诞辰100周年1904-2004\"字样",
+          "label": "\"邓小平诞辰100周年1904-2004\"字样",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0688,
+              "y": 0.0577,
+              "width": 0.8751,
+              "height": 0.368
+            }
+          ]
+        }
+      ]
+    },
+    "b": {
+      "image": "coins/img/JB54_b.webp",
+      "items": [
+        {
+          "quote": "国名",
+          "label": "国名",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.1022,
+              "y": 0.0464,
+              "width": 0.7945,
+              "height": 0.2912
+            }
+          ]
+        },
+        {
+          "quote": "四川广安邓小平故居",
+          "label": "四川广安邓小平故居",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.056,
+              "y": 0.3441,
+              "width": 0.9101,
+              "height": 0.4388
+            }
+          ]
+        },
+        {
+          "quote": "面值",
+          "label": "面值",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3515,
+              "y": 0.8189,
+              "width": 0.2949,
+              "height": 0.0983
+            }
+          ]
+        },
+        {
+          "quote": "年号",
+          "label": "年号",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.4217,
+              "y": 0.8915,
+              "width": 0.1514,
+              "height": 0.0703
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

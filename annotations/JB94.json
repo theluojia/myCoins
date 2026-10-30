@@ -1,0 +1,94 @@
+{
+  "id": "JB94",
+  "version": 1,
+  "faces": {
+    "f": {
+      "image": "coins/img/JB94_f.webp",
+      "items": [
+        {
+          "quote": "孙中山头像",
+          "label": "孙中山头像",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.21,
+              "y": 0.1321,
+              "width": 0.546,
+              "height": 0.6793
+            }
+          ]
+        },
+        {
+          "quote": "\"孙中山先生诞辰150周年1866-2016\"字样",
+          "label": "\"孙中山先生诞辰150周年1866-2016\"字样",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0571,
+              "y": 0.047,
+              "width": 0.8931,
+              "height": 0.4761
+            }
+          ]
+        }
+      ]
+    },
+    "b": {
+      "image": "coins/img/JB94_b.webp",
+      "items": [
+        {
+          "quote": "国名",
+          "label": "国名",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.1295,
+              "y": 0.0679,
+              "width": 0.7686,
+              "height": 0.2623
+            }
+          ]
+        },
+        {
+          "quote": "广东省中山市翠亨村孙中山故居",
+          "label": "广东省中山市翠亨村孙中山故居",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0809,
+              "y": 0.3034,
+              "width": 0.8443,
+              "height": 0.3938
+            }
+          ]
+        },
+        {
+          "quote": "面值",
+          "label": "面值",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3611,
+              "y": 0.73,
+              "width": 0.2989,
+              "height": 0.1308
+            }
+          ]
+        },
+        {
+          "quote": "年号",
+          "label": "年号",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.4105,
+              "y": 0.8626,
+              "width": 0.1995,
+              "height": 0.0624
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

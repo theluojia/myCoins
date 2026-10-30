@@ -1,0 +1,140 @@
+{
+  "id": "JB122",
+  "version": 1,
+  "faces": {
+    "f": {
+      "image": "coins/img/JB122_f.webp",
+      "items": [
+        {
+          "quote": "中国京剧艺术中净角形象",
+          "label": "中国京剧艺术中净角形象",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.4839,
+              "y": 0.2096,
+              "width": 0.4448,
+              "height": 0.7004
+            }
+          ]
+        },
+        {
+          "quote": "局部为彩色图案",
+          "label": "局部为彩色图案",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.3034,
+              "cy": 0.479,
+              "rx": 0.1724,
+              "ry": 0.2133
+            }
+          ]
+        },
+        {
+          "quote": "辅以装饰化图形",
+          "label": "装饰化图形",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.5476,
+              "cy": 0.2458,
+              "rx": 0.18,
+              "ry": 0.14
+            }
+          ]
+        },
+        {
+          "quote": "“中国京剧艺术”",
+          "label": "“中国京剧艺术”",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.2419,
+              "y": 0.0486,
+              "width": 0.5256,
+              "height": 0.1423
+            }
+          ]
+        },
+        {
+          "quote": "面额“5元”",
+          "label": "面额“5元”",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.1779,
+              "y": 0.7044,
+              "width": 0.2085,
+              "height": 0.1357
+            }
+          ]
+        }
+      ]
+    },
+    "b": {
+      "image": "coins/img/JB122_b.webp",
+      "items": [
+        {
+          "quote": "国徽",
+          "label": "国徽",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.4968,
+              "cy": 0.4841,
+              "rx": 0.3111,
+              "ry": 0.3264
+            }
+          ]
+        },
+        {
+          "quote": "国名",
+          "label": "国名",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0445,
+              "y": 0.0493,
+              "width": 0.9258,
+              "height": 0.3977
+            }
+          ]
+        },
+        {
+          "quote": "年号",
+          "label": "年号",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3641,
+              "y": 0.8414,
+              "width": 0.28,
+              "height": 0.11
+            }
+          ]
+        },
+        {
+          "quote": "中国戏曲乐器图案",
+          "label": "中国戏曲乐器图案",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.8347,
+              "cy": 0.6929,
+              "rx": 0.1312,
+              "ry": 0.2046
+            },
+            {
+              "type": "ellipse",
+              "cx": 0.1926,
+              "cy": 0.7055,
+              "rx": 0.1304,
+              "ry": 0.2082
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

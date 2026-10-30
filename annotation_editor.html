@@ -30,10 +30,6 @@
         <select id="coinSelect"></select>
       </label>
       <button id="nextCoinBtn" class="icon-button" title="下一枚">→</button>
-      <label class="check-field">
-        <input id="pre2000Only" type="checkbox" checked>
-        <span>只看 2000 年以前</span>
-      </label>
       <div id="faceTabs" class="face-tabs" role="tablist" aria-label="币面">
         <button type="button" data-face="f" class="active">f · 第一图</button>
         <button type="button" data-face="b">b · 第二图</button>
@@ -79,10 +75,13 @@
           </div>
         </div>
 
-        <div class="description-card">
+        <label class="description-card">
           <span id="faceName" class="face-name"></span>
-          <p id="faceDescription"></p>
-        </div>
+          <span class="description-edit-area">
+            <textarea id="faceDescription" rows="3" aria-label="当前币面描述"></textarea>
+            <small>这里可直接修正币面描述；保存时会与标记 JSON 一并写入 coin_data.json。</small>
+          </span>
+        </label>
 
         <div class="shortcut-help">
           <span>拖动区域：移动</span>
@@ -100,14 +99,18 @@
             <h2>文字标记</h2>
             <button id="addItemBtn" class="text-button">＋新增</button>
           </div>
-          <p class="section-hint">可先在图片下方的币面描述中选中文字，再点“新增”；整条错误标记可在下方删除。</p>
+          <p class="section-hint">可先在图片下方的币面描述中选中文字，再点“新增”；整条错误标记可在下方删除。修改描述后，请同步修正受影响标记的原文。</p>
           <div id="itemList" class="item-list"></div>
         </section>
 
         <section id="itemEditor" class="inspector-section" hidden>
           <div class="section-heading">
             <h2>当前标记</h2>
-            <button id="deleteItemBtn" class="text-button danger">删除标记</button>
+            <div class="item-order-actions" aria-label="调整当前标记顺序">
+              <button id="moveItemUpBtn" class="text-button" title="将当前标记上移一位">↑ 上移</button>
+              <button id="moveItemDownBtn" class="text-button" title="将当前标记下移一位">↓ 下移</button>
+              <button id="deleteItemBtn" class="text-button danger">删除标记</button>
+            </div>
           </div>
           <label class="field">
             <span>描述中的原文</span>
@@ -161,6 +164,7 @@
     <div id="toast" class="toast" role="status" aria-live="polite"></div>
   </div>
 
+  <script src="annotations/annotation_generator.js"></script>
   <script src="annotations/editor.js"></script>
 </body>
 </html>

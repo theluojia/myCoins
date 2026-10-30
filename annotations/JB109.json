@@ -1,0 +1,133 @@
+{
+  "id": "JB109",
+  "version": 1,
+  "faces": {
+    "f": {
+      "image": "coins/img/JB109_f.webp",
+      "items": [
+        {
+          "quote": "剪纸艺术与装饰年画相结合的老虎形象",
+          "label": "剪纸艺术与装饰年画相结合的老虎形象",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.5899,
+              "cy": 0.5936,
+              "rx": 0.341,
+              "ry": 0.3087
+            }
+          ]
+        },
+        {
+          "quote": "花灯",
+          "label": "花灯",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.2612,
+              "cy": 0.3062,
+              "rx": 0.1347,
+              "ry": 0.2019
+            }
+          ]
+        },
+        {
+          "quote": "松枝、松果",
+          "label": "松枝、松果",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.6444,
+              "cy": 0.1935,
+              "rx": 0.2699,
+              "ry": 0.1491
+            }
+          ]
+        },
+        {
+          "quote": "“壬寅”字样",
+          "label": "币面左侧刊“壬寅”字样",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.048,
+              "y": 0.3907,
+              "width": 0.1207,
+              "height": 0.2175
+            }
+          ]
+        }
+      ]
+    },
+    "b": {
+      "image": "coins/img/JB109_b.webp",
+      "items": [
+        {
+          "quote": "行名",
+          "label": "行名",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0771,
+              "y": 0.06,
+              "width": 0.8202,
+              "height": 0.3473
+            }
+          ]
+        },
+        {
+          "quote": "面值",
+          "label": "面值",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.2609,
+              "y": 0.2523,
+              "width": 0.6455,
+              "height": 0.4748
+            }
+          ]
+        },
+        {
+          "quote": "汉语拼音字母\"SHIYUAN\"",
+          "label": "汉语拼音字母\"SHIYUAN\"年号",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0773,
+              "y": 0.4986,
+              "width": 0.2479,
+              "height": 0.1378
+            }
+          ]
+        },
+        {
+          "quote": "年号",
+          "label": "年号",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3233,
+              "y": 0.8217,
+              "width": 0.3353,
+              "height": 0.1203
+            }
+          ]
+        },
+        {
+          "quote": "团花图案",
+          "label": "团花图案",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.4988,
+              "cy": 0.5038,
+              "rx": 0.3394,
+              "ry": 0.3361
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

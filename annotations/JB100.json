@@ -1,0 +1,147 @@
+{
+  "id": "JB100",
+  "version": 1,
+  "faces": {
+    "f": {
+      "image": "coins/img/JB100_f.webp",
+      "items": [
+        {
+          "quote": "数字40",
+          "label": "数字40",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.1708,
+              "y": 0.2,
+              "width": 0.6354,
+              "height": 0.4231
+            }
+          ]
+        },
+        {
+          "quote": "牡丹花",
+          "label": "牡丹花",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.4455,
+              "cy": 0.8053,
+              "rx": 0.3257,
+              "ry": 0.1349
+            }
+          ]
+        },
+        {
+          "quote": "飘带和礼花",
+          "label": "飘带和礼花",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.1057,
+              "cy": 0.5471,
+              "rx": 0.1057,
+              "ry": 0.2142
+            },
+            {
+              "type": "ellipse",
+              "cx": 0.8592,
+              "cy": 0.6189,
+              "rx": 0.1408,
+              "ry": 0.2445
+            }
+          ]
+        },
+        {
+          "quote": "\"庆祝改革开放40周年\"字样",
+          "label": "\"庆祝改革开放40周年\"字样",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0838,
+              "y": 0.0463,
+              "width": 0.8239,
+              "height": 0.3022
+            }
+          ]
+        },
+        {
+          "quote": "下方刊面额",
+          "label": "面额",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.546,
+              "y": 0.5891,
+              "width": 0.2058,
+              "height": 0.1387
+            }
+          ]
+        }
+      ]
+    },
+    "b": {
+      "image": "coins/img/JB100_b.webp",
+      "items": [
+        {
+          "quote": "国徽",
+          "label": "国徽",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.4993,
+              "cy": 0.5021,
+              "rx": 0.3325,
+              "ry": 0.345
+            }
+          ]
+        },
+        {
+          "quote": "国名",
+          "label": "国名",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0635,
+              "y": 0.0388,
+              "width": 0.9061,
+              "height": 0.4162
+            }
+          ]
+        },
+        {
+          "quote": "年号",
+          "label": "年号",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.36,
+              "y": 0.835,
+              "width": 0.28,
+              "height": 0.11
+            }
+          ]
+        },
+        {
+          "quote": "左右两侧为果实图案",
+          "label": "左右两侧为果实图案",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.8415,
+              "cy": 0.6856,
+              "rx": 0.0799,
+              "ry": 0.15
+            },
+            {
+              "type": "ellipse",
+              "cx": 0.1555,
+              "cy": 0.6802,
+              "rx": 0.0746,
+              "ry": 0.1565
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

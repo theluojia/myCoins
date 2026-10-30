@@ -1,0 +1,101 @@
+{
+  "id": "JB45",
+  "version": 1,
+  "faces": {
+    "f": {
+      "image": "coins/img/JB45_f.webp",
+      "items": [
+        {
+          "quote": "将军俑特写",
+          "label": "将军俑特写",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.1694,
+              "y": 0.2279,
+              "width": 0.4825,
+              "height": 0.7147
+            }
+          ]
+        },
+        {
+          "quote": "兵马俑坑",
+          "label": "兵马俑坑",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.7534,
+              "cy": 0.6248,
+              "rx": 0.2043,
+              "ry": 0.1826
+            },
+            {
+              "type": "ellipse",
+              "cx": 0.152,
+              "cy": 0.6304,
+              "rx": 0.1152,
+              "ry": 0.1566
+            }
+          ]
+        },
+        {
+          "quote": "面额",
+          "label": "面额",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.6368,
+              "y": 0.2426,
+              "width": 0.2197,
+              "height": 0.1686
+            }
+          ]
+        }
+      ]
+    },
+    "b": {
+      "image": "coins/img/JB45_b.webp",
+      "items": [
+        {
+          "quote": "国徽",
+          "label": "国徽",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.4945,
+              "cy": 0.3871,
+              "rx": 0.3264,
+              "ry": 0.3305
+            }
+          ]
+        },
+        {
+          "quote": "国名",
+          "label": "国名",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.174,
+              "y": 0.6907,
+              "width": 0.6551,
+              "height": 0.1094
+            }
+          ]
+        },
+        {
+          "quote": "年号",
+          "label": "年号",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.369,
+              "y": 0.81,
+              "width": 0.271,
+              "height": 0.1038
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

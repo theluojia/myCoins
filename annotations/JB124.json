@@ -1,0 +1,186 @@
+{
+  "id": "JB124",
+  "version": 1,
+  "faces": {
+    "f": {
+      "image": "coins/img/JB124_f.webp",
+      "items": [
+        {
+          "quote": "九曲溪",
+          "label": "九曲溪",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.4734,
+              "cy": 0.7615,
+              "rx": 0.1849,
+              "ry": 0.1164
+            },
+            {
+              "type": "ellipse",
+              "cx": 0.7425,
+              "cy": 0.5818,
+              "rx": 0.1058,
+              "ry": 0.1392
+            },
+            {
+              "type": "ellipse",
+              "cx": 0.3908,
+              "cy": 0.527,
+              "rx": 0.1625,
+              "ry": 0.0944
+            }
+          ]
+        },
+        {
+          "quote": "阔叶林",
+          "label": "阔叶林",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.1759,
+              "cy": 0.5346,
+              "rx": 0.1325,
+              "ry": 0.1341
+            }
+          ]
+        },
+        {
+          "quote": "茶园",
+          "label": "茶园",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.8274,
+              "cy": 0.699,
+              "rx": 0.1425,
+              "ry": 0.1586
+            }
+          ]
+        },
+        {
+          "quote": "辅以玉女峰",
+          "label": "玉女峰",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.255,
+              "cy": 0.3784,
+              "rx": 0.085,
+              "ry": 0.1214
+            }
+          ]
+        },
+        {
+          "quote": "远山",
+          "label": "远山",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.1333,
+              "y": 0.2058,
+              "width": 0.7533,
+              "height": 0.1633
+            }
+          ]
+        },
+        {
+          "quote": "金斑喙凤蝶",
+          "label": "金斑喙凤蝶",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.3333,
+              "cy": 0.7025,
+              "rx": 0.12,
+              "ry": 0.1079
+            }
+          ]
+        },
+        {
+          "quote": "茶叶",
+          "label": "茶叶",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.4017,
+              "cy": 0.8705,
+              "rx": 0.1967,
+              "ry": 0.0801
+            }
+          ]
+        },
+        {
+          "quote": "“武夷山国家公园”字样",
+          "label": "“武夷山国家公园”字样",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.23,
+              "y": 0.0515,
+              "width": 0.5533,
+              "height": 0.1769
+            }
+          ]
+        },
+        {
+          "quote": "面额",
+          "label": "面额",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.455,
+              "y": 0.6859,
+              "width": 0.1867,
+              "height": 0.1312
+            }
+          ]
+        }
+      ]
+    },
+    "b": {
+      "image": "coins/img/JB124_b.webp",
+      "items": [
+        {
+          "quote": "国徽",
+          "label": "国徽",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.5007,
+              "cy": 0.4985,
+              "rx": 0.3522,
+              "ry": 0.3494
+            }
+          ]
+        },
+        {
+          "quote": "国名",
+          "label": "国名",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0459,
+              "y": 0.0418,
+              "width": 0.9534,
+              "height": 0.3741
+            }
+          ]
+        },
+        {
+          "quote": "年号",
+          "label": "年号",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3558,
+              "y": 0.8407,
+              "width": 0.28,
+              "height": 0.11
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,120 @@
+{
+  "id": "JB82",
+  "version": 1,
+  "faces": {
+    "f": {
+      "image": "coins/img/JB82_f.webp",
+      "items": [
+        {
+          "quote": "三个手拉手的人物形象",
+          "label": "三个手拉手的人物形象",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.5194,
+              "cy": 0.6339,
+              "rx": 0.3766,
+              "ry": 0.2277
+            }
+          ]
+        },
+        {
+          "quote": "地球",
+          "label": "地球",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.4957,
+              "cy": 0.2833,
+              "rx": 0.3791,
+              "ry": 0.2144
+            }
+          ]
+        },
+        {
+          "quote": "叶子",
+          "label": "叶子",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.5782,
+              "cy": 0.8524,
+              "rx": 0.2754,
+              "ry": 0.1247
+            }
+          ]
+        },
+        {
+          "quote": "刊\"环境保护\"字样",
+          "label": "\"环境保护\"字样",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0661,
+              "y": 0.4193,
+              "width": 0.3012,
+              "height": 0.1269
+            }
+          ]
+        }
+      ]
+    },
+    "b": {
+      "image": "coins/img/JB82_b.webp",
+      "items": [
+        {
+          "quote": "国徽",
+          "label": "国徽",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.5034,
+              "cy": 0.4398,
+              "rx": 0.2669,
+              "ry": 0.2651
+            }
+          ]
+        },
+        {
+          "quote": "国名",
+          "label": "国名",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0523,
+              "y": 0.0611,
+              "width": 0.917,
+              "height": 0.4623
+            }
+          ]
+        },
+        {
+          "quote": "面额",
+          "label": "面额",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.2786,
+              "y": 0.6884,
+              "width": 0.4531,
+              "height": 0.1716
+            }
+          ]
+        },
+        {
+          "quote": "年号",
+          "label": "年号",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3634,
+              "y": 0.8481,
+              "width": 0.28,
+              "height": 0.11
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

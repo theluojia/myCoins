@@ -1,0 +1,133 @@
+{
+  "id": "JB58",
+  "version": 1,
+  "faces": {
+    "f": {
+      "image": "coins/img/JB58_f.webp",
+      "items": [
+        {
+          "quote": "身穿中国传统服饰的儿童",
+          "label": "身穿中国传统服饰的儿童",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.5759,
+              "cy": 0.5191,
+              "rx": 0.2428,
+              "ry": 0.3836
+            }
+          ]
+        },
+        {
+          "quote": "两只雏鸡的篮子",
+          "label": "两只雏鸡的篮子",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.6048,
+              "y": 0.2924,
+              "width": 0.2874,
+              "height": 0.3127
+            }
+          ]
+        },
+        {
+          "quote": "右手举蚂蚱",
+          "label": "右手举蚂蚱",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.4124,
+              "cy": 0.2755,
+              "rx": 0.0801,
+              "ry": 0.0859
+            }
+          ]
+        },
+        {
+          "quote": "下方一只母鸡",
+          "label": "一只母鸡",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.2558,
+              "y": 0.5657,
+              "width": 0.3041,
+              "height": 0.3278
+            }
+          ]
+        },
+        {
+          "quote": "迎春灯笼",
+          "label": "迎春灯笼",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.1129,
+              "y": 0.1512,
+              "width": 0.1958,
+              "height": 0.5523
+            }
+          ]
+        },
+        {
+          "quote": "右下方为\"乙酉\"字样",
+          "label": "\"乙酉\"字样",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.7314,
+              "y": 0.6152,
+              "width": 0.1301,
+              "height": 0.1862
+            }
+          ]
+        }
+      ]
+    },
+    "b": {
+      "image": "coins/img/JB58_b.webp",
+      "items": [
+        {
+          "quote": "行名",
+          "label": "行名",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0305,
+              "y": 0.0525,
+              "width": 0.9123,
+              "height": 0.4707
+            }
+          ]
+        },
+        {
+          "quote": "面额\"1元\"及汉语拼音字母\"YIYUAN\"",
+          "label": "面额\"1元\"及汉语拼音字母\"YIYUAN\"",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0961,
+              "y": 0.2292,
+              "width": 0.7801,
+              "height": 0.5645
+            }
+          ]
+        },
+        {
+          "quote": "年号",
+          "label": "年号",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3046,
+              "y": 0.8079,
+              "width": 0.3875,
+              "height": 0.1239
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

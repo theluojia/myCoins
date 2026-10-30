@@ -1,0 +1,133 @@
+{
+  "id": "JB101",
+  "version": 1,
+  "faces": {
+    "f": {
+      "image": "coins/img/JB101_f.webp",
+      "items": [
+        {
+          "quote": "一只中国传统剪纸艺术与装饰年画元素相结合造型的小猪",
+          "label": "一只中国传统剪纸艺术与装饰年画元素相结合造型的小猪",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.4954,
+              "cy": 0.6292,
+              "rx": 0.3516,
+              "ry": 0.2625
+            }
+          ]
+        },
+        {
+          "quote": "宫灯",
+          "label": "宫灯",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.1928,
+              "y": 0.069,
+              "width": 0.2971,
+              "height": 0.4038
+            }
+          ]
+        },
+        {
+          "quote": "石榴花",
+          "label": "石榴花",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.7025,
+              "cy": 0.1756,
+              "rx": 0.1764,
+              "ry": 0.1095
+            }
+          ]
+        },
+        {
+          "quote": "\"己亥\"字样",
+          "label": "币面左侧刊\"己亥\"字样",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0508,
+              "y": 0.4156,
+              "width": 0.1052,
+              "height": 0.2171
+            }
+          ]
+        }
+      ]
+    },
+    "b": {
+      "image": "coins/img/JB101_b.webp",
+      "items": [
+        {
+          "quote": "行名",
+          "label": "行名",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0771,
+              "y": 0.06,
+              "width": 0.8202,
+              "height": 0.3473
+            }
+          ]
+        },
+        {
+          "quote": "面值",
+          "label": "面值",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.2609,
+              "y": 0.2523,
+              "width": 0.6455,
+              "height": 0.4748
+            }
+          ]
+        },
+        {
+          "quote": "汉语拼音字母\"SHIYUAN\"",
+          "label": "汉语拼音字母\"SHIYUAN\"年号",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0773,
+              "y": 0.4986,
+              "width": 0.2479,
+              "height": 0.1378
+            }
+          ]
+        },
+        {
+          "quote": "年号",
+          "label": "年号",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3233,
+              "y": 0.8217,
+              "width": 0.3353,
+              "height": 0.1203
+            }
+          ]
+        },
+        {
+          "quote": "团花图案",
+          "label": "团花图案",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.4988,
+              "cy": 0.5038,
+              "rx": 0.3394,
+              "ry": 0.3361
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

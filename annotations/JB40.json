@@ -1,0 +1,107 @@
+{
+  "id": "JB40",
+  "version": 1,
+  "faces": {
+    "f": {
+      "image": "coins/img/JB40_f.webp",
+      "items": [
+        {
+          "quote": "敦煌石窟的精美彩塑",
+          "label": "敦煌石窟的精美彩塑",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.16,
+              "y": 0.0985,
+              "width": 0.4519,
+              "height": 0.8292
+            }
+          ]
+        },
+        {
+          "quote": "敦煌壁画",
+          "label": "敦煌壁画",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.4951,
+              "y": 0.1182,
+              "width": 0.4225,
+              "height": 0.3425
+            }
+          ]
+        },
+        {
+          "quote": "主题文字",
+          "label": "主题文字",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.5874,
+              "y": 0.468,
+              "width": 0.3423,
+              "height": 0.2588
+            }
+          ]
+        }
+      ]
+    },
+    "b": {
+      "image": "coins/img/JB40_b.webp",
+      "items": [
+        {
+          "quote": "敦煌莫高窟九层楼",
+          "label": "敦煌莫高窟九层楼",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3024,
+              "y": 0.2257,
+              "width": 0.3914,
+              "height": 0.4743
+            }
+          ]
+        },
+        {
+          "quote": "国名",
+          "label": "国名",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0557,
+              "y": 0.051,
+              "width": 0.8797,
+              "height": 0.4346
+            }
+          ]
+        },
+        {
+          "quote": "面额",
+          "label": "面额",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3034,
+              "y": 0.7056,
+              "width": 0.4007,
+              "height": 0.1587
+            }
+          ]
+        },
+        {
+          "quote": "年号",
+          "label": "年号",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3852,
+              "y": 0.8498,
+              "width": 0.2322,
+              "height": 0.0946
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

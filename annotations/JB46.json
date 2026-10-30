@@ -1,0 +1,141 @@
+{
+  "id": "JB46",
+  "version": 1,
+  "faces": {
+    "f": {
+      "image": "coins/img/JB46_f.webp",
+      "items": [
+        {
+          "quote": "身穿中国传统服饰的儿童",
+          "label": "身穿中国传统服饰的儿童",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.6095,
+              "cy": 0.5356,
+              "rx": 0.2939,
+              "ry": 0.3851
+            }
+          ]
+        },
+        {
+          "quote": "如意",
+          "label": "如意",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.2142,
+              "y": 0.1357,
+              "width": 0.2796,
+              "height": 0.2192
+            }
+          ]
+        },
+        {
+          "quote": "羊形迎春灯笼",
+          "label": "羊形迎春灯笼",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.1115,
+              "y": 0.252,
+              "width": 0.3568,
+              "height": 0.4099
+            }
+          ]
+        },
+        {
+          "quote": "背景为绽放的礼花",
+          "label": "绽放的礼花",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.5139,
+              "cy": 0.1455,
+              "rx": 0.1788,
+              "ry": 0.1012
+            },
+            {
+              "type": "ellipse",
+              "cx": 0.8766,
+              "cy": 0.422,
+              "rx": 0.0938,
+              "ry": 0.0738
+            },
+            {
+              "type": "ellipse",
+              "cx": 0.1017,
+              "cy": 0.4807,
+              "rx": 0.0805,
+              "ry": 0.0915
+            },
+            {
+              "type": "ellipse",
+              "cx": 0.445,
+              "cy": 0.4009,
+              "rx": 0.0594,
+              "ry": 0.0463
+            }
+          ]
+        },
+        {
+          "quote": "\"癸未\"字样",
+          "label": "\"癸未\"字样",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.346,
+              "y": 0.8461,
+              "width": 0.2994,
+              "height": 0.1138
+            }
+          ]
+        }
+      ]
+    },
+    "b": {
+      "image": "coins/img/JB46_b.webp",
+      "items": [
+        {
+          "quote": "行名",
+          "label": "行名",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0305,
+              "y": 0.0525,
+              "width": 0.9123,
+              "height": 0.4707
+            }
+          ]
+        },
+        {
+          "quote": "面额\"1元\"及汉语拼音字母\"YIYUAN\"",
+          "label": "面额\"1元\"及汉语拼音字母\"YIYUAN\"",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0961,
+              "y": 0.2292,
+              "width": 0.7801,
+              "height": 0.5645
+            }
+          ]
+        },
+        {
+          "quote": "年号",
+          "label": "年号",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3046,
+              "y": 0.8079,
+              "width": 0.3875,
+              "height": 0.1239
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

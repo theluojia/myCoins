@@ -1,0 +1,107 @@
+{
+  "id": "JB55",
+  "version": 1,
+  "faces": {
+    "f": {
+      "image": "coins/img/JB55_f.webp",
+      "items": [
+        {
+          "quote": "人民大会堂",
+          "label": "人民大会堂",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0666,
+              "y": 0.4666,
+              "width": 0.8785,
+              "height": 0.2604
+            }
+          ]
+        },
+        {
+          "quote": "华灯",
+          "label": "华灯",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0815,
+              "y": 0.2665,
+              "width": 0.1889,
+              "height": 0.5488
+            }
+          ]
+        },
+        {
+          "quote": "\"人民代表大会成立五十周年\"和\"1954-2004\"字样",
+          "label": "\"人民代表大会成立五十周年\"和\"1954-2004\"字样",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.2311,
+              "y": 0.1898,
+              "width": 0.5556,
+              "height": 0.2643
+            }
+          ]
+        },
+        {
+          "quote": "面额",
+          "label": "面额",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.4615,
+              "y": 0.73,
+              "width": 0.1985,
+              "height": 0.169
+            }
+          ]
+        }
+      ]
+    },
+    "b": {
+      "image": "coins/img/JB55_b.webp",
+      "items": [
+        {
+          "quote": "国名",
+          "label": "国名",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.062,
+              "y": 0.048,
+              "width": 0.8731,
+              "height": 0.448
+            }
+          ]
+        },
+        {
+          "quote": "国徽",
+          "label": "国徽",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.5,
+              "cy": 0.5166,
+              "rx": 0.2939,
+              "ry": 0.3065
+            }
+          ]
+        },
+        {
+          "quote": "年号",
+          "label": "年号",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3421,
+              "y": 0.807,
+              "width": 0.3187,
+              "height": 0.1324
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

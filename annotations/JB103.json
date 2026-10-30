@@ -1,0 +1,185 @@
+{
+  "id": "JB103",
+  "version": 1,
+  "faces": {
+    "f": {
+      "image": "coins/img/JB103_f.webp",
+      "items": [
+        {
+          "quote": "泰山松柏",
+          "label": "泰山松柏",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0558,
+              "y": 0.4531,
+              "width": 0.2703,
+              "height": 0.2469
+            }
+          ]
+        },
+        {
+          "quote": "泰山日出",
+          "label": "泰山日出",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.6891,
+              "y": 0.0967,
+              "width": 0.2116,
+              "height": 0.2257
+            }
+          ]
+        },
+        {
+          "quote": "挑山工",
+          "label": "挑山工",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3095,
+              "y": 0.6636,
+              "width": 0.2134,
+              "height": 0.1918
+            }
+          ]
+        },
+        {
+          "quote": "泰山石刻",
+          "label": "泰山石刻",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.5179,
+              "y": 0.6654,
+              "width": 0.2716,
+              "height": 0.1877
+            }
+          ]
+        },
+        {
+          "quote": "南天门",
+          "label": "南天门",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.1859,
+              "y": 0.2202,
+              "width": 0.1018,
+              "height": 0.0826
+            }
+          ]
+        },
+        {
+          "quote": "十八盘",
+          "label": "十八盘",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.1995,
+              "y": 0.2766,
+              "width": 0.087,
+              "height": 0.2433
+            }
+          ]
+        },
+        {
+          "quote": "玉皇顶",
+          "label": "玉皇顶",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.5267,
+              "y": 0.0594,
+              "width": 0.2144,
+              "height": 0.1485
+            }
+          ]
+        },
+        {
+          "quote": "\"世界文化和自然遗产——泰山\"字样",
+          "label": "\"世界文化和自然遗产——泰山\"字样",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.2224,
+              "y": 0.8483,
+              "width": 0.5803,
+              "height": 0.0794
+            }
+          ]
+        },
+        {
+          "quote": "面额",
+          "label": "面额",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.7246,
+              "y": 0.5304,
+              "width": 0.1888,
+              "height": 0.1101
+            }
+          ]
+        }
+      ]
+    },
+    "b": {
+      "image": "coins/img/JB103_b.webp",
+      "items": [
+        {
+          "quote": "国徽",
+          "label": "国徽",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.4982,
+              "cy": 0.4934,
+              "rx": 0.3071,
+              "ry": 0.3262
+            }
+          ]
+        },
+        {
+          "quote": "国名",
+          "label": "国名",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0881,
+              "y": 0.0565,
+              "width": 0.8256,
+              "height": 0.3719
+            }
+          ]
+        },
+        {
+          "quote": "装饰风格的泰山图案",
+          "label": "装饰风格的泰山图案",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0674,
+              "y": 0.6844,
+              "width": 0.8917,
+              "height": 0.2233
+            }
+          ]
+        },
+        {
+          "quote": "年号",
+          "label": "年号",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3972,
+              "y": 0.8529,
+              "width": 0.225,
+              "height": 0.0993
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

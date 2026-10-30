@@ -1,0 +1,107 @@
+{
+  "id": "JB49",
+  "version": 1,
+  "faces": {
+    "f": {
+      "image": "coins/img/JB49_f.webp",
+      "items": [
+        {
+          "quote": "孔庙大成殿",
+          "label": "孔庙大成殿",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.07,
+              "y": 0.3672,
+              "width": 0.8663,
+              "height": 0.4014
+            }
+          ]
+        },
+        {
+          "quote": "孔林万古长春坊",
+          "label": "孔林万古长春坊",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3092,
+              "y": 0.0903,
+              "width": 0.4232,
+              "height": 0.2196
+            }
+          ]
+        },
+        {
+          "quote": "孔府门匾",
+          "label": "孔府门匾",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0859,
+              "y": 0.0934,
+              "width": 0.2379,
+              "height": 0.3064
+            }
+          ]
+        },
+        {
+          "quote": "面额",
+          "label": "面额",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.7084,
+              "y": 0.2595,
+              "width": 0.2258,
+              "height": 0.1589
+            }
+          ]
+        }
+      ]
+    },
+    "b": {
+      "image": "coins/img/JB49_b.webp",
+      "items": [
+        {
+          "quote": "国徽",
+          "label": "国徽",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.4945,
+              "cy": 0.3871,
+              "rx": 0.3264,
+              "ry": 0.3305
+            }
+          ]
+        },
+        {
+          "quote": "国名",
+          "label": "国名",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.174,
+              "y": 0.6907,
+              "width": 0.6551,
+              "height": 0.1094
+            }
+          ]
+        },
+        {
+          "quote": "年号",
+          "label": "年号",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.369,
+              "y": 0.81,
+              "width": 0.271,
+              "height": 0.1038
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

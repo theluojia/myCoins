@@ -1,0 +1,101 @@
+{
+  "id": "JB62",
+  "version": 1,
+  "faces": {
+    "f": {
+      "image": "coins/img/JB62_f.webp",
+      "items": [
+        {
+          "quote": "龙潭圣迹亭",
+          "label": "龙潭圣迹亭",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.5957,
+              "cy": 0.342,
+              "rx": 0.1532,
+              "ry": 0.2761
+            }
+          ]
+        },
+        {
+          "quote": "老树、相思林",
+          "label": "老树、相思林",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.3655,
+              "cy": 0.3264,
+              "rx": 0.2151,
+              "ry": 0.2476
+            },
+            {
+              "type": "ellipse",
+              "cx": 0.8105,
+              "cy": 0.3328,
+              "rx": 0.1852,
+              "ry": 0.2369
+            }
+          ]
+        },
+        {
+          "quote": "面额",
+          "label": "面额",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0553,
+              "y": 0.3679,
+              "width": 0.2373,
+              "height": 0.1536
+            }
+          ]
+        }
+      ]
+    },
+    "b": {
+      "image": "coins/img/JB62_b.webp",
+      "items": [
+        {
+          "quote": "国徽",
+          "label": "国徽",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.5,
+              "cy": 0.4958,
+              "rx": 0.2872,
+              "ry": 0.2961
+            }
+          ]
+        },
+        {
+          "quote": "国名",
+          "label": "国名",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0929,
+              "y": 0.0686,
+              "width": 0.8226,
+              "height": 0.3964
+            }
+          ]
+        },
+        {
+          "quote": "年号",
+          "label": "年号",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3591,
+              "y": 0.7966,
+              "width": 0.28,
+              "height": 0.11
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

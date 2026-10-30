@@ -1,0 +1,146 @@
+{
+  "id": "JB99",
+  "version": 1,
+  "faces": {
+    "f": {
+      "image": "coins/img/JB99_f.webp",
+      "items": [
+        {
+          "quote": "\"复兴号\"动车组",
+          "label": "\"复兴号\"动车组",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.2322,
+              "y": 0.4743,
+              "width": 0.7272,
+              "height": 0.2987
+            }
+          ]
+        },
+        {
+          "quote": "大胜关长江大桥",
+          "label": "大胜关长江大桥",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.396,
+              "y": 0.1179,
+              "width": 0.4951,
+              "height": 0.1379
+            }
+          ]
+        },
+        {
+          "quote": "北京南站",
+          "label": "北京南站",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.5511,
+              "y": 0.3427,
+              "width": 0.418,
+              "height": 0.1714
+            }
+          ]
+        },
+        {
+          "quote": "高山",
+          "label": "高山",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3804,
+              "y": 0.053,
+              "width": 0.3125,
+              "height": 0.1067
+            }
+          ]
+        },
+        {
+          "quote": "梯田",
+          "label": "梯田",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0967,
+              "y": 0.1607,
+              "width": 0.2122,
+              "height": 0.1955
+            }
+          ]
+        },
+        {
+          "quote": "沙漠",
+          "label": "沙漠",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0473,
+              "y": 0.5294,
+              "width": 0.1684,
+              "height": 0.2268
+            }
+          ]
+        },
+        {
+          "quote": "刊面额",
+          "label": "面额",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.2225,
+              "y": 0.3237,
+              "width": 0.2641,
+              "height": 0.1669
+            }
+          ]
+        }
+      ]
+    },
+    "b": {
+      "image": "coins/img/JB99_b.webp",
+      "items": [
+        {
+          "quote": "国徽",
+          "label": "国徽",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.5014,
+              "cy": 0.5052,
+              "rx": 0.3097,
+              "ry": 0.3286
+            }
+          ]
+        },
+        {
+          "quote": "国名",
+          "label": "国名",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0885,
+              "y": 0.0534,
+              "width": 0.8536,
+              "height": 0.3827
+            }
+          ]
+        },
+        {
+          "quote": "年号",
+          "label": "年号",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.365,
+              "y": 0.825,
+              "width": 0.28,
+              "height": 0.11
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

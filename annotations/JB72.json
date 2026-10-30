@@ -1,0 +1,107 @@
+{
+  "id": "JB72",
+  "version": 1,
+  "faces": {
+    "f": {
+      "image": "coins/img/JB72_f.webp",
+      "items": [
+        {
+          "quote": "一个小男孩",
+          "label": "一个小男孩",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.4593,
+              "cy": 0.5028,
+              "rx": 0.2137,
+              "ry": 0.3606
+            }
+          ]
+        },
+        {
+          "quote": "一枚鼠型图案中国结",
+          "label": "一枚鼠型图案中国结",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.6666,
+              "cy": 0.4821,
+              "rx": 0.1431,
+              "ry": 0.2237
+            }
+          ]
+        },
+        {
+          "quote": "一串\"财\"字鞭炮",
+          "label": "一串\"财\"字鞭炮",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.3029,
+              "cy": 0.6116,
+              "rx": 0.1343,
+              "ry": 0.152
+            }
+          ]
+        },
+        {
+          "quote": "\"戊子\"字样",
+          "label": "\"戊子\"字样",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.5628,
+              "y": 0.7589,
+              "width": 0.2283,
+              "height": 0.1033
+            }
+          ]
+        }
+      ]
+    },
+    "b": {
+      "image": "coins/img/JB72_b.webp",
+      "items": [
+        {
+          "quote": "行名",
+          "label": "行名",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0305,
+              "y": 0.0525,
+              "width": 0.9123,
+              "height": 0.4707
+            }
+          ]
+        },
+        {
+          "quote": "面额\"1元\"及汉语拼音字母\"YIYUAN\"",
+          "label": "面额\"1元\"及汉语拼音字母\"YIYUAN\"",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0961,
+              "y": 0.2292,
+              "width": 0.7801,
+              "height": 0.5645
+            }
+          ]
+        },
+        {
+          "quote": "年号",
+          "label": "年号",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3046,
+              "y": 0.8079,
+              "width": 0.3875,
+              "height": 0.1239
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

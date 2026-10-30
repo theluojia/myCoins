@@ -9,56 +9,104 @@
           "quote": "树木年轮",
           "label": "树木年轮主景",
           "regions": [
-            { "type": "ellipse", "cx": 0.72, "cy": 0.5, "rx": 0.25, "ry": 0.42 }
+            {
+              "type": "ellipse",
+              "cx": 0.72,
+              "cy": 0.5,
+              "rx": 0.25,
+              "ry": 0.42
+            }
           ]
         },
         {
           "quote": "第一套至第五套人民币代表性局部图案",
           "label": "历套人民币代表性图案",
           "regions": [
-            { "type": "rect", "x": 0.28, "y": 0.23, "width": 0.42, "height": 0.57 }
+            {
+              "type": "rect",
+              "x": 0.28,
+              "y": 0.23,
+              "width": 0.42,
+              "height": 0.57
+            }
           ]
         },
         {
           "quote": "国徽",
           "label": "左上方国徽",
           "regions": [
-            { "type": "ellipse", "cx": 0.07, "cy": 0.19, "rx": 0.055, "ry": 0.12 }
+            {
+              "type": "ellipse",
+              "cx": 0.08,
+              "cy": 0.19,
+              "rx": 0.055,
+              "ry": 0.12
+            }
           ]
         },
         {
           "quote": "中国人民银行",
           "label": "中国人民银行行名",
           "regions": [
-            { "type": "rect", "x": 0.19, "y": 0.07, "width": 0.36, "height": 0.13 }
+            {
+              "type": "rect",
+              "x": 0.19,
+              "y": 0.07,
+              "width": 0.36,
+              "height": 0.13
+            }
           ]
         },
         {
           "quote": "人民币发行七十周年纪念",
           "label": "七十周年纪念文字",
           "regions": [
-            { "type": "rect", "x": 0.19, "y": 0.17, "width": 0.32, "height": 0.06 }
+            {
+              "type": "rect",
+              "x": 0.19,
+              "y": 0.17,
+              "width": 0.2653,
+              "height": 0.0823
+            }
           ]
         },
         {
           "quote": "1948-2018",
           "label": "纪念年份“1948-2018”",
           "regions": [
-            { "type": "rect", "x": 0.19, "y": 0.21, "width": 0.14, "height": 0.06 }
+            {
+              "type": "rect",
+              "x": 0.1917,
+              "y": 0.2304,
+              "width": 0.12,
+              "height": 0.0656
+            }
           ]
         },
         {
           "quote": "面额数字“50”",
           "label": "左下方面额数字“50”",
           "regions": [
-            { "type": "rect", "x": 0.04, "y": 0.66, "width": 0.14, "height": 0.25 }
+            {
+              "type": "rect",
+              "x": 0.035,
+              "y": 0.675,
+              "width": 0.14,
+              "height": 0.25
+            }
           ]
         },
         {
           "quote": "伍拾圆",
           "label": "右上方“50”和“伍拾圆”",
           "regions": [
-            { "type": "rect", "x": 0.83, "y": 0.06, "width": 0.16, "height": 0.19 }
+            {
+              "type": "rect",
+              "x": 0.815,
+              "y": 0.06,
+              "width": 0.16,
+              "height": 0.19
+            }
           ]
         }
       ]
@@ -70,63 +118,117 @@
           "quote": "中国人民银行大楼",
           "label": "中国人民银行大楼主景",
           "regions": [
-            { "type": "rect", "x": 0.08, "y": 0.3, "width": 0.56, "height": 0.47 }
+            {
+              "type": "rect",
+              "x": 0.0633,
+              "y": 0.3,
+              "width": 0.5767,
+              "height": 0.5169
+            }
           ]
         },
         {
           "quote": "牡丹花",
           "label": "背景牡丹花",
           "regions": [
-            { "type": "ellipse", "cx": 0.18, "cy": 0.18, "rx": 0.2, "ry": 0.18 }
+            {
+              "type": "ellipse",
+              "cx": 0.18,
+              "cy": 0.18,
+              "rx": 0.2,
+              "ry": 0.18
+            }
           ]
         },
         {
           "quote": "中国人民银行旧址",
           "label": "上方中国人民银行旧址",
           "regions": [
-            { "type": "rect", "x": 0.51, "y": 0.02, "width": 0.31, "height": 0.28 }
+            {
+              "type": "rect",
+              "x": 0.51,
+              "y": 0.02,
+              "width": 0.3654,
+              "height": 0.3551
+            }
           ]
         },
         {
           "quote": "第一套人民币发行布告",
           "label": "右侧第一套人民币发行布告",
           "regions": [
-            { "type": "rect", "x": 0.9, "y": 0.04, "width": 0.08, "height": 0.34 }
+            {
+              "type": "rect",
+              "x": 0.8464,
+              "y": 0.0438,
+              "width": 0.1178,
+              "height": 0.37
+            }
           ]
         },
         {
           "quote": "城市建筑剪影",
           "label": "右侧城市建筑剪影",
           "regions": [
-            { "type": "rect", "x": 0.69, "y": 0.53, "width": 0.27, "height": 0.2 }
+            {
+              "type": "rect",
+              "x": 0.6425,
+              "y": 0.4624,
+              "width": 0.3175,
+              "height": 0.3352
+            }
           ]
         },
         {
           "quote": "面额数字“50”",
           "label": "左上角面额数字“50”",
           "regions": [
-            { "type": "rect", "x": 0.03, "y": 0.06, "width": 0.07, "height": 0.23 }
+            {
+              "type": "rect",
+              "x": 0.03,
+              "y": 0.06,
+              "width": 0.07,
+              "height": 0.2037
+            }
           ]
         },
         {
           "quote": "蒙、藏、维、壮四种民族文字行名和面额",
           "label": "多民族文字行名和面额",
           "regions": [
-            { "type": "rect", "x": 0.1, "y": 0.07, "width": 0.4, "height": 0.15 }
+            {
+              "type": "rect",
+              "x": 0.1,
+              "y": 0.07,
+              "width": 0.3763,
+              "height": 0.1819
+            }
           ]
         },
         {
           "quote": "行长章及“2018年”",
           "label": "行长章及“2018年”",
           "regions": [
-            { "type": "rect", "x": 0.52, "y": 0.83, "width": 0.15, "height": 0.11 }
+            {
+              "type": "rect",
+              "x": 0.5121,
+              "y": 0.815,
+              "width": 0.1333,
+              "height": 0.1325
+            }
           ]
         },
         {
           "quote": "YUAN",
           "label": "右下角“50”和“YUAN”",
           "regions": [
-            { "type": "rect", "x": 0.82, "y": 0.59, "width": 0.15, "height": 0.31 }
+            {
+              "type": "rect",
+              "x": 0.8244,
+              "y": 0.6445,
+              "width": 0.15,
+              "height": 0.31
+            }
           ]
         }
       ]

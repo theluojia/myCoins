@@ -1,0 +1,94 @@
+{
+  "id": "JB88",
+  "version": 1,
+  "faces": {
+    "f": {
+      "image": "coins/img/JB88_f.webp",
+      "items": [
+        {
+          "quote": "一个手持寓意\"吉庆有余\"挂件的小女孩",
+          "label": "一个手持寓意\"吉庆有余\"挂件的小女孩",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.4006,
+              "cy": 0.3474,
+              "rx": 0.2789,
+              "ry": 0.2419
+            }
+          ]
+        },
+        {
+          "quote": "木马",
+          "label": "木马",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3689,
+              "y": 0.2632,
+              "width": 0.4738,
+              "height": 0.5932
+            }
+          ]
+        },
+        {
+          "quote": "\"甲午\"字样",
+          "label": "\"甲午\"字样",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.8133,
+              "y": 0.4492,
+              "width": 0.1135,
+              "height": 0.1693
+            }
+          ]
+        }
+      ]
+    },
+    "b": {
+      "image": "coins/img/JB88_b.webp",
+      "items": [
+        {
+          "quote": "行名",
+          "label": "行名",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0305,
+              "y": 0.0525,
+              "width": 0.9123,
+              "height": 0.4707
+            }
+          ]
+        },
+        {
+          "quote": "面额\"1元\"及汉语拼音字母\"YIYUAN\"",
+          "label": "面额\"1元\"及汉语拼音字母\"YIYUAN\"",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0961,
+              "y": 0.2292,
+              "width": 0.7801,
+              "height": 0.5645
+            }
+          ]
+        },
+        {
+          "quote": "年号",
+          "label": "年号",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3046,
+              "y": 0.8079,
+              "width": 0.3875,
+              "height": 0.1239
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

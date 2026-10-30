@@ -1,0 +1,107 @@
+{
+  "id": "JB97",
+  "version": 1,
+  "faces": {
+    "f": {
+      "image": "coins/img/JB97_f.webp",
+      "items": [
+        {
+          "quote": "\"和\"字的楷书书法",
+          "label": "\"和\"字的楷书书法",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.2189,
+              "y": 0.1927,
+              "width": 0.7038,
+              "height": 0.6302
+            }
+          ]
+        },
+        {
+          "quote": "衬景图案为书法的飞白",
+          "label": "衬景图案为书法的飞白",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.2277,
+              "cy": 0.5305,
+              "rx": 0.1795,
+              "ry": 0.3857
+            }
+          ]
+        },
+        {
+          "quote": "内缘右上方刊\"和\"字五种书法体",
+          "label": "\"和\"字五种书法体",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.394,
+              "y": 0.0632,
+              "width": 0.473,
+              "height": 0.2625
+            }
+          ]
+        }
+      ]
+    },
+    "b": {
+      "image": "coins/img/JB97_b.webp",
+      "items": [
+        {
+          "quote": "国徽",
+          "label": "国徽",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.5087,
+              "cy": 0.434,
+              "rx": 0.2678,
+              "ry": 0.257
+            }
+          ]
+        },
+        {
+          "quote": "国名",
+          "label": "国名",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0535,
+              "y": 0.0603,
+              "width": 0.895,
+              "height": 0.4687
+            }
+          ]
+        },
+        {
+          "quote": "面额",
+          "label": "面额",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.2669,
+              "y": 0.6809,
+              "width": 0.463,
+              "height": 0.1729
+            }
+          ]
+        },
+        {
+          "quote": "年号",
+          "label": "年号",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3481,
+              "y": 0.8547,
+              "width": 0.2927,
+              "height": 0.0982
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

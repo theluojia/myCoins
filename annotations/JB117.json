@@ -1,0 +1,166 @@
+{
+  "id": "JB117",
+  "version": 1,
+  "faces": {
+    "f": {
+      "image": "coins/img/JB117_f.webp",
+      "items": [
+        {
+          "quote": "东北虎",
+          "label": "东北虎",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.4944,
+              "cy": 0.6866,
+              "rx": 0.3369,
+              "ry": 0.1779
+            }
+          ]
+        },
+        {
+          "quote": "东北豹",
+          "label": "东北豹",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.2131,
+              "cy": 0.3537,
+              "rx": 0.1432,
+              "ry": 0.0873
+            }
+          ]
+        },
+        {
+          "quote": "红松",
+          "label": "红松",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.224,
+              "cy": 0.6215,
+              "rx": 0.18,
+              "ry": 0.14
+            }
+          ]
+        },
+        {
+          "quote": "辅以老爷岭",
+          "label": "老爷岭",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.5889,
+              "cy": 0.3546,
+              "rx": 0.2613,
+              "ry": 0.1464
+            }
+          ]
+        },
+        {
+          "quote": "珲春河",
+          "label": "珲春河",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.4559,
+              "cy": 0.5759,
+              "rx": 0.1145,
+              "ry": 0.1147
+            },
+            {
+              "type": "ellipse",
+              "cx": 0.8031,
+              "cy": 0.7378,
+              "rx": 0.1176,
+              "ry": 0.097
+            }
+          ]
+        },
+        {
+          "quote": "梅花鹿",
+          "label": "梅花鹿",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.827,
+              "cy": 0.6449,
+              "rx": 0.0987,
+              "ry": 0.0526
+            }
+          ]
+        },
+        {
+          "quote": "“东北虎豹国家公园”字样",
+          "label": "“东北虎豹国家公园”字样",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.2027,
+              "y": 0.0532,
+              "width": 0.5922,
+              "height": 0.1802
+            }
+          ]
+        },
+        {
+          "quote": "面额",
+          "label": "面额",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.4082,
+              "y": 0.8446,
+              "width": 0.1949,
+              "height": 0.1242
+            }
+          ]
+        }
+      ]
+    },
+    "b": {
+      "image": "coins/img/JB117_b.webp",
+      "items": [
+        {
+          "quote": "国徽",
+          "label": "国徽",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.5007,
+              "cy": 0.4985,
+              "rx": 0.3522,
+              "ry": 0.3494
+            }
+          ]
+        },
+        {
+          "quote": "国名",
+          "label": "国名",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0459,
+              "y": 0.0418,
+              "width": 0.9534,
+              "height": 0.3741
+            }
+          ]
+        },
+        {
+          "quote": "年号",
+          "label": "年号",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3558,
+              "y": 0.8407,
+              "width": 0.28,
+              "height": 0.11
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,133 @@
+{
+  "id": "JB114",
+  "version": 1,
+  "faces": {
+    "f": {
+      "image": "coins/img/JB114_f.webp",
+      "items": [
+        {
+          "quote": "大熊猫母子",
+          "label": "大熊猫母子",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.3333,
+              "cy": 0.6558,
+              "rx": 0.2113,
+              "ry": 0.2345
+            }
+          ]
+        },
+        {
+          "quote": "四姑娘山",
+          "label": "四姑娘山",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.2652,
+              "y": 0.1752,
+              "width": 0.5218,
+              "height": 0.2295
+            }
+          ]
+        },
+        {
+          "quote": "辅以绿尾虹雉",
+          "label": "绿尾虹雉",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.8066,
+              "cy": 0.7107,
+              "rx": 0.1083,
+              "ry": 0.128
+            }
+          ]
+        },
+        {
+          "quote": "竹林",
+          "label": "竹林",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.1414,
+              "cy": 0.4965,
+              "rx": 0.1069,
+              "ry": 0.307
+            }
+          ]
+        },
+        {
+          "quote": "“大熊猫国家公园”字样",
+          "label": "“大熊猫国家公园”字样",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.2289,
+              "y": 0.0534,
+              "width": 0.5563,
+              "height": 0.1699
+            }
+          ]
+        },
+        {
+          "quote": "面额",
+          "label": "面额",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.5281,
+              "y": 0.6516,
+              "width": 0.2053,
+              "height": 0.1252
+            }
+          ]
+        }
+      ]
+    },
+    "b": {
+      "image": "coins/img/JB114_b.webp",
+      "items": [
+        {
+          "quote": "国徽",
+          "label": "国徽",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.5007,
+              "cy": 0.4985,
+              "rx": 0.3522,
+              "ry": 0.3494
+            }
+          ]
+        },
+        {
+          "quote": "国名",
+          "label": "国名",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0459,
+              "y": 0.0418,
+              "width": 0.9534,
+              "height": 0.3741
+            }
+          ]
+        },
+        {
+          "quote": "年号",
+          "label": "年号",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3558,
+              "y": 0.8407,
+              "width": 0.28,
+              "height": 0.11
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

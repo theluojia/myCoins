@@ -1,0 +1,114 @@
+{
+  "id": "JB51",
+  "version": 1,
+  "faces": {
+    "f": {
+      "image": "coins/img/JB51_f.webp",
+      "items": [
+        {
+          "quote": "身穿中国传统服饰的儿童",
+          "label": "身穿中国传统服饰的儿童",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.462,
+              "cy": 0.5841,
+              "rx": 0.3456,
+              "ry": 0.2973
+            }
+          ]
+        },
+        {
+          "quote": "孙悟空图案的风筝",
+          "label": "孙悟空图案的风筝",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.4072,
+              "y": 0.1125,
+              "width": 0.3891,
+              "height": 0.2384
+            }
+          ]
+        },
+        {
+          "quote": "装饰性的风的线条",
+          "label": "装饰性的风的线条",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.2365,
+              "cy": 0.6438,
+              "rx": 0.147,
+              "ry": 0.0726
+            },
+            {
+              "type": "ellipse",
+              "cx": 0.8043,
+              "cy": 0.5451,
+              "rx": 0.1666,
+              "ry": 0.1223
+            }
+          ]
+        },
+        {
+          "quote": "内缘右上方刊\"甲申\"字样",
+          "label": "\"甲申\"字样",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.6568,
+              "y": 0.3066,
+              "width": 0.235,
+              "height": 0.125
+            }
+          ]
+        }
+      ]
+    },
+    "b": {
+      "image": "coins/img/JB51_b.webp",
+      "items": [
+        {
+          "quote": "行名",
+          "label": "行名",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0305,
+              "y": 0.0525,
+              "width": 0.9123,
+              "height": 0.4707
+            }
+          ]
+        },
+        {
+          "quote": "面额\"1元\"及汉语拼音字母\"YIYUAN\"",
+          "label": "面额\"1元\"及汉语拼音字母\"YIYUAN\"",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0961,
+              "y": 0.2292,
+              "width": 0.7801,
+              "height": 0.5645
+            }
+          ]
+        },
+        {
+          "quote": "年号",
+          "label": "年号",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3046,
+              "y": 0.8079,
+              "width": 0.3875,
+              "height": 0.1239
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

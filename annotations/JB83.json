@@ -1,0 +1,153 @@
+{
+  "id": "JB83",
+  "version": 1,
+  "faces": {
+    "f": {
+      "image": "coins/img/JB83_f.webp",
+      "items": [
+        {
+          "quote": "党徽",
+          "label": "党徽",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.5054,
+              "cy": 0.3338,
+              "rx": 0.1992,
+              "ry": 0.2043
+            }
+          ]
+        },
+        {
+          "quote": "党旗",
+          "label": "党旗",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0423,
+              "y": 0.2401,
+              "width": 0.301,
+              "height": 0.5822
+            }
+          ]
+        },
+        {
+          "quote": "牡丹",
+          "label": "牡丹",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.499,
+              "cy": 0.8132,
+              "rx": 0.2506,
+              "ry": 0.1464
+            }
+          ]
+        },
+        {
+          "quote": "和平鸽",
+          "label": "和平鸽",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.7332,
+              "cy": 0.4891,
+              "rx": 0.1994,
+              "ry": 0.2302
+            }
+          ]
+        },
+        {
+          "quote": "五角星",
+          "label": "五角星",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.1636,
+              "y": 0.5782,
+              "width": 0.6429,
+              "height": 0.2253
+            }
+          ]
+        },
+        {
+          "quote": "币名和\"1921-2011\"字样",
+          "label": "币名和\"1921-2011\"字样",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.1752,
+              "y": 0.0538,
+              "width": 0.6709,
+              "height": 0.1887
+            },
+            {
+              "type": "rect",
+              "x": 0.3306,
+              "y": 0.4808,
+              "width": 0.3426,
+              "height": 0.1004
+            }
+          ]
+        },
+        {
+          "quote": "面额",
+          "label": "面额",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0468,
+              "y": 0.4488,
+              "width": 0.2261,
+              "height": 0.1856
+            }
+          ]
+        }
+      ]
+    },
+    "b": {
+      "image": "coins/img/JB83_b.webp",
+      "items": [
+        {
+          "quote": "国名",
+          "label": "国名",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0775,
+              "y": 0.06,
+              "width": 0.8614,
+              "height": 0.408
+            }
+          ]
+        },
+        {
+          "quote": "国徽",
+          "label": "国徽",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.5062,
+              "cy": 0.5139,
+              "rx": 0.3312,
+              "ry": 0.3488
+            }
+          ]
+        },
+        {
+          "quote": "年号",
+          "label": "年号",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.361,
+              "y": 0.8238,
+              "width": 0.28,
+              "height": 0.11
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

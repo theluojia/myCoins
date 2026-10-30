@@ -12,7 +12,6 @@
     localOnlyNotice: $('localOnlyNotice'),
     serverBadge: $('serverBadge'),
     coinSelect: $('coinSelect'),
-    pre2000Only: $('pre2000Only'),
     prevCoinBtn: $('prevCoinBtn'),
     nextCoinBtn: $('nextCoinBtn'),
     faceTabs: $('faceTabs'),
@@ -40,6 +39,8 @@
     quoteInput: $('quoteInput'),
     labelInput: $('labelInput'),
     addItemBtn: $('addItemBtn'),
+    moveItemUpBtn: $('moveItemUpBtn'),
+    moveItemDownBtn: $('moveItemDownBtn'),
     deleteItemBtn: $('deleteItemBtn'),
     regionList: $('regionList'),
     regionCounter: $('regionCounter'),
@@ -65,7 +66,10 @@
     history: [],
     future: [],
     drag: null,
-    reviewed: new Set(readJsonStorage(REVIEW_KEY, []))
+    reviewed: new Set(readJsonStorage(REVIEW_KEY, [])),
+    descriptionEditing: false,
+    descriptionMutationStarted: false,
+    descriptionSelection: ''
   };
 
   function readJsonStorage(key, fallback) {
@@ -123,8 +127,13 @@
     return face === 'f' ? (state.coin.description || '') : (state.coin.description2 || '');
   }
 
+  function setFaceDescription(value, face = state.face) {
+    if (!state.coin) return;
+    state.coin[face === 'f' ? 'description' : 'description2'] = value;
+  }
+
   function filteredCoins() {
-    return state.coins.filter(coin => !els.pre2000Only.checked || Number(coin.year) < 2000);
+    return state.coins;
   }
 
   function fillCoinSelect(preferredId) {
@@ -164,21 +173,33 @@
     state.source = 'file';
     state.itemIndex = 0;
     state.regionIndex = 0;
+    state.descriptionSelection = '';
     if (!options.keepFace) state.face = 'f';
     els.coinSelect.value = coin.id;
     render();
 
     try {
       const response = await fetch(`annotations/${encodeURIComponent(coin.id)}.json?t=${Date.now()}`, { cache: 'no-store' });
-      if (!response.ok) throw new Error(response.status === 404 ? 'missing' : `HTTP ${response.status}`);
-      const fileData = await response.json();
-      const draft = readJsonStorage(DRAFT_PREFIX + coin.id, null);
+      if (!response.ok && response.status !== 404) throw new Error(`HTTP ${response.status}`);
+      const fileData = response.ok ? await response.json() : null;
+      const draft = options.ignoreDraft ? null : readJsonStorage(DRAFT_PREFIX + coin.id, null);
       if (draft?.data?.id === coin.id) {
         state.data = draft.data;
+        if (draft.descriptions) {
+          coin.description = draft.descriptions.description ?? coin.description;
+          coin.description2 = draft.descriptions.description2 ?? coin.description2;
+        }
         state.dirty = true;
         state.source = 'draft';
-      } else {
+      } else if (fileData) {
         state.data = fileData;
+      } else {
+        const generator = globalThis.CoinAnnotationGenerator;
+        if (!generator?.createAnnotation) throw new Error('自动标记生成器未加载');
+        state.data = generator.createAnnotation(coin);
+        state.dirty = true;
+        state.source = 'generated';
+        toast(`未找到 ${coin.id}.json，已自动生成标记初稿，请人工审核两面后保存。`);
       }
       if (!state.data.faces[state.face]) state.face = Object.keys(state.data.faces)[0];
       const params = new URLSearchParams(location.search);
@@ -186,9 +207,19 @@
       history.replaceState(null, '', `${location.pathname}?${params.toString()}`);
     } catch (error) {
       state.data = null;
-      if (String(error.message) !== 'missing') toast(`加载 ${coin.id} 失败：${error.message}`, true);
+      toast(`加载 ${coin.id} 失败：${error.message}`, true);
     }
     render();
+  }
+
+  async function reloadCoinFromFiles() {
+    const id = state.coin?.id;
+    if (!id) return;
+    const response = await fetch(`coin_data.json?t=${Date.now()}`, { cache: 'no-store' });
+    if (!response.ok) throw new Error(`coin_data.json HTTP ${response.status}`);
+    state.coins = await response.json();
+    fillCoinSelect(id);
+    await loadCoin(id, { keepFace: true, ignoreDraft: true });
   }
 
   function render() {
@@ -204,7 +235,9 @@
     els.coinTitle.textContent = `${state.coin.id} · ${state.coin.name}${state.coin.subtitle ? `－${state.coin.subtitle}` : ''}`;
     els.coinMeta.textContent = `${state.coin.year}年 · ${state.coin.denomination} · ${state.coin.size}`;
     els.dirtyBadge.className = `badge ${state.dirty ? 'badge-warn' : 'badge-muted'}`;
-    els.dirtyBadge.textContent = state.dirty ? (state.source === 'draft' ? '浏览器草稿未保存' : '已修改未保存') : '与项目文件一致';
+    els.dirtyBadge.textContent = state.dirty
+      ? (state.source === 'draft' ? '浏览器草稿未保存' : state.source === 'generated' ? '新币标记初稿未保存' : '已修改未保存')
+      : '与项目文件一致';
     els.undoBtn.disabled = !state.history.length;
     els.redoBtn.disabled = !state.future.length;
     els.copyBtn.disabled = !state.data;
@@ -224,7 +257,10 @@
     els.emptyState.hidden = Boolean(face);
     els.stageViewport.hidden = !face;
     els.faceName.textContent = faceLabel();
-    els.faceDescription.textContent = faceDescription();
+    if (!state.descriptionEditing && els.faceDescription.value !== faceDescription()) {
+      els.faceDescription.value = faceDescription();
+    }
+    els.faceDescription.disabled = !face;
     if (!face) {
       els.overlay.replaceChildren();
       return;
@@ -369,6 +405,8 @@
     if (!item) return;
     els.quoteInput.value = item.quote;
     els.labelInput.value = item.label;
+    els.moveItemUpBtn.disabled = state.itemIndex === 0;
+    els.moveItemDownBtn.disabled = state.itemIndex === face.items.length - 1;
     els.regionList.replaceChildren();
     item.regions.forEach((region, index) => {
       const button = document.createElement('button');
@@ -541,9 +579,27 @@
 
   function beginMutation() {
     if (!state.data) return;
-    state.history.push(JSON.stringify(state.data));
+    state.history.push(JSON.stringify(snapshotState()));
     if (state.history.length > 60) state.history.shift();
     state.future = [];
+  }
+
+  function snapshotState() {
+    return {
+      data: state.data,
+      descriptions: {
+        description: state.coin?.description || '',
+        description2: state.coin?.description2 || ''
+      }
+    };
+  }
+
+  function restoreSnapshot(snapshot) {
+    state.data = snapshot.data;
+    if (state.coin && snapshot.descriptions) {
+      state.coin.description = snapshot.descriptions.description;
+      state.coin.description2 = snapshot.descriptions.description2;
+    }
   }
 
   function markChanged(shouldRender = true) {
@@ -552,22 +608,25 @@
     state.source = 'draft';
     state.reviewed.delete(`${state.coin.id}:${state.face}`);
     saveReviewed();
-    localStorage.setItem(DRAFT_PREFIX + state.coin.id, JSON.stringify({ updatedAt: Date.now(), data: state.data }));
+    localStorage.setItem(DRAFT_PREFIX + state.coin.id, JSON.stringify({
+      updatedAt: Date.now(),
+      ...snapshotState()
+    }));
     if (shouldRender) render();
   }
 
   function undo() {
     if (!state.history.length || !state.data) return;
-    state.future.push(JSON.stringify(state.data));
-    state.data = JSON.parse(state.history.pop());
+    state.future.push(JSON.stringify(snapshotState()));
+    restoreSnapshot(JSON.parse(state.history.pop()));
     normalizeSelection();
     markChanged();
   }
 
   function redo() {
     if (!state.future.length || !state.data) return;
-    state.history.push(JSON.stringify(state.data));
-    state.data = JSON.parse(state.future.pop());
+    state.history.push(JSON.stringify(snapshotState()));
+    restoreSnapshot(JSON.parse(state.future.pop()));
     normalizeSelection();
     markChanged();
   }
@@ -611,29 +670,31 @@
     const face = currentFaceData();
     if (!face) return;
     const description = faceDescription();
-    const selection = window.getSelection();
-    let quote = '';
-    if (selection && selection.rangeCount) {
-      const range = selection.getRangeAt(0);
-      const ancestor = range.commonAncestorContainer.nodeType === Node.TEXT_NODE
-        ? range.commonAncestorContainer.parentElement
-        : range.commonAncestorContainer;
-      if (ancestor && els.faceDescription.contains(ancestor)) quote = selection.toString().trim();
+    const quote = state.descriptionSelection.trim();
+    if (!quote) {
+      toast('请先在当前币面描述中选中文字，再点击“新增”。', true);
+      return;
     }
-    if (!quote) quote = (prompt('请输入描述中需要映射的原文：') || '').trim();
-    if (!quote) return;
     if (!description.includes(quote)) {
       toast('这段原文不在当前面的描述中，请保持完全一致。', true);
       return;
     }
-    const label = (prompt('请输入图中位置名称：', quote) || '').trim();
-    if (!label) return;
     beginMutation();
-    face.items.push({ quote, label, regions: [{ type: 'rect', x: 0.32, y: 0.35, width: 0.36, height: 0.3 }] });
+    face.items.push({ quote, label: quote, regions: [{ type: 'rect', x: 0.32, y: 0.35, width: 0.36, height: 0.3 }] });
     state.itemIndex = face.items.length - 1;
     state.regionIndex = 0;
-    selection?.removeAllRanges();
+    state.descriptionSelection = '';
     markChanged();
+    toast(`已新增标记“${quote}”，请调整位置和名称。`);
+  }
+
+  function captureDescriptionSelection() {
+    if (!state.coin || state.descriptionEditing === false && document.activeElement !== els.faceDescription) return;
+    const start = els.faceDescription.selectionStart;
+    const end = els.faceDescription.selectionEnd;
+    state.descriptionSelection = start !== end
+      ? els.faceDescription.value.slice(start, end).trim()
+      : '';
   }
 
   function deleteItem() {
@@ -645,6 +706,19 @@
     state.itemIndex = Math.max(0, Math.min(state.itemIndex, face.items.length - 1));
     state.regionIndex = 0;
     markChanged();
+  }
+
+  function moveItem(offset) {
+    const face = currentFaceData();
+    if (!face || !currentItem()) return;
+    const targetIndex = state.itemIndex + offset;
+    if (targetIndex < 0 || targetIndex >= face.items.length) return;
+    beginMutation();
+    const [item] = face.items.splice(state.itemIndex, 1);
+    face.items.splice(targetIndex, 0, item);
+    state.itemIndex = targetIndex;
+    markChanged();
+    toast(`已将标记“${item.label}”${offset < 0 ? '上移' : '下移'}一位。`);
   }
 
   function validateData() {
@@ -677,7 +751,13 @@
       const response = await fetch(`/api/annotations/${encodeURIComponent(state.coin.id)}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: prettyJson()
+        body: JSON.stringify({
+          annotation: state.data,
+          descriptions: {
+            description: state.coin.description || '',
+            description2: state.coin.description2 || ''
+          }
+        })
       });
       const result = await response.json();
       if (!response.ok) throw new Error(result.error || `HTTP ${response.status}`);
@@ -685,7 +765,7 @@
       state.source = 'file';
       localStorage.removeItem(DRAFT_PREFIX + state.coin.id);
       render();
-      toast(`${state.coin.id}.json 已保存到项目`);
+      toast(`${state.coin.id}.json 与 coin_data.json 已保存`);
     } catch (error) {
       toast(`保存失败：${error.message}`, true);
     }
@@ -727,13 +807,14 @@
     els.reviewBtn.classList.toggle('reviewed', reviewed);
     els.reviewBtn.textContent = reviewed ? '✓ 本面已审核（点击撤销）' : '标记本面已审核';
     els.reviewBtn.disabled = !state.data || state.dirty;
-    const total = state.coins.filter(coin => Number(coin.year) < 2000).length * 2;
+    const visibleCoins = filteredCoins();
+    const visibleIds = new Set(visibleCoins.map(coin => coin.id));
+    const total = visibleCoins.length * 2;
     const done = [...state.reviewed].filter(entry => {
       const id = entry.split(':')[0];
-      const coin = state.coins.find(item => item.id === id);
-      return coin && Number(coin.year) < 2000;
+      return visibleIds.has(id);
     }).length;
-    els.reviewProgress.textContent = `2000 年以前审核进度：${done} / ${total} 面`;
+    els.reviewProgress.textContent = `审核进度：${done} / ${total} 面`;
   }
 
   function toggleReview() {
@@ -765,10 +846,6 @@
 
   function attachEvents() {
     els.coinSelect.addEventListener('change', () => loadCoin(els.coinSelect.value));
-    els.pre2000Only.addEventListener('change', () => {
-      const coins = fillCoinSelect(state.coin?.id);
-      if (!coins.some(coin => coin.id === state.coin?.id) && coins[0]) loadCoin(coins[0].id);
-    });
     els.prevCoinBtn.addEventListener('click', () => navigateCoin(-1));
     els.nextCoinBtn.addEventListener('click', () => navigateCoin(1));
     els.faceTabs.addEventListener('click', event => {
@@ -777,6 +854,7 @@
       state.face = button.dataset.face;
       state.itemIndex = 0;
       state.regionIndex = 0;
+      state.descriptionSelection = '';
       render();
     });
     els.showAllRegions.addEventListener('change', renderCanvas);
@@ -786,8 +864,37 @@
     els.reloadBtn.addEventListener('click', async () => {
       if (state.dirty && !confirm('放弃当前浏览器草稿并从项目文件重新加载？')) return;
       localStorage.removeItem(DRAFT_PREFIX + state.coin.id);
-      await loadCoin(state.coin.id, { keepFace: true });
-      toast('已从项目文件重新加载');
+      try {
+        await reloadCoinFromFiles();
+        toast('标记与币面描述已从项目文件重新加载');
+      } catch (error) {
+        toast(`重新加载失败：${error.message}`, true);
+      }
+    });
+    els.faceDescription.addEventListener('focus', () => {
+      if (!state.data || state.descriptionEditing) return;
+      state.descriptionEditing = true;
+      state.descriptionMutationStarted = false;
+    });
+    els.faceDescription.addEventListener('input', () => {
+      if (!state.data) return;
+      if (!state.descriptionMutationStarted) {
+        beginMutation();
+        state.descriptionMutationStarted = true;
+      }
+      setFaceDescription(els.faceDescription.value);
+      markChanged(false);
+      renderHeader();
+      renderReview();
+    });
+    els.faceDescription.addEventListener('select', captureDescriptionSelection);
+    els.faceDescription.addEventListener('keyup', captureDescriptionSelection);
+    els.faceDescription.addEventListener('pointerup', captureDescriptionSelection);
+    els.faceDescription.addEventListener('blur', () => {
+      state.descriptionEditing = false;
+      state.descriptionMutationStarted = false;
+      if (!faceDescription().trim()) toast('币面描述不能为空；保存前请补充内容。', true);
+      render();
     });
     els.quoteInput.addEventListener('change', () => {
       if (!currentItem()) return;
@@ -806,7 +913,10 @@
       currentItem().label = els.labelInput.value.trim();
       markChanged();
     });
+    els.addItemBtn.addEventListener('pointerdown', captureDescriptionSelection);
     els.addItemBtn.addEventListener('click', addItem);
+    els.moveItemUpBtn.addEventListener('click', () => moveItem(-1));
+    els.moveItemDownBtn.addEventListener('click', () => moveItem(1));
     els.deleteItemBtn.addEventListener('click', deleteItem);
     els.addRegionButtons.forEach(button => button.addEventListener('click', () => addRegion(button.dataset.addRegion)));
     els.deleteRegionBtn.addEventListener('click', () => {

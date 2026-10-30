@@ -1,0 +1,94 @@
+{
+  "id": "JB76",
+  "version": 1,
+  "faces": {
+    "f": {
+      "image": "coins/img/JB76_f.webp",
+      "items": [
+        {
+          "quote": "一个穿中国传统服饰的小男孩吹牧笛",
+          "label": "一个穿中国传统服饰的小男孩吹牧笛",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.3716,
+              "cy": 0.4844,
+              "rx": 0.3001,
+              "ry": 0.3144
+            }
+          ]
+        },
+        {
+          "quote": "背景为金牛献宝",
+          "label": "金牛献宝",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.6703,
+              "cy": 0.4083,
+              "rx": 0.2384,
+              "ry": 0.2883
+            }
+          ]
+        },
+        {
+          "quote": "内缘下方刊\"己丑\"字样",
+          "label": "\"己丑\"字样",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3082,
+              "y": 0.7766,
+              "width": 0.2689,
+              "height": 0.1278
+            }
+          ]
+        }
+      ]
+    },
+    "b": {
+      "image": "coins/img/JB76_b.webp",
+      "items": [
+        {
+          "quote": "行名",
+          "label": "行名",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0305,
+              "y": 0.0525,
+              "width": 0.9123,
+              "height": 0.4707
+            }
+          ]
+        },
+        {
+          "quote": "面额\"1元\"及汉语拼音字母\"YIYUAN\"",
+          "label": "面额\"1元\"及汉语拼音字母\"YIYUAN\"",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0961,
+              "y": 0.2292,
+              "width": 0.7801,
+              "height": 0.5645
+            }
+          ]
+        },
+        {
+          "quote": "年号",
+          "label": "年号",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3046,
+              "y": 0.8079,
+              "width": 0.3875,
+              "height": 0.1239
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

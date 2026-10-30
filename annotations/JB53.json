@@ -1,0 +1,120 @@
+{
+  "id": "JB53",
+  "version": 1,
+  "faces": {
+    "f": {
+      "image": "coins/img/JB53_f.webp",
+      "items": [
+        {
+          "quote": "光华岛",
+          "label": "光华岛",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.206,
+              "y": 0.4644,
+              "width": 0.4949,
+              "height": 0.1825
+            }
+          ]
+        },
+        {
+          "quote": "热带植物",
+          "label": "热带植物",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.6796,
+              "y": 0.5164,
+              "width": 0.2568,
+              "height": 0.272
+            }
+          ]
+        },
+        {
+          "quote": "群山",
+          "label": "群山",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0555,
+              "y": 0.1989,
+              "width": 0.8975,
+              "height": 0.2781
+            }
+          ]
+        },
+        {
+          "quote": "水鸟",
+          "label": "水鸟",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.5605,
+              "cy": 0.18,
+              "rx": 0.2025,
+              "ry": 0.116
+            }
+          ]
+        },
+        {
+          "quote": "面额",
+          "label": "面额",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.2059,
+              "y": 0.6504,
+              "width": 0.2369,
+              "height": 0.1539
+            }
+          ]
+        }
+      ]
+    },
+    "b": {
+      "image": "coins/img/JB53_b.webp",
+      "items": [
+        {
+          "quote": "国徽",
+          "label": "国徽",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.5,
+              "cy": 0.4958,
+              "rx": 0.2872,
+              "ry": 0.2961
+            }
+          ]
+        },
+        {
+          "quote": "国名",
+          "label": "国名",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0929,
+              "y": 0.0686,
+              "width": 0.8226,
+              "height": 0.3964
+            }
+          ]
+        },
+        {
+          "quote": "年号",
+          "label": "年号",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3591,
+              "y": 0.7966,
+              "width": 0.28,
+              "height": 0.11
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

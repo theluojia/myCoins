@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Local-only static server with a narrow API for saving annotation JSON files."""
+"""Local-only server for atomically saving annotation and coin description data."""
 
 from __future__ import annotations
 
@@ -18,11 +18,20 @@ ANNOTATION_DIR = ROOT / "annotations"
 COINS_FILE = ROOT / "coin_data.json"
 ID_PATTERN = re.compile(r"^[A-Za-z0-9-]+$")
 MAX_BODY_BYTES = 2 * 1024 * 1024
+MAX_DESCRIPTION_LENGTH = 20_000
+REGION_EDGE_TOLERANCE = 0.05
+
+
+def load_coins() -> list[dict]:
+    with COINS_FILE.open("r", encoding="utf-8") as handle:
+        data = json.load(handle)
+    if not isinstance(data, list):
+        raise ValueError("coin_data.json 顶层必须是数组")
+    return data
 
 
 def load_coin_map() -> dict[str, dict]:
-    with COINS_FILE.open("r", encoding="utf-8") as handle:
-        return {coin["id"]: coin for coin in json.load(handle)}
+    return {coin["id"]: coin for coin in load_coins()}
 
 
 def finite_ratio(value: object) -> bool:
@@ -39,7 +48,10 @@ def validate_region(region: object, context: str) -> None:
             raise ValueError(f"{context} 的矩形坐标无效")
         if region["width"] <= 0 or region["height"] <= 0:
             raise ValueError(f"{context} 的矩形尺寸必须大于 0")
-        if region["x"] + region["width"] > 1 or region["y"] + region["height"] > 1:
+        if (
+            region["x"] + region["width"] > 1 + REGION_EDGE_TOLERANCE
+            or region["y"] + region["height"] > 1 + REGION_EDGE_TOLERANCE
+        ):
             raise ValueError(f"{context} 的矩形超出图片")
     elif region_type == "ellipse":
         keys = ("cx", "cy", "rx", "ry")
@@ -48,10 +60,10 @@ def validate_region(region: object, context: str) -> None:
         if region["rx"] <= 0 or region["ry"] <= 0:
             raise ValueError(f"{context} 的椭圆半径必须大于 0")
         if (
-            region["cx"] - region["rx"] < 0
-            or region["cy"] - region["ry"] < 0
-            or region["cx"] + region["rx"] > 1
-            or region["cy"] + region["ry"] > 1
+            region["cx"] - region["rx"] < -REGION_EDGE_TOLERANCE
+            or region["cy"] - region["ry"] < -REGION_EDGE_TOLERANCE
+            or region["cx"] + region["rx"] > 1 + REGION_EDGE_TOLERANCE
+            or region["cy"] + region["ry"] > 1 + REGION_EDGE_TOLERANCE
         ):
             raise ValueError(f"{context} 的椭圆超出图片")
     elif region_type == "polygon":
@@ -69,7 +81,31 @@ def validate_region(region: object, context: str) -> None:
         raise ValueError(f"{context} 使用了未知形状：{region_type}")
 
 
-def validate_annotation(data: object, requested_id: str) -> dict:
+def validate_descriptions(data: object, coin: dict) -> dict[str, str]:
+    if data is None:
+        return {
+            "description": str(coin.get("description") or ""),
+            "description2": str(coin.get("description2") or ""),
+        }
+    if not isinstance(data, dict):
+        raise ValueError("descriptions 必须是对象")
+    descriptions: dict[str, str] = {}
+    for key, label in (("description", "主题面/正面"), ("description2", "国名面/背面")):
+        value = data.get(key)
+        if not isinstance(value, str) or not value.strip():
+            raise ValueError(f"{label}描述不能为空")
+        if len(value) > MAX_DESCRIPTION_LENGTH:
+            raise ValueError(f"{label}描述过长")
+        descriptions[key] = value.strip()
+    return descriptions
+
+
+def validate_annotation(
+    data: object,
+    requested_id: str,
+    coin: dict,
+    descriptions: dict[str, str],
+) -> dict:
     if not isinstance(data, dict):
         raise ValueError("JSON 顶层必须是对象")
     if data.get("id") != requested_id:
@@ -77,9 +113,6 @@ def validate_annotation(data: object, requested_id: str) -> dict:
     if data.get("version") != 1:
         raise ValueError("目前只支持 version: 1")
 
-    coin = load_coin_map().get(requested_id)
-    if coin is None:
-        raise ValueError("coin_data.json 中不存在该编号")
     faces = data.get("faces")
     if not isinstance(faces, dict):
         raise ValueError("缺少 faces")
@@ -97,7 +130,7 @@ def validate_annotation(data: object, requested_id: str) -> dict:
         items = face.get("items")
         if not isinstance(items, list) or not items:
             raise ValueError(f"{face_key} 面至少需要一个标记")
-        description = str(coin.get(description_key) or "")
+        description = descriptions[description_key]
         for item_index, item in enumerate(items, start=1):
             context = f"{face_key} 面第 {item_index} 个标记"
             if not isinstance(item, dict):
@@ -116,8 +149,66 @@ def validate_annotation(data: object, requested_id: str) -> dict:
     return data
 
 
+def write_json_temp(directory: Path, prefix: str, payload: object) -> str:
+    with tempfile.NamedTemporaryFile(
+        mode="w",
+        encoding="utf-8",
+        newline="\n",
+        prefix=prefix,
+        suffix=".tmp",
+        dir=directory,
+        delete=False,
+    ) as handle:
+        json.dump(payload, handle, ensure_ascii=False, indent=2)
+        handle.write("\n")
+        handle.flush()
+        os.fsync(handle.fileno())
+        return handle.name
+
+
+def save_annotation_and_coin(
+    annotation_id: str,
+    annotation: dict,
+    coins: list[dict],
+) -> Path:
+    target = ANNOTATION_DIR / f"{annotation_id}.json"
+    annotation_temp = write_json_temp(ANNOTATION_DIR, f".{annotation_id}.", annotation)
+    coins_temp = write_json_temp(ROOT, ".coin_data.", coins)
+    rollback_temp: str | None = None
+    try:
+        with tempfile.NamedTemporaryFile(
+            mode="wb",
+            prefix=".coin_data.rollback.",
+            suffix=".tmp",
+            dir=ROOT,
+            delete=False,
+        ) as handle:
+            handle.write(COINS_FILE.read_bytes())
+            handle.flush()
+            os.fsync(handle.fileno())
+            rollback_temp = handle.name
+
+        os.replace(coins_temp, COINS_FILE)
+        coins_temp = ""
+        try:
+            os.replace(annotation_temp, target)
+            annotation_temp = ""
+        except OSError:
+            os.replace(rollback_temp, COINS_FILE)
+            rollback_temp = None
+            raise
+        return target
+    finally:
+        for temp_name in (annotation_temp, coins_temp, rollback_temp):
+            if temp_name:
+                try:
+                    os.unlink(temp_name)
+                except FileNotFoundError:
+                    pass
+
+
 class EditorHandler(SimpleHTTPRequestHandler):
-    server_version = "CoinAnnotationEditor/1.0"
+    server_version = "CoinAnnotationEditor/1.1"
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, directory=str(ROOT), **kwargs)
@@ -161,23 +252,33 @@ class EditorHandler(SimpleHTTPRequestHandler):
 
         try:
             raw = self.rfile.read(content_length)
-            data = json.loads(raw.decode("utf-8"))
-            validated = validate_annotation(data, annotation_id)
-            target = ANNOTATION_DIR / f"{annotation_id}.json"
-            with tempfile.NamedTemporaryFile(
-                mode="w",
-                encoding="utf-8",
-                newline="\n",
-                prefix=f".{annotation_id}.",
-                suffix=".tmp",
-                dir=ANNOTATION_DIR,
-                delete=False,
-            ) as handle:
-                json.dump(validated, handle, ensure_ascii=False, indent=2)
-                handle.write("\n")
-                temp_name = handle.name
-            os.replace(temp_name, target)
-            self.send_json(200, {"ok": True, "file": str(target.relative_to(ROOT))})
+            payload = json.loads(raw.decode("utf-8"))
+            coins = load_coins()
+            coin = next((entry for entry in coins if entry.get("id") == annotation_id), None)
+            if coin is None:
+                raise ValueError("coin_data.json 中不存在该编号")
+
+            if isinstance(payload, dict) and "annotation" in payload:
+                annotation_data = payload.get("annotation")
+                description_data = payload.get("descriptions")
+            else:
+                # Keep old editor clients working: a bare annotation only updates its JSON file.
+                annotation_data = payload
+                description_data = None
+
+            descriptions = validate_descriptions(description_data, coin)
+            validated = validate_annotation(annotation_data, annotation_id, coin, descriptions)
+            coin["description"] = descriptions["description"]
+            coin["description2"] = descriptions["description2"]
+            target = save_annotation_and_coin(annotation_id, validated, coins)
+            self.send_json(
+                200,
+                {
+                    "ok": True,
+                    "file": str(target.relative_to(ROOT)),
+                    "coinFile": str(COINS_FILE.relative_to(ROOT)),
+                },
+            )
         except (UnicodeDecodeError, json.JSONDecodeError) as error:
             self.send_json(400, {"error": f"JSON 无效：{error}"})
         except ValueError as error:

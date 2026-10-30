@@ -1,0 +1,136 @@
+{
+  "id": "JB56",
+  "version": 1,
+  "faces": {
+    "f": {
+      "image": "coins/img/JB56_f.webp",
+      "items": [
+        {
+          "quote": "亭台楼阁",
+          "label": "亭台楼阁",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.3318,
+              "cy": 0.3306,
+              "rx": 0.1283,
+              "ry": 0.1732
+            },
+            {
+              "type": "ellipse",
+              "cx": 0.719,
+              "cy": 0.241,
+              "rx": 0.0792,
+              "ry": 0.1108
+            },
+            {
+              "type": "ellipse",
+              "cx": 0.6904,
+              "cy": 0.4174,
+              "rx": 0.1621,
+              "ry": 0.1128
+            },
+            {
+              "type": "rect",
+              "x": 0.3985,
+              "y": 0.4778,
+              "width": 0.4366,
+              "height": 0.1148
+            }
+          ]
+        },
+        {
+          "quote": "泉石花木",
+          "label": "泉石花木",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.2534,
+              "y": 0.1064,
+              "width": 0.36,
+              "height": 0.3
+            },
+            {
+              "type": "ellipse",
+              "cx": 0.1899,
+              "cy": 0.5263,
+              "rx": 0.1325,
+              "ry": 0.3624
+            },
+            {
+              "type": "ellipse",
+              "cx": 0.8648,
+              "cy": 0.4534,
+              "rx": 0.1068,
+              "ry": 0.2093
+            },
+            {
+              "type": "ellipse",
+              "cx": 0.6041,
+              "cy": 0.6001,
+              "rx": 0.1814,
+              "ry": 0.0548
+            }
+          ]
+        },
+        {
+          "quote": "面额",
+          "label": "面额",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.496,
+              "y": 0.0564,
+              "width": 0.2289,
+              "height": 0.1669
+            }
+          ]
+        }
+      ]
+    },
+    "b": {
+      "image": "coins/img/JB56_b.webp",
+      "items": [
+        {
+          "quote": "国徽",
+          "label": "国徽",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.4945,
+              "cy": 0.3871,
+              "rx": 0.3264,
+              "ry": 0.3305
+            }
+          ]
+        },
+        {
+          "quote": "国名",
+          "label": "国名",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.174,
+              "y": 0.6907,
+              "width": 0.6551,
+              "height": 0.1094
+            }
+          ]
+        },
+        {
+          "quote": "年号",
+          "label": "年号",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.369,
+              "y": 0.81,
+              "width": 0.271,
+              "height": 0.1038
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

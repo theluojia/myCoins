@@ -1,0 +1,140 @@
+{
+  "id": "JB96",
+  "version": 1,
+  "faces": {
+    "f": {
+      "image": "coins/img/JB96_f.webp",
+      "items": [
+        {
+          "quote": "飘带",
+          "label": "飘带",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.1789,
+              "y": 0.2509,
+              "width": 0.3339,
+              "height": 0.4616
+            }
+          ]
+        },
+        {
+          "quote": "橄榄枝",
+          "label": "橄榄枝",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.6307,
+              "cy": 0.3081,
+              "rx": 0.1227,
+              "ry": 0.084
+            },
+            {
+              "type": "ellipse",
+              "cx": 0.6709,
+              "cy": 0.5549,
+              "rx": 0.205,
+              "ry": 0.0466
+            }
+          ]
+        },
+        {
+          "quote": "军徽",
+          "label": "军徽",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.6508,
+              "cy": 0.4371,
+              "rx": 0.1472,
+              "ry": 0.1462
+            }
+          ]
+        },
+        {
+          "quote": "\"1927-2017\"",
+          "label": "\"1927-2017\"",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.5191,
+              "y": 0.5791,
+              "width": 0.27,
+              "height": 0.0851
+            }
+          ]
+        },
+        {
+          "quote": "蕴含\"90\"字样",
+          "label": "蕴含\"90\"字样",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.2112,
+              "y": 0.2498,
+              "width": 0.622,
+              "height": 0.5
+            }
+          ]
+        },
+        {
+          "quote": "面额和长城图案",
+          "label": "面额和长城图案",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0829,
+              "y": 0.6689,
+              "width": 0.8575,
+              "height": 0.28
+            }
+          ]
+        }
+      ]
+    },
+    "b": {
+      "image": "coins/img/JB96_b.webp",
+      "items": [
+        {
+          "quote": "国徽",
+          "label": "国徽",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.5028,
+              "cy": 0.507,
+              "rx": 0.3158,
+              "ry": 0.3272
+            }
+          ]
+        },
+        {
+          "quote": "国名",
+          "label": "国名",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0595,
+              "y": 0.0439,
+              "width": 0.8742,
+              "height": 0.4163
+            }
+          ]
+        },
+        {
+          "quote": "年号",
+          "label": "年号",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3554,
+              "y": 0.8333,
+              "width": 0.28,
+              "height": 0.11
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

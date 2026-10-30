@@ -1,0 +1,133 @@
+{
+  "id": "JB90",
+  "version": 1,
+  "faces": {
+    "f": {
+      "image": "coins/img/JB90_f.webp",
+      "items": [
+        {
+          "quote": "一只传统装饰造型的小山羊",
+          "label": "一只传统装饰造型的小山羊",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.575,
+              "cy": 0.5614,
+              "rx": 0.3566,
+              "ry": 0.3258
+            }
+          ]
+        },
+        {
+          "quote": "宫灯",
+          "label": "宫灯",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.3388,
+              "cy": 0.2656,
+              "rx": 0.1896,
+              "ry": 0.185
+            }
+          ]
+        },
+        {
+          "quote": "花朵",
+          "label": "花朵",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.5789,
+              "cy": 0.1358,
+              "rx": 0.1604,
+              "ry": 0.0799
+            }
+          ]
+        },
+        {
+          "quote": "\"乙未\"字样",
+          "label": "\"乙未\"字样",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0616,
+              "y": 0.3934,
+              "width": 0.0975,
+              "height": 0.1857
+            }
+          ]
+        }
+      ]
+    },
+    "b": {
+      "image": "coins/img/JB90_b.webp",
+      "items": [
+        {
+          "quote": "行名",
+          "label": "行名",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0771,
+              "y": 0.06,
+              "width": 0.8202,
+              "height": 0.3473
+            }
+          ]
+        },
+        {
+          "quote": "面值",
+          "label": "面值",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.2609,
+              "y": 0.2523,
+              "width": 0.6455,
+              "height": 0.4748
+            }
+          ]
+        },
+        {
+          "quote": "汉语拼音字母\"SHIYUAN\"",
+          "label": "汉语拼音字母\"SHIYUAN\"年号",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0773,
+              "y": 0.4986,
+              "width": 0.2479,
+              "height": 0.1378
+            }
+          ]
+        },
+        {
+          "quote": "年号",
+          "label": "年号",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3233,
+              "y": 0.8217,
+              "width": 0.3353,
+              "height": 0.1203
+            }
+          ]
+        },
+        {
+          "quote": "团花图案",
+          "label": "团花图案",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.4988,
+              "cy": 0.5038,
+              "rx": 0.3394,
+              "ry": 0.3361
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

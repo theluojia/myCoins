@@ -1,0 +1,153 @@
+{
+  "id": "JB113",
+  "version": 1,
+  "faces": {
+    "f": {
+      "image": "coins/img/JB113_f.webp",
+      "items": [
+        {
+          "quote": "藏羚羊",
+          "label": "藏羚羊",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.3653,
+              "cy": 0.6531,
+              "rx": 0.1885,
+              "ry": 0.2564
+            },
+            {
+              "type": "ellipse",
+              "cx": 0.7765,
+              "cy": 0.7945,
+              "rx": 0.0944,
+              "ry": 0.0904
+            }
+          ]
+        },
+        {
+          "quote": "三江源典型地貌",
+          "label": "三江源典型地貌",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.1488,
+              "y": 0.3726,
+              "width": 0.6435,
+              "height": 0.2575
+            }
+          ]
+        },
+        {
+          "quote": "绿绒蒿",
+          "label": "绿绒蒿",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.1576,
+              "cy": 0.7201,
+              "rx": 0.0705,
+              "ry": 0.1365
+            }
+          ]
+        },
+        {
+          "quote": "野牦牛",
+          "label": "野牦牛",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.8902,
+              "cy": 0.5677,
+              "rx": 0.0733,
+              "ry": 0.0741
+            }
+          ]
+        },
+        {
+          "quote": "黑颈鹤",
+          "label": "黑颈鹤",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.4826,
+              "cy": 0.4086,
+              "rx": 0.1063,
+              "ry": 0.0487
+            }
+          ]
+        },
+        {
+          "quote": "“三江源国家公园”字样",
+          "label": "“三江源国家公园”字样",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.2151,
+              "y": 0.0435,
+              "width": 0.5782,
+              "height": 0.177
+            }
+          ]
+        },
+        {
+          "quote": "面额",
+          "label": "面额",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.567,
+              "y": 0.6175,
+              "width": 0.1958,
+              "height": 0.1231
+            }
+          ]
+        }
+      ]
+    },
+    "b": {
+      "image": "coins/img/JB113_b.webp",
+      "items": [
+        {
+          "quote": "国徽",
+          "label": "国徽",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.5007,
+              "cy": 0.4985,
+              "rx": 0.3522,
+              "ry": 0.3494
+            }
+          ]
+        },
+        {
+          "quote": "国名",
+          "label": "国名",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0459,
+              "y": 0.0418,
+              "width": 0.9534,
+              "height": 0.3741
+            }
+          ]
+        },
+        {
+          "quote": "年号",
+          "label": "年号",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3558,
+              "y": 0.8407,
+              "width": 0.28,
+              "height": 0.11
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

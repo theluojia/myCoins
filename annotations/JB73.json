@@ -1,0 +1,107 @@
+{
+  "id": "JB73",
+  "version": 1,
+  "faces": {
+    "f": {
+      "image": "coins/img/JB73_f.webp",
+      "items": [
+        {
+          "quote": "福娃足球运动造型",
+          "label": "福娃足球运动造型",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.5539,
+              "cy": 0.4359,
+              "rx": 0.34,
+              "ry": 0.25
+            }
+          ]
+        },
+        {
+          "quote": "面值",
+          "label": "面值",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.099,
+              "y": 0.3258,
+              "width": 0.1869,
+              "height": 0.2174
+            }
+          ]
+        },
+        {
+          "quote": "\"第29届奥林匹克运动会\"字样",
+          "label": "\"第29届奥林匹克运动会\"字样",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0569,
+              "y": 0.544,
+              "width": 0.8805,
+              "height": 0.4048
+            }
+          ]
+        }
+      ]
+    },
+    "b": {
+      "image": "coins/img/JB73_b.webp",
+      "items": [
+        {
+          "quote": "会徽",
+          "label": "会徽",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.5017,
+              "cy": 0.4594,
+              "rx": 0.1975,
+              "ry": 0.2402
+            }
+          ]
+        },
+        {
+          "quote": "国家体育场和跑道俯视图",
+          "label": "国家体育场和跑道俯视图",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.5028,
+              "cy": 0.5529,
+              "rx": 0.3047,
+              "ry": 0.1815
+            }
+          ]
+        },
+        {
+          "quote": "国名",
+          "label": "国名",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0797,
+              "y": 0.0702,
+              "width": 0.8405,
+              "height": 0.3759
+            }
+          ]
+        },
+        {
+          "quote": "年号",
+          "label": "年号",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3533,
+              "y": 0.7907,
+              "width": 0.308,
+              "height": 0.1066
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

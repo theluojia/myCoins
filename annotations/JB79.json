@@ -1,0 +1,120 @@
+{
+  "id": "JB79",
+  "version": 1,
+  "faces": {
+    "f": {
+      "image": "coins/img/JB79_f.webp",
+      "items": [
+        {
+          "quote": "世博会吉祥物\"海宝\"",
+          "label": "世博会吉祥物\"海宝\"",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.309,
+              "y": 0.1879,
+              "width": 0.5919,
+              "height": 0.6081
+            }
+          ]
+        },
+        {
+          "quote": "城市建筑群",
+          "label": "城市建筑群",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0572,
+              "y": 0.2566,
+              "width": 0.383,
+              "height": 0.2379
+            }
+          ]
+        },
+        {
+          "quote": "\"中国2010年上海世博会\"字样",
+          "label": "\"中国2010年上海世博会\"字样",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.1055,
+              "y": 0.0528,
+              "width": 0.7933,
+              "height": 0.2899
+            }
+          ]
+        },
+        {
+          "quote": "面额",
+          "label": "面额",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0964,
+              "y": 0.5159,
+              "width": 0.2634,
+              "height": 0.2273
+            }
+          ]
+        }
+      ]
+    },
+    "b": {
+      "image": "coins/img/JB79_b.webp",
+      "items": [
+        {
+          "quote": "国名",
+          "label": "国名",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0594,
+              "y": 0.0578,
+              "width": 0.8955,
+              "height": 0.4045
+            }
+          ]
+        },
+        {
+          "quote": "会徽",
+          "label": "会徽",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.4957,
+              "cy": 0.4878,
+              "rx": 0.2746,
+              "ry": 0.2684
+            }
+          ]
+        },
+        {
+          "quote": "微缩文字\"EXPO 2010 SHANGHAICHINA\"",
+          "label": "微缩文字\"EXPO 2010 SHANGHAICHINA\"",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3583,
+              "y": 0.7586,
+              "width": 0.2866,
+              "height": 0.0497
+            }
+          ]
+        },
+        {
+          "quote": "年号",
+          "label": "年号",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.355,
+              "y": 0.82,
+              "width": 0.28,
+              "height": 0.11
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,146 @@
+{
+  "id": "JB120",
+  "version": 1,
+  "faces": {
+    "f": {
+      "image": "coins/img/JB120_f.webp",
+      "items": [
+        {
+          "quote": "海南热带雨林景观",
+          "label": "海南热带雨林景观",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.1564,
+              "y": 0.1963,
+              "width": 0.6742,
+              "height": 0.6252
+            }
+          ]
+        },
+        {
+          "quote": "海南长臂猿",
+          "label": "海南长臂猿",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.5175,
+              "cy": 0.44,
+              "rx": 0.1593,
+              "ry": 0.1629
+            }
+          ]
+        },
+        {
+          "quote": "五指山",
+          "label": "五指山",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.7325,
+              "cy": 0.3118,
+              "rx": 0.2068,
+              "ry": 0.1507
+            }
+          ]
+        },
+        {
+          "quote": "万泉河",
+          "label": "万泉河",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.6133,
+              "cy": 0.7486,
+              "rx": 0.1115,
+              "ry": 0.1875
+            }
+          ]
+        },
+        {
+          "quote": "海南孔雀雉",
+          "label": "海南孔雀雉",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.568,
+              "cy": 0.9118,
+              "rx": 0.0779,
+              "ry": 0.0609
+            }
+          ]
+        },
+        {
+          "quote": "“海南热带雨林国家公园”字样",
+          "label": "“海南热带雨林国家公园”字样",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.1263,
+              "y": 0.0596,
+              "width": 0.7771,
+              "height": 0.2646
+            }
+          ]
+        },
+        {
+          "quote": "面额",
+          "label": "面额",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.4483,
+              "y": 0.7176,
+              "width": 0.1775,
+              "height": 0.1158
+            }
+          ]
+        }
+      ]
+    },
+    "b": {
+      "image": "coins/img/JB120_b.webp",
+      "items": [
+        {
+          "quote": "国徽",
+          "label": "国徽",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.5007,
+              "cy": 0.4985,
+              "rx": 0.3522,
+              "ry": 0.3494
+            }
+          ]
+        },
+        {
+          "quote": "国名",
+          "label": "国名",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0459,
+              "y": 0.0418,
+              "width": 0.9534,
+              "height": 0.3741
+            }
+          ]
+        },
+        {
+          "quote": "年号",
+          "label": "年号",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3558,
+              "y": 0.8557,
+              "width": 0.28,
+              "height": 0.11
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

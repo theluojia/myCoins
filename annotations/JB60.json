@@ -1,0 +1,94 @@
+{
+  "id": "JB60",
+  "version": 1,
+  "faces": {
+    "f": {
+      "image": "coins/img/JB60_f.webp",
+      "items": [
+        {
+          "quote": "宝瓶口",
+          "label": "宝瓶口",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.1227,
+              "y": 0.5314,
+              "width": 0.337,
+              "height": 0.3265
+            }
+          ]
+        },
+        {
+          "quote": "鱼嘴分水堤",
+          "label": "鱼嘴分水堤",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.4505,
+              "cy": 0.229,
+              "rx": 0.2977,
+              "ry": 0.1595
+            }
+          ]
+        },
+        {
+          "quote": "面额",
+          "label": "面额",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.6701,
+              "y": 0.252,
+              "width": 0.2295,
+              "height": 0.1665
+            }
+          ]
+        }
+      ]
+    },
+    "b": {
+      "image": "coins/img/JB60_b.webp",
+      "items": [
+        {
+          "quote": "国徽",
+          "label": "国徽",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.502,
+              "cy": 0.3841,
+              "rx": 0.3152,
+              "ry": 0.3153
+            }
+          ]
+        },
+        {
+          "quote": "国名",
+          "label": "国名",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.168,
+              "y": 0.6801,
+              "width": 0.6642,
+              "height": 0.1246
+            }
+          ]
+        },
+        {
+          "quote": "年号",
+          "label": "年号",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.36,
+              "y": 0.81,
+              "width": 0.28,
+              "height": 0.11
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "id": "JB47",
+  "version": 1,
+  "faces": {
+    "f": {
+      "image": "coins/img/JB47_f.webp",
+      "items": [
+        {
+          "quote": "朝天宫",
+          "label": "朝天宫",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.219,
+              "y": 0.2056,
+              "width": 0.7269,
+              "height": 0.5155
+            }
+          ]
+        },
+        {
+          "quote": "树木",
+          "label": "树木",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0767,
+              "y": 0.2045,
+              "width": 0.312,
+              "height": 0.4533
+            }
+          ]
+        },
+        {
+          "quote": "灯笼",
+          "label": "灯笼",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.1072,
+              "y": 0.7148,
+              "width": 0.7768,
+              "height": 0.1282
+            }
+          ]
+        },
+        {
+          "quote": "面额",
+          "label": "面额",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.2887,
+              "y": 0.0888,
+              "width": 0.2349,
+              "height": 0.1678
+            }
+          ]
+        }
+      ]
+    },
+    "b": {
+      "image": "coins/img/JB47_b.webp",
+      "items": [
+        {
+          "quote": "国徽",
+          "label": "国徽",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.5,
+              "cy": 0.4958,
+              "rx": 0.2872,
+              "ry": 0.2961
+            }
+          ]
+        },
+        {
+          "quote": "国名",
+          "label": "国名",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0929,
+              "y": 0.0686,
+              "width": 0.8226,
+              "height": 0.3964
+            }
+          ]
+        },
+        {
+          "quote": "年号",
+          "label": "年号",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3591,
+              "y": 0.7966,
+              "width": 0.28,
+              "height": 0.11
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

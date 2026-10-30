@@ -1,0 +1,133 @@
+{
+  "id": "JB112",
+  "version": 1,
+  "faces": {
+    "f": {
+      "image": "coins/img/JB112_f.webp",
+      "items": [
+        {
+          "quote": "峨眉山金顶",
+          "label": "峨眉山金顶",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3865,
+              "y": 0.0571,
+              "width": 0.2226,
+              "height": 0.1575
+            }
+          ]
+        },
+        {
+          "quote": "乐山大佛",
+          "label": "乐山大佛",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.2096,
+              "y": 0.3839,
+              "width": 0.3167,
+              "height": 0.4518
+            }
+          ]
+        },
+        {
+          "quote": "“世界文化和自然遗产——峨眉山-乐山大佛”字样",
+          "label": "“世界文化和自然遗产——峨眉山-乐山大佛”字样",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3126,
+              "y": 0.8552,
+              "width": 0.382,
+              "height": 0.1062
+            }
+          ]
+        },
+        {
+          "quote": "面额",
+          "label": "面额",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.7471,
+              "y": 0.6668,
+              "width": 0.1789,
+              "height": 0.1011
+            }
+          ]
+        }
+      ]
+    },
+    "b": {
+      "image": "coins/img/JB112_b.webp",
+      "items": [
+        {
+          "quote": "国徽",
+          "label": "国徽",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.4982,
+              "cy": 0.4934,
+              "rx": 0.3071,
+              "ry": 0.3262
+            }
+          ]
+        },
+        {
+          "quote": "国名",
+          "label": "国名",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0881,
+              "y": 0.0565,
+              "width": 0.8256,
+              "height": 0.3719
+            }
+          ]
+        },
+        {
+          "quote": "装饰风格的峨眉山",
+          "label": "装饰风格的峨眉山",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0674,
+              "y": 0.6844,
+              "width": 0.8917,
+              "height": 0.2233
+            }
+          ]
+        },
+        {
+          "quote": "乐山大佛图案",
+          "label": "乐山大佛图案",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0674,
+              "y": 0.6844,
+              "width": 0.8917,
+              "height": 0.2233
+            }
+          ]
+        },
+        {
+          "quote": "年号",
+          "label": "年号",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3972,
+              "y": 0.8529,
+              "width": 0.225,
+              "height": 0.0993
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

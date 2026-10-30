@@ -1,0 +1,94 @@
+{
+  "id": "JB59",
+  "version": 1,
+  "faces": {
+    "f": {
+      "image": "coins/img/JB59_f.webp",
+      "items": [
+        {
+          "quote": "丽江古城",
+          "label": "错落有致的丽江古城",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0722,
+              "y": 0.3367,
+              "width": 0.8716,
+              "height": 0.4476
+            }
+          ]
+        },
+        {
+          "quote": "玉龙雪山",
+          "label": "玉龙雪山",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.506,
+              "cy": 0.2982,
+              "rx": 0.4314,
+              "ry": 0.121
+            }
+          ]
+        },
+        {
+          "quote": "面额",
+          "label": "面额",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.5764,
+              "y": 0.1342,
+              "width": 0.2183,
+              "height": 0.1442
+            }
+          ]
+        }
+      ]
+    },
+    "b": {
+      "image": "coins/img/JB59_b.webp",
+      "items": [
+        {
+          "quote": "国徽",
+          "label": "国徽",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.4945,
+              "cy": 0.3871,
+              "rx": 0.3264,
+              "ry": 0.3305
+            }
+          ]
+        },
+        {
+          "quote": "国名",
+          "label": "国名",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.174,
+              "y": 0.6907,
+              "width": 0.6551,
+              "height": 0.1094
+            }
+          ]
+        },
+        {
+          "quote": "年号",
+          "label": "年号",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.369,
+              "y": 0.81,
+              "width": 0.271,
+              "height": 0.1038
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,146 @@
+{
+  "id": "JB41",
+  "version": 1,
+  "faces": {
+    "f": {
+      "image": "coins/img/JB41_f.webp",
+      "items": [
+        {
+          "quote": "\"迎接新世纪\"字样",
+          "label": "\"迎接新世纪\"字样",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.1415,
+              "y": 0.058,
+              "width": 0.6537,
+              "height": 0.2496
+            }
+          ]
+        },
+        {
+          "quote": "光芒四射的太阳",
+          "label": "光芒四射的太阳",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.5956,
+              "cy": 0.4409,
+              "rx": 0.0979,
+              "ry": 0.102
+            }
+          ]
+        },
+        {
+          "quote": "地球",
+          "label": "地球",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.5253,
+              "cy": 0.7254,
+              "rx": 0.3227,
+              "ry": 0.1694
+            }
+          ]
+        },
+        {
+          "quote": "彩带",
+          "label": "彩带",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.1692,
+              "y": 0.2332,
+              "width": 0.4725,
+              "height": 0.4316
+            }
+          ]
+        },
+        {
+          "quote": "人眼",
+          "label": "人眼",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.5994,
+              "cy": 0.437,
+              "rx": 0.216,
+              "ry": 0.1022
+            }
+          ]
+        },
+        {
+          "quote": "面值",
+          "label": "面值",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3808,
+              "y": 0.8199,
+              "width": 0.32,
+              "height": 0.16
+            }
+          ]
+        }
+      ]
+    },
+    "b": {
+      "image": "coins/img/JB41_b.webp",
+      "items": [
+        {
+          "quote": "国名",
+          "label": "国名",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0864,
+              "y": 0.0466,
+              "width": 0.812,
+              "height": 0.3192
+            }
+          ]
+        },
+        {
+          "quote": "年号",
+          "label": "年号",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3622,
+              "y": 0.8412,
+              "width": 0.28,
+              "height": 0.11
+            }
+          ]
+        },
+        {
+          "quote": "滚滚前进的历史车轮",
+          "label": "滚滚前进的历史车轮",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.184,
+              "y": 0.3947,
+              "width": 0.6386,
+              "height": 0.4089
+            }
+          ]
+        },
+        {
+          "quote": "火箭及现代高层建筑",
+          "label": "火箭及现代高层建筑",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.2752,
+              "y": 0.1939,
+              "width": 0.5437,
+              "height": 0.2566
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

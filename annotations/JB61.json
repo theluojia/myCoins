@@ -1,0 +1,94 @@
+{
+  "id": "JB61",
+  "version": 1,
+  "faces": {
+    "f": {
+      "image": "coins/img/JB61_f.webp",
+      "items": [
+        {
+          "quote": "陈云头像",
+          "label": "陈云头像",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.2684,
+              "y": 0.1703,
+              "width": 0.5047,
+              "height": 0.669
+            }
+          ]
+        },
+        {
+          "quote": "\"陈云诞辰100周年1905-2005\"字样",
+          "label": "\"陈云诞辰100周年1905-2005\"字样",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0868,
+              "y": 0.0495,
+              "width": 0.8328,
+              "height": 0.3388
+            }
+          ]
+        }
+      ]
+    },
+    "b": {
+      "image": "coins/img/JB61_b.webp",
+      "items": [
+        {
+          "quote": "国名",
+          "label": "国名",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.12,
+              "y": 0.05,
+              "width": 0.7799,
+              "height": 0.2851
+            }
+          ]
+        },
+        {
+          "quote": "上海青浦陈云故居",
+          "label": "上海青浦陈云故居",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0727,
+              "y": 0.295,
+              "width": 0.8637,
+              "height": 0.4169
+            }
+          ]
+        },
+        {
+          "quote": "面值",
+          "label": "面值",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3526,
+              "y": 0.7695,
+              "width": 0.3137,
+              "height": 0.0993
+            }
+          ]
+        },
+        {
+          "quote": "年号",
+          "label": "年号",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.425,
+              "y": 0.8571,
+              "width": 0.1534,
+              "height": 0.0629
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
