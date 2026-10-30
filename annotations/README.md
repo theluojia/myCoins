@@ -25,7 +25,7 @@ http://127.0.0.1:8001/annotation_editor.html
 - 直接修正当前币面的描述；
 - 撤销、重做、浏览器草稿、下载或复制 JSON；
 - 通过 8001 端口的本地编辑服务，将标记 JSON 和币面描述分别保存到 `annotations/<id>.json` 与 `coin_data.json`；
-- 记录全部币种的本机审核进度。
+- 将全部币种的审核进度保存到 `annotations/review_progress.json`，可通过 Git 在不同电脑或浏览器之间接力。
 
 服务只监听 `127.0.0.1`。保存前会同时校验币面描述、标记原文、图片路径和区域坐标，再以临时文件替换方式写入；其中任一文件替换失败时会回滚 `coin_data.json`。
 
@@ -74,7 +74,7 @@ http://127.0.0.1:8001/annotation_editor.html
 - 区域位置、大小和形状能准确指向图中主体，没有明显覆盖无关内容；
 - 两个币面都已经检查并保存。
 
-编辑器中的审核进度保存在当前浏览器本机，用于辅助检查；真正需要提交到 Git 的成果是 `coin_data.json` 和 `annotations/<id>.json`。
+编辑器中的审核进度保存在 `annotations/review_progress.json`。首次使用新版编辑器时，浏览器中原有的审核进度会自动合并到该文件。通过 Git 接力时，需要一并提交 `coin_data.json`、`annotations/<id>.json` 和 `annotations/review_progress.json`。
 
 ## 可选的批量生成脚本
 

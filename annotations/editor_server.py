@@ -16,7 +16,9 @@ from urllib.parse import unquote, urlparse
 ROOT = Path(__file__).resolve().parents[1]
 ANNOTATION_DIR = ROOT / "annotations"
 COINS_FILE = ROOT / "coin_data.json"
+REVIEW_FILE = ANNOTATION_DIR / "review_progress.json"
 ID_PATTERN = re.compile(r"^[A-Za-z0-9-]+$")
+REVIEW_ENTRY_PATTERN = re.compile(r"^([A-Za-z0-9-]+):([fb])$")
 MAX_BODY_BYTES = 2 * 1024 * 1024
 MAX_DESCRIPTION_LENGTH = 20_000
 REGION_EDGE_TOLERANCE = 0.05
@@ -32,6 +34,44 @@ def load_coins() -> list[dict]:
 
 def load_coin_map() -> dict[str, dict]:
     return {coin["id"]: coin for coin in load_coins()}
+
+
+def load_review_progress() -> dict:
+    if not REVIEW_FILE.exists():
+        return {"version": 1, "reviewed": []}
+    with REVIEW_FILE.open("r", encoding="utf-8") as handle:
+        return validate_review_progress(json.load(handle))
+
+
+def validate_review_progress(data: object) -> dict:
+    if not isinstance(data, dict) or data.get("version") != 1:
+        raise ValueError("审核进度必须使用 version: 1")
+    reviewed = data.get("reviewed")
+    if not isinstance(reviewed, list):
+        raise ValueError("审核进度 reviewed 必须是数组")
+    coin_ids = set(load_coin_map())
+    normalized: set[str] = set()
+    for entry in reviewed:
+        if not isinstance(entry, str):
+            raise ValueError("审核进度条目必须是字符串")
+        match = REVIEW_ENTRY_PATTERN.fullmatch(entry)
+        if match is None or match.group(1) not in coin_ids:
+            raise ValueError(f"审核进度条目无效：{entry}")
+        normalized.add(entry)
+    return {"version": 1, "reviewed": sorted(normalized)}
+
+
+def save_review_progress(data: dict) -> None:
+    temp_name = write_json_temp(ANNOTATION_DIR, ".review_progress.", data)
+    try:
+        os.replace(temp_name, REVIEW_FILE)
+        temp_name = ""
+    finally:
+        if temp_name:
+            try:
+                os.unlink(temp_name)
+            except FileNotFoundError:
+                pass
 
 
 def finite_ratio(value: object) -> bool:
@@ -227,19 +267,27 @@ class EditorHandler(SimpleHTTPRequestHandler):
         self.wfile.write(body)
 
     def do_GET(self) -> None:  # noqa: N802
-        if urlparse(self.path).path == "/api/health":
+        path = urlparse(self.path).path
+        if path == "/api/health":
             self.send_json(200, {"annotationEditor": True, "root": str(ROOT)})
+            return
+        if path == "/api/review-progress":
+            try:
+                self.send_json(200, load_review_progress())
+            except (ValueError, OSError, json.JSONDecodeError) as error:
+                self.send_json(500, {"error": f"读取审核进度失败：{error}"})
             return
         super().do_GET()
 
     def do_POST(self) -> None:  # noqa: N802
         path = unquote(urlparse(self.path).path)
         match = re.fullmatch(r"/api/annotations/([A-Za-z0-9-]+)", path)
-        if match is None:
+        is_review_progress = path == "/api/review-progress"
+        if match is None and not is_review_progress:
             self.send_json(404, {"error": "未知 API"})
             return
-        annotation_id = match.group(1)
-        if not ID_PATTERN.fullmatch(annotation_id):
+        annotation_id = match.group(1) if match else ""
+        if match and not ID_PATTERN.fullmatch(annotation_id):
             self.send_json(400, {"error": "编号格式无效"})
             return
         try:
@@ -253,6 +301,12 @@ class EditorHandler(SimpleHTTPRequestHandler):
         try:
             raw = self.rfile.read(content_length)
             payload = json.loads(raw.decode("utf-8"))
+            if is_review_progress:
+                validated_progress = validate_review_progress(payload)
+                save_review_progress(validated_progress)
+                self.send_json(200, {"ok": True, **validated_progress})
+                return
+
             coins = load_coins()
             coin = next((entry for entry in coins if entry.get("id") == annotation_id), None)
             if coin is None:

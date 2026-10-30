@@ -4,6 +4,7 @@
   const SVG_NS = 'http://www.w3.org/2000/svg';
   const DRAFT_PREFIX = 'coin-annotation-draft:';
   const REVIEW_KEY = 'coin-annotation-reviewed-v1';
+  const REVIEW_MIGRATION_KEY = 'coin-annotation-review-git-v1-migrated';
   const LOCAL_HOSTS = new Set(['localhost', '127.0.0.1', '::1', '']);
 
   const $ = id => document.getElementById(id);
@@ -66,7 +67,8 @@
     history: [],
     future: [],
     drag: null,
-    reviewed: new Set(readJsonStorage(REVIEW_KEY, [])),
+    reviewed: new Set(),
+    reviewSaving: false,
     descriptionEditing: false,
     descriptionMutationStarted: false,
     descriptionSelection: ''
@@ -160,6 +162,45 @@
     }
     els.serverBadge.className = `badge ${state.apiWritable ? 'badge-ok' : 'badge-warn'}`;
     els.serverBadge.textContent = state.apiWritable ? '可直接保存到项目' : '只读服务：可下载 JSON';
+  }
+
+  function cacheReviewed() {
+    localStorage.setItem(REVIEW_KEY, JSON.stringify([...state.reviewed].sort()));
+  }
+
+  async function persistReviewProgress() {
+    if (!state.apiWritable) {
+      cacheReviewed();
+      return;
+    }
+    const response = await fetch('/api/review-progress', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ version: 1, reviewed: [...state.reviewed].sort() })
+    });
+    const result = await response.json();
+    if (!response.ok) throw new Error(result.error || `HTTP ${response.status}`);
+    state.reviewed = new Set(result.reviewed || []);
+    cacheReviewed();
+  }
+
+  async function loadReviewProgress() {
+    const legacyReviewed = readJsonStorage(REVIEW_KEY, []);
+    if (!state.apiWritable) {
+      state.reviewed = new Set(legacyReviewed);
+      return;
+    }
+    const response = await fetch(`/api/review-progress?t=${Date.now()}`, { cache: 'no-store' });
+    const result = await response.json();
+    if (!response.ok) throw new Error(result.error || `HTTP ${response.status}`);
+    state.reviewed = new Set(result.reviewed || []);
+    if (!localStorage.getItem(REVIEW_MIGRATION_KEY)) {
+      legacyReviewed.forEach(entry => state.reviewed.add(entry));
+      await persistReviewProgress();
+      localStorage.setItem(REVIEW_MIGRATION_KEY, '1');
+    } else {
+      cacheReviewed();
+    }
   }
 
   async function loadCoin(id, options = {}) {
@@ -606,8 +647,11 @@
     if (!state.data) return;
     state.dirty = true;
     state.source = 'draft';
-    state.reviewed.delete(`${state.coin.id}:${state.face}`);
-    saveReviewed();
+    const reviewRemoved = state.reviewed.delete(`${state.coin.id}:${state.face}`);
+    if (reviewRemoved) {
+      cacheReviewed();
+      persistReviewProgress().catch(error => toast(`更新审核进度失败：${error.message}`, true));
+    }
     localStorage.setItem(DRAFT_PREFIX + state.coin.id, JSON.stringify({
       updatedAt: Date.now(),
       ...snapshotState()
@@ -797,16 +841,12 @@
     setTimeout(() => URL.revokeObjectURL(url), 1000);
   }
 
-  function saveReviewed() {
-    localStorage.setItem(REVIEW_KEY, JSON.stringify([...state.reviewed].sort()));
-  }
-
   function renderReview() {
     const key = state.coin ? `${state.coin.id}:${state.face}` : '';
     const reviewed = state.reviewed.has(key);
     els.reviewBtn.classList.toggle('reviewed', reviewed);
     els.reviewBtn.textContent = reviewed ? '✓ 本面已审核（点击撤销）' : '标记本面已审核';
-    els.reviewBtn.disabled = !state.data || state.dirty;
+    els.reviewBtn.disabled = !state.data || state.dirty || state.reviewSaving;
     const visibleCoins = filteredCoins();
     const visibleIds = new Set(visibleCoins.map(coin => coin.id));
     const total = visibleCoins.length * 2;
@@ -817,13 +857,27 @@
     els.reviewProgress.textContent = `审核进度：${done} / ${total} 面`;
   }
 
-  function toggleReview() {
-    if (!state.coin || state.dirty) return;
+  async function toggleReview() {
+    if (!state.coin || state.dirty || state.reviewSaving) return;
     const key = `${state.coin.id}:${state.face}`;
-    if (state.reviewed.has(key)) state.reviewed.delete(key);
+    const wasReviewed = state.reviewed.has(key);
+    if (wasReviewed) state.reviewed.delete(key);
     else state.reviewed.add(key);
-    saveReviewed();
+    state.reviewSaving = true;
+    cacheReviewed();
     renderReview();
+    try {
+      await persistReviewProgress();
+      toast(wasReviewed ? '已撤销审核，进度已写入项目' : '本面已审核，进度已写入项目');
+    } catch (error) {
+      if (wasReviewed) state.reviewed.add(key);
+      else state.reviewed.delete(key);
+      cacheReviewed();
+      toast(`保存审核进度失败：${error.message}`, true);
+    } finally {
+      state.reviewSaving = false;
+      renderReview();
+    }
   }
 
   function renderFeedback() {
@@ -1007,6 +1061,7 @@
       const coins = fillCoinSelect(requested);
       const initial = coins.find(coin => coin.id === requested) || coins[0];
       await checkSaveService();
+      await loadReviewProgress();
       if (initial) await loadCoin(initial.id);
     } catch (error) {
       toast(`初始化失败：${error.message}`, true);
