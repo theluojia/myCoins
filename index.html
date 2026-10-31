@@ -522,6 +522,11 @@
             min-height: 0;
             padding: 0.65rem 0 1rem;
             overflow-y: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        .zoom-bottom-flex::-webkit-scrollbar {
+            display: none;
         }
         .zoom-name {
             margin-bottom: 0.75rem;
@@ -548,6 +553,18 @@
             line-height: 0;
         }
         .zoom-image-wrapper.is-note {
+            width: min(82vw, 56rem);
+            height: min(42dvh, 27rem);
+        }
+        .zoom-image-wrapper.is-note.note-portrait {
+            width: min(38vw, 25rem);
+            height: min(58dvh, 36rem);
+        }
+        .zoom-image-wrapper.is-note.note-square {
+            width: min(58dvh, 36rem, 82vw);
+            height: min(58dvh, 36rem, 82vw);
+        }
+        .zoom-image-wrapper.is-note.note-landscape {
             width: min(82vw, 56rem);
             height: min(42dvh, 27rem);
         }
@@ -866,6 +883,18 @@
                 height: min(84vw, 48dvh);
             }
             .zoom-image-wrapper.is-note {
+                width: 92vw;
+                height: min(30dvh, 16rem);
+            }
+            .zoom-image-wrapper.is-note.note-portrait {
+                width: min(68vw, 38dvh);
+                height: min(52dvh, 26rem);
+            }
+            .zoom-image-wrapper.is-note.note-square {
+                width: min(84vw, 48dvh);
+                height: min(84vw, 48dvh);
+            }
+            .zoom-image-wrapper.is-note.note-landscape {
                 width: 92vw;
                 height: min(30dvh, 16rem);
             }
@@ -2091,6 +2120,7 @@
         // 4. 图片放大弹窗
         let zoomState = { coin: null, face: 'front', lensActive: false, zoomFactor: 2.5, exploreMode: false };
         var zoomPreloadImgs = []; // 打开弹窗时预加载当前币另一面
+        const coinImageOrientationCache = new Map();
         // 所有币种都已有标注文件；按编号懒加载，避免首页一次性请求全部 JSON。
         const coinAnnotationCache = new Map();
         let coinAnnotationRequestSeq = 0;
@@ -2176,7 +2206,7 @@
             els.toggle.disabled = !coinAnnotationState.ready;
             els.toggle.classList.toggle('active', exploring);
             els.toggle.textContent = coinAnnotationState.ready
-                ? (exploring ? '返回纯大图' : '探索细节')
+                ? (exploring ? '结束探索' : '探索细节')
                 : '正在准备探索…';
             els.toggle.setAttribute('aria-expanded', exploring ? 'true' : 'false');
             els.panel.classList.toggle('active', exploring);
@@ -2381,12 +2411,40 @@
             selectCoinAnnotation(next);
         }
 
-        function openCoinZoom(coin, viewMode) {
+        function classifyCoinImageOrientation(width, height) {
+            if (!width || !height) return 'landscape';
+            const ratio = width / height;
+            if (ratio > 1.15) return 'landscape';
+            if (ratio < 0.85) return 'portrait';
+            return 'square';
+        }
+
+        function applyZoomImageOrientation(coin, orientation) {
+            const wrapper = document.getElementById('zoomImageWrapper');
+            const isNote = coin.id.startsWith('JC');
+            wrapper.classList.toggle('is-note', isNote);
+            wrapper.classList.remove('note-landscape', 'note-portrait', 'note-square');
+            if (isNote) wrapper.classList.add('note-' + orientation);
+        }
+
+        function openCoinZoom(coin, viewMode, sourceImage) {
             zoomState.coin = coin;
             zoomState.exploreMode = false;
             // viewMode 'front' = .front-image visible → imageUrl (反面)
             // viewMode 'back'  = .back-image visible → imageUrl2 (正面)
             zoomState.face = viewMode === 'front' ? 'back' : 'front';
+            const initialFileFace = zoomState.face === 'front' ? 'b' : 'f';
+            const initialOrientationKey = coin.id + ':' + initialFileFace;
+            if (sourceImage && sourceImage.naturalWidth && sourceImage.naturalHeight) {
+                coinImageOrientationCache.set(
+                    initialOrientationKey,
+                    classifyCoinImageOrientation(sourceImage.naturalWidth, sourceImage.naturalHeight)
+                );
+            }
+            applyZoomImageOrientation(
+                coin,
+                coinImageOrientationCache.get(initialOrientationKey) || 'landscape'
+            );
 
             // 预加载另一面图片（浏览器缓存，不阻塞主流程）
             zoomPreloadImgs = [];
@@ -2414,13 +2472,17 @@
                 ? (isFront ? '反面' : '正面')
                 : (isFront ? '正面' : '反面');
             const fileFace = isFront ? 'b' : 'f';
+            const orientationKey = coin.id + ':' + fileFace;
             const localSrc = 'coins/img/' + coin.id + '_' + fileFace + '.webp';
             const fallbackSrc = isFront ? coin.imageUrl2 : coin.imageUrl;
             const description = (isFront ? coin.description2 : coin.description) || '暂无描述';
 
             zoomModalName.textContent = coin.name;
             zoomModalImg.alt = coin.name + ' ' + faceLabel;
-            zoomImageWrapper.classList.toggle('is-note', coin.id.startsWith('JC'));
+            applyZoomImageOrientation(
+                coin,
+                coinImageOrientationCache.get(orientationKey) || 'landscape'
+            );
             zoomModalFace.textContent = '【' + faceLabel + '】';
             prepareCoinAnnotationGuide(coin, fileFace, description);
 
@@ -2430,9 +2492,15 @@
                 this.onerror = null;
             };
             zoomModalImg.onload = function() {
+                const orientation = classifyCoinImageOrientation(
+                    zoomModalImg.naturalWidth,
+                    zoomModalImg.naturalHeight
+                );
+                coinImageOrientationCache.set(orientationKey, orientation);
+                applyZoomImageOrientation(coin, orientation);
                 zoomLoading.style.display = 'none';
                 zoomModalImg.style.opacity = '1';
-                syncCoinAnnotationOverlayBounds();
+                requestAnimationFrame(syncCoinAnnotationOverlayBounds);
             };
             zoomModalImg._fb = 0;
 
@@ -4351,7 +4419,10 @@
                                     // 双击：放大当前图片
                                     const frontImg = imageContainer.querySelector('.front-image');
                                     const viewMode = frontImg.classList.contains('hidden') ? 'back' : 'front';
-                                    openCoinZoom(coin, viewMode);
+                                    const sourceImage = viewMode === 'front'
+                                        ? frontImg
+                                        : imageContainer.querySelector('.back-image');
+                                    openCoinZoom(coin, viewMode, sourceImage);
                                     imgClickCount = 0;
                                 }
                             });
@@ -4362,7 +4433,10 @@
                                 imgPressTimer = setTimeout(() => {
                                     const frontImg = imageContainer.querySelector('.front-image');
                                     const viewMode = frontImg.classList.contains('hidden') ? 'back' : 'front';
-                                    openCoinZoom(coin, viewMode);
+                                    const sourceImage = viewMode === 'front'
+                                        ? frontImg
+                                        : imageContainer.querySelector('.back-image');
+                                    openCoinZoom(coin, viewMode, sourceImage);
                                     e.preventDefault();
                                 }, 500);
                             }, { passive: false });
