@@ -164,7 +164,8 @@ button:disabled { cursor: not-allowed; opacity: 0.45; }
   background-position: 0 0, 0 8px, 8px -8px, -8px 0;
   background-size: 16px 16px;
 }
-.image-stage { position: relative; display: inline-block; max-width: 96%; max-height: 96%; line-height: 0; user-select: none; }
+/* 舞台高度必须由实际图片撑开，否则竖图会让 SVG 标记层比图片略矮，越靠下偏差越明显。 */
+.image-stage { position: relative; display: inline-block; max-width: 96%; line-height: 0; user-select: none; }
 .image-stage img { display: block; max-width: 100%; max-height: calc(100vh - 320px); object-fit: contain; pointer-events: none; }
 #editorOverlay { position: absolute; inset: 0; width: 100%; height: 100%; touch-action: none; cursor: default; }
 
