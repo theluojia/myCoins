@@ -48,6 +48,7 @@
     addRegionButtons: document.querySelectorAll('[data-add-region]'),
     deleteRegionBtn: $('deleteRegionBtn'),
     reviewBtn: $('reviewBtn'),
+    nextUnreviewedBtn: $('nextUnreviewedBtn'),
     reviewProgress: $('reviewProgress'),
     feedbackText: $('feedbackText'),
     copyFeedbackBtn: $('copyFeedbackBtn'),
@@ -71,7 +72,8 @@
     reviewSaving: false,
     descriptionEditing: false,
     descriptionMutationStarted: false,
-    descriptionSelection: ''
+    descriptionSelection: '',
+    descriptionSelectionStart: -1
   };
 
   function readJsonStorage(key, fallback) {
@@ -132,6 +134,44 @@
   function setFaceDescription(value, face = state.face) {
     if (!state.coin) return;
     state.coin[face === 'f' ? 'description' : 'description2'] = value;
+  }
+
+  function quoteMatchStarts(description, quote) {
+    const starts = [];
+    if (!quote) return starts;
+    let searchFrom = 0;
+    while (searchFrom <= description.length - quote.length) {
+      const start = description.indexOf(quote, searchFrom);
+      if (start < 0) break;
+      starts.push(start);
+      searchFrom = start + quote.length;
+    }
+    return starts;
+  }
+
+  function itemQuoteStart(description, item) {
+    const starts = quoteMatchStarts(description, item.quote);
+    const occurrence = Number.isInteger(item.occurrence) && item.occurrence > 0
+      ? item.occurrence
+      : 1;
+    return starts[occurrence - 1] ?? -1;
+  }
+
+  function setItemOccurrence(item, occurrence) {
+    if (occurrence > 1) item.occurrence = occurrence;
+    else delete item.occurrence;
+  }
+
+  function normalizeItemOccurrences() {
+    if (!state.data) return;
+    for (const faceKey of ['f', 'b']) {
+      const description = faceDescription(faceKey);
+      const items = state.data.faces?.[faceKey]?.items || [];
+      items.forEach(item => {
+        const starts = quoteMatchStarts(description, item.quote);
+        if (starts.length <= 1 || item.occurrence === 1) delete item.occurrence;
+      });
+    }
   }
 
   function filteredCoins() {
@@ -215,6 +255,7 @@
     state.itemIndex = 0;
     state.regionIndex = 0;
     state.descriptionSelection = '';
+    state.descriptionSelectionStart = -1;
     if (!options.keepFace) state.face = 'f';
     els.coinSelect.value = coin.id;
     render();
@@ -431,7 +472,9 @@
       button.className = `item-row${index === state.itemIndex ? ' active' : ''}`;
       button.innerHTML = `<span class="item-index">${index + 1}</span><span class="item-copy"><strong></strong><span></span></span>`;
       button.querySelector('strong').textContent = item.label;
-      button.querySelector('.item-copy span').textContent = item.quote;
+      button.querySelector('.item-copy span').textContent = item.occurrence > 1
+        ? `${item.quote}（第 ${item.occurrence} 处）`
+        : item.quote;
       button.addEventListener('click', () => {
         state.itemIndex = index;
         state.regionIndex = 0;
@@ -723,22 +766,34 @@
       toast('这段原文不在当前面的描述中，请保持完全一致。', true);
       return;
     }
+    const starts = quoteMatchStarts(description, quote);
+    const occurrenceIndex = starts.indexOf(state.descriptionSelectionStart);
+    if (occurrenceIndex < 0) {
+      toast('无法确认所选文字在描述中的位置，请重新选择后再新增。', true);
+      return;
+    }
+    const occurrence = occurrenceIndex + 1;
     beginMutation();
-    face.items.push({ quote, label: quote, regions: [{ type: 'rect', x: 0.32, y: 0.35, width: 0.36, height: 0.3 }] });
+    const item = { quote, label: quote, regions: [{ type: 'rect', x: 0.32, y: 0.35, width: 0.36, height: 0.3 }] };
+    setItemOccurrence(item, occurrence);
+    face.items.push(item);
     state.itemIndex = face.items.length - 1;
     state.regionIndex = 0;
     state.descriptionSelection = '';
+    state.descriptionSelectionStart = -1;
     markChanged();
-    toast(`已新增标记“${quote}”，请调整位置和名称。`);
+    toast(`已新增标记“${quote}”${occurrence > 1 ? `（第 ${occurrence} 处）` : ''}，请调整位置和名称。`);
   }
 
   function captureDescriptionSelection() {
     if (!state.coin || state.descriptionEditing === false && document.activeElement !== els.faceDescription) return;
     const start = els.faceDescription.selectionStart;
     const end = els.faceDescription.selectionEnd;
-    state.descriptionSelection = start !== end
-      ? els.faceDescription.value.slice(start, end).trim()
-      : '';
+    const selected = start !== end ? els.faceDescription.value.slice(start, end) : '';
+    const quote = selected.trim();
+    const leadingWhitespace = selected.length - selected.trimStart().length;
+    state.descriptionSelection = quote;
+    state.descriptionSelectionStart = quote ? start + leadingWhitespace : -1;
   }
 
   function deleteItem() {
@@ -747,6 +802,7 @@
     if (!confirm(`删除标记“${currentItem().label}”？可以使用撤销恢复。`)) return;
     beginMutation();
     face.items.splice(state.itemIndex, 1);
+    normalizeItemOccurrences();
     state.itemIndex = Math.max(0, Math.min(state.itemIndex, face.items.length - 1));
     state.regionIndex = 0;
     markChanged();
@@ -772,7 +828,14 @@
       if (!face || !Array.isArray(face.items) || !face.items.length) return `${faceKey} 面没有标记`;
       const description = faceDescription(faceKey);
       for (const item of face.items) {
-        if (!description.includes(item.quote)) return `${faceKey} 面描述中找不到原文：${item.quote}`;
+        const starts = quoteMatchStarts(description, item.quote);
+        if (!starts.length) return `${faceKey} 面描述中找不到原文：${item.quote}`;
+        if (item.occurrence !== undefined && (!Number.isInteger(item.occurrence) || item.occurrence < 2)) {
+          return `${faceKey} 面“${item.quote}”的 occurrence 必须是大于 1 的整数`;
+        }
+        if (item.occurrence > starts.length) {
+          return `${faceKey} 面“${item.quote}”只有 ${starts.length} 处，找不到第 ${item.occurrence} 处`;
+        }
         if (!item.label.trim()) return `${faceKey} 面存在空的位置名称`;
         if (!Array.isArray(item.regions) || !item.regions.length) return `${item.label} 没有区域`;
       }
@@ -785,6 +848,7 @@
   }
 
   async function saveProject() {
+    normalizeItemOccurrences();
     const validationError = validateData();
     if (validationError) return toast(validationError, true);
     if (!state.apiWritable) {
@@ -841,6 +905,16 @@
     setTimeout(() => URL.revokeObjectURL(url), 1000);
   }
 
+  function unreviewedFaces() {
+    const missing = [];
+    filteredCoins().forEach(coin => {
+      ['f', 'b'].forEach(face => {
+        if (!state.reviewed.has(`${coin.id}:${face}`)) missing.push({ coin, face });
+      });
+    });
+    return missing;
+  }
+
   function renderReview() {
     const key = state.coin ? `${state.coin.id}:${state.face}` : '';
     const reviewed = state.reviewed.has(key);
@@ -848,13 +922,36 @@
     els.reviewBtn.textContent = reviewed ? '✓ 本面已审核（点击撤销）' : '标记本面已审核';
     els.reviewBtn.disabled = !state.data || state.dirty || state.reviewSaving;
     const visibleCoins = filteredCoins();
-    const visibleIds = new Set(visibleCoins.map(coin => coin.id));
     const total = visibleCoins.length * 2;
-    const done = [...state.reviewed].filter(entry => {
-      const id = entry.split(':')[0];
-      return visibleIds.has(id);
-    }).length;
+    const missing = unreviewedFaces();
+    const done = total - missing.length;
     els.reviewProgress.textContent = `审核进度：${done} / ${total} 面`;
+    els.nextUnreviewedBtn.disabled = !missing.length;
+    els.nextUnreviewedBtn.textContent = missing.length
+      ? `定位未审核面（${missing.length}）`
+      : '全部币面已审核';
+  }
+
+  async function goToNextUnreviewed() {
+    const missing = unreviewedFaces();
+    if (!missing.length) {
+      toast('全部币面都已审核。');
+      return;
+    }
+    const currentIndex = missing.findIndex(entry => (
+      entry.coin.id === state.coin?.id && entry.face === state.face
+    ));
+    const target = currentIndex >= 0 && missing.length > 1
+      ? missing[(currentIndex + 1) % missing.length]
+      : missing[0];
+    if (target.coin.id !== state.coin?.id) await loadCoin(target.coin.id);
+    state.face = target.face;
+    state.itemIndex = 0;
+    state.regionIndex = 0;
+    state.descriptionSelection = '';
+    state.descriptionSelectionStart = -1;
+    render();
+    toast(`已定位：${target.coin.id} · ${faceLabel(target.face)}`);
   }
 
   async function toggleReview() {
@@ -909,6 +1006,7 @@
       state.itemIndex = 0;
       state.regionIndex = 0;
       state.descriptionSelection = '';
+      state.descriptionSelectionStart = -1;
       render();
     });
     els.showAllRegions.addEventListener('change', renderCanvas);
@@ -952,13 +1050,23 @@
     });
     els.quoteInput.addEventListener('change', () => {
       if (!currentItem()) return;
-      if (!faceDescription().includes(els.quoteInput.value)) {
+      const description = faceDescription();
+      const nextQuote = els.quoteInput.value;
+      const nextStarts = quoteMatchStarts(description, nextQuote);
+      if (!nextStarts.length) {
         toast('原文必须完整出现在当前面的描述中。', true);
         els.quoteInput.value = currentItem().quote;
         return;
       }
       beginMutation();
-      currentItem().quote = els.quoteInput.value;
+      const previousStart = itemQuoteStart(description, currentItem());
+      currentItem().quote = nextQuote;
+      const nearestIndex = previousStart < 0
+        ? 0
+        : nextStarts.reduce((best, start, index) => (
+          Math.abs(start - previousStart) < Math.abs(nextStarts[best] - previousStart) ? index : best
+        ), 0);
+      setItemOccurrence(currentItem(), nearestIndex + 1);
       markChanged();
     });
     els.labelInput.addEventListener('change', () => {
@@ -982,6 +1090,7 @@
       markChanged();
     });
     els.reviewBtn.addEventListener('click', toggleReview);
+    els.nextUnreviewedBtn.addEventListener('click', goToNextUnreviewed);
     els.copyFeedbackBtn.addEventListener('click', () => copyText(els.feedbackText.value, '区域说明已复制'));
     els.copyBtn.addEventListener('click', () => state.data && copyText(prettyJson(), 'JSON 已复制'));
     els.downloadBtn.addEventListener('click', downloadJson);

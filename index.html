@@ -2243,6 +2243,20 @@
             renderCoinExploreMode();
         }
 
+        function findCoinAnnotationQuoteStart(description, item) {
+            const occurrence = Number.isInteger(item.occurrence) && item.occurrence > 0
+                ? item.occurrence
+                : 1;
+            let start = -1;
+            let searchFrom = 0;
+            for (let index = 0; index < occurrence; index += 1) {
+                start = description.indexOf(item.quote, searchFrom);
+                if (start < 0) return -1;
+                searchFrom = start + item.quote.length;
+            }
+            return start;
+        }
+
         function renderCoinAnnotationDescription() {
             const els = getCoinAnnotationElements();
             const description = coinAnnotationState.description;
@@ -2250,7 +2264,7 @@
             const matches = [];
 
             items.forEach((item, index) => {
-                const start = description.indexOf(item.quote);
+                const start = findCoinAnnotationQuoteStart(description, item);
                 if (start >= 0) {
                     matches.push({ start, end: start + item.quote.length, item, index });
                 }

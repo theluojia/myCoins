@@ -179,6 +179,12 @@ def validate_annotation(
             label = item.get("label")
             if not isinstance(quote, str) or not quote or quote not in description:
                 raise ValueError(f"{context} 的原文不在币面描述中：{quote}")
+            occurrence = item.get("occurrence")
+            if occurrence is not None:
+                if not isinstance(occurrence, int) or isinstance(occurrence, bool) or occurrence < 2:
+                    raise ValueError(f"{context} 的 occurrence 必须是大于 1 的整数")
+                if description.count(quote) < occurrence:
+                    raise ValueError(f"{context} 找不到原文的第 {occurrence} 处：{quote}")
             if not isinstance(label, str) or not label.strip():
                 raise ValueError(f"{context} 缺少位置名称")
             regions = item.get("regions")

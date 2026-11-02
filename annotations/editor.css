@@ -230,6 +230,7 @@ button:disabled { cursor: not-allowed; opacity: 0.45; }
 .nudge-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; margin-top: 10px; }
 .nudge-grid button { min-height: 31px; padding: 4px; font-size: 11px; }
 .review-section { text-align: center; }
+.review-section #nextUnreviewedBtn { width: 100%; margin-top: 7px; }
 .review-section .muted { display: block; margin-top: 7px; }
 .feedback-section textarea { width: 100%; resize: vertical; color: #5f574c; font-family: ui-monospace, SFMono-Regular, Consolas, monospace; font-size: 11px; line-height: 1.5; }
 .feedback-section .button { width: 100%; margin-top: 7px; }
