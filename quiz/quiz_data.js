@@ -46,9 +46,9 @@ const QUIZ_QUESTIONS = [
   {
     id: 7, category: "issuance",
     question: "京剧艺术系列纪念币中，哪枚的发行量最大？",
-    options: ["生角", "旦角", "净角", "三枚发行量相同"],
-    correctIndex: 0,
-    explanation: "京剧生角（2023年）是系列龙头，发行量6000万枚。旦角发行量5000万枚，净角6000万枚。"
+    options: ["生角", "旦角", "净角", "四枚发行量相同"],
+    correctIndex: 3,
+    explanation: "京剧生角（2023年）是系列龙头，发行量6000万枚。旦角发行量6000万枚，净角6000万枚，丑角6000万枚。"
   },
   {
     id: 8, category: "issuance",
@@ -331,10 +331,10 @@ const QUIZ_QUESTIONS = [
   },
   {
     id: 47, category: "metal",
-    question: "中国纪念钞中，哪种材质的纪念钞发行数量更多？",
+    question: "中国纪念钞中，哪种材质的纪念钞发行数量更多（截止2026）？",
     options: ["纸钞", "塑料钞", "两者数量相当", "没有纪念钞"],
     correctIndex: 2,
-    explanation: "纸钞（建国钞、龙钞、奥运钞、航天钞）和塑料钞（千禧龙钞、蛇钞、马钞等）各有5枚左右，数量相当。"
+    explanation: "纸钞（建国钞、奥运钞、航天钞、人民币钞、冬奥雪钞）和塑料钞（千禧龙钞、生肖龙钞、蛇钞、马钞、冬奥冰钞等）各有5枚左右，数量相当。单从趋势来看，未来发行当以塑料钞为主。"
   },
   {
     id: 48, category: "metal",
@@ -604,9 +604,9 @@ const QUIZ_QUESTIONS = [
   {
     id: 85, category: "name-match",
     question: "京剧艺术纪念币系列分别表现为哪些行当？",
-    options: ["生、旦、净、末", "生、旦、净、丑", "生、旦、净（已发行的3枚）", "梅、程、荀、尚"],
-    correctIndex: 2,
-    explanation: "京剧艺术系列目前已发行3枚：生角（2023年）、旦角（2024年）、净角（2025年），分别对应京剧三大行当。"
+    options: ["生、旦、净、末、丑", "生、旦、净、丑", "生、旦、净", "梅、程、荀、尚"],
+    correctIndex: 1,
+    explanation: "京剧艺术系列目前已发行4枚：生角（2023年）、旦角（2024年）、净角（2025年）、丑角（2026年），分别对应京剧四大行当。"
   },
   {
     id: 86, category: "name-match",
