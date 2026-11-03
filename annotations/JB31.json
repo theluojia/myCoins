@@ -6,8 +6,8 @@
       "image": "coins/img/JB31_f.webp",
       "items": [
         {
-          "quote": "一只丹顶鹤站在水草地中",
-          "label": "水草地中的丹顶鹤",
+          "quote": "一只丹顶鹤",
+          "label": "一只丹顶鹤",
           "regions": [
             {
               "type": "ellipse",
@@ -46,7 +46,7 @@
         },
         {
           "quote": "水草地",
-          "label": "水草与湿地",
+          "label": "水草地",
           "regions": [
             {
               "type": "rect",

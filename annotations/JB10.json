@@ -6,8 +6,8 @@
       "image": "coins/img/JB10_f.webp",
       "items": [
         {
-          "quote": "40",
-          "label": "艺术字“40”",
+          "quote": "艺术字\"40\"",
+          "label": "艺术字\"40\"",
           "regions": [
             {
               "type": "rect",
@@ -88,6 +88,19 @@
               "y": 0.84,
               "width": 0.38,
               "height": 0.08
+            }
+          ]
+        },
+        {
+          "quote": "\"中华人民共和国成立四十周年\"",
+          "label": "\"中华人民共和国成立四十周年\"字样",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0788,
+              "y": 0.0556,
+              "width": 0.8477,
+              "height": 0.3513
             }
           ]
         }

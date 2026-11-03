@@ -7,7 +7,7 @@
       "items": [
         {
           "quote": "毛泽东等领导同志",
-          "label": "天安门城楼上的领导同志",
+          "label": "毛泽东等领导同志",
           "regions": [
             {
               "type": "rect",
@@ -33,7 +33,7 @@
         },
         {
           "quote": "开国大典",
-          "label": "开国大典场景",
+          "label": "开国大典",
           "regions": [
             {
               "type": "rect",

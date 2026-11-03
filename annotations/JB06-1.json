@@ -7,7 +7,7 @@
       "items": [
         {
           "quote": "足球运动员形象",
-          "label": "足球运动员",
+          "label": "足球运动员形象",
           "regions": [
             {
               "type": "ellipse",
@@ -33,7 +33,7 @@
         },
         {
           "quote": "面值",
-          "label": "面值“1角”",
+          "label": "面值",
           "regions": [
             {
               "type": "rect",

@@ -46,7 +46,7 @@
         },
         {
           "quote": "花纹装饰",
-          "label": "下方花纹装饰",
+          "label": "花纹装饰",
           "regions": [
             {
               "type": "rect",

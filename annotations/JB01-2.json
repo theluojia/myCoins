@@ -7,7 +7,7 @@
       "items": [
         {
           "quote": "汉、蒙、藏、维和高山族人物形象",
-          "label": "五个民族人物形象",
+          "label": "汉、蒙、藏、维和高山族人物形象",
           "regions": [
             {
               "type": "ellipse",
@@ -48,7 +48,7 @@
         },
         {
           "quote": "民族大团结",
-          "label": "民族大团结主题文字",
+          "label": "民族大团结",
           "regions": [
             {
               "type": "rect",

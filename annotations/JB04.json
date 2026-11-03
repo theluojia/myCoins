@@ -6,8 +6,8 @@
       "image": "coins/img/JB04_f.webp",
       "items": [
         {
-          "quote": "和平",
-          "label": "和平雕像",
+          "quote": "\"和平\"雕像",
+          "label": "\"和平\"雕像",
           "regions": [
             {
               "type": "ellipse",
@@ -19,8 +19,8 @@
           ]
         },
         {
-          "quote": "国际和平年",
-          "label": "“国际和平年”主题文字",
+          "quote": "中文主题文字",
+          "label": "中文主题文字",
           "regions": [
             {
               "type": "rect",
@@ -28,6 +28,13 @@
               "y": 0.8362,
               "width": 0.4111,
               "height": 0.0923
+            },
+            {
+              "type": "ellipse",
+              "cx": 0.171,
+              "cy": 0.5542,
+              "rx": 0.0858,
+              "ry": 0.1599
             }
           ]
         },

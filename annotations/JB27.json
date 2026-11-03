@@ -6,8 +6,8 @@
       "image": "coins/img/JB27_f.webp",
       "items": [
         {
-          "quote": "一只站立于岩石上的华南虎",
-          "label": "岩石上的华南虎",
+          "quote": "华南虎",
+          "label": "华南虎",
           "regions": [
             {
               "type": "ellipse",
@@ -15,6 +15,19 @@
               "cy": 0.47,
               "rx": 0.32,
               "ry": 0.32
+            }
+          ]
+        },
+        {
+          "quote": "岩石",
+          "label": "岩石",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.503,
+              "cy": 0.805,
+              "rx": 0.3127,
+              "ry": 0.1126
             }
           ]
         },
@@ -41,19 +54,6 @@
               "y": 0.2744,
               "width": 0.24,
               "height": 0.2
-            }
-          ]
-        },
-        {
-          "quote": "灌木枝",
-          "label": "左侧灌木枝",
-          "regions": [
-            {
-              "type": "rect",
-              "x": 0.1404,
-              "y": 0.6914,
-              "width": 0.5163,
-              "height": 0.2569
             }
           ]
         }

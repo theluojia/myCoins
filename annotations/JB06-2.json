@@ -7,7 +7,7 @@
       "items": [
         {
           "quote": "体操运动员形象",
-          "label": "体操运动员",
+          "label": "体操运动员形象",
           "regions": [
             {
               "type": "ellipse",
@@ -20,7 +20,7 @@
         },
         {
           "quote": "年号",
-          "label": "年号“1987”",
+          "label": "年号",
           "regions": [
             {
               "type": "rect",
@@ -33,7 +33,7 @@
         },
         {
           "quote": "面值",
-          "label": "面值“1角”",
+          "label": "面值",
           "regions": [
             {
               "type": "rect",

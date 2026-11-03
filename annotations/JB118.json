@@ -6,8 +6,8 @@
       "image": "coins/img/JB118_f.webp",
       "items": [
         {
-          "quote": "中国京剧艺术中旦角形象",
-          "label": "中国京剧艺术中旦角形象",
+          "quote": "旦角形象",
+          "label": "旦角形象",
           "regions": [
             {
               "type": "rect",
@@ -19,8 +19,8 @@
           ]
         },
         {
-          "quote": "局部为彩色图案",
-          "label": "局部为彩色图案",
+          "quote": "彩色图案",
+          "label": "彩色图案",
           "regions": [
             {
               "type": "ellipse",
@@ -32,7 +32,7 @@
           ]
         },
         {
-          "quote": "辅以装饰化图形",
+          "quote": "装饰化图形",
           "label": "装饰化图形",
           "regions": [
             {
@@ -46,7 +46,7 @@
         },
         {
           "quote": "“中国京剧艺术”",
-          "label": "“中国京剧艺术”",
+          "label": "“中国京剧艺术”字样",
           "regions": [
             {
               "type": "rect",
@@ -59,12 +59,12 @@
         },
         {
           "quote": "面额“5元”",
-          "label": "面额“5元”",
+          "label": "“5元”字样",
           "regions": [
             {
               "type": "rect",
               "x": 0.3813,
-              "y": 0.82,
+              "y": 0.805,
               "width": 0.2063,
               "height": 0.135
             }

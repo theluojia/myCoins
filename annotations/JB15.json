@@ -6,7 +6,7 @@
       "image": "coins/img/JB15_f.webp",
       "items": [
         {
-          "quote": "中华人民共和国宪法",
+          "quote": "《中华人民共和国宪法》单行本",
           "label": "《中华人民共和国宪法》单行本",
           "regions": [
             {
@@ -20,7 +20,7 @@
         },
         {
           "quote": "鲜花",
-          "label": "托衬宪法的鲜花",
+          "label": "鲜花",
           "regions": [
             {
               "type": "ellipse",

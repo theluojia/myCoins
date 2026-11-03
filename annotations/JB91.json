@@ -6,6 +6,19 @@
       "image": "coins/img/JB91_f.webp",
       "items": [
         {
+          "quote": "纪念主题文字",
+          "label": "纪念主题文字",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0451,
+              "y": 0.0285,
+              "width": 0.9331,
+              "height": 0.5815
+            }
+          ]
+        },
+        {
           "quote": "数字\"70\"与\"1945-2015\"",
           "label": "数字\"70\"与\"1945-2015\"",
           "regions": [

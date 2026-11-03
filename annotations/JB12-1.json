@@ -6,6 +6,19 @@
       "image": "coins/img/JB12-1_f.webp",
       "items": [
         {
+          "quote": "纪念文字",
+          "label": "纪念文字",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0705,
+              "y": 0.065,
+              "width": 0.8699,
+              "height": 0.6131
+            }
+          ]
+        },
+        {
           "quote": "绶带",
           "label": "植树运动绶带",
           "regions": [
@@ -48,6 +61,19 @@
               "cy": 0.3932,
               "rx": 0.334,
               "ry": 0.2132
+            }
+          ]
+        },
+        {
+          "quote": "年号",
+          "label": "年号",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3634,
+              "y": 0.8199,
+              "width": 0.2973,
+              "height": 0.0982
             }
           ]
         }

@@ -6,19 +6,6 @@
       "image": "coins/img/JB13-3_f.webp",
       "items": [
         {
-          "quote": "十一届三中全会会址",
-          "label": "十一届三中全会会址",
-          "regions": [
-            {
-              "type": "rect",
-              "x": 0.16,
-              "y": 0.31,
-              "width": 0.68,
-              "height": 0.34
-            }
-          ]
-        },
-        {
           "quote": "中国共产党成立七十周年",
           "label": "建党七十周年主题文字",
           "regions": [
@@ -28,6 +15,32 @@
               "y": 0.0573,
               "width": 0.8652,
               "height": 0.3273
+            }
+          ]
+        },
+        {
+          "quote": "党徽",
+          "label": "党徽",
+          "regions": [
+            {
+              "type": "ellipse",
+              "cx": 0.5012,
+              "cy": 0.2766,
+              "rx": 0.091,
+              "ry": 0.0912
+            }
+          ]
+        },
+        {
+          "quote": "十一届三中全会会址",
+          "label": "十一届三中全会会址",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.16,
+              "y": 0.31,
+              "width": 0.68,
+              "height": 0.34
             }
           ]
         },

@@ -6,6 +6,19 @@
       "image": "coins/img/JB23_f.webp",
       "items": [
         {
+          "quote": "纪念文字",
+          "label": "纪念文字",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.1041,
+              "y": 0.0873,
+              "width": 0.7984,
+              "height": 0.3081
+            }
+          ]
+        },
+        {
           "quote": "联合国会徽",
           "label": "联合国会徽",
           "regions": [
@@ -19,8 +32,8 @@
           ]
         },
         {
-          "quote": "50",
-          "label": "联合国成立五十周年“50”",
+          "quote": "\"50\"字样",
+          "label": "\"50\"字样",
           "regions": [
             {
               "type": "rect",

@@ -6,6 +6,19 @@
       "image": "coins/img/JB08_f.webp",
       "items": [
         {
+          "quote": "纪念文字",
+          "label": "纪念文字",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0508,
+              "y": 0.0684,
+              "width": 0.9016,
+              "height": 0.5309
+            }
+          ]
+        },
+        {
           "quote": "中国人民银行行徽",
           "label": "中国人民银行行徽",
           "regions": [
@@ -28,6 +41,39 @@
               "y": 0.2282,
               "width": 0.6632,
               "height": 0.5042
+            }
+          ]
+        },
+        {
+          "quote": "纪念年份",
+          "label": "纪念年份",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.1769,
+              "y": 0.6542,
+              "width": 0.1777,
+              "height": 0.0681
+            },
+            {
+              "type": "rect",
+              "x": 0.6421,
+              "y": 0.6542,
+              "width": 0.1947,
+              "height": 0.0734
+            }
+          ]
+        },
+        {
+          "quote": "面额",
+          "label": "面额",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3401,
+              "y": 0.7427,
+              "width": 0.3218,
+              "height": 0.1716
             }
           ]
         }

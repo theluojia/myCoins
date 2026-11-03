@@ -33,7 +33,7 @@
         },
         {
           "quote": "国徽",
-          "label": "左上方国徽",
+          "label": "国徽",
           "regions": [
             {
               "type": "ellipse",
@@ -85,7 +85,7 @@
         },
         {
           "quote": "面额数字“50”",
-          "label": "左下方面额数字“50”",
+          "label": "面额数字“50”",
           "regions": [
             {
               "type": "rect",
@@ -97,8 +97,8 @@
           ]
         },
         {
-          "quote": "伍拾圆",
-          "label": "右上方“50”和“伍拾圆”",
+          "quote": "“50”和“伍拾圆”",
+          "label": "“50”和“伍拾圆”",
           "regions": [
             {
               "type": "rect",

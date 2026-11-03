@@ -6,8 +6,21 @@
       "image": "coins/img/JB12-3_f.webp",
       "items": [
         {
+          "quote": "纪念文字",
+          "label": "纪念文字",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0703,
+              "y": 0.0804,
+              "width": 0.8545,
+              "height": 0.5951
+            }
+          ]
+        },
+        {
           "quote": "华表",
-          "label": "中央华表",
+          "label": "华表",
           "regions": [
             {
               "type": "rect",
@@ -20,7 +33,7 @@
         },
         {
           "quote": "地球",
-          "label": "地球图案",
+          "label": "地球",
           "regions": [
             {
               "type": "ellipse",
@@ -32,7 +45,7 @@
           ]
         },
         {
-          "quote": "小鸟",
+          "quote": "飞翔的小鸟",
           "label": "飞翔的小鸟",
           "regions": [
             {
@@ -48,6 +61,19 @@
               "cy": 0.3576,
               "rx": 0.13,
               "ry": 0.08
+            }
+          ]
+        },
+        {
+          "quote": "年号",
+          "label": "年号",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3576,
+              "y": 0.814,
+              "width": 0.2885,
+              "height": 0.0972
             }
           ]
         }

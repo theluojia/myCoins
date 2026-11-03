@@ -602,17 +602,17 @@
             stroke: rgba(253, 230, 138, 0.95);
         }
         .annotation-active-outline {
-            fill: rgba(251, 191, 36, 0.14);
+            fill: none;
             stroke: #fbbf24;
             stroke-width: 3;
             vector-effect: non-scaling-stroke;
             pointer-events: none;
             filter: drop-shadow(0 0 5px rgba(251, 191, 36, 0.9));
-            animation: annotationPulse 1.5s ease-in-out infinite;
+            animation: annotationOutlineBreathe 1.8s ease-in-out infinite;
         }
-        @keyframes annotationPulse {
-            0%, 100% { stroke-opacity: 0.75; fill-opacity: 0.55; }
-            50% { stroke-opacity: 1; fill-opacity: 1; }
+        @keyframes annotationOutlineBreathe {
+            0%, 100% { stroke-opacity: 0.72; }
+            50% { stroke-opacity: 1; }
         }
         .zoom-lens {
             position: absolute;
@@ -655,7 +655,8 @@
             border-radius: 0.5rem;
         }
         .zoom-face-label {
-            margin-top: 0.45rem;
+            margin-top: -0.35rem;
+            margin-bottom: 0.45rem;
             font-size: 0.8rem;
             color: #888;
             font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif;
@@ -688,6 +689,12 @@
             background: rgba(255,255,255,0.05);
             border-color: rgba(255,255,255,0.16);
             cursor: wait;
+        }
+        .zoom-explore-actions {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
         }
         .zoom-explore-panel {
             display: none;
@@ -781,31 +788,29 @@
             box-shadow: 0 0 0 2px rgba(251, 191, 36, 0.25);
         }
         .annotation-nav {
-            display: none;
-            flex-direction: column;
+            display: flex;
             align-items: center;
             justify-content: center;
-            gap: 0.4rem;
-            margin-top: 0.55rem;
-            max-width: 90vw;
-            color: #d1d5db;
-            font-size: 0.8rem;
+            max-width: 0;
+            margin-left: 0;
+            overflow: hidden;
+            opacity: 0;
+            pointer-events: none;
+            transform: translateX(-0.5rem);
+            transition: max-width 0.22s ease, margin-left 0.22s ease, opacity 0.18s ease, transform 0.22s ease;
         }
         .annotation-nav.active {
-            display: flex;
+            max-width: 13rem;
+            margin-left: 0.45rem;
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateX(0);
         }
         .annotation-nav-controls {
-            display: grid;
-            grid-template-columns: 1fr auto 1fr;
+            display: flex;
             align-items: center;
-            gap: 0.5rem;
-            width: 12rem;
-        }
-        .annotation-nav-controls .annotation-nav-btn:first-child {
-            justify-self: start;
-        }
-        .annotation-nav-controls .annotation-nav-btn:last-child {
-            justify-self: end;
+            gap: 0.35rem;
+            white-space: nowrap;
         }
         .annotation-nav-btn {
             min-width: 2.1rem;
@@ -826,12 +831,17 @@
         }
         .annotation-status {
             display: block;
-            width: min(36rem, 80vw);
+            width: min(56rem, 90vw);
+            min-height: 1.25rem;
+            margin-top: 0.25rem;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
             text-align: center;
             color: #fde68a;
+            font-size: 0.8rem;
+            line-height: 1.25rem;
+            text-shadow: 0 1px 2px #000, 0 0 6px rgba(0,0,0,0.9);
         }
         .zoom-arrow {
             position: absolute;
@@ -912,8 +922,10 @@
                 height: 2.5rem;
             }
             .annotation-nav {
-                gap: 0.3rem;
-                font-size: 0.75rem;
+                max-width: 0;
+            }
+            .annotation-nav.active {
+                max-width: 13rem;
             }
             .annotation-nav-btn {
                 padding: 0 0.5rem;
@@ -1441,13 +1453,14 @@
             <div class="zoom-content" onclick="event.stopPropagation()">
                 <div class="zoom-top-fixed">
                     <div id="zoomModalName" class="zoom-name"></div>
+                    <div id="zoomModalFace" class="zoom-face-label"></div>
                     <div id="zoomImageWrapper" class="zoom-image-wrapper">
                         <img id="zoomModalImg" class="zoom-image" src="" alt="">
                         <svg id="coinAnnotationOverlay" class="coin-annotation-overlay" viewBox="0 0 1000 1000" preserveAspectRatio="none" aria-hidden="true"></svg>
                         <div id="zoomLens" class="zoom-lens"></div>
                         <div id="zoomLoading" class="zoom-loading" style="display:none"></div>
                     </div>
-                    <div id="zoomModalFace" class="zoom-face-label"></div>
+                    <span id="coinAnnotationStatus" class="annotation-status" aria-live="polite"></span>
                 </div>
                 <div class="zoom-bottom-flex">
                     <!--
@@ -1460,17 +1473,18 @@
                         <button class="zoom-ctrl-btn" onclick="event.stopPropagation();changeZoomFactor(0.5)" title="放大">+</button>
                         <span class="zoom-hint">点击图片开启/关闭放大镜</span>
                     </div>
-                    <button id="coinExploreToggle" type="button" class="zoom-explore-toggle" aria-expanded="false" onclick="event.stopPropagation();toggleCoinExploreMode()">正在准备探索…</button>
-                    <div id="coinExplorePanel" class="zoom-explore-panel">
-                        <div id="zoomModalDesc" class="zoom-desc"></div>
+                    <div class="zoom-explore-actions">
+                        <button id="coinExploreToggle" type="button" class="zoom-explore-toggle" aria-expanded="false" onclick="event.stopPropagation();toggleCoinExploreMode()">正在准备探索…</button>
                         <div id="coinAnnotationNav" class="annotation-nav" aria-label="图文导览控制">
                             <div class="annotation-nav-controls">
                                 <button type="button" class="annotation-nav-btn" onclick="event.stopPropagation();stepCoinAnnotation(-1)" title="上一处">←</button>
                                 <button type="button" class="annotation-nav-btn" onclick="event.stopPropagation();clearCoinAnnotation()" title="恢复默认大图">还原</button>
                                 <button type="button" class="annotation-nav-btn" onclick="event.stopPropagation();stepCoinAnnotation(1)" title="下一处">→</button>
                             </div>
-                            <span id="coinAnnotationStatus" class="annotation-status" aria-live="polite"></span>
                         </div>
+                    </div>
+                    <div id="coinExplorePanel" class="zoom-explore-panel">
+                        <div id="zoomModalDesc" class="zoom-desc"></div>
                     </div>
                 </div>
             </div>
@@ -2397,7 +2411,7 @@
             if (index >= 0 && items[index]) {
                 els.status.textContent = (index + 1) + ' / ' + items.length + ' · ' + (items[index].label || items[index].quote);
             } else {
-                els.status.textContent = '点击黄色文字查看图中位置';
+                els.status.textContent = '';
             }
         }
 

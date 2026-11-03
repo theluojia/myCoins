@@ -6,8 +6,8 @@
       "image": "coins/img/JB121_f.webp",
       "items": [
         {
-          "quote": "中国人民抗日战争暨世界反法西斯战争胜利80周年纪念活动标识",
-          "label": "中国人民抗日战争暨世界反法西斯战争胜利80周年纪念活动标识",
+          "quote": "纪念活动标识",
+          "label": "纪念活动标识",
           "regions": [
             {
               "type": "ellipse",
@@ -20,7 +20,7 @@
         },
         {
           "quote": "字样",
-          "label": "字样",
+          "label": "纪念活动字样",
           "regions": [
             {
               "type": "rect",

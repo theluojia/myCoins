@@ -6,8 +6,8 @@
       "image": "coins/img/JB30_f.webp",
       "items": [
         {
-          "quote": "一只朱鹮站在树枝上",
-          "label": "站在树枝上的朱鹮",
+          "quote": "一只朱鹮",
+          "label": "一只朱鹮",
           "regions": [
             {
               "type": "ellipse",
@@ -46,7 +46,7 @@
         },
         {
           "quote": "树枝",
-          "label": "朱鹮脚下树枝",
+          "label": "树枝",
           "regions": [
             {
               "type": "rect",

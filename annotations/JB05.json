@@ -7,7 +7,7 @@
       "items": [
         {
           "quote": "放牧图",
-          "label": "牧民与牲畜放牧图",
+          "label": "放牧图",
           "regions": [
             {
               "type": "rect",
@@ -20,20 +20,33 @@
         },
         {
           "quote": "蒙古文字",
-          "label": "蒙古文纪念主题",
+          "label": "蒙古文纪念文字",
           "regions": [
             {
               "type": "rect",
               "x": 0.2703,
               "y": 0.8282,
-              "width": 0.4753,
-              "height": 0.1288
+              "width": 0.4657,
+              "height": 0.0762
+            }
+          ]
+        },
+        {
+          "quote": "纪念年份",
+          "label": "纪念年份",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.3892,
+              "y": 0.8917,
+              "width": 0.2375,
+              "height": 0.0511
             }
           ]
         },
         {
           "quote": "面值",
-          "label": "面值“1元”",
+          "label": "面值",
           "regions": [
             {
               "type": "rect",

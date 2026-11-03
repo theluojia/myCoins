@@ -6,8 +6,34 @@
       "image": "coins/img/JB12-2_f.webp",
       "items": [
         {
+          "quote": "纪念文字",
+          "label": "纪念文字",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.0564,
+              "y": 0.4672,
+              "width": 0.8146,
+              "height": 0.4729
+            }
+          ]
+        },
+        {
+          "quote": "花卉装饰",
+          "label": "花卉装饰",
+          "regions": [
+            {
+              "type": "rect",
+              "x": 0.1721,
+              "y": 0.1328,
+              "width": 0.33,
+              "height": 0.6772
+            }
+          ]
+        },
+        {
           "quote": "女青年头像",
-          "label": "女青年侧面头像",
+          "label": "女青年头像",
           "regions": [
             {
               "type": "ellipse",
@@ -19,15 +45,15 @@
           ]
         },
         {
-          "quote": "花卉",
-          "label": "头像周围的花卉装饰",
+          "quote": "年号",
+          "label": "年号",
           "regions": [
             {
               "type": "rect",
-              "x": 0.1721,
-              "y": 0.1328,
-              "width": 0.33,
-              "height": 0.6772
+              "x": 0.6996,
+              "y": 0.5679,
+              "width": 0.2159,
+              "height": 0.0951
             }
           ]
         }

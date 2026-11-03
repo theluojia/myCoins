@@ -64,7 +64,7 @@
       "items": [
         {
           "quote": "玉女峰",
-          "label": "画面中央的玉女峰",
+          "label": "玉女峰",
           "regions": [
             {
               "type": "ellipse",
@@ -77,7 +77,7 @@
         },
         {
           "quote": "九曲溪",
-          "label": "穿行山间的九曲溪",
+          "label": "九曲溪",
           "regions": [
             {
               "type": "polygon",
@@ -129,7 +129,7 @@
         },
         {
           "quote": "茶叶",
-          "label": "右下方茶叶",
+          "label": "茶叶",
           "regions": [
             {
               "type": "ellipse",
@@ -142,7 +142,7 @@
         },
         {
           "quote": "竹排",
-          "label": "九曲溪上的竹排",
+          "label": "竹排",
           "regions": [
             {
               "type": "ellipse",
@@ -155,7 +155,7 @@
         },
         {
           "quote": "武夷精舍",
-          "label": "山间的武夷精舍",
+          "label": "武夷精舍",
           "regions": [
             {
               "type": "rect",
@@ -168,7 +168,7 @@
         },
         {
           "quote": "石刻",
-          "label": "左侧摩崖石刻",
+          "label": "石刻",
           "regions": [
             {
               "type": "rect",
@@ -180,8 +180,8 @@
           ]
         },
         {
-          "quote": "世界文化和自然遗产——武夷山",
-          "label": "主题文字",
+          "quote": "“世界文化和自然遗产——武夷山”字样",
+          "label": "“世界文化和自然遗产——武夷山”字样",
           "regions": [
             {
               "type": "rect",
