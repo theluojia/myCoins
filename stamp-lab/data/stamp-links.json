@@ -1,0 +1,3294 @@
+{
+  "meta": {
+    "schemaVersion": 1,
+    "generatedAt": "2026-11-06T08:10:11.7300053Z",
+    "source": "https://meetstamps.com/",
+    "sourceCoinFile": "../coin_data_simple.json",
+    "stampCount": 78,
+    "relationCount": 108,
+    "matchedCoinCount": 107,
+    "totalCoinCount": 149,
+    "coverage": 0.7181,
+    "statusCounts": {
+      "missing_preview": 1,
+      "ok": 77
+    }
+  },
+  "coins": [
+    {
+      "id": "JB01-1",
+      "name": "中华人民共和国成立三十五周年－祖国万岁",
+      "year": 1984
+    },
+    {
+      "id": "JB01-2",
+      "name": "中华人民共和国成立三十五周年－民族大团结",
+      "year": 1984
+    },
+    {
+      "id": "JB01-3",
+      "name": "中华人民共和国成立三十五周年－开国大典",
+      "year": 1984
+    },
+    {
+      "id": "JB02",
+      "name": "庆祝西藏自治区成立20周年",
+      "year": 1985
+    },
+    {
+      "id": "JB03",
+      "name": "新疆维吾尔自治区成立30周年",
+      "year": 1985
+    },
+    {
+      "id": "JB04",
+      "name": "国际和平年",
+      "year": 1986
+    },
+    {
+      "id": "JB05",
+      "name": "内蒙古自治区成立四十周年",
+      "year": 1987
+    },
+    {
+      "id": "JB06-1",
+      "name": "中华人民共和国第六届运动会－足球",
+      "year": 1987
+    },
+    {
+      "id": "JB06-2",
+      "name": "中华人民共和国第六届运动会－体操",
+      "year": 1987
+    },
+    {
+      "id": "JB06-3",
+      "name": "中华人民共和国第六届运动会－排球",
+      "year": 1987
+    },
+    {
+      "id": "JB07",
+      "name": "宁夏回族自治区成立三十周年",
+      "year": 1988
+    },
+    {
+      "id": "JB08",
+      "name": "中国人民银行成立四十周年",
+      "year": 1988
+    },
+    {
+      "id": "JB09",
+      "name": "广西壮族自治区成立三十周年",
+      "year": 1988
+    },
+    {
+      "id": "JB10",
+      "name": "中华人民共和国成立四十周年",
+      "year": 1989
+    },
+    {
+      "id": "JB11-1",
+      "name": "第十一届亚洲运动会－射箭",
+      "year": 1990
+    },
+    {
+      "id": "JB11-2",
+      "name": "第十一届亚洲运动会－武术",
+      "year": 1990
+    },
+    {
+      "id": "JB12-1",
+      "name": "全民义务植树运动十周年－绶带/铁锹/小树",
+      "year": 1991
+    },
+    {
+      "id": "JB12-2",
+      "name": "全民义务植树运动十周年－女青年头像",
+      "year": 1991
+    },
+    {
+      "id": "JB12-3",
+      "name": "全民义务植树运动十周年－华表/地球/小鸟",
+      "year": 1991
+    },
+    {
+      "id": "JB13-1",
+      "name": "中国共产党成立七十周年－第一次全国代表大会",
+      "year": 1991
+    },
+    {
+      "id": "JB13-2",
+      "name": "中国共产党成立七十周年－遵义会议",
+      "year": 1991
+    },
+    {
+      "id": "JB13-3",
+      "name": "中国共产党成立七十周年－第十一届三中全会",
+      "year": 1991
+    },
+    {
+      "id": "JB14-1",
+      "name": "第一届世界女子足球锦标赛－踢球",
+      "year": 1991
+    },
+    {
+      "id": "JB14-2",
+      "name": "第一届世界女子足球锦标赛－扑球",
+      "year": 1991
+    },
+    {
+      "id": "JB15",
+      "name": "宪法颁布十周年",
+      "year": 1992
+    },
+    {
+      "id": "JB16",
+      "name": "宋庆龄诞辰100周年",
+      "year": 1993
+    },
+    {
+      "id": "JB17",
+      "name": "中国珍稀野生动物－大熊猫",
+      "year": 1993
+    },
+    {
+      "id": "JB18",
+      "name": "毛泽东诞辰100周年",
+      "year": 1993
+    },
+    {
+      "id": "JB19",
+      "name": "希望工程实施5周年",
+      "year": 1994
+    },
+    {
+      "id": "JB20",
+      "name": "第43届世界乒乓球锦标赛",
+      "year": 1995
+    },
+    {
+      "id": "JB21",
+      "name": "中国抗日战争和世界反法西斯战争胜利50周年",
+      "year": 1995
+    },
+    {
+      "id": "JB22",
+      "name": "联合国第四次世界妇女大会",
+      "year": 1995
+    },
+    {
+      "id": "JB23",
+      "name": "联合国成立五十周年",
+      "year": 1995
+    },
+    {
+      "id": "JB24",
+      "name": "中国珍稀野生动物－金丝猴",
+      "year": 1995
+    },
+    {
+      "id": "JB25",
+      "name": "朱德诞辰110周年",
+      "year": 1996
+    },
+    {
+      "id": "JB26",
+      "name": "中国珍稀野生动物－白鳍豚",
+      "year": 1996
+    },
+    {
+      "id": "JB27",
+      "name": "中国珍稀野生动物－华南虎",
+      "year": 1996
+    },
+    {
+      "id": "JB28-1",
+      "name": "庆祝中华人民共和国香港特别行政区成立－基本法",
+      "year": 1997
+    },
+    {
+      "id": "JB28-2",
+      "name": "庆祝中华人民共和国香港特别行政区成立－维多利亚港",
+      "year": 1997
+    },
+    {
+      "id": "JB29",
+      "name": "周恩来诞辰100周年",
+      "year": 1998
+    },
+    {
+      "id": "JB30",
+      "name": "中国珍稀野生动物－朱鹮",
+      "year": 1998
+    },
+    {
+      "id": "JB31",
+      "name": "中国珍稀野生动物－丹顶鹤",
+      "year": 1998
+    },
+    {
+      "id": "JB32",
+      "name": "中国珍稀野生动物－褐马鸡",
+      "year": 1998
+    },
+    {
+      "id": "JB33",
+      "name": "中国珍稀野生动物－扬子鳄",
+      "year": 1998
+    },
+    {
+      "id": "JB34",
+      "name": "刘少奇诞辰100周年",
+      "year": 1998
+    },
+    {
+      "id": "JB35",
+      "name": "中国珍稀野生动物－中华鲟",
+      "year": 1999
+    },
+    {
+      "id": "JB36",
+      "name": "中国珍稀野生动物－金斑喙凤蝶",
+      "year": 1999
+    },
+    {
+      "id": "JB37",
+      "name": "中国人民政治协商会议成立五十周年",
+      "year": 1999
+    },
+    {
+      "id": "JB38",
+      "name": "中华人民共和国成立五十周年",
+      "year": 1999
+    },
+    {
+      "id": "JC01",
+      "name": "中华人民共和国成立五十周年（钞）",
+      "year": 1999
+    },
+    {
+      "id": "JB39-1",
+      "name": "庆祝中华人民共和国澳门特别行政区成立－基本法",
+      "year": 1999
+    },
+    {
+      "id": "JB39-2",
+      "name": "庆祝中华人民共和国澳门特别行政区成立－妈祖阁和帆船",
+      "year": 1999
+    },
+    {
+      "id": "JB40",
+      "name": "敦煌藏经洞发现100周年",
+      "year": 2000
+    },
+    {
+      "id": "JB41",
+      "name": "迎接新世纪",
+      "year": 2000
+    },
+    {
+      "id": "JC02",
+      "name": "迎接新世纪（钞）",
+      "year": 2000
+    },
+    {
+      "id": "JB42",
+      "name": "西藏和平解放五十周年",
+      "year": 2001
+    },
+    {
+      "id": "JB43",
+      "name": "辛亥革命90周年",
+      "year": 2001
+    },
+    {
+      "id": "JB44",
+      "name": "世界文化遗产－万里长城",
+      "year": 2002
+    },
+    {
+      "id": "JB45",
+      "name": "世界文化遗产－秦始皇陵及兵马俑坑",
+      "year": 2002
+    },
+    {
+      "id": "JB46",
+      "name": "2003年贺岁（癸未）",
+      "year": 2003
+    },
+    {
+      "id": "JB47",
+      "name": "宝岛台湾－朝天宫",
+      "year": 2003
+    },
+    {
+      "id": "JB48",
+      "name": "宝岛台湾－赤嵌楼",
+      "year": 2003
+    },
+    {
+      "id": "JB49",
+      "name": "世界文化遗产－曲阜孔庙孔林孔府",
+      "year": 2003
+    },
+    {
+      "id": "JB50",
+      "name": "世界文化遗产－明清故宫",
+      "year": 2003
+    },
+    {
+      "id": "JB51",
+      "name": "2004年贺岁（甲申）",
+      "year": 2004
+    },
+    {
+      "id": "JB52",
+      "name": "宝岛台湾－鹅銮鼻",
+      "year": 2004
+    },
+    {
+      "id": "JB53",
+      "name": "宝岛台湾－日月潭",
+      "year": 2004
+    },
+    {
+      "id": "JB54",
+      "name": "邓小平诞辰100周年",
+      "year": 2004
+    },
+    {
+      "id": "JB55",
+      "name": "人民代表大会成立五十周年",
+      "year": 2004
+    },
+    {
+      "id": "JB56",
+      "name": "世界文化遗产－苏州古典园林",
+      "year": 2004
+    },
+    {
+      "id": "JB57",
+      "name": "世界文化遗产－周口店\"北京人\"遗址",
+      "year": 2004
+    },
+    {
+      "id": "JB58",
+      "name": "2005年贺岁（乙酉）",
+      "year": 2005
+    },
+    {
+      "id": "JB59",
+      "name": "世界文化遗产－丽江古城",
+      "year": 2005
+    },
+    {
+      "id": "JB60",
+      "name": "世界文化遗产－青城山与都江堰",
+      "year": 2005
+    },
+    {
+      "id": "JB61",
+      "name": "陈云诞辰100周年",
+      "year": 2005
+    },
+    {
+      "id": "JB62",
+      "name": "宝岛台湾－敬字亭",
+      "year": 2005
+    },
+    {
+      "id": "JB63",
+      "name": "2006年贺岁（丙戍）",
+      "year": 2006
+    },
+    {
+      "id": "JB64",
+      "name": "第 29 届奥林匹克运动会－举重",
+      "year": 2006
+    },
+    {
+      "id": "JB65",
+      "name": "第 29 届奥林匹克运动会－游泳",
+      "year": 2006
+    },
+    {
+      "id": "JB66",
+      "name": "世界文化遗产－龙门石窟",
+      "year": 2006
+    },
+    {
+      "id": "JB67",
+      "name": "世界文化遗产－颐和园",
+      "year": 2006
+    },
+    {
+      "id": "JB68",
+      "name": "2007年贺岁（丁亥）",
+      "year": 2006
+    },
+    {
+      "id": "JB69",
+      "name": "第 29 届奥林匹克运动会－体操",
+      "year": 2007
+    },
+    {
+      "id": "JB70",
+      "name": "第 29 届奥林匹克运动会－射箭",
+      "year": 2007
+    },
+    {
+      "id": "JB71",
+      "name": "第 29 届奥林匹克运动会－乒乓球",
+      "year": 2007
+    },
+    {
+      "id": "JB72",
+      "name": "2008年贺岁（戊子）",
+      "year": 2008
+    },
+    {
+      "id": "JB73",
+      "name": "第 29 届奥林匹克运动会－足球",
+      "year": 2008
+    },
+    {
+      "id": "JB74",
+      "name": "第 29 届奥林匹克运动会－击剑",
+      "year": 2008
+    },
+    {
+      "id": "JB75",
+      "name": "第 29 届奥林匹克运动会－现代五项",
+      "year": 2008
+    },
+    {
+      "id": "JC03",
+      "name": "第 29 届奥林匹克运动会（钞）",
+      "year": 2008
+    },
+    {
+      "id": "JB76",
+      "name": "2009年贺岁（己丑）",
+      "year": 2009
+    },
+    {
+      "id": "JB77",
+      "name": "\"和\"字书法－篆书",
+      "year": 2009
+    },
+    {
+      "id": "JB78",
+      "name": "环境保护－关注",
+      "year": 2009
+    },
+    {
+      "id": "JB79",
+      "name": "中国2010年上海世博会",
+      "year": 2010
+    },
+    {
+      "id": "JB80",
+      "name": "2010年贺岁（庚寅）",
+      "year": 2010
+    },
+    {
+      "id": "JB81",
+      "name": "\"和\"字书法－隶书",
+      "year": 2010
+    },
+    {
+      "id": "JB82",
+      "name": "环境保护－参与",
+      "year": 2010
+    },
+    {
+      "id": "JB83",
+      "name": "中国共产党成立90周年",
+      "year": 2011
+    },
+    {
+      "id": "JB84",
+      "name": "2011年贺岁（辛卯）",
+      "year": 2011
+    },
+    {
+      "id": "JB85",
+      "name": "2012年贺岁（壬辰）",
+      "year": 2012
+    },
+    {
+      "id": "JB86",
+      "name": "2013年贺岁（癸巳）",
+      "year": 2013
+    },
+    {
+      "id": "JB87",
+      "name": "\"和\"字书法－行书",
+      "year": 2013
+    },
+    {
+      "id": "JB88",
+      "name": "2014年贺岁（甲午）",
+      "year": 2013
+    },
+    {
+      "id": "JB89",
+      "name": "\"和\"字书法－草书",
+      "year": 2014
+    },
+    {
+      "id": "JB90",
+      "name": "2015年贺岁（乙未）",
+      "year": 2015
+    },
+    {
+      "id": "JB91",
+      "name": "中国人民抗日战争暨世界反法西斯战争胜利70周年",
+      "year": 2015
+    },
+    {
+      "id": "JB92",
+      "name": "中国航天",
+      "year": 2015
+    },
+    {
+      "id": "JC04",
+      "name": "中国航天（钞）",
+      "year": 2015
+    },
+    {
+      "id": "JB93",
+      "name": "2016年贺岁（丙申）",
+      "year": 2016
+    },
+    {
+      "id": "JB94",
+      "name": "孙中山先生诞辰150周年",
+      "year": 2016
+    },
+    {
+      "id": "JB95",
+      "name": "2017年贺岁（丁酉）",
+      "year": 2017
+    },
+    {
+      "id": "JB96",
+      "name": "中国人民解放军建军90周年",
+      "year": 2017
+    },
+    {
+      "id": "JB97",
+      "name": "\"和\"字书法－楷书",
+      "year": 2017
+    },
+    {
+      "id": "JB98",
+      "name": "2018年贺岁（戊戍）",
+      "year": 2018
+    },
+    {
+      "id": "JB99",
+      "name": "中国高铁",
+      "year": 2018
+    },
+    {
+      "id": "JB100",
+      "name": "庆祝改革开放40周年",
+      "year": 2018
+    },
+    {
+      "id": "JC05",
+      "name": "人民币发行七十周年（钞）",
+      "year": 2018
+    },
+    {
+      "id": "JB101",
+      "name": "2019年贺岁（己亥）",
+      "year": 2019
+    },
+    {
+      "id": "JB102",
+      "name": "中华人民共和国成立70周年",
+      "year": 2019
+    },
+    {
+      "id": "JB103",
+      "name": "世界文化和自然遗产－泰山",
+      "year": 2019
+    },
+    {
+      "id": "JB104",
+      "name": "2020年贺岁（庚子）",
+      "year": 2020
+    },
+    {
+      "id": "JB105",
+      "name": "世界文化和自然遗产－武夷山",
+      "year": 2020
+    },
+    {
+      "id": "JB106",
+      "name": "2021年贺岁（辛丑）",
+      "year": 2021
+    },
+    {
+      "id": "JB107",
+      "name": "中国共产党成立100周年",
+      "year": 2021
+    },
+    {
+      "id": "JB108-1",
+      "name": "第24届冬季奥林匹克运动会－冰上运动项目",
+      "year": 2021
+    },
+    {
+      "id": "JB108-2",
+      "name": "第24届冬季奥林匹克运动会－雪上运动项目",
+      "year": 2021
+    },
+    {
+      "id": "JC06-1",
+      "name": "第24届冬季奥林匹克运动会（钞）－冰上运动项目",
+      "year": 2021
+    },
+    {
+      "id": "JC06-2",
+      "name": "第24届冬季奥林匹克运动会（钞）－雪上运动项目",
+      "year": 2021
+    },
+    {
+      "id": "JB109",
+      "name": "2022年贺岁（壬寅）",
+      "year": 2022
+    },
+    {
+      "id": "JB110",
+      "name": "2023年贺岁（癸卯）",
+      "year": 2023
+    },
+    {
+      "id": "JB111",
+      "name": "世界文化和自然遗产－黄山",
+      "year": 2023
+    },
+    {
+      "id": "JB112",
+      "name": "世界文化和自然遗产－峨眉山-乐山大佛",
+      "year": 2023
+    },
+    {
+      "id": "JB113",
+      "name": "三江源国家公园",
+      "year": 2023
+    },
+    {
+      "id": "JB114",
+      "name": "大熊猫国家公园",
+      "year": 2023
+    },
+    {
+      "id": "JB115",
+      "name": "中国京剧艺术－生角",
+      "year": 2023
+    },
+    {
+      "id": "JB116",
+      "name": "2024年贺岁（甲辰）",
+      "year": 2024
+    },
+    {
+      "id": "JC07",
+      "name": "2024年贺岁（钞）",
+      "year": 2024
+    },
+    {
+      "id": "JB117",
+      "name": "东北虎豹国家公园",
+      "year": 2024
+    },
+    {
+      "id": "JB118",
+      "name": "中国京剧艺术－旦角",
+      "year": 2024
+    },
+    {
+      "id": "JB119",
+      "name": "2025年贺岁（乙巳）",
+      "year": 2025
+    },
+    {
+      "id": "JC08",
+      "name": "2025年贺岁（钞）",
+      "year": 2025
+    },
+    {
+      "id": "JB120",
+      "name": "海南热带雨林国家公园",
+      "year": 2025
+    },
+    {
+      "id": "JB121",
+      "name": "中国人民抗日战争暨世界反法西斯战争胜利80周年",
+      "year": 2025
+    },
+    {
+      "id": "JB122",
+      "name": "中国京剧艺术－净角",
+      "year": 2025
+    },
+    {
+      "id": "JB123",
+      "name": "2026年贺岁（丙午）",
+      "year": 2026
+    },
+    {
+      "id": "JC09",
+      "name": "2026年贺岁（钞）",
+      "year": 2026
+    },
+    {
+      "id": "JB124",
+      "name": "武夷山国家公园",
+      "year": 2026
+    },
+    {
+      "id": "JB125",
+      "name": "江泽民诞辰100周年",
+      "year": 2026
+    },
+    {
+      "id": "JB126",
+      "name": "中国京剧艺术－丑角",
+      "year": 2026
+    }
+  ],
+  "stamps": [
+    {
+      "id": "cn-j172",
+      "catalogNo": "J172",
+      "title": "1990·北京第十一届亚洲运动会（第三组）",
+      "pageUrl": "https://meetstamps.com/archives/11030",
+      "sourceSite": "meetstamps",
+      "retrievedAt": "2026-11-06T08:09:09.0342571Z",
+      "status": "ok",
+      "httpStatus": 200,
+      "pageTitle": "J172 1990·北京第十一届亚洲运动会（第三组）",
+      "issueDate": "1990-09-22",
+      "sourceImageUrl": "https://meetstamps.com/wp-content/uploads/2010/10/j172.jpg",
+      "preview": {
+        "localPath": "assets/previews/cn-j172.jpg",
+        "width": 443,
+        "height": 221,
+        "byteSize": 59913,
+        "sha256": "51bd63b090ffe5b1622eca4e47c7619ffde3def58e49a4fb724761da64659c84"
+      }
+    },
+    {
+      "id": "cn-j128",
+      "catalogNo": "J128",
+      "title": "国际和平年",
+      "pageUrl": "https://meetstamps.com/archives/10678",
+      "sourceSite": "meetstamps",
+      "retrievedAt": "2026-11-06T08:09:08.9543736Z",
+      "status": "ok",
+      "httpStatus": 200,
+      "pageTitle": "J128 国际和平年",
+      "issueDate": "1986-06-16",
+      "sourceImageUrl": "https://meetstamps.com/wp-content/uploads/2010/10/j128.jpg",
+      "preview": {
+        "localPath": "assets/previews/cn-j128.jpg",
+        "width": 330,
+        "height": 231,
+        "byteSize": 29694,
+        "sha256": "12a710133ef49a10853b8ab0f18e807967751def30423d7141cc0659af410388"
+      }
+    },
+    {
+      "id": "cn-j116",
+      "catalogNo": "J116",
+      "title": "西藏自治区成立二十周年",
+      "pageUrl": "https://meetstamps.com/archives/10557",
+      "sourceSite": "meetstamps",
+      "retrievedAt": "2026-11-06T08:09:08.8429053Z",
+      "status": "ok",
+      "httpStatus": 200,
+      "pageTitle": "J116 西藏自治区成立二十周年",
+      "issueDate": "1985-09-01",
+      "sourceImageUrl": "https://meetstamps.com/wp-content/uploads/2010/10/j116.jpg",
+      "preview": {
+        "localPath": "assets/previews/cn-j116.jpg",
+        "width": 438,
+        "height": 198,
+        "byteSize": 58834,
+        "sha256": "937e3ce6ff192a342ab09b5d99c4c77b7d325c017dad213fd6c0b07f4417adb7"
+      }
+    },
+    {
+      "id": "cn-j178",
+      "catalogNo": "J178",
+      "title": "中国共产党成立七十周年",
+      "pageUrl": "https://meetstamps.com/archives/11089",
+      "sourceSite": "meetstamps",
+      "retrievedAt": "2026-11-06T08:09:09.0888284Z",
+      "status": "ok",
+      "httpStatus": 200,
+      "pageTitle": "J178 中国共产党成立七十周年",
+      "issueDate": "1991-07-01",
+      "sourceImageUrl": "https://meetstamps.com/wp-content/uploads/2010/11/j178.jpg",
+      "preview": {
+        "localPath": "assets/previews/cn-j178.jpg",
+        "width": 412,
+        "height": 157,
+        "byteSize": 35076,
+        "sha256": "5c400dd0a78738b81b17672cc13e473c3b29ec8dccabe8553b126e0d3808337c"
+      }
+    },
+    {
+      "id": "cn-j119",
+      "catalogNo": "J119",
+      "title": "新疆维吾尔自治区成立三十周年",
+      "pageUrl": "https://meetstamps.com/archives/10635",
+      "sourceSite": "meetstamps",
+      "retrievedAt": "2026-11-06T08:09:08.9146229Z",
+      "status": "ok",
+      "httpStatus": 200,
+      "pageTitle": "J119 新疆维吾尔自治区成立三十周年",
+      "issueDate": "1985-10-01",
+      "sourceImageUrl": "https://meetstamps.com/wp-content/uploads/2010/10/j119s.jpg",
+      "preview": {
+        "localPath": "assets/previews/cn-j119.jpg",
+        "width": 348,
+        "height": 272,
+        "byteSize": 65365,
+        "sha256": "fc128eb59063e56a4fbfb760d83bbe35a766e241e8f210be8c2bc66a962338e8"
+      }
+    },
+    {
+      "id": "cn-j144",
+      "catalogNo": "J144",
+      "title": "中华人民共和国第六届运动会",
+      "pageUrl": "https://meetstamps.com/archives/10880",
+      "sourceSite": "meetstamps",
+      "retrievedAt": "2026-11-06T08:09:08.9945612Z",
+      "status": "ok",
+      "httpStatus": 200,
+      "pageTitle": "J144 中华人民共和国第六届运动会",
+      "issueDate": "1987-11-20",
+      "sourceImageUrl": "https://meetstamps.com/wp-content/uploads/2010/10/j144.jpg",
+      "preview": {
+        "localPath": "assets/previews/cn-j144.jpg",
+        "width": 299,
+        "height": 392,
+        "byteSize": 70738,
+        "sha256": "9014e0475f1d1605fb21dd7aa24cb248c44c51d5b0fd91d49e0dca31b084be7a"
+      }
+    },
+    {
+      "id": "cn-j185",
+      "catalogNo": "J185",
+      "title": "第一届世界女子足球锦标赛",
+      "pageUrl": "https://meetstamps.com/archives/11113",
+      "sourceSite": "meetstamps",
+      "retrievedAt": "2026-11-06T08:09:09.1343073Z",
+      "status": "ok",
+      "httpStatus": 200,
+      "pageTitle": "J185 第一届世界女子足球锦标赛",
+      "issueDate": "1991-11-16",
+      "sourceImageUrl": "https://meetstamps.com/wp-content/uploads/2010/11/j185.jpg",
+      "preview": {
+        "localPath": "assets/previews/cn-j185.jpg",
+        "width": 356,
+        "height": 230,
+        "byteSize": 45044,
+        "sha256": "db3773b6a22f2fcd087f4914fa0ad91f121242c5a1673c71f802b2b41dd6bca9"
+      }
+    },
+    {
+      "id": "cn-j105",
+      "catalogNo": "J105",
+      "title": "中华人民共和国成立三十五周年",
+      "pageUrl": "https://meetstamps.com/archives/10518",
+      "sourceSite": "meetstamps",
+      "retrievedAt": "2026-11-06T08:09:08.819372Z",
+      "status": "ok",
+      "httpStatus": 200,
+      "pageTitle": "J105 中华人民共和国成立三十五周年",
+      "issueDate": "1984-10-01",
+      "sourceImageUrl": "https://meetstamps.com/wp-content/uploads/2010/10/j105.jpg",
+      "preview": {
+        "localPath": "assets/previews/cn-j105.jpg",
+        "width": 419,
+        "height": 337,
+        "byteSize": 85748,
+        "sha256": "a58d0b6d86052bc877d0b9efe80ee8542b3694b138cf052abcbe9436af2cd96f"
+      }
+    },
+    {
+      "id": "cn-1992-20",
+      "catalogNo": "1992-20",
+      "title": "中华人民共和国宪法（1982-1992）",
+      "pageUrl": "https://meetstamps.com/archives/8729",
+      "sourceSite": "meetstamps",
+      "retrievedAt": "2026-11-06T08:09:15.0457996Z",
+      "status": "ok",
+      "httpStatus": 200,
+      "pageTitle": "1992年纪念邮票《中华人民共和国宪法》",
+      "issueDate": "1992-12-04",
+      "sourceImageUrl": "https://meetstamps.com/wp-content/uploads/2010/08/20100801-37s.jpg",
+      "preview": {
+        "localPath": "assets/previews/cn-1992-20.jpg",
+        "width": 126,
+        "height": 168,
+        "byteSize": 8228,
+        "sha256": "57cc17f172e57a8be5712d3a9ca43d02839bdf202d751fc8d862194c8ede3da0"
+      }
+    },
+    {
+      "id": "cn-1993-03",
+      "catalogNo": "1993-3",
+      "title": "宋庆龄同志诞生一百周年",
+      "pageUrl": "https://meetstamps.com/archives/8409",
+      "sourceSite": "meetstamps",
+      "retrievedAt": "2026-11-06T08:09:15.2028015Z",
+      "status": "ok",
+      "httpStatus": 200,
+      "pageTitle": "1993年纪念邮票《宋庆龄同志诞生一百周年》",
+      "issueDate": "1993-01-20",
+      "sourceImageUrl": "https://meetstamps.com/wp-content/uploads/2010/08/20100801-2-1s.jpg",
+      "preview": {
+        "localPath": "assets/previews/cn-1993-03.jpg",
+        "width": 167,
+        "height": 125,
+        "byteSize": 7623,
+        "sha256": "8ee6b3f6b60922089ea13fe674ba70acf02b38b4c60fb811a62f80211de00227"
+      }
+    },
+    {
+      "id": "cn-1993-17",
+      "catalogNo": "1993-17",
+      "title": "毛泽东同志诞生一百周年",
+      "pageUrl": "https://meetstamps.com/archives/8471",
+      "sourceSite": "meetstamps",
+      "retrievedAt": "2026-11-06T08:09:15.642834Z",
+      "status": "ok",
+      "httpStatus": 200,
+      "pageTitle": "1993年纪念邮票《毛泽东同志诞生一百周年》",
+      "issueDate": "1993-12-26",
+      "sourceImageUrl": "https://meetstamps.com/wp-content/uploads/2010/08/20100801-16-1s.jpg",
+      "preview": {
+        "localPath": "assets/previews/cn-1993-17.jpg",
+        "width": 115,
+        "height": 152,
+        "byteSize": 7626,
+        "sha256": "0830d773a00388da25d2d506b986155407472452abc00031601ca85cb29a58cb"
+      }
+    },
+    {
+      "id": "cn-1995-17",
+      "catalogNo": "1995-17",
+      "title": "抗日战争及世界反法西斯战争胜利50周年",
+      "pageUrl": "https://meetstamps.com/archives/8032",
+      "sourceSite": "meetstamps",
+      "retrievedAt": "2026-11-06T08:09:16.2005999Z",
+      "status": "ok",
+      "httpStatus": 200,
+      "pageTitle": "1995年纪念邮票《抗日战争及世界反法西斯战争胜利50周年》",
+      "issueDate": "1995-09-03",
+      "sourceImageUrl": "https://meetstamps.com/wp-content/uploads/2010/08/20100726-17-5s.jpg",
+      "preview": {
+        "localPath": "assets/previews/cn-1995-17.jpg",
+        "width": 168,
+        "height": 125,
+        "byteSize": 10674,
+        "sha256": "a9a1161d689545e47ff1d96991e64d3012120d538bf7510f51f54b25fe3e117c"
+      }
+    },
+    {
+      "id": "cn-1995-21",
+      "catalogNo": "1995-21",
+      "title": "联合国成立50周年",
+      "pageUrl": "https://meetstamps.com/archives/8086",
+      "sourceSite": "meetstamps",
+      "retrievedAt": "2026-11-06T08:09:16.559478Z",
+      "status": "ok",
+      "httpStatus": 200,
+      "pageTitle": "1995年纪念邮票《联合国成立50周年》",
+      "issueDate": "1995-10-24",
+      "sourceImageUrl": "https://meetstamps.com/wp-content/uploads/2010/08/20100726-21-1.jpg",
+      "preview": {
+        "localPath": "assets/previews/cn-1995-21.jpg",
+        "width": 200,
+        "height": 153,
+        "byteSize": 29023,
+        "sha256": "61a7c85afce0989e674dfb57e80032f7cdefd459ae3f96270452588d53a3b68d"
+      }
+    },
+    {
+      "id": "cn-1995-20",
+      "catalogNo": "1995-20",
+      "title": "联合国第四次世界妇女大会",
+      "pageUrl": "https://meetstamps.com/archives/8053",
+      "sourceSite": "meetstamps",
+      "retrievedAt": "2026-11-06T08:09:16.3202676Z",
+      "status": "ok",
+      "httpStatus": 200,
+      "pageTitle": "1995年纪念邮票《联合国第四次世界妇女大会》",
+      "issueDate": "1995-09-04",
+      "sourceImageUrl": "https://meetstamps.com/wp-content/uploads/2010/08/20100726-18-1s.jpg",
+      "preview": {
+        "localPath": "assets/previews/cn-1995-20.jpg",
+        "width": 150,
+        "height": 116,
+        "byteSize": 8981,
+        "sha256": "bedef2f8a39394160cd50074c6a1c7b58ad61775c2477159ded2775fb6b3d2e3"
+      }
+    },
+    {
+      "id": "cn-1995-05",
+      "catalogNo": "1995-5",
+      "title": "第43届世界乒乓球锦标赛",
+      "pageUrl": "https://meetstamps.com/archives/7867",
+      "sourceSite": "meetstamps",
+      "retrievedAt": "2026-11-06T08:09:15.6945138Z",
+      "status": "ok",
+      "httpStatus": 200,
+      "pageTitle": "1995年纪念邮票《第43届世界乒乓球锦标赛》",
+      "issueDate": "1995-05-01",
+      "sourceImageUrl": "https://meetstamps.com/wp-content/uploads/2010/07/20100726-7-1s.jpg",
+      "preview": {
+        "localPath": "assets/previews/cn-1995-05.jpg",
+        "width": 167,
+        "height": 128,
+        "byteSize": 9088,
+        "sha256": "4fb9b1e00607d03cbc156a07d3e9f9a0c3104850a747ebd14bceb6e1504686be"
+      }
+    },
+    {
+      "id": "cn-t106",
+      "catalogNo": "T106",
+      "title": "熊猫",
+      "pageUrl": "https://meetstamps.com/archives/12858",
+      "sourceSite": "meetstamps",
+      "retrievedAt": "2026-11-06T08:09:15.5986221Z",
+      "status": "ok",
+      "httpStatus": 200,
+      "pageTitle": "T106 熊猫",
+      "issueDate": "1985-05-24",
+      "sourceImageUrl": "https://meetstamps.com/wp-content/uploads/2011/01/T106.jpg",
+      "preview": {
+        "localPath": "assets/previews/cn-t106.jpg",
+        "width": 322,
+        "height": 323,
+        "byteSize": 56076,
+        "sha256": "c410f7011e69158eeda44059c5cc2fbb9da556b83fb9a4adbb4042b7366dd12a"
+      }
+    },
+    {
+      "id": "cn-te60",
+      "catalogNo": "特60",
+      "title": "金丝猴",
+      "pageUrl": "https://meetstamps.com/archives/13688",
+      "sourceSite": "meetstamps",
+      "retrievedAt": "2026-11-06T08:09:19.8109855Z",
+      "status": "ok",
+      "httpStatus": 200,
+      "pageTitle": "特60 金丝猴",
+      "issueDate": "1963-09-25",
+      "sourceImageUrl": "https://meetstamps.com/wp-content/uploads/2011/02/s60.jpg",
+      "preview": {
+        "localPath": "assets/previews/cn-te60.jpg",
+        "width": 451,
+        "height": 259,
+        "byteSize": 101709,
+        "sha256": "2ff13f003e7d763c3949ec3e4e82569a91886ed7c74252603012afe130e84e1b"
+      }
+    },
+    {
+      "id": "cn-1997-10",
+      "catalogNo": "1997-10",
+      "title": "香港回归祖国",
+      "pageUrl": "https://meetstamps.com/archives/7269",
+      "sourceSite": "meetstamps",
+      "retrievedAt": "2026-11-06T08:09:21.8810542Z",
+      "status": "ok",
+      "httpStatus": 200,
+      "pageTitle": "1997年纪念邮票《香港回归祖国》",
+      "issueDate": "1997-07-01",
+      "sourceImageUrl": "https://meetstamps.com/wp-content/uploads/2010/07/20100628-10-1s.jpg",
+      "preview": {
+        "localPath": "assets/previews/cn-1997-10.jpg",
+        "width": 208,
+        "height": 128,
+        "byteSize": 9139,
+        "sha256": "338d0da20cd26d2bf9b91c197b5af9cbcd1d37bd322d41f43a4efdd56045b82b"
+      }
+    },
+    {
+      "id": "cn-t57",
+      "catalogNo": "T57",
+      "title": "白鱀豚",
+      "pageUrl": "https://meetstamps.com/archives/12551",
+      "sourceSite": "meetstamps",
+      "retrievedAt": "2026-11-06T08:09:21.8344924Z",
+      "status": "ok",
+      "httpStatus": 200,
+      "pageTitle": "T57 白鱀豚",
+      "issueDate": "1980-12-15",
+      "sourceImageUrl": "https://meetstamps.com/wp-content/uploads/2010/12/T57.jpg",
+      "preview": {
+        "localPath": "assets/previews/cn-t57.jpg",
+        "width": 400,
+        "height": 153,
+        "byteSize": 34595,
+        "sha256": "b562db6eaca58666b32e314c9204f90a73450e7b215fb206746f25b6282b9948"
+      }
+    },
+    {
+      "id": "cn-1998-05",
+      "catalogNo": "1998-5",
+      "title": "周恩来同志诞生一百周年",
+      "pageUrl": "https://meetstamps.com/archives/6827",
+      "sourceSite": "meetstamps",
+      "retrievedAt": "2026-11-06T08:09:22.7789358Z",
+      "status": "ok",
+      "httpStatus": 200,
+      "pageTitle": "1998年纪念邮票《周恩来同志诞生一百周年》",
+      "issueDate": "1998-03-05",
+      "sourceImageUrl": "https://meetstamps.com/wp-content/uploads/2010/06/20100617-7-1s.jpg",
+      "preview": {
+        "localPath": "assets/previews/cn-1998-05.jpg",
+        "width": 122,
+        "height": 161,
+        "byteSize": 8094,
+        "sha256": "885e26ce0d3d086b8b0456ffbf8a7f617bef8523fa1abfc60a5d8f6d6147c9dc"
+      }
+    },
+    {
+      "id": "cn-j134",
+      "catalogNo": "J134",
+      "title": "朱德同志诞生一百周年",
+      "pageUrl": "https://meetstamps.com/archives/10801",
+      "sourceSite": "meetstamps",
+      "retrievedAt": "2026-11-06T08:09:21.7842221Z",
+      "status": "ok",
+      "httpStatus": 200,
+      "pageTitle": "J134 朱德同志诞生一百周年",
+      "issueDate": "1986-12-01",
+      "sourceImageUrl": "https://meetstamps.com/wp-content/uploads/2010/10/j134.jpg",
+      "preview": {
+        "localPath": "assets/previews/cn-j134.jpg",
+        "width": 262,
+        "height": 178,
+        "byteSize": 57775,
+        "sha256": "6b9df0b7b227064334dc8160fe3267ee6f640a3f06569858c8c251914460f302"
+      }
+    },
+    {
+      "id": "cn-te48",
+      "catalogNo": "特48",
+      "title": "丹顶鹤",
+      "pageUrl": "https://meetstamps.com/archives/13643",
+      "sourceSite": "meetstamps",
+      "retrievedAt": "2026-11-06T08:09:22.8565275Z",
+      "status": "ok",
+      "httpStatus": 200,
+      "pageTitle": "特48 丹顶鹤",
+      "issueDate": "1962-06-10",
+      "sourceImageUrl": "https://meetstamps.com/wp-content/uploads/2011/02/s48.jpg",
+      "preview": {
+        "localPath": "assets/previews/cn-te48.jpg",
+        "width": 417,
+        "height": 182,
+        "byteSize": 59737,
+        "sha256": "44c3d0796bf220d58fecc22960750346ba3b3a45e4b30b4fd945796a13bd0e13"
+      }
+    },
+    {
+      "id": "cn-t94",
+      "catalogNo": "T94",
+      "title": "朱鹮",
+      "pageUrl": "https://meetstamps.com/archives/12794",
+      "sourceSite": "meetstamps",
+      "retrievedAt": "2026-11-06T08:09:22.8157728Z",
+      "status": "ok",
+      "httpStatus": 200,
+      "pageTitle": "T94 朱鹮",
+      "issueDate": "1984-05-15",
+      "sourceImageUrl": "https://meetstamps.com/wp-content/uploads/2011/01/T94.jpg",
+      "preview": {
+        "localPath": "assets/previews/cn-t94.jpg",
+        "width": 385,
+        "height": 282,
+        "byteSize": 87361,
+        "sha256": "d9671ccd7861df9f03ad56f8141d212913650f0290ae6f6a36141688d91ea26f"
+      }
+    },
+    {
+      "id": "cn-t134",
+      "catalogNo": "T134",
+      "title": "褐马鸡",
+      "pageUrl": "https://meetstamps.com/archives/13058",
+      "sourceSite": "meetstamps",
+      "retrievedAt": "2026-11-06T08:09:23.368317Z",
+      "status": "ok",
+      "httpStatus": 200,
+      "pageTitle": "T134 褐马鸡",
+      "issueDate": "1989-02-21",
+      "sourceImageUrl": "https://meetstamps.com/wp-content/uploads/2011/01/T134.jpg",
+      "preview": {
+        "localPath": "assets/previews/cn-t134.jpg",
+        "width": 400,
+        "height": 113,
+        "byteSize": 40245,
+        "sha256": "db0b9d48a82c44ff02f634fe85136c166d64f3c5a8785fc0f5925cb90ec91880"
+      }
+    },
+    {
+      "id": "cn-1999-11",
+      "catalogNo": "1999-11",
+      "title": "中华人民共和国成立五十周年—民族大团结",
+      "pageUrl": "https://meetstamps.com/archives/6667",
+      "sourceSite": "meetstamps",
+      "retrievedAt": "2026-11-06T08:09:27.9010675Z",
+      "status": "missing_preview",
+      "httpStatus": 200,
+      "pageTitle": "1999年纪念邮票《中华人民共和国成立五十周年——民族大团结 》",
+      "issueDate": "1999-10-01",
+      "sourceImageUrl": null,
+      "preview": null
+    },
+    {
+      "id": "cn-t85",
+      "catalogNo": "T85",
+      "title": "扬子鳄",
+      "pageUrl": "https://meetstamps.com/archives/12714",
+      "sourceSite": "meetstamps",
+      "retrievedAt": "2026-11-06T08:09:26.237455Z",
+      "status": "ok",
+      "httpStatus": 200,
+      "pageTitle": "T85 扬子鳄",
+      "issueDate": "1983-05-24",
+      "sourceImageUrl": "https://meetstamps.com/wp-content/uploads/2011/01/T85.jpg",
+      "preview": {
+        "localPath": "assets/previews/cn-t85.jpg",
+        "width": 420,
+        "height": 100,
+        "byteSize": 40023,
+        "sha256": "bd8146155df235da59662f912628070d08efb73032e5029b5b29bd762ec9f723"
+      }
+    },
+    {
+      "id": "cn-1998-24",
+      "catalogNo": "1998-24",
+      "title": "刘少奇同志诞生一百周年",
+      "pageUrl": "https://meetstamps.com/archives/7019",
+      "sourceSite": "meetstamps",
+      "retrievedAt": "2026-11-06T08:09:27.2226186Z",
+      "status": "ok",
+      "httpStatus": 200,
+      "pageTitle": "1998年纪念邮票《刘少奇同志诞生一百周年》",
+      "issueDate": "1998-11-24",
+      "sourceImageUrl": "https://meetstamps.com/wp-content/uploads/2010/06/20100624-9-1s.jpg",
+      "preview": {
+        "localPath": "assets/previews/cn-1998-24.jpg",
+        "width": 112,
+        "height": 149,
+        "byteSize": 6177,
+        "sha256": "5ae3dd44048f306799e4b454305f692bb1b9961a85d5c4a19b573ccbd070f593"
+      }
+    },
+    {
+      "id": "cn-1999-12",
+      "catalogNo": "1999-12",
+      "title": "中国人民政治协商会议成立五十周年",
+      "pageUrl": "https://meetstamps.com/archives/6728",
+      "sourceSite": "meetstamps",
+      "retrievedAt": "2026-11-06T08:09:27.8528389Z",
+      "status": "ok",
+      "httpStatus": 200,
+      "pageTitle": "1999年纪念邮票《中国人民政治协商会议成立五十周年》",
+      "issueDate": "1999-09-21",
+      "sourceImageUrl": "https://meetstamps.com/wp-content/uploads/2010/06/20100615-2-1s.jpg",
+      "preview": {
+        "localPath": "assets/previews/cn-1999-12.jpg",
+        "width": 160,
+        "height": 122,
+        "byteSize": 8414,
+        "sha256": "435fc74c30b0b3503dec377bd54acfcea1f3565ba8387cf31638f804943272be"
+      }
+    },
+    {
+      "id": "cn-1999-18",
+      "catalogNo": "1999-18",
+      "title": "澳门回归祖国",
+      "pageUrl": "https://meetstamps.com/archives/6760",
+      "sourceSite": "meetstamps",
+      "retrievedAt": "2026-11-06T08:09:28.3580436Z",
+      "status": "ok",
+      "httpStatus": 200,
+      "pageTitle": "1999年纪念邮票《澳门回归祖国》",
+      "issueDate": "1999-12-20",
+      "sourceImageUrl": "https://meetstamps.com/wp-content/uploads/2010/06/20100617-1-1s.jpg",
+      "preview": {
+        "localPath": "assets/previews/cn-1999-18.jpg",
+        "width": 200,
+        "height": 122,
+        "byteSize": 8509,
+        "sha256": "1bca48b2819e1be2e36f7b34c3d9be0ea986f4ca767c4d707a6fff310dc14423"
+      }
+    },
+    {
+      "id": "cn-te56",
+      "catalogNo": "特56",
+      "title": "蝴蝶",
+      "pageUrl": "https://meetstamps.com/archives/13673",
+      "sourceSite": "meetstamps",
+      "retrievedAt": "2026-11-06T08:09:27.5407015Z",
+      "status": "ok",
+      "httpStatus": 200,
+      "pageTitle": "特56 蝴蝶",
+      "issueDate": "1963-07-15",
+      "sourceImageUrl": "https://meetstamps.com/wp-content/uploads/2011/02/s56.jpg",
+      "preview": {
+        "localPath": "assets/previews/cn-te56.jpg",
+        "width": 405,
+        "height": 463,
+        "byteSize": 145157,
+        "sha256": "36f7e0a4d7619ca7571c0009e8fb783adfc43af9ca539cf4dd958172b1533741"
+      }
+    },
+    {
+      "id": "cn-1996-20",
+      "catalogNo": "1996-20",
+      "title": "敦煌壁画（第六组）",
+      "pageUrl": "https://meetstamps.com/archives/7661",
+      "sourceSite": "meetstamps",
+      "retrievedAt": "2026-11-06T08:09:28.8216503Z",
+      "status": "ok",
+      "httpStatus": 200,
+      "pageTitle": "1996年特种邮票《敦煌壁画》",
+      "issueDate": "1996-08-15",
+      "sourceImageUrl": "https://meetstamps.com/wp-content/uploads/2010/07/20100720-9-1-224x300.jpg",
+      "preview": {
+        "localPath": "assets/previews/cn-1996-20.jpg",
+        "width": 112,
+        "height": 150,
+        "byteSize": 34884,
+        "sha256": "6be0683fbf23eb6aac3a274b3ba4ac23a7b70f15dab7f76717b5e8e5a1f548dc"
+      }
+    },
+    {
+      "id": "cn-t88",
+      "catalogNo": "T88",
+      "title": "秦始皇陵兵马俑",
+      "pageUrl": "https://meetstamps.com/archives/12767",
+      "sourceSite": "meetstamps",
+      "retrievedAt": "2026-11-06T08:09:30.2167097Z",
+      "status": "ok",
+      "httpStatus": 200,
+      "pageTitle": "T88 秦始皇陵兵马俑",
+      "issueDate": "1983-06-30",
+      "sourceImageUrl": "https://meetstamps.com/wp-content/uploads/2011/01/T88.jpg",
+      "preview": {
+        "localPath": "assets/previews/cn-t88.jpg",
+        "width": 350,
+        "height": 265,
+        "byteSize": 79965,
+        "sha256": "c1652a91aad886dc9b7a2b941f001fcb5fe634d61f7668508c8e2a74d0374f47"
+      }
+    },
+    {
+      "id": "cn-t38",
+      "catalogNo": "T38",
+      "title": "万里长城",
+      "pageUrl": "https://meetstamps.com/archives/12402",
+      "sourceSite": "meetstamps",
+      "retrievedAt": "2026-11-06T08:09:29.4205775Z",
+      "status": "ok",
+      "httpStatus": 200,
+      "pageTitle": "T38 万里长城",
+      "issueDate": "1979-06-25",
+      "sourceImageUrl": "https://meetstamps.com/wp-content/uploads/2010/12/T38.jpg",
+      "preview": {
+        "localPath": "assets/previews/cn-t38.jpg",
+        "width": 416,
+        "height": 310,
+        "byteSize": 82988,
+        "sha256": "7bab18965636a1e6ed7038457e8f89ae21c5dace5f5eeda3b84f792a973d2ed4"
+      }
+    },
+    {
+      "id": "cn-2002-09",
+      "catalogNo": "2002-9",
+      "title": "丽江古城",
+      "pageUrl": "https://meetstamps.com/archives/5615",
+      "sourceSite": "meetstamps",
+      "retrievedAt": "2026-11-06T08:09:31.7651507Z",
+      "status": "ok",
+      "httpStatus": 200,
+      "pageTitle": "2002年特种邮票《丽江古城》",
+      "issueDate": "2002-05-01",
+      "sourceImageUrl": "https://meetstamps.com/wp-content/uploads/2010/05/20100517-7-1s.jpg",
+      "preview": {
+        "localPath": "assets/previews/cn-2002-09.jpg",
+        "width": 129,
+        "height": 99,
+        "byteSize": 8341,
+        "sha256": "6dca56bc5f2b59b2adb64d58528898f7d2dd9a6673bc4abe3ae29159cf6fdb8b"
+      }
+    },
+    {
+      "id": "cn-t96",
+      "catalogNo": "T96",
+      "title": "苏州园林—拙政园",
+      "pageUrl": "https://meetstamps.com/archives/12800",
+      "sourceSite": "meetstamps",
+      "retrievedAt": "2026-11-06T08:09:31.2140569Z",
+      "status": "ok",
+      "httpStatus": 200,
+      "pageTitle": "T96 苏州园林——拙政园",
+      "issueDate": "1984-06-30",
+      "sourceImageUrl": "https://meetstamps.com/wp-content/uploads/2011/01/T96.jpg",
+      "preview": {
+        "localPath": "assets/previews/cn-t96.jpg",
+        "width": 273,
+        "height": 356,
+        "byteSize": 109001,
+        "sha256": "8bab7cbc37afc6680f83a410bc391b988d8842b1366a60cb4ce86c8eef6ad12b"
+      }
+    },
+    {
+      "id": "cn-j120",
+      "catalogNo": "J120",
+      "title": "故宫博物院建立六十周年",
+      "pageUrl": "https://meetstamps.com/archives/10639",
+      "sourceSite": "meetstamps",
+      "retrievedAt": "2026-11-06T08:09:30.9157369Z",
+      "status": "ok",
+      "httpStatus": 200,
+      "pageTitle": "J120 故宫博物院建院六十周年",
+      "issueDate": "1985-10-10",
+      "sourceImageUrl": "https://meetstamps.com/wp-content/uploads/2010/10/j120s.jpg",
+      "preview": {
+        "localPath": "assets/previews/cn-j120.jpg",
+        "width": 382,
+        "height": 461,
+        "byteSize": 182397,
+        "sha256": "0825fbbd00f3f88c20d672feefc27fcb8bafcffbadf08fd24f4efe5be50a844e"
+      }
+    },
+    {
+      "id": "cn-t156",
+      "catalogNo": "T156",
+      "title": "都江堰",
+      "pageUrl": "https://meetstamps.com/archives/12895",
+      "sourceSite": "meetstamps",
+      "retrievedAt": "2026-11-06T08:09:32.641508Z",
+      "status": "ok",
+      "httpStatus": 200,
+      "pageTitle": "T156 都江堰水利工程",
+      "issueDate": "1991-02-20",
+      "sourceImageUrl": "https://meetstamps.com/wp-content/uploads/2016/09/t156-300x67.jpg",
+      "preview": {
+        "localPath": "assets/previews/cn-t156.jpg",
+        "width": 500,
+        "height": 112,
+        "byteSize": 8551,
+        "sha256": "3d05d0617f11de3f01e292120c9850ec5d8892e6828cc2334e09f9110b565ba0"
+      }
+    },
+    {
+      "id": "cn-2006-19",
+      "catalogNo": "2006-19",
+      "title": "第29届奥林匹克运动会—运动项目（一）",
+      "pageUrl": "https://meetstamps.com/archives/4827",
+      "sourceSite": "meetstamps",
+      "retrievedAt": "2026-11-06T08:09:33.0908723Z",
+      "status": "ok",
+      "httpStatus": 200,
+      "pageTitle": "2006年纪念邮票《第29届奥林匹克运动会——运动项目（一）》",
+      "issueDate": "2006-08-08",
+      "sourceImageUrl": "https://meetstamps.com/wp-content/uploads/2010/04/20100426-2-1.jpg",
+      "preview": {
+        "localPath": "assets/previews/cn-2006-19.jpg",
+        "width": 97,
+        "height": 130,
+        "byteSize": 22695,
+        "sha256": "5b40b612d398c3ee9e1784d6b6ad49cb8d9f933c12f2cacc57c7afa2e0e3c984"
+      }
+    },
+    {
+      "id": "cn-2007-22",
+      "catalogNo": "2007-22",
+      "title": "第29届奥林匹克运动会—运动项目（二）",
+      "pageUrl": "https://meetstamps.com/archives/4624",
+      "sourceSite": "meetstamps",
+      "retrievedAt": "2026-11-06T08:09:33.946859Z",
+      "status": "ok",
+      "httpStatus": 200,
+      "pageTitle": "2007年纪念邮票《第29届奥林匹克运动会——运动项目（二）》",
+      "issueDate": "2007-08-08",
+      "sourceImageUrl": "https://meetstamps.com/wp-content/uploads/2010/04/20100420-7-1.jpg",
+      "preview": {
+        "localPath": "assets/previews/cn-2007-22.jpg",
+        "width": 74,
+        "height": 99,
+        "byteSize": 27667,
+        "sha256": "cc327721817365264040a300239477ba50cd90d2ede25c3108eb56e794c2772a"
+      }
+    },
+    {
+      "id": "cn-2015-20",
+      "catalogNo": "2015-20",
+      "title": "中国人民抗日战争暨世界反法西斯战争胜利七十周年",
+      "pageUrl": "https://meetstamps.com/archives/19471",
+      "sourceSite": "meetstamps",
+      "retrievedAt": "2026-11-06T08:09:37.0166884Z",
+      "status": "ok",
+      "httpStatus": 200,
+      "pageTitle": "2015年纪念邮票《中国人民抗日战争暨世界反法西斯战争胜利七十周年》",
+      "issueDate": "2015-09-03",
+      "sourceImageUrl": "https://meetstamps.com/wp-content/uploads/2015/08/201583162676657-300x180.jpg",
+      "preview": {
+        "localPath": "assets/previews/cn-2015-20.jpg",
+        "width": 100,
+        "height": 60,
+        "byteSize": 22377,
+        "sha256": "b9812686ad0c579ecdc64ce7a1ccb3fd066faa597102045de7b4b961ee1cf036"
+      }
+    },
+    {
+      "id": "cn-2011-16",
+      "catalogNo": "2011-16",
+      "title": "中国共产党成立九十周年",
+      "pageUrl": "https://meetstamps.com/archives/14331",
+      "sourceSite": "meetstamps",
+      "retrievedAt": "2026-11-06T08:09:35.6033531Z",
+      "status": "ok",
+      "httpStatus": 200,
+      "pageTitle": "2011年纪念邮票《中国共产党成立九十周年》",
+      "issueDate": "2011-06-22",
+      "sourceImageUrl": "https://meetstamps.com/wp-content/uploads/2011/06/20110618-2s.jpg",
+      "preview": {
+        "localPath": "assets/previews/cn-2011-16.jpg",
+        "width": 472,
+        "height": 103,
+        "byteSize": 59351,
+        "sha256": "c7013c6acca56fccbb5139f4acc1d1a45531f5bf26dcb151084bf761a34c8476"
+      }
+    },
+    {
+      "id": "cn-2010-10",
+      "catalogNo": "2010-10",
+      "title": "中国2010年上海世博会开幕纪念",
+      "pageUrl": "https://meetstamps.com/archives/5750",
+      "sourceSite": "meetstamps",
+      "retrievedAt": "2026-11-06T08:09:35.5112301Z",
+      "status": "ok",
+      "httpStatus": 200,
+      "pageTitle": "2010年纪念邮票《中国2010年上海世博会开幕纪念》",
+      "issueDate": "2010-05-01",
+      "sourceImageUrl": "https://meetstamps.com/wp-content/uploads/2010/05/20100519-5-1s.jpg",
+      "preview": {
+        "localPath": "assets/previews/cn-2010-10.jpg",
+        "width": 161,
+        "height": 212,
+        "byteSize": 29747,
+        "sha256": "93fce60ded09ae923bd7d01f33c0ee9dd4680f9d9325bd8232cb354b78e8eeda"
+      }
+    },
+    {
+      "id": "cn-2006-17",
+      "catalogNo": "2006-17",
+      "title": "中国航天事业创建五十周年",
+      "pageUrl": "https://meetstamps.com/archives/4792",
+      "sourceSite": "meetstamps",
+      "retrievedAt": "2026-11-06T08:09:37.4730343Z",
+      "status": "ok",
+      "httpStatus": 200,
+      "pageTitle": "2006年纪念邮票《中国航天事业创建五十周年》",
+      "issueDate": "2006-06-08",
+      "sourceImageUrl": "https://meetstamps.com/wp-content/uploads/2010/04/20100424-1023x316.jpg",
+      "preview": {
+        "localPath": "assets/previews/cn-2006-17.jpg",
+        "width": 275,
+        "height": 85,
+        "byteSize": 112528,
+        "sha256": "fa48c67e38a880d4a70f3a09e9927db4c9eb25441d4951120baa7335b3e4269b"
+      }
+    },
+    {
+      "id": "cn-2016-31",
+      "catalogNo": "2016-31",
+      "title": "孙中山诞生一百五十周年",
+      "pageUrl": "https://meetstamps.com/archives/20565",
+      "sourceSite": "meetstamps",
+      "retrievedAt": "2026-11-06T08:09:37.6983136Z",
+      "status": "ok",
+      "httpStatus": 200,
+      "pageTitle": "2016年纪念邮票《孙中山诞生一百五十周年》",
+      "issueDate": "2016-11-12",
+      "sourceImageUrl": "https://meetstamps.com/wp-content/uploads/2016/11/2016-32-1-150x112.jpg",
+      "preview": {
+        "localPath": "assets/previews/cn-2016-31.jpg",
+        "width": 120,
+        "height": 89,
+        "byteSize": 6624,
+        "sha256": "d06a99a0be40e1c54d6400fca6b48b1a4eaf54d86b10e80770cd3aad8ccb8651"
+      }
+    },
+    {
+      "id": "cn-2017-18",
+      "catalogNo": "2017-18",
+      "title": "中国人民解放军建军九十周年",
+      "pageUrl": "https://meetstamps.com/archives/21754",
+      "sourceSite": "meetstamps",
+      "retrievedAt": "2026-11-06T08:09:37.8058084Z",
+      "status": "ok",
+      "httpStatus": 200,
+      "pageTitle": "2017年纪念邮票《中国人民解放军建军九十周年》",
+      "issueDate": "2017-08-01",
+      "sourceImageUrl": "https://meetstamps.com/wp-content/uploads/2017/07/2017-18-1-113x150.jpg",
+      "preview": {
+        "localPath": "assets/previews/cn-2017-18.jpg",
+        "width": 113,
+        "height": 150,
+        "byteSize": 7662,
+        "sha256": "052d582969f4eb03510de0065354e6075c7dadac4dc4484498ab1b3afeb8caad"
+      }
+    },
+    {
+      "id": "cn-2018-37",
+      "catalogNo": "2018-37",
+      "title": "改革开放四十周年",
+      "pageUrl": "https://meetstamps.com/archives/22458",
+      "sourceSite": "meetstamps",
+      "retrievedAt": "2026-11-06T08:09:39.0231412Z",
+      "status": "ok",
+      "httpStatus": 200,
+      "pageTitle": "2018年纪念邮票《改革开放四十周年》",
+      "issueDate": "2018-12-18",
+      "sourceImageUrl": "https://meetstamps.com/wp-content/uploads/2018/12/单枚2-1-1-150x93.jpg",
+      "preview": {
+        "localPath": "assets/previews/cn-2018-37.jpg",
+        "width": 150,
+        "height": 93,
+        "byteSize": 5517,
+        "sha256": "68a7ba551ccba4560d0ee8e61228d6b60766f57c05faf0229a788d06b2c84518"
+      }
+    },
+    {
+      "id": "cn-2017-29",
+      "catalogNo": "2017-29",
+      "title": "中国高速铁路发展成就",
+      "pageUrl": "https://meetstamps.com/archives/21972",
+      "sourceSite": "meetstamps",
+      "retrievedAt": "2026-11-06T08:09:38.7459823Z",
+      "status": "ok",
+      "httpStatus": 200,
+      "pageTitle": "2017年纪念邮票《中国高速铁路发展成就》",
+      "issueDate": "2017-11-25",
+      "sourceImageUrl": "https://meetstamps.com/wp-content/uploads/2017/12/2017-29-4-1-150x91.jpg",
+      "preview": {
+        "localPath": "assets/previews/cn-2017-29.jpg",
+        "width": 150,
+        "height": 91,
+        "byteSize": 5732,
+        "sha256": "d09abe370d7d475c4ac80dca9ad950559c29694ccc2423bd53901593af92ab77"
+      }
+    },
+    {
+      "id": "cn-2019-23",
+      "catalogNo": "2019-23",
+      "title": "中华人民共和国成立七十周年",
+      "pageUrl": "https://meetstamps.com/archives/22828",
+      "sourceSite": "meetstamps",
+      "retrievedAt": "2026-11-06T08:09:41.1349481Z",
+      "status": "ok",
+      "httpStatus": 200,
+      "pageTitle": "2019年纪念邮票《中华人民共和国成立七十周年》",
+      "issueDate": "2019-10-01",
+      "sourceImageUrl": "https://meetstamps.com/wp-content/uploads/2019/09/2019-23-1-150x112.jpg",
+      "preview": {
+        "localPath": "assets/previews/cn-2019-23.jpg",
+        "width": 150,
+        "height": 112,
+        "byteSize": 13573,
+        "sha256": "fdadfe05572bbc0490ca4acb1d5f6c6f2c92d86c0d0d69f2820404e7ead541bc"
+      }
+    },
+    {
+      "id": "cn-2022-04",
+      "catalogNo": "2022-4",
+      "title": "第24届冬季奥林匹克运动会开幕纪念",
+      "pageUrl": "https://meetstamps.com/archives/25026",
+      "sourceSite": "meetstamps",
+      "retrievedAt": "2026-11-06T08:09:42.5138994Z",
+      "status": "ok",
+      "httpStatus": 200,
+      "pageTitle": "2022年纪念邮票《第24届冬季奥林匹克运动会开幕纪念》",
+      "issueDate": "2022-02-04",
+      "sourceImageUrl": "https://meetstamps.com/wp-content/uploads/2022/02/2022-4-1-150x89.jpg",
+      "preview": {
+        "localPath": "assets/previews/cn-2022-04.jpg",
+        "width": 150,
+        "height": 89,
+        "byteSize": 10605,
+        "sha256": "6d1c67d536e38a009ea9b82e7ed5ca4367bea91a54fbda7616524d7fb0d061e1"
+      }
+    },
+    {
+      "id": "cn-2022-23",
+      "catalogNo": "2022-23",
+      "title": "国家公园",
+      "pageUrl": "https://meetstamps.com/archives/25677",
+      "sourceSite": "meetstamps",
+      "retrievedAt": "2026-11-06T08:09:43.0777238Z",
+      "status": "ok",
+      "httpStatus": 200,
+      "pageTitle": "2022年纪念邮票《国家公园》",
+      "issueDate": "2022-11-05",
+      "sourceImageUrl": "https://meetstamps.com/wp-content/uploads/2022/11/2022-26-1-150x75.jpg",
+      "preview": {
+        "localPath": "assets/previews/cn-2022-23.jpg",
+        "width": 150,
+        "height": 75,
+        "byteSize": 11465,
+        "sha256": "056135073b3b0017bf3d45324b20581c2d1ebd4424c1113601026993567c0484"
+      }
+    },
+    {
+      "id": "cn-2021-16",
+      "catalogNo": "2021-16",
+      "title": "中国共产党成立100周年",
+      "pageUrl": "https://meetstamps.com/archives/24497",
+      "sourceSite": "meetstamps",
+      "retrievedAt": "2026-11-06T08:09:41.7377576Z",
+      "status": "ok",
+      "httpStatus": 200,
+      "pageTitle": "2021年纪念邮票《中国共产党成立100周年》",
+      "issueDate": "2021-07-01",
+      "sourceImageUrl": "https://meetstamps.com/wp-content/uploads/2021/06/2021-16-277x300.jpg",
+      "preview": {
+        "localPath": "assets/previews/cn-2021-16.jpg",
+        "width": 277,
+        "height": 300,
+        "byteSize": 21546,
+        "sha256": "c4505371c1b233a72a154109a1af902504652a9f04b4a7e4e38c13b885837f26"
+      }
+    },
+    {
+      "id": "cn-2025-18",
+      "catalogNo": "2025-18",
+      "title": "中国人民抗日战争暨世界反法西斯战争胜利八十周年",
+      "pageUrl": "https://meetstamps.com/archives/27592",
+      "sourceSite": "meetstamps",
+      "retrievedAt": "2026-11-06T08:09:43.8898516Z",
+      "status": "ok",
+      "httpStatus": 200,
+      "pageTitle": "2025年纪念邮票《中国人民抗日战争暨世界反法西斯战争胜利八十周年》",
+      "issueDate": "2025-09-03",
+      "sourceImageUrl": "https://meetstamps.com/wp-content/uploads/2025/08/2025-18-300x241.jpg",
+      "preview": {
+        "localPath": "assets/previews/cn-2025-18.jpg",
+        "width": 300,
+        "height": 241,
+        "byteSize": 23272,
+        "sha256": "00835dc02797ca6617c4a0475b681463585e54791702e2e20e063745c5321242"
+      }
+    },
+    {
+      "id": "cn-2003-01",
+      "catalogNo": "2003-1",
+      "title": "癸未年",
+      "pageUrl": "https://meetstamps.com/archives/5308",
+      "sourceSite": "meetstamps",
+      "retrievedAt": "2026-11-06T08:09:45.233435Z",
+      "status": "ok",
+      "httpStatus": 200,
+      "pageTitle": "2003年特种邮票《癸未年》",
+      "issueDate": "2003-01-05",
+      "sourceImageUrl": "https://meetstamps.com/wp-content/uploads/2010/05/20100510-1-1.jpg",
+      "preview": {
+        "localPath": "assets/previews/cn-2003-01.jpg",
+        "width": 144,
+        "height": 170,
+        "byteSize": 32363,
+        "sha256": "3be147b41e07f79a3ee1058c301f13c1ed555829b7dc139f6742ff3992a3064a"
+      }
+    },
+    {
+      "id": "cn-2026-17",
+      "catalogNo": "2026-17",
+      "title": "纪念江泽民同志诞辰100周年",
+      "pageUrl": "https://meetstamps.com/archives/27881",
+      "sourceSite": "meetstamps",
+      "retrievedAt": "2026-11-06T08:09:45.1598857Z",
+      "status": "ok",
+      "httpStatus": 200,
+      "pageTitle": "2026年纪念邮票《纪念江泽民同志诞辰100周年》",
+      "issueDate": "2026-08-17",
+      "sourceImageUrl": "https://meetstamps.com/wp-content/uploads/2026/02/2026-13-1-300x225.jpg",
+      "preview": {
+        "localPath": "assets/previews/cn-2026-17.jpg",
+        "width": 300,
+        "height": 225,
+        "byteSize": 21990,
+        "sha256": "3dc77a88648133ea7abbd6c77e5c0241f78dc504e137301d18992aba03096427"
+      }
+    },
+    {
+      "id": "cn-t130",
+      "catalogNo": "T130",
+      "title": "泰山",
+      "pageUrl": "https://meetstamps.com/archives/13036",
+      "sourceSite": "meetstamps",
+      "retrievedAt": "2026-11-06T08:09:41.4979678Z",
+      "status": "ok",
+      "httpStatus": 200,
+      "pageTitle": "T130 泰山",
+      "issueDate": "1988-09-14",
+      "sourceImageUrl": "https://meetstamps.com/wp-content/uploads/2011/01/T130.jpg",
+      "preview": {
+        "localPath": "assets/previews/cn-t130.jpg",
+        "width": 347,
+        "height": 254,
+        "byteSize": 93386,
+        "sha256": "66ae0cf2d027bf2c666775b109c61a4d1a3170f43562e92ad85011f979168a78"
+      }
+    },
+    {
+      "id": "cn-2004-01",
+      "catalogNo": "2004-1",
+      "title": "甲申年",
+      "pageUrl": "https://meetstamps.com/archives/5099",
+      "sourceSite": "meetstamps",
+      "retrievedAt": "2026-11-06T08:09:47.3678205Z",
+      "status": "ok",
+      "httpStatus": 200,
+      "pageTitle": "2004年特种邮票《甲申年》",
+      "issueDate": "2004-01-05",
+      "sourceImageUrl": "https://meetstamps.com/wp-content/uploads/2010/05/20100502-5s.jpg",
+      "preview": {
+        "localPath": "assets/previews/cn-2004-01.jpg",
+        "width": 122,
+        "height": 125,
+        "byteSize": 11953,
+        "sha256": "2c045994b71f7e5a7a94b28fd7b49e9c5d6276fd002b916cd098f00e61c66d50"
+      }
+    },
+    {
+      "id": "cn-2006-01",
+      "catalogNo": "2006-1",
+      "title": "丙戌年",
+      "pageUrl": "https://meetstamps.com/archives/4704",
+      "sourceSite": "meetstamps",
+      "retrievedAt": "2026-11-06T08:09:48.7349049Z",
+      "status": "ok",
+      "httpStatus": 200,
+      "pageTitle": "2006年特种邮票《丙戌年》",
+      "issueDate": "2006-01-05",
+      "sourceImageUrl": "https://meetstamps.com/wp-content/uploads/2010/04/20100420-16.jpg",
+      "preview": {
+        "localPath": "assets/previews/cn-2006-01.jpg",
+        "width": 125,
+        "height": 128,
+        "byteSize": 38427,
+        "sha256": "cef15721490b7764cfd8dca26310eb837517579dd3ec2d2a0e7f4211fe254cad"
+      }
+    },
+    {
+      "id": "cn-2007-01",
+      "catalogNo": "2007-1",
+      "title": "丁亥年",
+      "pageUrl": "https://meetstamps.com/archives/4488",
+      "sourceSite": "meetstamps",
+      "retrievedAt": "2026-11-06T08:09:49.287923Z",
+      "status": "ok",
+      "httpStatus": 200,
+      "pageTitle": "2007年特种邮票《丁亥年》",
+      "issueDate": "2007-01-05",
+      "sourceImageUrl": "https://meetstamps.com/wp-content/uploads/2010/04/20100417-1.jpg",
+      "preview": {
+        "localPath": "assets/previews/cn-2007-01.jpg",
+        "width": 211,
+        "height": 212,
+        "byteSize": 31179,
+        "sha256": "90b0f41445ea99f40dd40ab618c32cef01d8a2d74059734e8e1d35ad81111e55"
+      }
+    },
+    {
+      "id": "cn-2008-01",
+      "catalogNo": "2008-1",
+      "title": "戊子年",
+      "pageUrl": "https://meetstamps.com/archives/572",
+      "sourceSite": "meetstamps",
+      "retrievedAt": "2026-11-06T08:09:49.5642992Z",
+      "status": "ok",
+      "httpStatus": 200,
+      "pageTitle": "2008年特种邮票《戊子年》",
+      "issueDate": "2008-01-05",
+      "sourceImageUrl": "https://meetstamps.com/wp-content/uploads/2009/09/2008-戊子年-特种邮票.jpg",
+      "preview": {
+        "localPath": "assets/previews/cn-2008-01.jpg",
+        "width": 120,
+        "height": 119,
+        "byteSize": 49707,
+        "sha256": "af7bfa1a296b61dcbfb0ff419d263424dd5e1ba4f5582597f985f605b357551a"
+      }
+    },
+    {
+      "id": "cn-2005-01",
+      "catalogNo": "2005-1",
+      "title": "乙酉年",
+      "pageUrl": "https://meetstamps.com/archives/4899",
+      "sourceSite": "meetstamps",
+      "retrievedAt": "2026-11-06T08:09:48.5664887Z",
+      "status": "ok",
+      "httpStatus": 200,
+      "pageTitle": "2005年特种邮票《乙酉年》",
+      "issueDate": "2005-01-05",
+      "sourceImageUrl": "https://meetstamps.com/wp-content/uploads/2010/04/20100427.jpg",
+      "preview": {
+        "localPath": "assets/previews/cn-2005-01.jpg",
+        "width": 119,
+        "height": 118,
+        "byteSize": 31413,
+        "sha256": "51330d065efd4c03dbd0fe779a6660c2df5c40ada807f75bc65a02b6221a5330"
+      }
+    },
+    {
+      "id": "cn-2009-01",
+      "catalogNo": "2009-1",
+      "title": "己丑年",
+      "pageUrl": "https://meetstamps.com/archives/345",
+      "sourceSite": "meetstamps",
+      "retrievedAt": "2026-11-06T08:09:53.1516021Z",
+      "status": "ok",
+      "httpStatus": 200,
+      "pageTitle": "2009年特种邮票《己丑年》",
+      "issueDate": "2009-01-05",
+      "sourceImageUrl": "https://meetstamps.com/wp-content/uploads/2009/09/0124.jpg",
+      "preview": {
+        "localPath": "assets/previews/cn-2009-01.jpg",
+        "width": 200,
+        "height": 201,
+        "byteSize": 48322,
+        "sha256": "8573cbf120fa9c382222952c94593dd10d4d258d4acba5e397f038cf5f3141fe"
+      }
+    },
+    {
+      "id": "cn-2013-01",
+      "catalogNo": "2013-1",
+      "title": "癸巳年",
+      "pageUrl": "https://meetstamps.com/archives/16273",
+      "sourceSite": "meetstamps",
+      "retrievedAt": "2026-11-06T08:09:53.5951589Z",
+      "status": "ok",
+      "httpStatus": 200,
+      "pageTitle": "2013年特种邮票《癸巳年》",
+      "issueDate": "2013-01-05",
+      "sourceImageUrl": "https://meetstamps.com/wp-content/uploads/2013/01/2013-1.jpg",
+      "preview": {
+        "localPath": "assets/previews/cn-2013-01.jpg",
+        "width": 203,
+        "height": 205,
+        "byteSize": 56211,
+        "sha256": "64a44d65c8bfe319d3fff1d600eb7043d3887104295aa635698f0ae6b72060f2"
+      }
+    },
+    {
+      "id": "cn-2010-01",
+      "catalogNo": "2010-1",
+      "title": "庚寅年",
+      "pageUrl": "https://meetstamps.com/archives/1937",
+      "sourceSite": "meetstamps",
+      "retrievedAt": "2026-11-06T08:09:53.3438153Z",
+      "status": "ok",
+      "httpStatus": 200,
+      "pageTitle": "2010特种邮票《庚寅年》",
+      "issueDate": "2010-01-05",
+      "sourceImageUrl": "https://meetstamps.com/wp-content/uploads/2010/01/20100206-1-3.jpg",
+      "preview": {
+        "localPath": "assets/previews/cn-2010-01.jpg",
+        "width": 160,
+        "height": 160,
+        "byteSize": 80626,
+        "sha256": "857d80f572c0c3e7c79497c4154c2285ae1ae54713040dcb626c2434fa972bff"
+      }
+    },
+    {
+      "id": "cn-2011-01",
+      "catalogNo": "2011-1",
+      "title": "辛卯年",
+      "pageUrl": "https://meetstamps.com/archives/12641",
+      "sourceSite": "meetstamps",
+      "retrievedAt": "2026-11-06T08:09:53.399807Z",
+      "status": "ok",
+      "httpStatus": 200,
+      "pageTitle": "2011年特种邮票《辛卯年》",
+      "issueDate": "2011-01-05",
+      "sourceImageUrl": "https://meetstamps.com/wp-content/uploads/2020/04/2011-1-300x221.jpg",
+      "preview": {
+        "localPath": "assets/previews/cn-2011-01.jpg",
+        "width": 300,
+        "height": 221,
+        "byteSize": 23848,
+        "sha256": "3e90e53e1541d470524e96edd10d6f80ff8e0991af85316132f1e983bebd56c5"
+      }
+    },
+    {
+      "id": "cn-2016-01",
+      "catalogNo": "2016-1",
+      "title": "丙申年",
+      "pageUrl": "https://meetstamps.com/archives/19714",
+      "sourceSite": "meetstamps",
+      "retrievedAt": "2026-11-06T08:09:55.8760109Z",
+      "status": "ok",
+      "httpStatus": 200,
+      "pageTitle": "2016年特种邮票《丙申年》",
+      "issueDate": "2016-01-05",
+      "sourceImageUrl": "https://meetstamps.com/wp-content/uploads/2015/12/2016-1-1-300x300.jpg",
+      "preview": {
+        "localPath": "assets/previews/cn-2016-01.jpg",
+        "width": 200,
+        "height": 200,
+        "byteSize": 27103,
+        "sha256": "cd932150d5646b1ded7b33dd7e3407b291cf26f54766d3d25e18a2d3c0ad894a"
+      }
+    },
+    {
+      "id": "cn-2015-01",
+      "catalogNo": "2015-1",
+      "title": "乙未年",
+      "pageUrl": "https://meetstamps.com/archives/19086",
+      "sourceSite": "meetstamps",
+      "retrievedAt": "2026-11-06T08:09:55.2112442Z",
+      "status": "ok",
+      "httpStatus": 200,
+      "pageTitle": "2015年特种邮票《乙未年》",
+      "issueDate": "2015-01-05",
+      "sourceImageUrl": "https://meetstamps.com/wp-content/uploads/2014/12/2015-1-297x300.jpg",
+      "preview": {
+        "localPath": "assets/previews/cn-2015-01.jpg",
+        "width": 200,
+        "height": 202,
+        "byteSize": 40931,
+        "sha256": "91ca9415646b3777b56bc7d0fba6e5176fc8aa405a5248ad10cd6027568b16b6"
+      }
+    },
+    {
+      "id": "cn-2012-01",
+      "catalogNo": "2012-1",
+      "title": "壬辰年",
+      "pageUrl": "https://meetstamps.com/archives/15349",
+      "sourceSite": "meetstamps",
+      "retrievedAt": "2026-11-06T08:09:53.5220236Z",
+      "status": "ok",
+      "httpStatus": 200,
+      "pageTitle": "2012年特种邮票《壬辰年》",
+      "issueDate": "2012-01-05",
+      "sourceImageUrl": "https://meetstamps.com/wp-content/uploads/2012/01/2012-01-01.jpg",
+      "preview": {
+        "localPath": "assets/previews/cn-2012-01.jpg",
+        "width": 210,
+        "height": 212,
+        "byteSize": 63362,
+        "sha256": "d6986c58d2f5971c44b2151427ca5549ec78d6fbf3576ba86b961287f63cafb0"
+      }
+    },
+    {
+      "id": "cn-2014-01",
+      "catalogNo": "2014-1",
+      "title": "甲午年",
+      "pageUrl": "https://meetstamps.com/archives/17810",
+      "sourceSite": "meetstamps",
+      "retrievedAt": "2026-11-06T08:09:55.1608746Z",
+      "status": "ok",
+      "httpStatus": 200,
+      "pageTitle": "2014年特种邮票《甲午年》",
+      "issueDate": "2014-01-05",
+      "sourceImageUrl": "https://meetstamps.com/wp-content/uploads/2014/01/2014-1.jpg",
+      "preview": {
+        "localPath": "assets/previews/cn-2014-01.jpg",
+        "width": 112,
+        "height": 112,
+        "byteSize": 82667,
+        "sha256": "2f9dff9648d60a5cf09016c754aa10ee104cd86344a4ba10dec15c1bde94cf96"
+      }
+    },
+    {
+      "id": "cn-2017-01",
+      "catalogNo": "2017-1",
+      "title": "丁酉年",
+      "pageUrl": "https://meetstamps.com/archives/20780",
+      "sourceSite": "meetstamps",
+      "retrievedAt": "2026-11-06T08:09:58.4668749Z",
+      "status": "ok",
+      "httpStatus": 200,
+      "pageTitle": "2017年特种邮票《丁酉年》",
+      "issueDate": "2017-01-05",
+      "sourceImageUrl": "https://meetstamps.com/wp-content/uploads/2016/12/2017-1-1-150x150.jpg",
+      "preview": {
+        "localPath": "assets/previews/cn-2017-01.jpg",
+        "width": 150,
+        "height": 150,
+        "byteSize": 8590,
+        "sha256": "70e497d7a7539649c80782f7cfdffe1e8af36495593316e5e65f977ae492b7ed"
+      }
+    },
+    {
+      "id": "cn-2019-01",
+      "catalogNo": "2019-1",
+      "title": "己亥年",
+      "pageUrl": "https://meetstamps.com/archives/22464",
+      "sourceSite": "meetstamps",
+      "retrievedAt": "2026-11-06T08:10:00.9246094Z",
+      "status": "ok",
+      "httpStatus": 200,
+      "pageTitle": "2019年特种邮票《己亥年》",
+      "issueDate": "2019-01-05",
+      "sourceImageUrl": "https://meetstamps.com/wp-content/uploads/2018/12/单枚2-1-2-150x150.jpg",
+      "preview": {
+        "localPath": "assets/previews/cn-2019-01.jpg",
+        "width": 150,
+        "height": 150,
+        "byteSize": 8105,
+        "sha256": "6008fe252fdaf2409a06af68eac96161a9f1fb310c6e86c769ac2a8059088c23"
+      }
+    },
+    {
+      "id": "cn-2018-01",
+      "catalogNo": "2018-1",
+      "title": "戊戌年",
+      "pageUrl": "https://meetstamps.com/archives/22014",
+      "sourceSite": "meetstamps",
+      "retrievedAt": "2026-11-06T08:09:59.6390075Z",
+      "status": "ok",
+      "httpStatus": 200,
+      "pageTitle": "2018年特种邮票《戊戌年》",
+      "issueDate": "2018-01-05",
+      "sourceImageUrl": "https://meetstamps.com/wp-content/uploads/2018/01/2018-1-1-150x150.jpg",
+      "preview": {
+        "localPath": "assets/previews/cn-2018-01.jpg",
+        "width": 150,
+        "height": 150,
+        "byteSize": 7666,
+        "sha256": "722eab0ed5890fb0b5fae4c5521a6c4bab46d6388d82941eb128272f908b7dd3"
+      }
+    },
+    {
+      "id": "cn-2024-01",
+      "catalogNo": "2024-1",
+      "title": "甲辰年",
+      "pageUrl": "https://meetstamps.com/archives/25999",
+      "sourceSite": "meetstamps",
+      "retrievedAt": "2026-11-06T08:10:01.9669035Z",
+      "status": "ok",
+      "httpStatus": 200,
+      "pageTitle": "2024年特种邮票《甲辰年》",
+      "issueDate": "2024-01-05",
+      "sourceImageUrl": "https://meetstamps.com/wp-content/uploads/2023/03/2024-1bs2-2-106x150.jpg",
+      "preview": {
+        "localPath": "assets/previews/cn-2024-01.jpg",
+        "width": 106,
+        "height": 150,
+        "byteSize": 14616,
+        "sha256": "b247d96d7375ca564e9dd489cce386994a9f76435d0afb0ed01e0f5d978668c9"
+      }
+    },
+    {
+      "id": "cn-2020-01",
+      "catalogNo": "2020-1",
+      "title": "庚子年",
+      "pageUrl": "https://meetstamps.com/archives/23050",
+      "sourceSite": "meetstamps",
+      "retrievedAt": "2026-11-06T08:10:01.2778233Z",
+      "status": "ok",
+      "httpStatus": 200,
+      "pageTitle": "2020年特种邮票《庚子年》",
+      "issueDate": "2020-01-05",
+      "sourceImageUrl": "https://meetstamps.com/wp-content/uploads/2019/11/2020-1-1-150x150.jpg",
+      "preview": {
+        "localPath": "assets/previews/cn-2020-01.jpg",
+        "width": 150,
+        "height": 150,
+        "byteSize": 13921,
+        "sha256": "867e72817661ce8aecf3f1323c732623472bbba170d36c516343cbae30226984"
+      }
+    },
+    {
+      "id": "cn-2023-01",
+      "catalogNo": "2023-1",
+      "title": "癸卯年",
+      "pageUrl": "https://meetstamps.com/archives/24243",
+      "sourceSite": "meetstamps",
+      "retrievedAt": "2026-11-06T08:10:01.9222556Z",
+      "status": "ok",
+      "httpStatus": 200,
+      "pageTitle": "2023年特种邮票《癸卯年》",
+      "issueDate": "2023-01-05",
+      "sourceImageUrl": "https://meetstamps.com/wp-content/uploads/2022/12/2023-1-1-150x150.jpg",
+      "preview": {
+        "localPath": "assets/previews/cn-2023-01.jpg",
+        "width": 150,
+        "height": 150,
+        "byteSize": 9432,
+        "sha256": "85420d4902457b14af90025bc7a4e0cb07eeaf01709de10aedeaa88350be9c51"
+      }
+    },
+    {
+      "id": "cn-2021-01",
+      "catalogNo": "2021-1",
+      "title": "辛丑年",
+      "pageUrl": "https://meetstamps.com/archives/24173",
+      "sourceSite": "meetstamps",
+      "retrievedAt": "2026-11-06T08:10:01.7915155Z",
+      "status": "ok",
+      "httpStatus": 200,
+      "pageTitle": "2021年特种邮票《辛丑年》",
+      "issueDate": "2021-01-05",
+      "sourceImageUrl": "https://meetstamps.com/wp-content/uploads/2020/12/2021-1-1-296x300.jpg",
+      "preview": {
+        "localPath": "assets/previews/cn-2021-01.jpg",
+        "width": 148,
+        "height": 150,
+        "byteSize": 29636,
+        "sha256": "cf0baf63c2304ddc43844d6fd28a9930b30de9135ff489e7806822dc9410e238"
+      }
+    },
+    {
+      "id": "cn-2022-01",
+      "catalogNo": "2022-1",
+      "title": "壬寅年",
+      "pageUrl": "https://meetstamps.com/archives/22153",
+      "sourceSite": "meetstamps",
+      "retrievedAt": "2026-11-06T08:10:01.8420133Z",
+      "status": "ok",
+      "httpStatus": 200,
+      "pageTitle": "2022年特种邮票《壬寅年》",
+      "issueDate": "2022-01-05",
+      "sourceImageUrl": "https://meetstamps.com/wp-content/uploads/2020/03/2022-1-1-150x150.jpg",
+      "preview": {
+        "localPath": "assets/previews/cn-2022-01.jpg",
+        "width": 150,
+        "height": 150,
+        "byteSize": 25857,
+        "sha256": "b2e1bed8426e08a7561dcd8980394df8ae4e52549b59b8bea0a9a27e52c1b967"
+      }
+    },
+    {
+      "id": "cn-2025-01",
+      "catalogNo": "2025-1",
+      "title": "乙巳年",
+      "pageUrl": "https://meetstamps.com/archives/27236",
+      "sourceSite": "meetstamps",
+      "retrievedAt": "2026-11-06T08:10:03.4069863Z",
+      "status": "ok",
+      "httpStatus": 200,
+      "pageTitle": "2025年特种邮票《乙巳年》",
+      "issueDate": "2025-01-05",
+      "sourceImageUrl": "https://meetstamps.com/wp-content/uploads/2024/12/2025-1-1-150x150.jpg",
+      "preview": {
+        "localPath": "assets/previews/cn-2025-01.jpg",
+        "width": 150,
+        "height": 150,
+        "byteSize": 33106,
+        "sha256": "994f470bec6563ab29b4c7b5c2cfa99ed73fe731d425751c9dc0da4a760fd4d9"
+      }
+    },
+    {
+      "id": "cn-2026-01",
+      "catalogNo": "2026-1",
+      "title": "丙午年",
+      "pageUrl": "https://meetstamps.com/archives/27849",
+      "sourceSite": "meetstamps",
+      "retrievedAt": "2026-11-06T08:10:06.1410156Z",
+      "status": "ok",
+      "httpStatus": 200,
+      "pageTitle": "2026年特种邮票《丙午年》",
+      "issueDate": "2026-01-05",
+      "sourceImageUrl": "https://meetstamps.com/wp-content/uploads/2026/01/2026-1-1-298x300.jpg",
+      "preview": {
+        "localPath": "assets/previews/cn-2026-01.jpg",
+        "width": 200,
+        "height": 200,
+        "byteSize": 21609,
+        "sha256": "cfc9dace0db8dccabb1ad62e6a6c1cc589c6da3401a91f7dd684b54943397dfe"
+      }
+    }
+  ],
+  "links": [
+    {
+      "coinId": "JB01-1",
+      "coinName": "中华人民共和国成立三十五周年－祖国万岁",
+      "coinYear": 1984,
+      "stampId": "cn-j105",
+      "matchType": "exact_anniversary",
+      "confidence": 1,
+      "reason": "纪念币与邮票均纪念中华人民共和国成立三十五周年。"
+    },
+    {
+      "coinId": "JB01-2",
+      "coinName": "中华人民共和国成立三十五周年－民族大团结",
+      "coinYear": 1984,
+      "stampId": "cn-j105",
+      "matchType": "exact_anniversary",
+      "confidence": 1,
+      "reason": "纪念币与邮票均纪念中华人民共和国成立三十五周年。"
+    },
+    {
+      "coinId": "JB01-3",
+      "coinName": "中华人民共和国成立三十五周年－开国大典",
+      "coinYear": 1984,
+      "stampId": "cn-j105",
+      "matchType": "exact_anniversary",
+      "confidence": 1,
+      "reason": "纪念币与邮票均纪念中华人民共和国成立三十五周年。"
+    },
+    {
+      "coinId": "JB02",
+      "coinName": "庆祝西藏自治区成立20周年",
+      "coinYear": 1985,
+      "stampId": "cn-j116",
+      "matchType": "exact_anniversary",
+      "confidence": 1,
+      "reason": "同一周年主题，并在1985年9月1日发行。"
+    },
+    {
+      "coinId": "JB03",
+      "coinName": "新疆维吾尔自治区成立30周年",
+      "coinYear": 1985,
+      "stampId": "cn-j119",
+      "matchType": "exact_anniversary",
+      "confidence": 1,
+      "reason": "同一自治区成立三十周年主题。"
+    },
+    {
+      "coinId": "JB04",
+      "coinName": "国际和平年",
+      "coinYear": 1986,
+      "stampId": "cn-j128",
+      "matchType": "exact_event",
+      "confidence": 1,
+      "reason": "均以1986国际和平年为主题。"
+    },
+    {
+      "coinId": "JB06-1",
+      "coinName": "中华人民共和国第六届运动会－足球",
+      "coinYear": 1987,
+      "stampId": "cn-j144",
+      "matchType": "exact_event",
+      "confidence": 1,
+      "reason": "同一届全国运动会。"
+    },
+    {
+      "coinId": "JB06-2",
+      "coinName": "中华人民共和国第六届运动会－体操",
+      "coinYear": 1987,
+      "stampId": "cn-j144",
+      "matchType": "exact_event",
+      "confidence": 1,
+      "reason": "同一届全国运动会。"
+    },
+    {
+      "coinId": "JB06-3",
+      "coinName": "中华人民共和国第六届运动会－排球",
+      "coinYear": 1987,
+      "stampId": "cn-j144",
+      "matchType": "exact_event",
+      "confidence": 1,
+      "reason": "同一届全国运动会。"
+    },
+    {
+      "coinId": "JB11-1",
+      "coinName": "第十一届亚洲运动会－射箭",
+      "coinYear": 1990,
+      "stampId": "cn-j172",
+      "matchType": "exact_event",
+      "confidence": 1,
+      "reason": "同一届北京亚运会。"
+    },
+    {
+      "coinId": "JB11-2",
+      "coinName": "第十一届亚洲运动会－武术",
+      "coinYear": 1990,
+      "stampId": "cn-j172",
+      "matchType": "exact_event",
+      "confidence": 1,
+      "reason": "同一届北京亚运会。"
+    },
+    {
+      "coinId": "JB13-1",
+      "coinName": "中国共产党成立七十周年－第一次全国代表大会",
+      "coinYear": 1991,
+      "stampId": "cn-j178",
+      "matchType": "exact_anniversary",
+      "confidence": 1,
+      "reason": "同为中国共产党成立七十周年纪念。"
+    },
+    {
+      "coinId": "JB13-2",
+      "coinName": "中国共产党成立七十周年－遵义会议",
+      "coinYear": 1991,
+      "stampId": "cn-j178",
+      "matchType": "exact_anniversary",
+      "confidence": 1,
+      "reason": "同为中国共产党成立七十周年纪念。"
+    },
+    {
+      "coinId": "JB13-3",
+      "coinName": "中国共产党成立七十周年－第十一届三中全会",
+      "coinYear": 1991,
+      "stampId": "cn-j178",
+      "matchType": "exact_anniversary",
+      "confidence": 1,
+      "reason": "同为中国共产党成立七十周年纪念。"
+    },
+    {
+      "coinId": "JB14-1",
+      "coinName": "第一届世界女子足球锦标赛－踢球",
+      "coinYear": 1991,
+      "stampId": "cn-j185",
+      "matchType": "exact_event",
+      "confidence": 1,
+      "reason": "同一届世界女子足球锦标赛。"
+    },
+    {
+      "coinId": "JB14-2",
+      "coinName": "第一届世界女子足球锦标赛－扑球",
+      "coinYear": 1991,
+      "stampId": "cn-j185",
+      "matchType": "exact_event",
+      "confidence": 1,
+      "reason": "同一届世界女子足球锦标赛。"
+    },
+    {
+      "coinId": "JB15",
+      "coinName": "宪法颁布十周年",
+      "coinYear": 1992,
+      "stampId": "cn-1992-20",
+      "matchType": "exact_anniversary",
+      "confidence": 0.98,
+      "reason": "均纪念1982年宪法公布施行十周年。"
+    },
+    {
+      "coinId": "JB16",
+      "coinName": "宋庆龄诞辰100周年",
+      "coinYear": 1993,
+      "stampId": "cn-1993-03",
+      "matchType": "exact_anniversary",
+      "confidence": 1,
+      "reason": "同为宋庆龄诞辰一百周年纪念。"
+    },
+    {
+      "coinId": "JB17",
+      "coinName": "中国珍稀野生动物－大熊猫",
+      "coinYear": 1993,
+      "stampId": "cn-t106",
+      "matchType": "same_species",
+      "confidence": 0.88,
+      "reason": "共同表现大熊猫主题；并非同一发行事件。"
+    },
+    {
+      "coinId": "JB114",
+      "coinName": "大熊猫国家公园",
+      "coinYear": 2023,
+      "stampId": "cn-t106",
+      "matchType": "same_species",
+      "confidence": 0.88,
+      "reason": "共同表现大熊猫主题；并非同一发行事件。"
+    },
+    {
+      "coinId": "JB18",
+      "coinName": "毛泽东诞辰100周年",
+      "coinYear": 1993,
+      "stampId": "cn-1993-17",
+      "matchType": "exact_anniversary",
+      "confidence": 1,
+      "reason": "同为毛泽东诞辰一百周年纪念。"
+    },
+    {
+      "coinId": "JB20",
+      "coinName": "第43届世界乒乓球锦标赛",
+      "coinYear": 1995,
+      "stampId": "cn-1995-05",
+      "matchType": "exact_event",
+      "confidence": 1,
+      "reason": "同一届世界乒乓球锦标赛。"
+    },
+    {
+      "coinId": "JB21",
+      "coinName": "中国抗日战争和世界反法西斯战争胜利50周年",
+      "coinYear": 1995,
+      "stampId": "cn-1995-17",
+      "matchType": "exact_anniversary",
+      "confidence": 1,
+      "reason": "同一战争胜利五十周年主题。"
+    },
+    {
+      "coinId": "JB22",
+      "coinName": "联合国第四次世界妇女大会",
+      "coinYear": 1995,
+      "stampId": "cn-1995-20",
+      "matchType": "exact_event",
+      "confidence": 1,
+      "reason": "同一届联合国世界妇女大会。"
+    },
+    {
+      "coinId": "JB23",
+      "coinName": "联合国成立五十周年",
+      "coinYear": 1995,
+      "stampId": "cn-1995-21",
+      "matchType": "exact_anniversary",
+      "confidence": 1,
+      "reason": "同为联合国成立五十周年纪念。"
+    },
+    {
+      "coinId": "JB24",
+      "coinName": "中国珍稀野生动物－金丝猴",
+      "coinYear": 1995,
+      "stampId": "cn-te60",
+      "matchType": "same_species",
+      "confidence": 0.92,
+      "reason": "共同表现中国珍稀动物金丝猴。"
+    },
+    {
+      "coinId": "JB25",
+      "coinName": "朱德诞辰110周年",
+      "coinYear": 1996,
+      "stampId": "cn-j134",
+      "matchType": "same_person",
+      "confidence": 0.86,
+      "reason": "同一人物，纪念币为诞辰110周年，邮票为诞辰100周年。"
+    },
+    {
+      "coinId": "JB26",
+      "coinName": "中国珍稀野生动物－白鳍豚",
+      "coinYear": 1996,
+      "stampId": "cn-t57",
+      "matchType": "same_species",
+      "confidence": 0.94,
+      "reason": "共同表现白鱀豚。"
+    },
+    {
+      "coinId": "JB28-1",
+      "coinName": "庆祝中华人民共和国香港特别行政区成立－基本法",
+      "coinYear": 1997,
+      "stampId": "cn-1997-10",
+      "matchType": "exact_event",
+      "confidence": 1,
+      "reason": "同为香港回归祖国纪念。"
+    },
+    {
+      "coinId": "JB28-2",
+      "coinName": "庆祝中华人民共和国香港特别行政区成立－维多利亚港",
+      "coinYear": 1997,
+      "stampId": "cn-1997-10",
+      "matchType": "exact_event",
+      "confidence": 1,
+      "reason": "同为香港回归祖国纪念。"
+    },
+    {
+      "coinId": "JB29",
+      "coinName": "周恩来诞辰100周年",
+      "coinYear": 1998,
+      "stampId": "cn-1998-05",
+      "matchType": "exact_anniversary",
+      "confidence": 1,
+      "reason": "同为周恩来诞辰一百周年纪念。"
+    },
+    {
+      "coinId": "JB30",
+      "coinName": "中国珍稀野生动物－朱鹮",
+      "coinYear": 1998,
+      "stampId": "cn-t94",
+      "matchType": "same_species",
+      "confidence": 0.94,
+      "reason": "共同表现珍稀动物朱鹮。"
+    },
+    {
+      "coinId": "JB31",
+      "coinName": "中国珍稀野生动物－丹顶鹤",
+      "coinYear": 1998,
+      "stampId": "cn-te48",
+      "matchType": "same_species",
+      "confidence": 0.94,
+      "reason": "共同表现珍稀动物丹顶鹤。"
+    },
+    {
+      "coinId": "JB32",
+      "coinName": "中国珍稀野生动物－褐马鸡",
+      "coinYear": 1998,
+      "stampId": "cn-t134",
+      "matchType": "same_species",
+      "confidence": 0.94,
+      "reason": "共同表现珍稀动物褐马鸡。"
+    },
+    {
+      "coinId": "JB33",
+      "coinName": "中国珍稀野生动物－扬子鳄",
+      "coinYear": 1998,
+      "stampId": "cn-t85",
+      "matchType": "same_species",
+      "confidence": 0.94,
+      "reason": "共同表现珍稀动物扬子鳄。"
+    },
+    {
+      "coinId": "JB34",
+      "coinName": "刘少奇诞辰100周年",
+      "coinYear": 1998,
+      "stampId": "cn-1998-24",
+      "matchType": "exact_anniversary",
+      "confidence": 1,
+      "reason": "同为刘少奇诞辰一百周年纪念。"
+    },
+    {
+      "coinId": "JB36",
+      "coinName": "中国珍稀野生动物－金斑喙凤蝶",
+      "coinYear": 1999,
+      "stampId": "cn-te56",
+      "matchType": "same_species",
+      "confidence": 0.72,
+      "reason": "邮票包含多种蝴蝶，作为金斑喙凤蝶纪念币的近题资料。"
+    },
+    {
+      "coinId": "JB37",
+      "coinName": "中国人民政治协商会议成立五十周年",
+      "coinYear": 1999,
+      "stampId": "cn-1999-12",
+      "matchType": "exact_anniversary",
+      "confidence": 1,
+      "reason": "同为全国政协成立五十周年纪念。"
+    },
+    {
+      "coinId": "JB38",
+      "coinName": "中华人民共和国成立五十周年",
+      "coinYear": 1999,
+      "stampId": "cn-1999-11",
+      "matchType": "exact_anniversary",
+      "confidence": 1,
+      "reason": "同为中华人民共和国成立五十周年纪念。"
+    },
+    {
+      "coinId": "JC01",
+      "coinName": "中华人民共和国成立五十周年（钞）",
+      "coinYear": 1999,
+      "stampId": "cn-1999-11",
+      "matchType": "exact_anniversary",
+      "confidence": 1,
+      "reason": "同为中华人民共和国成立五十周年纪念。"
+    },
+    {
+      "coinId": "JB39-1",
+      "coinName": "庆祝中华人民共和国澳门特别行政区成立－基本法",
+      "coinYear": 1999,
+      "stampId": "cn-1999-18",
+      "matchType": "exact_event",
+      "confidence": 1,
+      "reason": "同为澳门回归祖国纪念。"
+    },
+    {
+      "coinId": "JB39-2",
+      "coinName": "庆祝中华人民共和国澳门特别行政区成立－妈祖阁和帆船",
+      "coinYear": 1999,
+      "stampId": "cn-1999-18",
+      "matchType": "exact_event",
+      "confidence": 1,
+      "reason": "同为澳门回归祖国纪念。"
+    },
+    {
+      "coinId": "JB40",
+      "coinName": "敦煌藏经洞发现100周年",
+      "coinYear": 2000,
+      "stampId": "cn-1996-20",
+      "matchType": "same_place",
+      "confidence": 0.82,
+      "reason": "同属敦煌石窟与敦煌艺术主题。"
+    },
+    {
+      "coinId": "JB44",
+      "coinName": "世界文化遗产－万里长城",
+      "coinYear": 2002,
+      "stampId": "cn-t38",
+      "matchType": "same_place",
+      "confidence": 0.96,
+      "reason": "共同表现世界文化遗产万里长城。"
+    },
+    {
+      "coinId": "JB45",
+      "coinName": "世界文化遗产－秦始皇陵及兵马俑坑",
+      "coinYear": 2002,
+      "stampId": "cn-t88",
+      "matchType": "same_place",
+      "confidence": 0.98,
+      "reason": "共同表现秦始皇陵及兵马俑。"
+    },
+    {
+      "coinId": "JB50",
+      "coinName": "世界文化遗产－明清故宫",
+      "coinYear": 2003,
+      "stampId": "cn-j120",
+      "matchType": "same_place",
+      "confidence": 0.88,
+      "reason": "共同表现明清故宫与故宫博物院。"
+    },
+    {
+      "coinId": "JB56",
+      "coinName": "世界文化遗产－苏州古典园林",
+      "coinYear": 2004,
+      "stampId": "cn-t96",
+      "matchType": "same_place",
+      "confidence": 0.96,
+      "reason": "拙政园是苏州古典园林代表。"
+    },
+    {
+      "coinId": "JB59",
+      "coinName": "世界文化遗产－丽江古城",
+      "coinYear": 2005,
+      "stampId": "cn-2002-09",
+      "matchType": "same_place",
+      "confidence": 0.98,
+      "reason": "共同表现世界文化遗产丽江古城。"
+    },
+    {
+      "coinId": "JB60",
+      "coinName": "世界文化遗产－青城山与都江堰",
+      "coinYear": 2005,
+      "stampId": "cn-t156",
+      "matchType": "same_place",
+      "confidence": 0.96,
+      "reason": "共同表现都江堰水利工程。"
+    },
+    {
+      "coinId": "JB64",
+      "coinName": "第 29 届奥林匹克运动会－举重",
+      "coinYear": 2006,
+      "stampId": "cn-2006-19",
+      "matchType": "exact_event",
+      "confidence": 0.98,
+      "reason": "同属北京第29届奥运会运动项目系列。"
+    },
+    {
+      "coinId": "JB65",
+      "coinName": "第 29 届奥林匹克运动会－游泳",
+      "coinYear": 2006,
+      "stampId": "cn-2006-19",
+      "matchType": "exact_event",
+      "confidence": 0.98,
+      "reason": "同属北京第29届奥运会运动项目系列。"
+    },
+    {
+      "coinId": "JB69",
+      "coinName": "第 29 届奥林匹克运动会－体操",
+      "coinYear": 2007,
+      "stampId": "cn-2007-22",
+      "matchType": "exact_event",
+      "confidence": 0.98,
+      "reason": "同属北京第29届奥运会运动项目系列。"
+    },
+    {
+      "coinId": "JB70",
+      "coinName": "第 29 届奥林匹克运动会－射箭",
+      "coinYear": 2007,
+      "stampId": "cn-2007-22",
+      "matchType": "exact_event",
+      "confidence": 0.98,
+      "reason": "同属北京第29届奥运会运动项目系列。"
+    },
+    {
+      "coinId": "JB71",
+      "coinName": "第 29 届奥林匹克运动会－乒乓球",
+      "coinYear": 2007,
+      "stampId": "cn-2007-22",
+      "matchType": "exact_event",
+      "confidence": 0.98,
+      "reason": "同属北京第29届奥运会运动项目系列。"
+    },
+    {
+      "coinId": "JB73",
+      "coinName": "第 29 届奥林匹克运动会－足球",
+      "coinYear": 2008,
+      "stampId": "cn-2007-22",
+      "matchType": "exact_event",
+      "confidence": 0.98,
+      "reason": "同属北京第29届奥运会运动项目系列。"
+    },
+    {
+      "coinId": "JB74",
+      "coinName": "第 29 届奥林匹克运动会－击剑",
+      "coinYear": 2008,
+      "stampId": "cn-2007-22",
+      "matchType": "exact_event",
+      "confidence": 0.98,
+      "reason": "同属北京第29届奥运会运动项目系列。"
+    },
+    {
+      "coinId": "JB75",
+      "coinName": "第 29 届奥林匹克运动会－现代五项",
+      "coinYear": 2008,
+      "stampId": "cn-2007-22",
+      "matchType": "exact_event",
+      "confidence": 0.98,
+      "reason": "同属北京第29届奥运会运动项目系列。"
+    },
+    {
+      "coinId": "JC03",
+      "coinName": "第 29 届奥林匹克运动会（钞）",
+      "coinYear": 2008,
+      "stampId": "cn-2007-22",
+      "matchType": "exact_event",
+      "confidence": 0.98,
+      "reason": "同属北京第29届奥运会运动项目系列。"
+    },
+    {
+      "coinId": "JB79",
+      "coinName": "中国2010年上海世博会",
+      "coinYear": 2010,
+      "stampId": "cn-2010-10",
+      "matchType": "exact_event",
+      "confidence": 1,
+      "reason": "同为中国2010年上海世博会纪念。"
+    },
+    {
+      "coinId": "JB83",
+      "coinName": "中国共产党成立90周年",
+      "coinYear": 2011,
+      "stampId": "cn-2011-16",
+      "matchType": "exact_anniversary",
+      "confidence": 1,
+      "reason": "同为中国共产党成立九十周年纪念。"
+    },
+    {
+      "coinId": "JB91",
+      "coinName": "中国人民抗日战争暨世界反法西斯战争胜利70周年",
+      "coinYear": 2015,
+      "stampId": "cn-2015-20",
+      "matchType": "exact_anniversary",
+      "confidence": 1,
+      "reason": "同一战争胜利七十周年主题。"
+    },
+    {
+      "coinId": "JB92",
+      "coinName": "中国航天",
+      "coinYear": 2015,
+      "stampId": "cn-2006-17",
+      "matchType": "same_cultural_subject",
+      "confidence": 0.84,
+      "reason": "同属中国航天发展主题。"
+    },
+    {
+      "coinId": "JC04",
+      "coinName": "中国航天（钞）",
+      "coinYear": 2015,
+      "stampId": "cn-2006-17",
+      "matchType": "same_cultural_subject",
+      "confidence": 0.84,
+      "reason": "同属中国航天发展主题。"
+    },
+    {
+      "coinId": "JB94",
+      "coinName": "孙中山先生诞辰150周年",
+      "coinYear": 2016,
+      "stampId": "cn-2016-31",
+      "matchType": "exact_anniversary",
+      "confidence": 1,
+      "reason": "同为孙中山诞辰一百五十周年纪念。"
+    },
+    {
+      "coinId": "JB96",
+      "coinName": "中国人民解放军建军90周年",
+      "coinYear": 2017,
+      "stampId": "cn-2017-18",
+      "matchType": "exact_anniversary",
+      "confidence": 1,
+      "reason": "同为中国人民解放军建军九十周年纪念。"
+    },
+    {
+      "coinId": "JB99",
+      "coinName": "中国高铁",
+      "coinYear": 2018,
+      "stampId": "cn-2017-29",
+      "matchType": "same_cultural_subject",
+      "confidence": 0.94,
+      "reason": "共同表现中国高速铁路发展成就。"
+    },
+    {
+      "coinId": "JB100",
+      "coinName": "庆祝改革开放40周年",
+      "coinYear": 2018,
+      "stampId": "cn-2018-37",
+      "matchType": "exact_anniversary",
+      "confidence": 1,
+      "reason": "同为改革开放四十周年纪念。"
+    },
+    {
+      "coinId": "JB102",
+      "coinName": "中华人民共和国成立70周年",
+      "coinYear": 2019,
+      "stampId": "cn-2019-23",
+      "matchType": "exact_anniversary",
+      "confidence": 1,
+      "reason": "同为中华人民共和国成立七十周年纪念。"
+    },
+    {
+      "coinId": "JB103",
+      "coinName": "世界文化和自然遗产－泰山",
+      "coinYear": 2019,
+      "stampId": "cn-t130",
+      "matchType": "same_place",
+      "confidence": 0.96,
+      "reason": "共同表现世界文化与自然遗产泰山。"
+    },
+    {
+      "coinId": "JB107",
+      "coinName": "中国共产党成立100周年",
+      "coinYear": 2021,
+      "stampId": "cn-2021-16",
+      "matchType": "exact_anniversary",
+      "confidence": 1,
+      "reason": "同为中国共产党成立一百周年纪念。"
+    },
+    {
+      "coinId": "JB108-1",
+      "coinName": "第24届冬季奥林匹克运动会－冰上运动项目",
+      "coinYear": 2021,
+      "stampId": "cn-2022-04",
+      "matchType": "exact_event",
+      "confidence": 1,
+      "reason": "同为北京第24届冬季奥林匹克运动会纪念。"
+    },
+    {
+      "coinId": "JB108-2",
+      "coinName": "第24届冬季奥林匹克运动会－雪上运动项目",
+      "coinYear": 2021,
+      "stampId": "cn-2022-04",
+      "matchType": "exact_event",
+      "confidence": 1,
+      "reason": "同为北京第24届冬季奥林匹克运动会纪念。"
+    },
+    {
+      "coinId": "JC06-1",
+      "coinName": "第24届冬季奥林匹克运动会（钞）－冰上运动项目",
+      "coinYear": 2021,
+      "stampId": "cn-2022-04",
+      "matchType": "exact_event",
+      "confidence": 1,
+      "reason": "同为北京第24届冬季奥林匹克运动会纪念。"
+    },
+    {
+      "coinId": "JC06-2",
+      "coinName": "第24届冬季奥林匹克运动会（钞）－雪上运动项目",
+      "coinYear": 2021,
+      "stampId": "cn-2022-04",
+      "matchType": "exact_event",
+      "confidence": 1,
+      "reason": "同为北京第24届冬季奥林匹克运动会纪念。"
+    },
+    {
+      "coinId": "JB113",
+      "coinName": "三江源国家公园",
+      "coinYear": 2023,
+      "stampId": "cn-2022-23",
+      "matchType": "same_place",
+      "confidence": 0.98,
+      "reason": "该套邮票涵盖三江源、大熊猫、东北虎豹、海南热带雨林和武夷山五个国家公园。"
+    },
+    {
+      "coinId": "JB114",
+      "coinName": "大熊猫国家公园",
+      "coinYear": 2023,
+      "stampId": "cn-2022-23",
+      "matchType": "same_place",
+      "confidence": 0.98,
+      "reason": "该套邮票涵盖三江源、大熊猫、东北虎豹、海南热带雨林和武夷山五个国家公园。"
+    },
+    {
+      "coinId": "JB117",
+      "coinName": "东北虎豹国家公园",
+      "coinYear": 2024,
+      "stampId": "cn-2022-23",
+      "matchType": "same_place",
+      "confidence": 0.98,
+      "reason": "该套邮票涵盖三江源、大熊猫、东北虎豹、海南热带雨林和武夷山五个国家公园。"
+    },
+    {
+      "coinId": "JB120",
+      "coinName": "海南热带雨林国家公园",
+      "coinYear": 2025,
+      "stampId": "cn-2022-23",
+      "matchType": "same_place",
+      "confidence": 0.98,
+      "reason": "该套邮票涵盖三江源、大熊猫、东北虎豹、海南热带雨林和武夷山五个国家公园。"
+    },
+    {
+      "coinId": "JB124",
+      "coinName": "武夷山国家公园",
+      "coinYear": 2026,
+      "stampId": "cn-2022-23",
+      "matchType": "same_place",
+      "confidence": 0.98,
+      "reason": "该套邮票涵盖三江源、大熊猫、东北虎豹、海南热带雨林和武夷山五个国家公园。"
+    },
+    {
+      "coinId": "JB121",
+      "coinName": "中国人民抗日战争暨世界反法西斯战争胜利80周年",
+      "coinYear": 2025,
+      "stampId": "cn-2025-18",
+      "matchType": "exact_anniversary",
+      "confidence": 1,
+      "reason": "同一战争胜利八十周年主题。"
+    },
+    {
+      "coinId": "JB125",
+      "coinName": "江泽民诞辰100周年",
+      "coinYear": 2026,
+      "stampId": "cn-2026-17",
+      "matchType": "exact_anniversary",
+      "confidence": 1,
+      "reason": "同为江泽民诞辰一百周年纪念。"
+    },
+    {
+      "coinId": "JB46",
+      "coinName": "2003年贺岁（癸未）",
+      "coinYear": 2003,
+      "stampId": "cn-2003-01",
+      "matchType": "same_zodiac",
+      "confidence": 0.96,
+      "reason": "同一癸未羊年生肖主题。"
+    },
+    {
+      "coinId": "JB51",
+      "coinName": "2004年贺岁（甲申）",
+      "coinYear": 2004,
+      "stampId": "cn-2004-01",
+      "matchType": "same_zodiac",
+      "confidence": 0.96,
+      "reason": "同一甲申猴年生肖主题。"
+    },
+    {
+      "coinId": "JB58",
+      "coinName": "2005年贺岁（乙酉）",
+      "coinYear": 2005,
+      "stampId": "cn-2005-01",
+      "matchType": "same_zodiac",
+      "confidence": 0.96,
+      "reason": "同一乙酉鸡年生肖主题。"
+    },
+    {
+      "coinId": "JB63",
+      "coinName": "2006年贺岁（丙戍）",
+      "coinYear": 2006,
+      "stampId": "cn-2006-01",
+      "matchType": "same_zodiac",
+      "confidence": 0.96,
+      "reason": "同一丙戌狗年生肖主题。"
+    },
+    {
+      "coinId": "JB68",
+      "coinName": "2007年贺岁（丁亥）",
+      "coinYear": 2006,
+      "stampId": "cn-2007-01",
+      "matchType": "same_zodiac",
+      "confidence": 0.96,
+      "reason": "同一丁亥猪年生肖主题。"
+    },
+    {
+      "coinId": "JB72",
+      "coinName": "2008年贺岁（戊子）",
+      "coinYear": 2008,
+      "stampId": "cn-2008-01",
+      "matchType": "same_zodiac",
+      "confidence": 0.96,
+      "reason": "同一戊子鼠年生肖主题。"
+    },
+    {
+      "coinId": "JB76",
+      "coinName": "2009年贺岁（己丑）",
+      "coinYear": 2009,
+      "stampId": "cn-2009-01",
+      "matchType": "same_zodiac",
+      "confidence": 0.96,
+      "reason": "同一己丑牛年生肖主题。"
+    },
+    {
+      "coinId": "JB80",
+      "coinName": "2010年贺岁（庚寅）",
+      "coinYear": 2010,
+      "stampId": "cn-2010-01",
+      "matchType": "same_zodiac",
+      "confidence": 0.96,
+      "reason": "同一庚寅虎年生肖主题。"
+    },
+    {
+      "coinId": "JB84",
+      "coinName": "2011年贺岁（辛卯）",
+      "coinYear": 2011,
+      "stampId": "cn-2011-01",
+      "matchType": "same_zodiac",
+      "confidence": 0.96,
+      "reason": "同一辛卯兔年生肖主题。"
+    },
+    {
+      "coinId": "JB85",
+      "coinName": "2012年贺岁（壬辰）",
+      "coinYear": 2012,
+      "stampId": "cn-2012-01",
+      "matchType": "same_zodiac",
+      "confidence": 0.96,
+      "reason": "同一壬辰龙年生肖主题。"
+    },
+    {
+      "coinId": "JB86",
+      "coinName": "2013年贺岁（癸巳）",
+      "coinYear": 2013,
+      "stampId": "cn-2013-01",
+      "matchType": "same_zodiac",
+      "confidence": 0.96,
+      "reason": "同一癸巳蛇年生肖主题。"
+    },
+    {
+      "coinId": "JB88",
+      "coinName": "2014年贺岁（甲午）",
+      "coinYear": 2013,
+      "stampId": "cn-2014-01",
+      "matchType": "same_zodiac",
+      "confidence": 0.96,
+      "reason": "同一甲午马年生肖主题。"
+    },
+    {
+      "coinId": "JB90",
+      "coinName": "2015年贺岁（乙未）",
+      "coinYear": 2015,
+      "stampId": "cn-2015-01",
+      "matchType": "same_zodiac",
+      "confidence": 0.96,
+      "reason": "同一乙未羊年生肖主题。"
+    },
+    {
+      "coinId": "JB93",
+      "coinName": "2016年贺岁（丙申）",
+      "coinYear": 2016,
+      "stampId": "cn-2016-01",
+      "matchType": "same_zodiac",
+      "confidence": 0.96,
+      "reason": "同一丙申猴年生肖主题。"
+    },
+    {
+      "coinId": "JB95",
+      "coinName": "2017年贺岁（丁酉）",
+      "coinYear": 2017,
+      "stampId": "cn-2017-01",
+      "matchType": "same_zodiac",
+      "confidence": 0.96,
+      "reason": "同一丁酉鸡年生肖主题。"
+    },
+    {
+      "coinId": "JB98",
+      "coinName": "2018年贺岁（戊戍）",
+      "coinYear": 2018,
+      "stampId": "cn-2018-01",
+      "matchType": "same_zodiac",
+      "confidence": 0.96,
+      "reason": "同一戊戌狗年生肖主题。"
+    },
+    {
+      "coinId": "JB101",
+      "coinName": "2019年贺岁（己亥）",
+      "coinYear": 2019,
+      "stampId": "cn-2019-01",
+      "matchType": "same_zodiac",
+      "confidence": 0.96,
+      "reason": "同一己亥猪年生肖主题。"
+    },
+    {
+      "coinId": "JB104",
+      "coinName": "2020年贺岁（庚子）",
+      "coinYear": 2020,
+      "stampId": "cn-2020-01",
+      "matchType": "same_zodiac",
+      "confidence": 0.96,
+      "reason": "同一庚子鼠年生肖主题。"
+    },
+    {
+      "coinId": "JB106",
+      "coinName": "2021年贺岁（辛丑）",
+      "coinYear": 2021,
+      "stampId": "cn-2021-01",
+      "matchType": "same_zodiac",
+      "confidence": 0.96,
+      "reason": "同一辛丑牛年生肖主题。"
+    },
+    {
+      "coinId": "JB109",
+      "coinName": "2022年贺岁（壬寅）",
+      "coinYear": 2022,
+      "stampId": "cn-2022-01",
+      "matchType": "same_zodiac",
+      "confidence": 0.96,
+      "reason": "同一壬寅虎年生肖主题。"
+    },
+    {
+      "coinId": "JB110",
+      "coinName": "2023年贺岁（癸卯）",
+      "coinYear": 2023,
+      "stampId": "cn-2023-01",
+      "matchType": "same_zodiac",
+      "confidence": 0.96,
+      "reason": "同一癸卯兔年生肖主题。"
+    },
+    {
+      "coinId": "JB116",
+      "coinName": "2024年贺岁（甲辰）",
+      "coinYear": 2024,
+      "stampId": "cn-2024-01",
+      "matchType": "same_zodiac",
+      "confidence": 0.96,
+      "reason": "同一甲辰龙年生肖主题。"
+    },
+    {
+      "coinId": "JC07",
+      "coinName": "2024年贺岁（钞）",
+      "coinYear": 2024,
+      "stampId": "cn-2024-01",
+      "matchType": "same_zodiac",
+      "confidence": 0.96,
+      "reason": "同一甲辰龙年生肖主题。"
+    },
+    {
+      "coinId": "JB119",
+      "coinName": "2025年贺岁（乙巳）",
+      "coinYear": 2025,
+      "stampId": "cn-2025-01",
+      "matchType": "same_zodiac",
+      "confidence": 0.96,
+      "reason": "同一乙巳蛇年生肖主题。"
+    },
+    {
+      "coinId": "JC08",
+      "coinName": "2025年贺岁（钞）",
+      "coinYear": 2025,
+      "stampId": "cn-2025-01",
+      "matchType": "same_zodiac",
+      "confidence": 0.96,
+      "reason": "同一乙巳蛇年生肖主题。"
+    },
+    {
+      "coinId": "JB123",
+      "coinName": "2026年贺岁（丙午）",
+      "coinYear": 2026,
+      "stampId": "cn-2026-01",
+      "matchType": "same_zodiac",
+      "confidence": 0.96,
+      "reason": "同一丙午马年生肖主题。"
+    },
+    {
+      "coinId": "JC09",
+      "coinName": "2026年贺岁（钞）",
+      "coinYear": 2026,
+      "stampId": "cn-2026-01",
+      "matchType": "same_zodiac",
+      "confidence": 0.96,
+      "reason": "同一丙午马年生肖主题。"
+    }
+  ]
+}

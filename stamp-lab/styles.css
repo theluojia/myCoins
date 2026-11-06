@@ -1,0 +1,54 @@
+:root { color-scheme:light; --ink:#15231d; --muted:#657269; --paper:#f4f0e7; --card:#fffdf8; --line:#d9d2c5; --green:#1c6b4b; --red:#a53d32; }
+* { box-sizing:border-box; }
+body { margin:0; color:var(--ink); background:var(--paper); font-family:ui-serif,"Noto Serif SC","Songti SC",serif; }
+a { color:inherit; }
+.hero { padding:64px max(24px,calc((100vw - 1120px)/2)); color:#f8f5eb; background:radial-gradient(circle at 80% 20%,#36775e 0,transparent 32%),linear-gradient(145deg,#173e31,#10271f); }
+.eyebrow { margin:0 0 12px; color:#d9c79b; letter-spacing:.16em; }
+h1 { margin:0; font-size:clamp(42px,8vw,88px); line-height:.95; }
+.intro { max-width:720px; margin:24px 0 36px; color:#dbe5df; font-size:17px; line-height:1.75; }
+code { font-family:ui-monospace,monospace; font-size:.9em; }
+.stats { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; max-width:800px; }
+.stats div { padding:16px; border:1px solid #ffffff2b; border-radius:14px; background:#ffffff0d; }
+.stats strong,.stats span { display:block; }
+.stats strong { font:700 28px/1 ui-sans-serif,system-ui; }
+.stats span { margin-top:7px; color:#c7d6ce; font-size:13px; }
+main { width:min(1120px,calc(100% - 40px)); margin:auto; padding:32px 0 72px; }
+.toolbar { position:sticky; top:12px; z-index:4; display:grid; grid-template-columns:2fr 1fr 1fr; gap:12px; padding:16px; border:1px solid var(--line); border-radius:18px; background:#f4f0e7e6; box-shadow:0 14px 40px #263f3020; backdrop-filter:blur(16px); }
+.toolbar label span { display:block; margin:0 0 6px 4px; color:var(--muted); font:600 12px/1 ui-sans-serif,system-ui; }
+input,select { width:100%; min-height:44px; padding:0 12px; border:1px solid var(--line); border-radius:11px; color:var(--ink); background:#fff; font:15px ui-sans-serif,system-ui; }
+input:focus,select:focus { outline:3px solid #1c6b4b25; border-color:var(--green); }
+.result-line { margin:24px 4px 14px; color:var(--muted); font:14px ui-sans-serif,system-ui; }
+.cards { display:grid; gap:18px; }
+.coin-card { overflow:hidden; border:1px solid var(--line); border-radius:20px; background:var(--card); box-shadow:0 8px 24px #594d3810; }
+.coin-header { position:relative; padding:24px 210px 22px 26px; border-bottom:1px solid var(--line); background:linear-gradient(100deg,#f1eadb,#fffdf8 60%); }
+.coin-meta { display:flex; gap:9px; color:var(--muted); font:12px ui-sans-serif,system-ui; }
+.coin-id { color:var(--red); font-weight:800; letter-spacing:.04em; }
+.coin-name { margin:8px 0 0; font-size:24px; line-height:1.35; }
+.mapping-count { position:absolute; top:50%; right:26px; transform:translateY(-50%); padding:8px 12px; border-radius:999px; color:#fff; background:var(--green); font:700 13px ui-sans-serif,system-ui; }
+.coin-card[data-mapping="none"] .mapping-count { color:var(--muted); background:#e8e2d7; }
+.coin-card[data-mapping="multiple"] .mapping-count { background:var(--red); }
+.stamp-list { display:grid; }
+.stamp-row { display:grid; grid-template-columns:180px 1fr; min-height:220px; border-top:1px solid var(--line); }
+.stamp-row:first-child { border-top:0; }
+.image-link { display:grid; place-items:center; padding:18px; background:#ebe5d8; }
+.image-link img { display:block; width:100%; max-height:185px; object-fit:contain; filter:drop-shadow(0 7px 9px #473d2d2b); }
+.image-link.missing::after { content:"暂无示意图"; color:var(--muted); font:14px ui-sans-serif,system-ui; }
+.stamp-body { padding:22px 24px; }
+.stamp-meta,.match-row { display:flex; align-items:center; gap:8px; font:12px ui-sans-serif,system-ui; }
+.stamp-meta { color:var(--muted); }
+.catalog { color:var(--red); font-weight:800; }
+h3 { margin:9px 0 12px; font-size:21px; line-height:1.35; }
+h3 a { text-decoration-thickness:1px; text-underline-offset:4px; }
+.badge { padding:4px 8px; border-radius:999px; color:#fff; background:var(--green); }
+.confidence { color:var(--green); font-weight:800; }
+.reason { margin:12px 0; color:#49574f; font-size:14px; line-height:1.6; }
+.source-state { margin:0; color:var(--muted); font:11px ui-sans-serif,system-ui; }
+.stamp-row[data-status="error"] { outline:1px solid #c96262; }
+.empty-state { min-height:128px; display:flex; align-items:center; justify-content:center; gap:14px; color:var(--muted); background:#faf7f0; font:14px ui-sans-serif,system-ui; }
+.empty-state span { display:grid; width:42px; height:42px; place-items:center; border:1px dashed #aaa194; border-radius:50%; font-weight:800; }
+.empty-state p { margin:0; }
+@media(max-width:680px){
+  .hero{padding-top:44px}.stats{grid-template-columns:repeat(2,1fr)}.toolbar{position:static;grid-template-columns:1fr}
+  .coin-header{padding:20px 20px 68px}.mapping-count{top:auto;right:auto;bottom:20px;left:20px;transform:none}
+  .coin-name{font-size:20px}.stamp-row{grid-template-columns:1fr}.image-link{min-height:210px}.image-link img{max-height:180px}
+}

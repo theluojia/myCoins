@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>币邮同题 · 数据验证页</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="hero">
+    <p class="eyebrow">myCoins · 独立数据实验</p>
+    <h1>币邮同题</h1>
+    <p class="intro">以纪念币为索引，逐枚查看零套、一套或多套同题邮票。本页只读取 <code>stamp-lab</code> 数据，不接入现有纪念币系统。</p>
+    <div id="stats" class="stats" aria-live="polite"></div>
+  </header>
+  <main>
+    <section class="toolbar" aria-label="筛选工具">
+      <label class="search"><span>搜索</span><input id="query" type="search" placeholder="币名、邮票名、编号或年份"></label>
+      <label><span>映射状态</span><select id="statusFilter"><option value="">全部纪念币</option><option value="matched">有对应邮票</option><option value="multiple">多套邮票</option><option value="unmatched">暂无对应</option></select></label>
+      <label><span>关系类型</span><select id="typeFilter"><option value="">全部关系</option></select></label>
+    </section>
+    <div class="result-line"><strong id="resultCount">0</strong> 枚纪念币 <span id="relationCount"></span></div>
+    <section id="cards" class="cards" aria-live="polite"></section>
+  </main>
+  <template id="coinTemplate">
+    <article class="coin-card">
+      <header class="coin-header">
+        <div class="coin-meta"><span class="coin-id"></span><span class="coin-year"></span></div>
+        <h2 class="coin-name"></h2>
+        <span class="mapping-count"></span>
+      </header>
+      <div class="stamp-list"></div>
+    </article>
+  </template>
+  <template id="stampTemplate">
+    <section class="stamp-row">
+      <a class="image-link" target="_blank" rel="noreferrer"><img loading="lazy" alt=""></a>
+      <div class="stamp-body">
+        <div class="stamp-meta"><span class="catalog"></span><span class="date"></span></div>
+        <h3><a class="stamp-link" target="_blank" rel="noreferrer"></a></h3>
+        <div class="match-row"><span class="badge"></span><span class="confidence"></span></div>
+        <p class="reason"></p>
+        <p class="source-state"></p>
+      </div>
+    </section>
+  </template>
+  <script src="app.js" type="module"></script>
+</body>
+</html>

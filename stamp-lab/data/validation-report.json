@@ -1,0 +1,19 @@
+{
+  "generatedAt": "2026-11-06T08:10:11.7300053Z",
+  "valid": true,
+  "stampCount": 78,
+  "relationCount": 108,
+  "matchedCoinCount": 107,
+  "statusCounts": {
+    "missing_preview": 1,
+    "ok": 77
+  },
+  "missingCoinIds": [],
+  "pageErrors": [],
+  "missingPreviews": [
+    {
+      "id": "cn-1999-11",
+      "pageUrl": "https://meetstamps.com/archives/6667"
+    }
+  ]
+}
