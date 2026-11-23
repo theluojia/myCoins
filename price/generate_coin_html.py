@@ -5,12 +5,13 @@
 """
 import json
 from datetime import date
+from pathlib import Path
 
-HERE = "."
-with open(HERE + "/coin_price_history.json", encoding="utf-8") as f:
+HERE = Path(__file__).resolve().parent
+with open(HERE / "coin_price_history.json", encoding="utf-8") as f:
     data = json.load(f)
 # 展示信息来自上级主目录的 coin_data.json（相对路径 ../coin_data.json，避免与 price/ 重复维护）
-with open(HERE + "/../coin_data.json", encoding="utf-8") as f:
+with open(HERE.parent / "coin_data.json", encoding="utf-8") as f:
     meta_list = json.load(f)
 META_BY_ID = {m["id"]: m for m in meta_list}
 
@@ -89,8 +90,9 @@ def build_payload():
             "priceCount": len(c["prices"]),
             "prices": [{"year": s["year"], "low": s["low"], "high": s["high"],
                         "type": s["type"], "stype": s["source_type"],
-                        "src": s["source"], "sdate": s["snapshot_date"],
-                        "note": s.get("note", "")} for s in sorted(c["prices"], key=lambda s: s["year"])],
+                        "src": s["source"], "url": s.get("source_url", ""),
+                        "sdate": s["snapshot_date"],
+                        "note": s.get("note", "")} for s in sorted(c["prices"], key=lambda s: (s["year"], s["snapshot_date"]))],
 
         })
     return out_coins
@@ -115,6 +117,8 @@ DATA_JSON = json.dumps(payload, ensure_ascii=False)
 
 def card_html(c):
     cur = c["cur"]
+    price_label = "面值" if cur["source_type"] == "official_face_value" else "当前参考"
+    price_text = str(cur["low"]) if cur["low"] == cur["high"] else str(cur["low"]) + "–" + str(cur["high"])
     return (
         '<div class="card" data-i="' + str(c["i"]) + '" onclick="focusCoin(' + str(c["i"]) + ')">'
         '<img class="coin-img" src="' + (c["img"] or "") + '" alt="' + c["name"] + '" '
@@ -123,7 +127,7 @@ def card_html(c):
         '<div class="card-title">' + c["name"] + '</div>'
         '<div class="card-sub">' + str(c["issue_year"]) + " 发行 · " + (c["theme"] or "") + '</div>'
         '<div class="card-meta">面值 ' + str(c["face"]) + '元 · 发行 ' + str(c["issuance"]) + '万</div>'
-        '<div class="price-now">当前 ¥' + str(cur["low"]) + '–' + str(cur["high"]) + '</div>'
+        '<div class="price-now">' + price_label + ' ¥' + price_text + '</div>'
         '<div class="mult">中值 ' + str(cur["mid"]) + '元 · 约面值 <b>' + str(c["mult"]) + '×</b></div>'
         '<div class="card-meta">采集 ' + cur["snapshot_date"] + ' · ' + cur["source_type"]
         + (' · 切分派生' if cur.get("type") == "split_derived" else '') + '</div>'
@@ -147,6 +151,7 @@ sources_items = "".join("<li>" + s + "</li>" for s in sch.get("sources_2026", []
 # 统计
 n_total = len(payload["coins"])
 n_note = sum(1 for c in payload["coins"] if c["isNote"])
+n_updates = sum(1 for c in coins if len(c["prices"]) > 1)
 max_coin = max(payload["coins"], key=lambda c: c["cur"]["mid"])
 
 TEMPLATE = r"""<!DOCTYPE html>
@@ -225,13 +230,12 @@ TEMPLATE = r"""<!DOCTYPE html>
     <div class="box"><div class="n">__NTOTAL__</div><div class="l">已录入当前价的币种（普通币+纪念钞）</div></div>
     <div class="box"><div class="n">__NNOTE__</div><div class="l">其中纪念钞</div></div>
     <div class="box"><div class="n">¥__MAXMID__</div><div class="l">当前最高：__MAXNAME__</div></div>
-    <div class="box"><div class="n">1 条</div><div class="l">每枚币当前仅 1 条 2026 基线快照</div></div>
+    <div class="box"><div class="n">__NUPDATES__</div><div class="l">本轮新增或复核的价格快照</div></div>
   </div>
 
   <div class="scheme">
     <b>采集方案：</b>__SCHEME_RULE__ <br>
-    首次运行 <code>python collect_price.py baseline</code>（全量写入当前价）；以后每年/每几年运行
-    <code>python collect_price.py add --id 币号 --low 低 --high 高 --src 出处 --src-date 采集日 --year 年</code> 追加一条当时最新价。
+    有来源的新报价通过 <code>python collect_price.py add --file updates/日期.json</code> 按采集日期追加；同一天重复导入不会产生重复快照。
     网站读取：<b>最新快照 = 当前参考价</b>，<b>全部快照 = 历史参考价</b>。
   </div>
 
@@ -246,13 +250,13 @@ TEMPLATE = r"""<!DOCTYPE html>
 
   <div class="panel">
     <h2>全币种当前参考价卡片（__NTOTAL__ 枚）</h2>
-    <p class="hint">每枚币 1 张卡，显示 2026 当前参考价区间、中值、面值倍数。点击卡片高亮并查看其采集快照。</p>
+    <p class="hint">每枚币 1 张卡，显示最近一次有来源的参考价及采集日期。尚无可靠现货报价的品种显示面值。点击卡片查看快照及来源。</p>
     <div class="cards">__CARDS__</div>
   </div>
 
   <div class="panel" id="tlPanel">
     <h2>选中币的采集快照时间线</h2>
-    <p class="hint">点击上方任意卡片，这里显示该币的全部价格快照（当前仅 2026 基线一条；你逐年追加后历史会在此累积）。标注「切分」者为整套价按发行量反比权重切分的单枚派生值。</p>
+    <p class="hint">点击上方任意卡片，这里显示该币的全部价格快照。标注「切分」者为整套报价折算，标注「面值」者并非市场报价。</p>
     <div id="tlBody"><div class="empty">请在上方点击一枚币查看其快照时间线。</div></div>
   </div>
 
@@ -271,7 +275,7 @@ TEMPLATE = r"""<!DOCTYPE html>
       <li><b>价格格式：</b>__SCHEME_PRICE__</li>
       <li><b>切分规则：</b>__SCHEME_SPLIT__</li>
       <li><b>当前参考价：</b>每枚币 <code>current</code> 字段 = 最新快照（网站直接读取）。</li>
-      <li><b>历史参考价：</b>每枚币 <code>prices</code> 数组 = 全部快照（按年排序即历史）。</li>
+      <li><b>历史参考价：</b>每枚币 <code>prices</code> 数组 = 全部快照（按采集日期排序）。</li>
       <li><b>文件分工：</b><code>coin_price_history.json</code> 仅存价格（id/name/issue_year + prices + current）；币种图片/描述等由网站渲染时按 id 从 <code>coin_data.json</code> 关联，避免双份维护不同步。</li>
     </ul>
     <p class="src-list"><b>2026 数据源：</b></p>
@@ -280,7 +284,7 @@ TEMPLATE = r"""<!DOCTYPE html>
   </div>
 
 </div>
-<footer>中国普通纪念币 / 纪念钞参考价格 · 当前价 + 逐年历史快照库 · 全量 __NTOTAL__ 枚</footer>
+<footer>中国普通纪念币 / 纪念钞参考价格 · 当前价 + 历史快照库 · 全量 __NTOTAL__ 枚</footer>
 
 <script>
 const DATA = __DATA__;
@@ -328,7 +332,7 @@ function renderTimeline(i){
       + ' <span class="tag">'+tag+'</span>'
       + ' <span class="muted">'+s.stype+' · '+(s.sdate||'')+'</span>'
       + (s.note ? '<div class="muted">'+s.note+'</div>' : '')
-      + '<div class="muted">'+s.src+'</div></li>';
+      + '<div class="muted">'+(s.url ? '<a href="'+s.url+'" target="_blank" rel="noopener noreferrer">'+s.src+'</a>' : s.src)+'</div></li>';
   });
   document.getElementById('tlBody').innerHTML =
     '<div class="tl"><div class="tl-head">'+c.name+'（'+c.priceCount+' 条）</div>'
@@ -360,6 +364,7 @@ html = (TEMPLATE
         .replace("__UPDATED__", meta.get("updated_at", ""))
         .replace("__NTOTAL__", str(n_total))
         .replace("__NNOTE__", str(n_note))
+        .replace("__NUPDATES__", str(n_updates))
         .replace("__MAXMID__", str(max_coin["cur"]["mid"]))
         .replace("__MAXNAME__", max_coin["name"])
         .replace("__SCHEME_RULE__", sch["rule"])
@@ -373,7 +378,7 @@ html = (TEMPLATE
         .replace("__SOURCES__", sources_items)
         .replace("__DATA__", DATA_JSON))
 
-with open("coin_price_history.html", "w", encoding="utf-8") as f:
+with open(HERE / "coin_price_history.html", "w", encoding="utf-8") as f:
     f.write(html)
 
 print("全量 HTML 已生成，大小", len(html), "字符；币种", n_total, "（纪念钞", n_note, "）；最高", max_coin["name"], max_coin["cur"]["mid"])

@@ -1163,6 +1163,7 @@
     }
     .stub-price-label { color: #9ca3af; line-height: 1.3; }
     .stub-price-num { font-weight: 700; color: #1f2937; line-height: 1.3; }
+    .stub-price-date { color: #6b7280; font-size: 9px; line-height: 1.2; }
     .stub-bars-col { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; }
     .stub-bar-row { display: flex; align-items: center; gap: 3px; }
     .stub-bar-label { color: #6b7280; flex-shrink: 0; white-space: nowrap; }
@@ -4238,15 +4239,18 @@
                             if (priceData) {
                                 const multPct = multBarPct(priceData.mult, globalMaxMult);
                                 const issPct = issBarPct(coin.issuance, globalMinIss, globalMaxIss);
-                                const lowDisp = priceData.low >= 100 ? Math.round(priceData.low) : priceData.low.toFixed(1);
-                                const highDisp = priceData.high >= 100 ? Math.round(priceData.high) : priceData.high.toFixed(1);
+                                const priceDisp = `¥${Number(priceData.mid.toFixed(2))}`;
+                                const snapshotDate = priceData.snapshot_date || '';
+                                const shortDate = /^\d{4}-\d{2}-\d{2}$/.test(snapshotDate)
+                                    ? snapshotDate.slice(2).replace(/-/g, '.') : '';
                                 const issDisp = coin.issuance >= 10000 ? (coin.issuance / 10000).toFixed(1).replace(/\.0$/, '') + '亿' : coin.issuance.toFixed(1).replace(/\.0$/, '') + '万';
                                 stubHTML = `
                                 <svg class="tear-svg"><line x1="0" y1="2.5" x2="100%" y2="2.5" stroke-dasharray="10 7"/></svg>
                                 <div class="card-stub bg-gray-100 text-[10px] sm:text-[12px]">
                                     <div class="stub-price-col">
                                         <span class="stub-price-label">参考价</span>
-                                        <span class="stub-price-num">¥${lowDisp} – ¥${highDisp}</span>
+                                        <span class="stub-price-num">${priceDisp}</span>
+                                        ${shortDate ? `<span class="stub-price-date" title="采集日期 ${snapshotDate}" aria-label="采集日期 ${snapshotDate}">采 ${shortDate}</span>` : ''}
                                     </div>
                                     <div class="stub-bars-col">
                                         <div class="stub-bar-row">
@@ -4727,7 +4731,8 @@
                                     low: p.current.low,
                                     high: p.current.high,
                                     mid: p.current.mid,
-                                    mult: mult
+                                    mult: mult,
+                                    snapshot_date: p.current.snapshot_date
                                 };
                                 allMults.push(mult);
                                 allIss.push(coin.issuance);

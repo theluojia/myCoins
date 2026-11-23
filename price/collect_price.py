@@ -4,9 +4,8 @@ collect_price.py —— 纪念币「当前参考价 + 价格历史」采集脚�
 ================================================================================
 用户最终模型（2026-07-29 确认）：
   · 每枚币 = id / name / issue_year + current(最新一条) + prices[](历史，按时间累积)。
-  · 「每次拉脚本只进一条记录」：baseline 给每枚写【一条】2026 当前价；
-    以后你每年/每几年运行 add，就再 append【一条】当时的最新价，历史自然增长。
-  · 不一次塞多条、不混入旧年价当历史。
+  · baseline 给每枚写一条 2026 基线；此后按采集日期追加有来源的报价。
+  · 同一币种、同一采集日期只保留一条，--force 覆盖该日快照。
   · 价格文件【不存基础信息】，币种图片/描述等由网站渲染时按 id 关联 coin_data.json。
 
 2026 当前价来源（均为公开可溯源，已核实）：
@@ -14,7 +13,7 @@ collect_price.py —— 纪念币「当前参考价 + 价格历史」采集脚�
   · [toutiao] 一枚邮币《新中国纪念币、纪念钞最新市场价格一览表》2025-12-15
               （覆盖 2023–2026 新发币 + 纪念钞 市场价/征价）
   · [sohu]   搜狐《纪念钞大全最新价格公布》2025-02-07 / 2026-06-08 更新（纪念钞现价）
-  · [est]    对金投/一枚邮币均未覆盖的极新发行（2026 马年贺岁币/钞）作保守估算并标注。
+  · [est]    对缺少市场报价的新品种按面值占位并标注。
   · [pbc_jingju] 中国人民银行公告〔2026〕第28号（京剧艺术丑角发行面额，市场价待补）。
 
 价格表示约定：
@@ -25,8 +24,8 @@ collect_price.py —— 纪念币「当前参考价 + 价格历史」采集脚�
 用法：
   python collect_price.py baseline            # 用内置 2026 表给全部币写【一条】当前价
   python collect_price.py add --id JB02 --low 260 --high 410 \
-        --cond "普制" --src "出处" --src-date 2027-08-01 --type annual
-  python collect_price.py add --file new_2027.json   # 批量追加（每条=一枚币一次更新）
+        --cond "普制" --src "出处" --src-date 2027-08-01 --type market_update
+  python collect_price.py add --file updates/2026-11-23.json
   python collect_price.py show               # 打印每枚当前价 + 历史条数
   python collect_price.py build              # 仅重算 current = prices 中最新一条
 
@@ -65,7 +64,7 @@ SOURCES = {
         "date": "2026-06-08",
     },
     "est": {
-        "name": "保守估算（金投/一枚邮币均未覆盖的极新发行）",
+        "name": "币种面值占位（coin_data.json）",
         "url": "",
         "date": "2026-07-29",
     },
@@ -194,9 +193,12 @@ PRICE_2026 = [
     {"k": "JB120", "p": 11.0, "m": ["JB120"], "src": "toutiao"},  # 海南雨林
     {"k": "JB121", "p": 12.0, "m": ["JB121"], "src": "toutiao"},  # 抗战80
     {"k": "JB122", "p": 6.0, "m": ["JB122"], "src": "toutiao"},   # 京剧净
-    {"k": "JB123", "p": 10.0, "m": ["JB123"], "src": "est"},      # 2026马 估算
-    {"k": "JB124", "p": 5.0, "m": ["JB124"], "src": "est"},       # 武夷山国家公园 估算
-    {"k": "JB125", "lo": 1.0, "hi": 1.0, "m": ["JB125"], "src": "est"},  # 江泽民诞辰100周年 估算
+    {"k": "JB123", "lo": 10.0, "hi": 10.0, "m": ["JB123"], "src": "est",
+     "source_type": "official_face_value", "note": "无可靠市场报价时按面值展示"},
+    {"k": "JB124", "lo": 10.0, "hi": 10.0, "m": ["JB124"], "src": "est",
+     "source_type": "official_face_value", "note": "无可靠市场报价时按面值展示"},
+    {"k": "JB125", "lo": 1.0, "hi": 1.0, "m": ["JB125"], "src": "est",
+     "source_type": "official_face_value", "note": "无可靠市场报价时按面值展示"},
     {"k": "JB126", "lo": 5.0, "hi": 5.0, "m": ["JB126"], "src": "pbc_jingju",
      "source_type": "official_face_value", "note": "尚未发行、暂无公开市场报价，暂按面额展示"},
     # —— 纪念钞（金投无，用 一枚邮币/搜狐，显式市场价/征价区间）——
@@ -208,20 +210,21 @@ PRICE_2026 = [
     {"k": "JC06", "p": 40.5, "m": ["JC06-1", "JC06-2"], "src": "sohu"},        # 冬奥钞 对→2张
     {"k": "JC07", "lo": 48.0, "hi": 58.0, "m": ["JC07"], "src": "sohu"},       # 2024龙钞
     {"k": "JC08", "lo": 27.0, "hi": 33.0, "m": ["JC08"], "src": "sohu"},       # 2025蛇钞
-    {"k": "JC09", "lo": 14.0, "hi": 18.0, "m": ["JC09"], "src": "est"},        # 2026马钞 估算
+    {"k": "JC09", "lo": 20.0, "hi": 20.0, "m": ["JC09"], "src": "est",
+     "source_type": "official_face_value", "note": "无可靠市场报价时按面值展示"},
 ]
 
 META_TEMPLATE = {
     "title": "中国普通纪念币 / 纪念钞 参考价格 · 当前价 + 价格历史",
-    "description": "为纪念币网站提供每枚币的「当前参考价」与「历史参考价」。每次更新追加一条当时最新价。",
+    "description": "为纪念币网站提供每枚币的当前参考价与历史快照；面值占位与市场报价分开标注。",
     "schema_version": SCHEMA_VERSION,
     "baseline_collected_at": None,
     "updated_at": None,
     "price_only_note": "本文件只存价格快照，币种基础信息（图片/描述/发行量等）在网站渲染时按 id 从 coin_data.json 关联。",
     "collection_scheme": {
-        "model": "当前价 + 逐年追加历史",
-        "rule": "baseline 给每枚写【一条】2026 当前价（入 prices 第一条 + current）；以后每年/每几年 add 一条当时最新价，历史自然累积。每次只进一条记录。",
-        "price_format": "区间 [low, high]，单位 CNY。普通币以主源报价为中点取 ±10% 参考区间；纪念钞优先用市场价/征价真实区间。",
+        "model": "当前价 + 按采集日期追加历史",
+        "rule": "有来源的新报价按采集日期追加快照；同一日期同一币种只保留一条。未找到可靠市场报价时按面值展示并标明状态。",
+        "price_format": "单位 CNY。保留来源原有的单价或区间；商家挂牌价不等同于实际到手价。",
         "split_rule": "整套价→单枚价：按发行量反比权重切分 S×(1/量_i)/Σ(1/量)；结果标记 source_type=split_derived，不替代真实单枚观测。",
         "sources_2026": [
             "金投收藏网《流通纪念币最新价格表》2026-07-26（主源，普通币 1984–2023）",
@@ -229,7 +232,7 @@ META_TEMPLATE = {
             "搜狐《纪念钞大全最新价格公布》2025-02-07 / 2026-06-08 更新（纪念钞现价）",
             "中国人民银行公告〔2026〕第28号（京剧艺术丑角发行面额，市场价待补）",
         ],
-        "disclaimer": "价格为公开可溯源的参考报价，非连续成交序列，受品相/号码/供求影响大，请勿直接用于交易。当前价为 2026 基线。",
+        "disclaimer": "价格为公开可溯源的参考报价，非连续成交序列；商家挂牌价未核实运费和最终结算价。面值占位不是市场报价。未更新的品种保留原采集日期，价格受品相、号码及供求影响，请勿直接用于交易。",
     },
 }
 
@@ -247,7 +250,7 @@ def load_db():
 
 
 def mid_of(low, high):
-    return round((low + high) / 2, 1)
+    return round((low + high) / 2, 2)
 
 
 def face_of(meta):
@@ -283,7 +286,8 @@ def derive_current(coin):
         "low": latest["low"], "high": latest["high"], "mid": latest["mid"],
         "snapshot_date": latest["snapshot_date"], "year": latest["year"],
         "source_type": latest["source_type"], "source": latest["source"],
-        "source_date": latest["source_date"], "condition": latest["condition"], "type": latest["type"],
+        "source_url": latest.get("source_url", ""), "source_date": latest["source_date"],
+        "condition": latest["condition"], "type": latest["type"], "note": latest.get("note", ""),
     }
 
 
@@ -405,6 +409,10 @@ def cmd_add(args):
             print("警告：目录中找不到", cid, "，跳过"); continue
         # 同 _upsert：面值下限钳制
         low, high = it["low"], it["high"]
+        if low is None or high is None or low < 0 or high < low:
+            raise ValueError(f"{cid}: 价格区间无效")
+        if not it.get("src") or not it.get("src_date"):
+            raise ValueError(f"{cid}: 必须提供来源和来源日期")
         face = face_of(meta_by_id[cid])
         if face:
             low = max(low, face)
@@ -415,10 +423,17 @@ def cmd_add(args):
                              snap_date=it.get("date"), year=it.get("year"), stype=it.get("type", "annual"))
         if cid in by_id:
             coin = by_id[cid]
-            if any(s["year"] == snap["year"] for s in coin["prices"]) and not args.force:
-                print(f"  {cid} 已有 {snap['year']} 年快照，跳过（--force 覆盖）"); continue
+            existing = next((i for i, s in enumerate(coin["prices"])
+                             if s["snapshot_date"] == snap["snapshot_date"]), None)
+            if existing is not None and not args.force:
+                print(f"  {cid} 已有 {snap['snapshot_date']} 快照，跳过（--force 覆盖）"); continue
+            if existing is not None:
+                coin["prices"][existing] = snap
+                print(f"  ~ {cid} {coin['name']} 覆盖 {snap['snapshot_date']} 快照")
+                derive_current(coin)
+                continue
             coin["prices"].append(snap)
-            print(f"  + {cid} {coin['name']} 追加 {snap['year']} 快照 {snap['low']:.1f}-{snap['high']:.1f}")
+            print(f"  + {cid} {coin['name']} 追加 {snap['snapshot_date']} 快照 {snap['low']:.1f}-{snap['high']:.1f}")
         else:
             coin = new_slim_coin(meta_by_id, cid)
             coin["prices"].append(snap)
