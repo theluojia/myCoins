@@ -488,6 +488,11 @@
         #statusFilter {
             width: 95px;
         }
+        #priceFilter, #issuanceFilter {
+            width: 95px;
+            padding-left: 4px;
+            padding-right: 0;
+        }
         /* 图片放大弹窗 */
         #zoomModal {
             display: none;
@@ -1271,7 +1276,7 @@
     <div class="max-w-7xl mx-auto pt-2 pb-6">
         <header class="text-center mb-8">
             <h1 class="text-4xl sm:text-5xl font-extrabold text-blue-800 leading-tight">我的纪念币收藏</h1>
-            <div id="collectionOverview" class="collection-overview mt-4 max-w-2xl mx-auto">
+            <div id="collectionOverview" class="collection-overview mt-4 max-w-4xl mx-auto">
                 <div class="collection-header" id="overviewHeader">
                     <div class="collection-summary">
                         <span class="collection-count" id="overviewCount">已收藏 0 / 想收藏 0 / 总数 0 枚</span>
@@ -1299,7 +1304,7 @@
                 </div>
             </div>
 
-            <div id="filterSection" class="collection-overview mt-4 max-w-2xl mx-auto p-2">
+            <div id="filterSection" class="collection-overview mt-4 max-w-4xl mx-auto p-2">
                 <div class="flex items-center gap-1">
                     <div class="relative flex-1">
                         <input type="text" id="searchInput" placeholder="搜索纪念币名称 ..."
@@ -1342,6 +1347,12 @@
                         <option value="uncollected">未收藏</option>
                         <option value="wishlist">想收藏</option>
                         <option value="collected">已收藏</option>
+                    </select>
+                    <select id="priceFilter" class="rounded-md border border-gray-300 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" aria-label="按参考价筛选">
+                        <option value="">所有参考价</option>
+                    </select>
+                    <select id="issuanceFilter" class="rounded-md border border-gray-300 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" aria-label="按发行量筛选">
+                        <option value="">所有发行量</option>
                     </select>
                 </div>
             </div>
@@ -1772,6 +1783,23 @@
 
         let currentSortOrder = 'desc';
         let searchTimeout = null;
+        const priceRanges = [
+            { min: 0, max: 10, label: '＜¥10' },
+            { min: 10, max: 20, label: '¥10–20' },
+            { min: 20, max: 50, label: '¥20–50' },
+            { min: 50, max: 100, label: '¥50–100' },
+            { min: 100, max: 500, label: '¥100–500' },
+            { min: 500, max: Infinity, label: '≥¥500' }
+        ];
+        // coin_data.json 的发行量单位为「万枚／万张」。
+        const issuanceRanges = [
+            { min: 0, max: 1000, label: '＜1000万' },
+            { min: 1000, max: 2000, label: '1–2千万' },
+            { min: 2000, max: 5000, label: '2–5千万' },
+            { min: 5000, max: 10000, label: '5千万–1亿' },
+            { min: 10000, max: 20000, label: '1–2亿' },
+            { min: 20000, max: Infinity, label: '≥2亿' }
+        ];
 
         let isBackView = false;        
 
@@ -1782,6 +1810,8 @@
         const metalFilter = document.getElementById('metalFilter');
         const yearFilter = document.getElementById('yearFilter');
         const statusFilter = document.getElementById('statusFilter');
+        const priceFilter = document.getElementById('priceFilter');
+        const issuanceFilter = document.getElementById('issuanceFilter');
         const clearFiltersBtn = document.getElementById('clearFiltersBtn'); 
         const sortOrderToggle = document.getElementById('sortOrderToggle');
         const searchInput = document.getElementById('searchInput');
@@ -4131,6 +4161,8 @@
             const selectedMetal = metalFilter.value;
             const selectedYear = yearFilter.value;
             const selectedStatus = statusFilter.value;
+            const selectedPriceRange = priceFilter.value === '' ? null : priceRanges[Number(priceFilter.value)];
+            const selectedIssuanceRange = issuanceFilter.value === '' ? null : issuanceRanges[Number(issuanceFilter.value)];
             const searchTerm = searchInput.value.toLowerCase().trim();
 
             // 1. 给容器添加淡出效果
@@ -4146,6 +4178,9 @@
                     const matchesMetal = selectedMetal === '' || coin.metal === selectedMetal;
                     const matchesYear = selectedYear === '' || coin.year.toString() === selectedYear;
                     const matchesSearch = searchTerm === '' || coin.name.toLowerCase().includes(searchTerm);
+                    const price = priceDataMap[coin.id]?.mid;
+                    const matchesPrice = !selectedPriceRange || (Number.isFinite(price) && price >= selectedPriceRange.min && price < selectedPriceRange.max);
+                    const matchesIssuance = !selectedIssuanceRange || (coin.issuance >= selectedIssuanceRange.min && coin.issuance < selectedIssuanceRange.max);
 
                     // 新增的收藏状态筛选逻辑
                     let matchesStatus = true;
@@ -4157,7 +4192,7 @@
                         matchesStatus = !myCollection.includes(coin.id) && !myWishlist.includes(coin.id);
                     }
 
-                    return matchesTheme && matchesDenomination && matchesSize && matchesMetal && matchesYear && matchesSearch && matchesStatus;
+                    return matchesTheme && matchesDenomination && matchesSize && matchesMetal && matchesYear && matchesSearch && matchesStatus && matchesPrice && matchesIssuance;
                 });
                 
                 // 按年份分组
@@ -4675,6 +4710,8 @@
             yearFilter.value = '';
             searchInput.value = '';
             statusFilter.value = '';
+            priceFilter.value = '';
+            issuanceFilter.value = '';
             renderUI();
         }
         
@@ -4998,6 +5035,8 @@
             sizeFilter.innerHTML = '<option value="">所有大小</option>' + sizes.map(s => `<option value="${s}">${s}</option>`).join('');
             metalFilter.innerHTML = '<option value="">所有材质</option>' + metals.map(m => `<option value="${m}">${m}</option>`).join('');
             yearFilter.innerHTML = '<option value="">所有年份</option>' + years.map(y => `<option value="${y}">${y}年</option>`).join('');
+            priceFilter.innerHTML = '<option value="">所有参考价</option>' + priceRanges.map((range, i) => `<option value="${i}">${range.label}</option>`).join('');
+            issuanceFilter.innerHTML = '<option value="">所有发行量</option>' + issuanceRanges.map((range, i) => `<option value="${i}">${range.label}</option>`).join('');
 
             themeFilter.addEventListener('change', renderUI);
             denominationFilter.addEventListener('change', renderUI);
@@ -5005,6 +5044,8 @@
             metalFilter.addEventListener('change', renderUI);
             yearFilter.addEventListener('change', renderUI);
             statusFilter.addEventListener('change', renderUI);
+            priceFilter.addEventListener('change', renderUI);
+            issuanceFilter.addEventListener('change', renderUI);
             
             sortOrderToggle.addEventListener('click', () => {
                 currentSortOrder = currentSortOrder === 'desc' ? 'asc' : 'desc';
