@@ -488,7 +488,7 @@
         #statusFilter {
             width: 95px;
         }
-        #priceFilter, #issuanceFilter {
+        #multiplierFilter, #issuanceFilter {
             width: 95px;
             padding-left: 4px;
             padding-right: 0;
@@ -1348,8 +1348,8 @@
                         <option value="wishlist">想收藏</option>
                         <option value="collected">已收藏</option>
                     </select>
-                    <select id="priceFilter" class="rounded-md border border-gray-300 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" aria-label="按参考价筛选">
-                        <option value="">所有参考价</option>
+                    <select id="multiplierFilter" class="rounded-md border border-gray-300 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" aria-label="按升值倍数筛选">
+                        <option value="">所有升值</option>
                     </select>
                     <select id="issuanceFilter" class="rounded-md border border-gray-300 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" aria-label="按发行量筛选">
                         <option value="">所有发行量</option>
@@ -1783,13 +1783,13 @@
 
         let currentSortOrder = 'desc';
         let searchTimeout = null;
-        const priceRanges = [
-            { min: 0, max: 10, label: '＜¥10' },
-            { min: 10, max: 20, label: '¥10–20' },
-            { min: 20, max: 50, label: '¥20–50' },
-            { min: 50, max: 100, label: '¥50–100' },
-            { min: 100, max: 500, label: '¥100–500' },
-            { min: 500, max: Infinity, label: '≥¥500' }
+        const multiplierRanges = [
+            { min: 0, max: 2, label: '＜2倍' },
+            { min: 2, max: 5, label: '2–5倍' },
+            { min: 5, max: 10, label: '5–10倍' },
+            { min: 10, max: 20, label: '10–20倍' },
+            { min: 20, max: 50, label: '20–50倍' },
+            { min: 50, max: Infinity, label: '≥50倍' }
         ];
         // coin_data.json 的发行量单位为「万枚／万张」。
         const issuanceRanges = [
@@ -1810,7 +1810,7 @@
         const metalFilter = document.getElementById('metalFilter');
         const yearFilter = document.getElementById('yearFilter');
         const statusFilter = document.getElementById('statusFilter');
-        const priceFilter = document.getElementById('priceFilter');
+        const multiplierFilter = document.getElementById('multiplierFilter');
         const issuanceFilter = document.getElementById('issuanceFilter');
         const clearFiltersBtn = document.getElementById('clearFiltersBtn'); 
         const sortOrderToggle = document.getElementById('sortOrderToggle');
@@ -4161,7 +4161,7 @@
             const selectedMetal = metalFilter.value;
             const selectedYear = yearFilter.value;
             const selectedStatus = statusFilter.value;
-            const selectedPriceRange = priceFilter.value === '' ? null : priceRanges[Number(priceFilter.value)];
+            const selectedMultiplierRange = multiplierFilter.value === '' ? null : multiplierRanges[Number(multiplierFilter.value)];
             const selectedIssuanceRange = issuanceFilter.value === '' ? null : issuanceRanges[Number(issuanceFilter.value)];
             const searchTerm = searchInput.value.toLowerCase().trim();
 
@@ -4178,8 +4178,9 @@
                     const matchesMetal = selectedMetal === '' || coin.metal === selectedMetal;
                     const matchesYear = selectedYear === '' || coin.year.toString() === selectedYear;
                     const matchesSearch = searchTerm === '' || coin.name.toLowerCase().includes(searchTerm);
-                    const price = priceDataMap[coin.id]?.mid;
-                    const matchesPrice = !selectedPriceRange || (Number.isFinite(price) && price >= selectedPriceRange.min && price < selectedPriceRange.max);
+                    const multiplier = priceDataMap[coin.id]?.mult;
+                    const displayedMultiplier = Number.isFinite(multiplier) ? Number(multiplier.toFixed(1)) : NaN;
+                    const matchesMultiplier = !selectedMultiplierRange || (displayedMultiplier >= selectedMultiplierRange.min && displayedMultiplier < selectedMultiplierRange.max);
                     const matchesIssuance = !selectedIssuanceRange || (coin.issuance >= selectedIssuanceRange.min && coin.issuance < selectedIssuanceRange.max);
 
                     // 新增的收藏状态筛选逻辑
@@ -4192,7 +4193,7 @@
                         matchesStatus = !myCollection.includes(coin.id) && !myWishlist.includes(coin.id);
                     }
 
-                    return matchesTheme && matchesDenomination && matchesSize && matchesMetal && matchesYear && matchesSearch && matchesStatus && matchesPrice && matchesIssuance;
+                    return matchesTheme && matchesDenomination && matchesSize && matchesMetal && matchesYear && matchesSearch && matchesStatus && matchesMultiplier && matchesIssuance;
                 });
                 
                 // 按年份分组
@@ -4710,7 +4711,7 @@
             yearFilter.value = '';
             searchInput.value = '';
             statusFilter.value = '';
-            priceFilter.value = '';
+            multiplierFilter.value = '';
             issuanceFilter.value = '';
             renderUI();
         }
@@ -5035,7 +5036,7 @@
             sizeFilter.innerHTML = '<option value="">所有大小</option>' + sizes.map(s => `<option value="${s}">${s}</option>`).join('');
             metalFilter.innerHTML = '<option value="">所有材质</option>' + metals.map(m => `<option value="${m}">${m}</option>`).join('');
             yearFilter.innerHTML = '<option value="">所有年份</option>' + years.map(y => `<option value="${y}">${y}年</option>`).join('');
-            priceFilter.innerHTML = '<option value="">所有参考价</option>' + priceRanges.map((range, i) => `<option value="${i}">${range.label}</option>`).join('');
+            multiplierFilter.innerHTML = '<option value="">所有升值</option>' + multiplierRanges.map((range, i) => `<option value="${i}">${range.label}</option>`).join('');
             issuanceFilter.innerHTML = '<option value="">所有发行量</option>' + issuanceRanges.map((range, i) => `<option value="${i}">${range.label}</option>`).join('');
 
             themeFilter.addEventListener('change', renderUI);
@@ -5044,7 +5045,7 @@
             metalFilter.addEventListener('change', renderUI);
             yearFilter.addEventListener('change', renderUI);
             statusFilter.addEventListener('change', renderUI);
-            priceFilter.addEventListener('change', renderUI);
+            multiplierFilter.addEventListener('change', renderUI);
             issuanceFilter.addEventListener('change', renderUI);
             
             sortOrderToggle.addEventListener('click', () => {
