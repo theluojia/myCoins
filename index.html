@@ -485,6 +485,11 @@
         #yearFilter {
             width: 95px;
         }
+        #mintFilter {
+            width: 95px;
+            padding-left: 4px;
+            padding-right: 0;
+        }
         #statusFilter {
             width: 95px;
         }
@@ -1276,7 +1281,7 @@
     <div class="max-w-7xl mx-auto pt-2 pb-6">
         <header class="text-center mb-8">
             <h1 class="text-4xl sm:text-5xl font-extrabold text-blue-800 leading-tight">我的纪念币收藏</h1>
-            <div id="collectionOverview" class="collection-overview mt-4 max-w-4xl mx-auto">
+            <div id="collectionOverview" class="collection-overview mt-4 max-w-5xl mx-auto">
                 <div class="collection-header" id="overviewHeader">
                     <div class="collection-summary">
                         <span class="collection-count" id="overviewCount">已收藏 0 / 想收藏 0 / 总数 0 枚</span>
@@ -1304,7 +1309,7 @@
                 </div>
             </div>
 
-            <div id="filterSection" class="collection-overview mt-4 max-w-4xl mx-auto p-2">
+            <div id="filterSection" class="collection-overview mt-4 max-w-5xl mx-auto p-2">
                 <div class="flex items-center gap-1">
                     <div class="relative flex-1">
                         <input type="text" id="searchInput" placeholder="搜索纪念币名称 ..."
@@ -1341,6 +1346,9 @@
                     </select>
                     <select id="yearFilter" class="rounded-md border border-gray-300 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
                         <option value="">所有年份</option>
+                    </select>
+                    <select id="mintFilter" class="rounded-md border border-gray-300 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" aria-label="按造币厂或印钞厂筛选">
+                        <option value="">所有造币厂</option>
                     </select>
                     <select id="statusFilter" class="rounded-md border border-gray-300 p-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
                         <option value="">所有状态</option>
@@ -1809,6 +1817,7 @@
         const sizeFilter = document.getElementById('sizeFilter');
         const metalFilter = document.getElementById('metalFilter');
         const yearFilter = document.getElementById('yearFilter');
+        const mintFilter = document.getElementById('mintFilter');
         const statusFilter = document.getElementById('statusFilter');
         const multiplierFilter = document.getElementById('multiplierFilter');
         const issuanceFilter = document.getElementById('issuanceFilter');
@@ -4160,6 +4169,7 @@
             const selectedSize = sizeFilter.value;
             const selectedMetal = metalFilter.value;
             const selectedYear = yearFilter.value;
+            const selectedMint = mintFilter.value;
             const selectedStatus = statusFilter.value;
             const selectedMultiplierRange = multiplierFilter.value === '' ? null : multiplierRanges[Number(multiplierFilter.value)];
             const selectedIssuanceRange = issuanceFilter.value === '' ? null : issuanceRanges[Number(issuanceFilter.value)];
@@ -4177,6 +4187,7 @@
                     const matchesSize = selectedSize === '' || coin.size === selectedSize;
                     const matchesMetal = selectedMetal === '' || coin.metal === selectedMetal;
                     const matchesYear = selectedYear === '' || coin.year.toString() === selectedYear;
+                    const matchesMint = selectedMint === '' || (Array.isArray(coin.mints) && coin.mints.includes(selectedMint));
                     const matchesSearch = searchTerm === '' || coin.name.toLowerCase().includes(searchTerm);
                     const multiplier = priceDataMap[coin.id]?.mult;
                     const displayedMultiplier = Number.isFinite(multiplier) ? Number(multiplier.toFixed(1)) : NaN;
@@ -4193,7 +4204,7 @@
                         matchesStatus = !myCollection.includes(coin.id) && !myWishlist.includes(coin.id);
                     }
 
-                    return matchesTheme && matchesDenomination && matchesSize && matchesMetal && matchesYear && matchesSearch && matchesStatus && matchesMultiplier && matchesIssuance;
+                    return matchesTheme && matchesDenomination && matchesSize && matchesMetal && matchesYear && matchesMint && matchesSearch && matchesStatus && matchesMultiplier && matchesIssuance;
                 });
                 
                 // 按年份分组
@@ -4709,6 +4720,7 @@
             sizeFilter.value = '';
             metalFilter.value = '';
             yearFilter.value = '';
+            mintFilter.value = '';
             searchInput.value = '';
             statusFilter.value = '';
             multiplierFilter.value = '';
@@ -5030,12 +5042,16 @@
             const sizes = [...new Set(coins.map(coin => coin.size))].sort((a, b) => parseInt(a) - parseInt(b));
             const metals = [...new Set(coins.map(coin => coin.metal))].sort();
             const years = [...new Set(coins.map(coin => coin.year))].sort((a, b) => b - a);
+            const mintNames = new Set(coins.flatMap(coin => Array.isArray(coin.mints) ? coin.mints : []));
 
             themeFilter.innerHTML = '<option value="">所有主题</option>' + themes.map(t => `<option value="${encodeURIComponent(t)}">${t}</option>`).join('');
             denominationFilter.innerHTML = '<option value="">所有面额</option>' + denominations.map(d => `<option value="${d}">${d}</option>`).join('');
             sizeFilter.innerHTML = '<option value="">所有大小</option>' + sizes.map(s => `<option value="${s}">${s}</option>`).join('');
             metalFilter.innerHTML = '<option value="">所有材质</option>' + metals.map(m => `<option value="${m}">${m}</option>`).join('');
             yearFilter.innerHTML = '<option value="">所有年份</option>' + years.map(y => `<option value="${y}">${y}年</option>`).join('');
+            mintFilter.innerHTML = '<option value="">所有造币厂</option>' + Object.entries(mintConfig)
+                .filter(([key]) => mintNames.has(key))
+                .map(([key, config]) => `<option value="${key}">${config.fullName}</option>`).join('');
             multiplierFilter.innerHTML = '<option value="">所有升值</option>' + multiplierRanges.map((range, i) => `<option value="${i}">${range.label}</option>`).join('');
             issuanceFilter.innerHTML = '<option value="">所有发行量</option>' + issuanceRanges.map((range, i) => `<option value="${i}">${range.label}</option>`).join('');
 
@@ -5044,6 +5060,7 @@
             sizeFilter.addEventListener('change', renderUI);
             metalFilter.addEventListener('change', renderUI);
             yearFilter.addEventListener('change', renderUI);
+            mintFilter.addEventListener('change', renderUI);
             statusFilter.addEventListener('change', renderUI);
             multiplierFilter.addEventListener('change', renderUI);
             issuanceFilter.addEventListener('change', renderUI);
