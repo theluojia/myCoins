@@ -1159,11 +1159,11 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        gap: 2px;
         white-space: nowrap;
     }
-    .stub-price-label { color: #9ca3af; line-height: 1.3; }
-    .stub-price-num { font-weight: 700; color: #1f2937; line-height: 1.3; }
-    .stub-price-date { color: #6b7280; font-size: 9px; line-height: 1.2; }
+    .stub-price-num { font-size: 14px; font-weight: 700; color: #1f2937; line-height: 1.1; }
+    .stub-price-date { color: #6b7280; font-size: 10px; line-height: 1.2; }
     .stub-bars-col { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; }
     .stub-bar-row { display: flex; align-items: center; gap: 3px; }
     .stub-bar-label { color: #6b7280; flex-shrink: 0; white-space: nowrap; }
@@ -4248,7 +4248,6 @@
                                 <svg class="tear-svg"><line x1="0" y1="2.5" x2="100%" y2="2.5" stroke-dasharray="10 7"/></svg>
                                 <div class="card-stub bg-gray-100 text-[10px] sm:text-[12px]">
                                     <div class="stub-price-col">
-                                        <span class="stub-price-label">参考价</span>
                                         <span class="stub-price-num">${priceDisp}</span>
                                         ${shortDate ? `<span class="stub-price-date" title="采集日期 ${snapshotDate}" aria-label="采集日期 ${snapshotDate}">采 ${shortDate}</span>` : ''}
                                     </div>
