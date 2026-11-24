@@ -2742,7 +2742,9 @@
     "denomination": "5元",
     "size": "30mm",
     "metal": "黄铜合金",
-    "mints": [],
+    "mints": [
+      "上海"
+    ],
     "imageUrl": "",
     "imageUrl2": "",
     "description2": "中华人民共和国国徽，国徽上方刊“中华人民共和国”国名，下方刊年号“2026”字样，辅以中国戏曲乐器图案",
